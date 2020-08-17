@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Name>DataSource2</Name>
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=FMBR02.ptcgrp.domain\SQLSERVER2008;Initial Catalog=TRAVELMART</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>2e62af2e-cca4-499d-a05c-44fadd79aae5</DataSourceID>
+</RptDataSource>

@@ -1,0 +1,1898 @@
+﻿body
+{
+    font-family: Calibri;
+    font-size: 10pt;
+    padding: 0;
+    border-spacing: 0;
+    margin: 0;
+    height: 95%;
+}
+.BannerTable
+{   
+}
+/*added on Aug 27, 2015*/
+
+.SelectedSubMenuCss
+{
+text-decoration:underline;
+color:#000000;
+font-size: 16px;
+pointer-events: none;
+cursor: default;
+
+}
+.BannerLeft
+{
+    height: 95px;
+    width: 232px;
+    background-image: url('../../Images/BannerLeft.jpg');
+    background-repeat: no-repeat;
+}
+.BannerMiddle
+{
+    background-position: right;
+    height: 95px;
+    background-image: url('../../Images/BannerMiddle2.jpg');
+    background-repeat: repeat-x;
+}
+.BannerRight
+{
+    height: 95px;
+    width: 783px;
+    background-image: url('../../Images/BannerRight.jpg');
+    background-repeat: no-repeat;
+}
+.Banner
+{
+    font-size: 14pt;
+    color: #000080;
+    font-weight: bold;
+    background-color: #D5EAFF;
+    height: 95px;
+    border-bottom-style: none;
+    width: 100%;
+    padding-left: 10px;
+    background-image: url('../../Images/BannerLogo.jpg'); 
+}
+.BlueBanner
+{
+  border-bottom-style: none;
+  width: 1220px;
+  height:64px;
+  background-image: url('../../Images/Blue/banner.jpg'); 
+}
+.Background
+{
+    background-image: url('../../Images/Blue/background.jpg');
+}
+.PageTitleNoColor
+{
+    font-size: 10pt;
+    font-style: normal;
+    text-align: left;
+    padding: 0 5px 0 5px;    
+    vertical-align: middle;    
+    padding-left: 5px;
+}
+.PageTitleNoColor span
+{
+    font-weight: normal;
+    font-size: 10pt;
+    text-align: right;
+    vertical-align: text-top;
+}
+
+.PageTitle
+{
+    font-size: 12pt;
+    font-style: normal;
+    text-align: left;
+    padding: 3px 5px 3px 5px;
+    font-weight: bold;
+    vertical-align: middle;
+    background-color: #82ABB8;
+    padding-left: 5px;   
+}
+.PageTitle span.Title
+{
+    font-size: 12pt;
+    font-style: normal;
+    text-align: left;
+    padding: 3px 5px 3px 5px;
+    font-weight: bold;
+    vertical-align: middle;
+    background-color: #82ABB8;
+    padding-left: 5px;   
+}
+
+.PageTitle span
+{
+    font-weight: normal;
+    font-size: small;
+    text-align: right;
+    vertical-align: text-top;
+}
+
+.PageSubTitle
+{
+    font-size: 11pt;
+    font-style: normal;
+    text-align: left;
+    padding: 3px 5px 3px 5px;
+    font-weight: bold;   
+    padding-left: 5px;    
+    text-decoration: underline;
+}
+.SmallText
+{
+    font-size: x-small;
+}
+.SmallTextCenter
+{
+    font-size: x-small;
+    text-align:center;
+}
+.SmallTextRight
+{
+    font-size: x-small;
+    text-align:right;
+}
+.SmallTextRightRed
+{
+    font-size: x-small;
+    text-align:right;
+    color: Red;
+}
+.SmallButton
+{
+    font-size: x-small;
+}
+table.TableView
+{
+    width: 1000px;
+    padding-left: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+table.TableView td.caption
+{
+    white-space: nowrap;
+    font-weight: normal;
+    vertical-align:middle;
+    width: 100px;
+    padding-left: 5px;
+    
+}
+table.TableView td.value
+{
+    font-style: normal;
+    white-space: nowrap;
+    font-weight: normal;
+    vertical-align:middle;
+    width: 350px;
+}
+
+table.TableEditor
+{
+    width: 100%;
+    padding-left: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+table.TableEditor td.caption
+{
+    white-space: nowrap;
+    font-weight: normal;
+    vertical-align:middle;
+    width: 200px;
+    padding-left: 5px;
+    
+}
+table.TableEditor td.value
+{
+    font-style: normal;
+    white-space: nowrap;
+    font-weight: normal;
+    vertical-align:middle;
+    width: 350px;
+}
+table.TableEditor th
+{
+   text-align:left;
+   font-size:12px;
+   font-weight:bold;
+}
+table.TableEditor td.warning
+{
+    text-align:left;
+}
+.LeftClass
+{
+    text-align: left;
+    vertical-align: middle;
+    white-space: nowrap;
+    padding-left: 10px;
+}
+.CenterClass
+{
+    text-align: center;
+    vertical-align: middle;    
+}
+.RightClass
+{
+    text-align: right;
+    vertical-align: middle;    
+  /*  background-color: #82ABB8;*/
+}
+.RightClass span
+{    
+    font-weight: normal;
+    font-size: 10pt;
+    text-align: right;
+    vertical-align: text-top;
+}
+.RightClass Button
+{
+    font-size: x-small;
+}
+
+.ViewTitlePadding
+{
+    padding: 0px 3px 0px 3px;
+}
+
+.ReadOnly
+{
+    /* border-style: none;     font-weight: bold;31949B;B8D1E7*/
+    background-color: #CDDDE2;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #9EC0DE;
+}
+.ReadOnlySmallRight
+{
+    background-color: #CDDDE2;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #9EC0DE;
+    font-size:x-small;
+    text-align:right;
+}
+.ReadOnlySmall
+{
+    background-color: #CDDDE2;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #9EC0DE;
+    font-size:x-small;
+}
+.Module
+{
+    padding-bottom: 7px;
+}
+
+.TextBoxInput
+{
+    font-family: arial;
+    font-style: normal;
+    font-size: 10pt;
+}
+.TextBoxInputRemarks
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-size: 9pt;
+    color: #333333;
+}
+select
+{
+    font-family: arial;
+    font-style: normal;
+    font-size: 9pt;
+    text-transform: uppercase;
+    z-index: -100;
+    margin-left: 0px;
+    }
+.TextBoxInputReadOnly
+{
+    background-color: #CDDDE2;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #9EC0DE;
+    font-family: arial;
+    font-style: normal;
+    font-size: 10pt;
+}
+/*.ButtonOE
+{
+    text-align:center;
+    font-size:large;    
+    color: Maroon;            
+    width:250px;
+}*/
+
+
+/* Listview table */
+
+table.listViewTableClass , table.listViewTableClass th, table.listViewTableClass td
+{
+    border: 1px solid #d4d4d4;
+}
+table.listViewTableClass
+{   
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #333333;
+    border-collapse: collapse;
+    border: 1px solid;
+    border-color: #CCCCCC;
+    
+}
+
+table.listViewTableClass tr:hover
+{
+    background-color: #fcf6cf;
+}
+
+table.listViewTableClass tr.alternateBg
+{
+    background-color: #FDFAE1;
+}
+table.listViewTableClass tr.alternateBg:hover
+{
+    background-color: #fcf6cf;
+}
+
+table.listViewTableClass th
+{
+    font-weight: bold;
+    font-size: 11px;
+    color: #CCC;
+    background-color: #333;
+    text-align: center;
+    border-color: #FFF;
+    padding-top:3px;
+    padding-bottom:3px;
+    padding-left:3px;
+    
+}
+table.listViewTableClass th a
+{
+    font-weight: bold;
+    font-size: 11px;
+    color: #CCC;
+    background-color: #333;
+    text-align: center;
+    border-color: #FFF;
+    padding-top:3px;
+    padding-bottom:3px;
+    padding-left:3px;
+    padding-right:3px;
+    text-decoration: underline;
+}
+table.listViewTableClass td
+{
+    padding: 1px;
+    text-align: center;
+}
+table.listViewTableClass td.leftAligned
+{
+    padding: 3px;
+    text-align: left;
+    white-space: normal;
+}
+table.listViewTableClass td.centerAligned
+{
+    padding: 3px;
+    text-align: center;
+    white-space: normal;
+}
+
+table.listViewTableClass td.rightAligned
+{
+    padding: 3px;
+    text-align: right;
+    white-space: nowrap;
+}
+table.listViewTableClass td.group
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #000;
+    /*background: #d3d3d3;*/
+    background: #82ABB8;
+}
+table.listViewTableClass td.groupRed
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #CC0000; /*background: #d3d3d3;*/
+    background: #82ABB8;
+}
+table.listViewTableClass td.group a.groupLink, table.listViewTable td.group a.groupLink:visited
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #000099;
+    background: #82ABB8;
+}
+table.listViewTableClass td.group a.groupLink:hover
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #000099;
+    background: #82ABB8;
+    text-decoration: underline;
+}
+table.listViewTableClass td a:link
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.listViewTableClass td a:active
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.listViewTableClass td a:visited
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.listViewTableClass td a:hover
+{
+    color: #0B55C4;
+    text-decoration: underline;
+}
+table.listViewTableClass tr.inactive
+{
+   /* background-color: #CCCCCC;*/
+}
+table.listViewTableClass tr.inactive td
+{
+    color: #CC0000;
+    text-decoration: line-through;
+    background-color: #C0C0C0;
+}
+table.listViewTableClass tr.notComplete td, table.listViewTable tr.notComplete td a, table.listViewTable tr.notComplete td a:hover
+{    
+    background-color: #C0C0C0;
+}
+table.listViewTableClass td.leftAligned a.EventNotification 
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;    
+    color: Red;
+    text-decoration: none;   
+    padding:0 0 0 0;
+    margin: 0 0 0 0; 
+}
+
+table.listViewTable, table.listViewTable th, table.listViewTable td
+{
+    border: 1px solid #d4d4d4;
+}
+table.listViewTable
+{
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #333333;
+    border-collapse: collapse;
+    border: 1px solid;
+    border-color: #CCCCCC;
+}
+table.listViewTable tr:hover
+{
+    background-color: #fcf6cf;
+}
+table.listViewTable tr.alternateBg
+{
+    background-color: #FDFAE1;
+}
+table.listViewTable tr.alternateBg:hover
+{
+    background-color: #fcf6cf;
+}
+/*table.listViewTable th { color:#000;background:#bdbec0;font-weight:bold;padding:5px; }*/
+table.listViewTable th
+{
+    font-weight: bold;
+    font-size: 11px;
+    color: #CCC;
+    background-color: #333;
+    text-align: center;
+    border-color: #FFF;
+    padding-top:3px;
+    padding-bottom:3px;
+    padding-left:3px;
+    padding-right:3px;
+}
+table.listViewTable th a
+{
+    font-weight: bold;
+    font-size: 11px;
+    color: #CCC;
+    background-color: #333;
+    text-align: center;
+    border-color: #FFF;
+    padding-top:3px;
+    padding-bottom:3px;
+    padding-left:3px;
+    padding-right:3px;
+    text-decoration: underline;
+}
+table.listViewTable td
+{
+    padding: 1px;
+    text-align: center;
+}
+table.listViewTable td.leftAligned
+{
+    padding: 3px;
+    text-align: left;
+    white-space: nowrap;
+}
+table.listViewTable td.centerAligned
+{
+    padding: 3px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+table.listViewTable td.rightAligned
+{
+    padding: 3px;
+    text-align: right;
+    white-space: nowrap;
+}
+table.listViewTable td.group
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #000;
+    /*background: #d3d3d3;*/
+    background: #82ABB8;
+}
+table.listViewTable td.groupRed
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #CC0000; /*background: #d3d3d3;*/
+    background: #82ABB8;
+}
+table.listViewTable td.group a.groupLink, table.listViewTable td.group a.groupLink:visited
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #000099;
+    background: #82ABB8;
+}
+table.listViewTable td.group a.groupLink:hover
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #000099;
+    background: #82ABB8;
+    text-decoration: underline;
+}
+table.listViewTable td a:link
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.listViewTable td a:active
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.listViewTable td a:visited
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.listViewTable td a:hover
+{
+    color: #0B55C4;
+    text-decoration: underline;
+}
+table.listViewTable tr.inactive
+{
+   /* background-color: #CCCCCC;*/
+}
+table.listViewTable tr.inactive td
+{
+    color: #CC0000;
+    text-decoration: line-through;
+    background-color: #C0C0C0;
+}
+table.listViewTable tr.notComplete td, table.listViewTable tr.notComplete td a, table.listViewTable tr.notComplete td a:hover
+{    
+    background-color: #C0C0C0;
+}
+table.listViewTable td.leftAligned a.EventNotification 
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;    
+    color: Red;
+    text-decoration: none;   
+    padding:0 0 0 0;
+    margin: 0 0 0 0; 
+}
+/* end Listview table */
+
+/* Listview settings for region (seaport) maintenance */
+table.listViewTable2, table.listViewTable2 th, table.listViewTable2 td
+{
+    border: 1px solid #d4d4d4;
+}
+table.listViewTable2
+{
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #333333;
+    border-collapse: collapse;
+    border: 1px solid;
+    border-color: #CCCCCC;
+}
+table.listViewTable2 tr:hover
+{
+    /*background-color: #fcf6cf;*/
+}
+table.listViewTable2 tr.alternateBg
+{
+    background-color: #FDFAE1;
+}
+table.listViewTable2 tr.alternateBg:hover
+{
+    background-color: #fcf6cf;
+}
+/*table.listViewTable th { color:#000;background:#bdbec0;font-weight:bold;padding:5px; }*/
+table.listViewTable2 th
+{
+    font-weight: bold;
+    font-size: 11px;
+    color: #CCC;
+    background-color: #333;
+    text-align: left;
+    border-color: #FFF;
+    padding-top:3px;
+    padding-bottom:3px;
+    padding-left:3px;
+    padding-right:3px;
+}
+table.listViewTable2 th a
+{
+    font-weight: bold;
+    font-size: 11px;
+    color: #CCC;
+    background-color: #333;
+    text-align: center;
+    border-color: #FFF;
+    padding-top:3px;
+    padding-bottom:3px;
+    padding-left:3px;
+    padding-right:3px;
+    text-decoration: underline;
+}
+/*
+table.listViewTable2 td
+{
+    padding: 1px;
+    text-align: center;
+}*/
+table.listViewTable2 td.leftAligned
+{
+    padding: 3px;
+    text-align: left;
+    white-space: nowrap;
+}
+table.listViewTable2 td.centerAligned
+{
+    padding: 3px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+table.listViewTable2 td.rightAligned
+{
+    padding: 3px;
+    text-align: right;
+    white-space: nowrap;
+}
+table.listViewTable2 td.group
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #000;
+    /*background: #d3d3d3;*/
+    background: #82ABB8;    
+}
+table.listViewTable2 td.groupRed
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #CC0000; /*background: #d3d3d3;*/
+    background: #82ABB8;
+}
+table.listViewTable2 td.group a.groupLink, table.listViewTable2 td.group a.groupLink:visited
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #000099;
+    background: #82ABB8;        
+}
+table.listViewTable2 td.group a.groupLink:hover
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #000099;
+    background: #82ABB8;
+    text-decoration: underline;
+}
+table.listViewTable2 td a:link
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.listViewTable2 td a:active
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.listViewTable2 td a:visited
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.listViewTable2 td a:hover
+{
+    color: #0B55C4;
+    text-decoration: underline;
+}
+table.listViewTable2 tr.inactive
+{
+   /* background-color: #CCCCCC;*/
+}
+table.listViewTable2 tr.inactive td
+{
+    color: #CC0000;
+    text-decoration: line-through;
+    background-color: #C0C0C0;
+}
+
+table.listViewTable2 td.leftAligned a.EventNotification 
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;    
+    color: Red;
+    text-decoration: none;   
+    padding:0 0 0 0;
+    margin: 0 0 0 0; 
+}
+table.listViewTable2 td.group table.group2
+{
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    border: 0;
+    width: 100%;
+}
+
+table.listViewTable2 td.group table.group2 td.title
+{
+    width:80%;
+    text-align:left;
+    border: 0;
+}
+table.listViewTable2 tr:hover
+{
+    background-color: #fcf6cf;
+}
+table.listViewTable2 tr table tr:hover
+{
+    background-color: #82ABB8;
+}
+
+/*
+table.listViewTable2 td.group table.group2 td
+{
+    width:10%;
+    border: 0;
+}
+table.listViewTable2 td.group table.group2 td.title:hover
+{
+    width:10%;
+    border: 0;
+    background: #82ABB8;  
+}*/
+
+/* */
+
+/* end Listview settings for region (seaport) maintenance */
+
+/* Listview settings for new HotelDashboardRoomType2 */
+table.listViewTable3, table.listViewTable3 th, table.listViewTable3 td
+{
+    border: 1px none #d4d4d4;    
+}
+table.listViewTable3
+{
+    width: 50%; /*60%;*/    
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #333333;
+    border-collapse: collapse;
+    border: 1px none;
+    border-color: #CCCCCC;    
+}
+table.listViewTable3 tr:hover
+{
+    /*background-color: #fcf6cf;*/
+}
+table.listViewTable3 tr.alternateBg
+{
+    /*background-color: #FDFAE1;*/
+}
+table.listViewTable3 tr.alternateBg:hover
+{
+    /*background-color: #fcf6cf;*/
+}
+/*table.listViewTable th { color:#000;background:#bdbec0;font-weight:bold;padding:5px; }*/
+table.listViewTable3 th
+{
+    font-weight: bold;
+    font-size: 11px;
+    color: #CCC;
+    background-color: #333;
+    text-align: left;
+    border-color: #FFF;
+    padding-top:3px;
+    padding-bottom:3px;
+    padding-left:3px;
+    padding-right:3px;    
+}
+table.listViewTable3 th a
+{
+    font-weight: bold;
+    font-size: 11px;
+    color: #CCC;
+    background-color: #333;
+    text-align: center;
+    border-color: #FFF;
+    padding-top:3px;
+    padding-bottom:3px;
+    padding-left:3px;
+    padding-right:3px;
+    text-decoration: underline;
+}
+table.listViewTable3 td
+{
+    padding: 1px;
+    text-align: center;
+    width: 10%;                
+}
+table.listViewTable3 td.leftAligned
+{
+    padding: 1px;
+    text-align: left;
+    white-space: nowrap; 
+    border: solid 2px gray; /*#fcf6cf #846c46 #82ABB8*/  
+    border-right: none; 
+    border-top: none;   
+}
+table.listViewTable3 td.tdLabelReservedSingle
+{
+    padding: 1px;
+    text-align: left;
+    white-space: nowrap; 
+    border: solid 2px gray; /*#fcf6cf #846c46 #82ABB8*/  
+    border-right: none;
+    border-bottom: none;
+}
+table.listViewTable3 td.centerAligned
+{
+    padding: 3px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+table.listViewTable3 td.rightAligned
+{
+    padding: 3px;
+    text-align: right;
+    white-space: nowrap;
+}
+table.listViewTable3 td.tdAligned
+{
+    padding: 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px; /*50px;*/
+    font-size: small;
+    border: solid 2px gray; /*#fcf6cf #846c46 #82ABB8*/   
+    border-left: none;    
+}
+
+table.listViewTable3 td.tdContract
+{
+    padding: 1px 1px 1px 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px; /*50px;*/
+    font-size: small;
+    border-top: solid 2px gray; 
+    /*background-color: #EAEAEA;/*#82ABB8;*/
+}
+table.listViewTable3 td.tdEvent
+{
+    padding: 1px 4px 1px 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px; /*50px;*/
+    font-size: small;
+    border-top: solid 2px gray;  
+    border-right: solid 2px gray;
+    /*background-color: #EAEAEA;/*#82ABB8;*/
+}
+table.listViewTable3 td.tdLabelSingle
+{
+    padding: 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px; /*50px;*/
+    font-size: small;
+    border-left: solid 2px gray; 
+    border-top: solid 2px gray;
+    /*background-color: #FFFFCC;*/
+}
+table.listViewTable3 td.tdResultSingle
+{
+    padding: 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px; /*50px;*/
+    font-size: small;
+    border-top: solid 2px gray;
+    /*background-color: #FFFFCC;*/   
+}
+table.listViewTable3 td.tdResultSingle2
+{
+    padding: 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px; /*50px;*/
+    font-size: small;
+    /*border-top: solid 2px gray;*/
+    /*background-color: #FFFFCC;*/
+    border-top: solid 2px gray;  
+    border-right: solid 2px gray;
+    padding-right:5px;
+}
+table.listViewTable3 td.tdLabelSingle2
+{
+    padding: 1px;
+    text-align: left;
+    white-space: nowrap;   
+    border-top: solid 2px gray;
+    /*background-color: #FFFFCC;*/
+}
+table.listViewTable3 td.tdLabelDouble
+{
+    padding: 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px; /*50px;*/
+    font-size: small;
+    border-left: solid 2px gray;    
+    border-bottom: solid 2px gray;
+    /*background-color: White;*/
+}
+table.listViewTable3 td.tdResultDouble
+{
+    padding: 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px;
+    font-size: small;
+    border-bottom: solid 2px gray;
+    /*background-color: White;*/    
+}
+table.listViewTable3 td.tdResultDouble2
+{
+    padding: 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px;
+    font-size: small;
+    /*border-bottom: solid 2px gray;*/
+    /*background-color: White;*/
+    border-right: solid 2px gray;    
+    border-bottom: solid 2px gray;
+    padding-right:5px;
+}
+table.listViewTable3 td.tdLabelDouble2
+{
+    padding: 1px;
+    text-align: left;
+    white-space: nowrap; 
+    border-bottom: solid 2px gray;   
+    /*background-color: White;*/
+}
+table.listViewTable3 td.tdSingleRight
+{
+    padding: 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px; /*50px;*/
+    font-size: small;     
+    border-top: solid 2px gray;  
+    border-right: solid 2px gray;   
+    /*background-color: #FFFFCC;*/
+}
+table.listViewTable3 td.tdRightBottom
+{
+    padding: 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px; /*50px;*/
+    font-size: small;     
+    border-right: solid 2px gray;    
+    border-bottom: solid 2px gray;    
+    /*background-color: White;*/ 
+}
+
+table.listViewTable3 li.bulleted
+{   
+    padding: 3px;
+    text-align: left;
+    white-space: nowrap;
+    text-indent: 45px; /*75px; 50px;*/
+    list-style-type: none;
+    font-size: small;    
+    /*list-style-image: url('../../Images/pencil2.gif');*/
+}
+table.listViewTable3 label.labelAligned
+{
+    padding: 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px; /*50px;*/
+    font-size: small;
+}table.listViewTable3 n.nAligned
+{
+    padding: 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px; /*50px;*/
+    font-size: small;
+}
+table.listViewTable3 label.labelBulleted
+{
+    padding: 3px;
+    text-align: left;
+    white-space: nowrap;
+    text-indent: 50px; 
+    font-size: small;   
+}
+table.listViewTable3 n.nBulleted
+{
+    padding: 3px;
+    text-align: left;
+    white-space: nowrap;
+    text-indent: 90px; /*65px;*/
+    font-size: small; 
+}
+table.listViewTable3 label.labelTextIndent
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;    
+    text-indent: 8px;
+}
+table.listViewTable3 img.imageSet
+{
+    list-style-image: url("contract.gif");    
+}
+table.listViewTable3 td.group
+{
+    padding: 1px 5px 1px 1px;
+    text-align: left;
+    color: #000;    
+    font-size: larger; /*larger;*/
+    border: solid 2px gray; /*#fcf6cf #846c46 #82ABB8*/
+    border-right: none;
+    /*background-color: #EAEAEA;/*#82ABB8;*/
+    /*background-color: White;*/ /*#D5EAFF; #82ABB8;*/
+}
+table.listViewTable3 td.groupRed
+{
+    padding: 1px 5px 1px 5px;
+    text-align: left;
+    color: #CC0000; /*background: #d3d3d3;*/
+    background: #82ABB8;
+}
+table.listViewTable3 td.group a.groupLinkExpired
+{
+	padding: 1px 5px 1px 1px;
+	text-align: left;
+	color: #676767;
+}
+table.listViewTable3 td.group a.groupLinkExpired:visited, a.groupLinkExpired:hover, table.listViewTable3 td.group 
+{
+    padding: 1px 5px 1px 1px;
+    text-align: left;
+    color: #676767;     
+    text-decoration: underline;
+}
+table.listViewTable3 td.group a.groupLink, table.listViewTable3 td.group a.groupLink:visited
+{
+    padding: 1px 5px 1px 1px;
+    text-align: left;
+    color: #000099;    
+    /*background: #82ABB8;*/
+}
+table.listViewTable3 td.group a.groupLink:hover
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #000099;     
+    /*background: #82ABB8;*/
+    text-decoration: underline;
+}
+table.listViewTable3 td.title
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;            
+    color: #000;        
+    font-size: larger; /*larger;*/    
+    /*background: #82ABB8;*/
+}
+table.listViewTable3 td.title a.titleLink, table.listViewTable3 td.title a.titleLink:visited
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #FF0000;
+    /*background: #82ABB8;*/
+}
+table.listViewTable3 td.title a.titleLink:hover
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #FF0000;
+    /*background: #82ABB8;*/
+    text-decoration: underline;
+}
+
+
+table.listViewTable3 td a:link
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.listViewTable3 td a:active
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.listViewTable3 td a:visited
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.listViewTable3 td a:hover
+{
+    color: #0B55C4;
+    text-decoration: underline;
+}
+table.listViewTable3 tr.inactive
+{
+   /* background-color: #CCCCCC;*/
+}
+table.listViewTable3 tr.inactive td
+{
+    color: #CC0000;
+    text-decoration: line-through;
+    background-color: #C0C0C0;
+}
+
+table.listViewTable3 td.leftAligned a.EventNotification 
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;    
+    color: Red;
+    text-decoration: none;   
+    padding:0 0 0 0;
+    margin: 0 0 0 0; 
+}
+/* end Listview settings for new HotelDashboardRoomType2 */
+
+/* Listview settings for new HotelException */
+table.listViewTable4, table.listViewTable4 th, table.listViewTable4 td
+{
+    border: 1px none #d4d4d4;
+}
+table.listViewTable4
+{
+    width: 50%; /*60%;*/    
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #333333;
+    border-collapse: collapse;
+    border: 1px none;
+    border-color: #CCCCCC;    
+}
+table.listViewTable4 tr:hover
+{
+    /*background-color: #fcf6cf;*/
+}
+table.listViewTable4 tr.alternateBg
+{
+    /*background-color: #FDFAE1;*/
+}
+table.listViewTable4 tr.alternateBg:hover
+{
+    /*background-color: #fcf6cf;*/
+}
+/*table.listViewTable th { color:#000;background:#bdbec0;font-weight:bold;padding:5px; }*/
+table.listViewTable4 th
+{
+    font-weight: bold;
+    font-size: 11px;
+    color: #CCC;
+    background-color: #333;
+    text-align: left;
+    border-color: #FFF;
+    padding-top:3px;
+    padding-bottom:3px;
+    padding-left:3px;
+    padding-right:3px;    
+}
+table.listViewTable4 th a
+{
+    font-weight: bold;
+    font-size: 11px;
+    color: #CCC;
+    background-color: #333;
+    text-align: center;
+    border-color: #FFF;
+    padding-top:3px;
+    padding-bottom:3px;
+    padding-left:3px;
+    padding-right:3px;
+    text-decoration: underline;
+}
+table.listViewTable4 td
+{
+    padding: 1px;
+    text-align: center;
+    width: 10%;                
+}
+table.listViewTable4 td.leftAligned
+{
+    padding: 1px;
+    text-align: left;
+    white-space: nowrap;    
+}
+table.listViewTable4 td.centerAligned
+{
+    padding: 3px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+table.listViewTable4 td.rightAligned
+{
+    padding: 3px;
+    text-align: right;
+    white-space: nowrap;
+}
+table.listViewTable4 td.tdAligned
+{
+    padding: 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px; /*50px;*/
+    font-size: small;    
+}
+table.listViewTable4 li.bulleted
+{   
+    padding: 3px;
+    text-align: left;
+    white-space: nowrap;
+    text-indent: 40px; /*75px; 50px;*/
+    list-style-type: square;
+    font-size: small;
+    /*list-style-image: url('../../Images/pencil2.gif');*/
+}
+table.listViewTable4 label.labelAligned
+{
+    padding: 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px; /*50px;*/
+    font-size: small;
+}table.listViewTable4 n.nAligned
+{
+    padding: 1px;
+    text-align: right;
+    white-space: nowrap;
+    width: 100px; /*50px;*/
+    font-size: small;
+}
+table.listViewTable4 label.labelBulleted
+{
+    padding: 3px;
+    text-align: left;
+    white-space: nowrap;
+    text-indent: 90px; /*65px;*/
+    font-size: small;   
+}
+table.listViewTable4 n.nBulleted
+{
+    padding: 3px;
+    text-align: left;
+    white-space: nowrap;
+    text-indent: 90px; /*65px;*/
+    font-size: small;   
+}
+table.listViewTable4 label.labelTextIndent
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;    
+    text-indent: 8px;
+}
+table.listViewTable4 td.group
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #000;    
+    font-size: larger; /*larger;*/    
+    /*background: #82ABB8;*/
+}
+table.listViewTable4 td.groupRed
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #CC0000; /*background: #d3d3d3;*/
+    background: #82ABB8;
+}
+table.listViewTable4 td.group a.groupLink, table.listViewTable3 td.group a.groupLink:visited
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #000099;
+    /*background: #82ABB8;*/
+}
+table.listViewTable4 td.group a.groupLink:hover
+{
+    padding: 1px 5px 1px 15px;
+    text-align: left;
+    color: #000099;
+    /*background: #82ABB8;*/
+    text-decoration: underline;
+}
+table.listViewTable4 td a:link
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.listViewTable4 td a:active
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.listViewTable4 td a:visited
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.listViewTable4 td a:hover
+{
+    color: #0B55C4;
+    text-decoration: underline;
+}
+table.listViewTable4 tr.inactive
+{
+   /* background-color: #CCCCCC;*/
+}
+table.listViewTable4 tr.inactive td
+{
+    color: #CC0000;
+    text-decoration: line-through;
+    background-color: #C0C0C0;
+}
+
+table.listViewTable4 td.leftAligned a.EventNotification 
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: bold;    
+    color: Red;
+    text-decoration: none;   
+    padding:0 0 0 0;
+    margin: 0 0 0 0; 
+}
+/* end Listview settings for new HotelException */
+
+/* begin css tabs */
+
+/*Credits: Dynamic Drive CSS Library */
+/*URL: http://www.dynamicdrive.com/style/ */
+
+.menu
+{
+    padding: 0;
+    border-spacing: 0;
+    margin: 0;
+    padding-left: 10px;
+}
+.basictab
+{
+    background-image: url('headerGradient2.png');
+    background-repeat: repeat-x;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    padding: 20px 0 3px 10px;
+    margin-left: 0;
+    padding-left: 15px;
+    font: normal 12px Verdana;
+    border-bottom: 1px solid gray;
+    list-style-type: none;
+    text-align: left; /*set to left, center, or right to align the menu as desired*/
+}
+
+.basictab li
+{
+    display: inline;
+    margin: 0;
+}
+
+.basictab li a
+{
+    text-decoration: none;
+    padding: 3px 7px;
+    margin-right: 0px;
+    border: 1px solid gray;
+    border-bottom: none;
+    background-color: #efefef;
+    color: #333333;
+}
+
+.basictab li a:visited
+{
+    color: #2d2b2b;
+}
+
+.basictab li a:hover
+{
+    background-color: #333333;
+    color: #FFFFFF;
+}
+
+.basictab li a:active
+{
+    color: black;
+}
+
+.basictab li.selected a
+{
+    /*selected tab effect*/
+    position: relative;
+    top: 1px;
+    padding-top: 4px;
+    background-color: #FFFFFF;
+    color: black;
+}
+
+/* end css tabs */
+
+.AirLink
+{
+}
+.HotelLink
+{
+}
+.PortLink
+{
+}
+.VehicleLink
+{
+}
+.EditLink
+{   
+}
+.ViewRemarks
+{
+}
+
+/* ListviewEmpty table */
+table.ListviewEmpty, table.ListviewEmpty th, table.ListviewEmpty td
+{
+    border: 1px solid #d4d4d4;
+    padding: 0;
+}
+table.ListviewEmpty
+{
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #333333;
+    border-collapse: collapse;
+    border: 1px solid;
+    border-color: #CCCCCC;
+}
+table.ListviewEmpty tr:hover
+{
+    background-color: #fcf6cf;
+}
+table.ListviewEmpty th
+{
+    font-weight: bold;
+    font-size: 12px;
+    color: #CCC;
+    background-color: #333;
+    text-align: center;
+    border-color: #FFF;
+}
+table.ListviewEmpty td
+{
+    padding: 5px;
+    text-align: center;
+}
+table.ListviewEmpty td.leftAligned
+{
+    padding: 5px;
+    text-align: left;
+}
+table.ListviewEmpty td.group
+{
+    padding: 5px 5px 5px 15px;
+    text-align: left;
+    color: #000;
+    background: #d3d3d3;
+}
+table.ListviewEmpty td a:link
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.ListviewEmpty td a:active
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.ListviewEmpty td a:visited
+{
+    color: #0B55C4;
+    text-decoration: none;
+}
+table.ListviewEmpty td a:hover
+{
+    color: #0B55C4;
+    text-decoration: underline;
+}
+/* end ListviewEmpty table */
+
+.hideElement
+{
+    display: none;
+}
+.fieldWatermark
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #999999;
+}
+.fieldWatermarkSmall
+{
+    font-family: Arial, Helvetica, sans-serif;
+     font-size: x-small;
+    color: #999999;
+}
+.PagerClass
+{
+    font-size: Small;
+    font-weight: bold;
+}
+.SearchMenu
+{
+    border-style: solid none none none;
+    border-width: 1px;
+    border-color: #808080;
+    text-align: left;
+}
+.CollapsiblePanel
+{
+    height: 0px;
+    overflow: hidden;
+}
+.LeftPanelTitle
+{
+    font-size: 10pt;
+    font-style: normal;
+    text-align: left;
+    padding: 3px 5px 3px 5px;
+    vertical-align: middle;
+    background-color: #82ABB8;
+    padding-left: 5px;
+    font-weight: bold;
+}
+.BlackText
+{
+    color: #000000;
+}
+.BlueText
+{
+    color: #0000CC;
+}
+.CountBlue
+{
+    font-weight: bold;
+    color: #0000FF;
+}
+.CountRed
+{
+    font-weight: bold;
+    color: #FF0000;
+}
+.dropdownSearch
+{
+    font-size: 11px;
+    font-style: italic;
+    background-color: #e3e3e3;
+    font-family: verdana;
+    border: solid 1px #35556b;
+    height: 20px;
+    vertical-align: middle;
+    z-index: 1000;
+    position: relative;
+}
+.RedBgNotification
+{
+    padding: 10px 10px 10px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;/*11px;*/
+    font-weight: bold;    
+    color: Red;
+    text-decoration: none;
+    /*background-color: Maroon; /*#FF0000;*/
+    /*border: solid 2px Red;*/
+}
+.RedBgNotification:hover
+{
+    padding: 10px 10px 10px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: Red; /*#FFFFFF;*/
+    text-decoration: underline;
+    /*background-color: Maroon;*/
+    /*border: solid 2px Red;*/    
+}
+.GrayNotification
+{
+	font-family: Verdana, Helvetica, sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	font-style: italic;
+	color: #333333;
+	vertical-align:middle;
+}
+.RedNotification
+{
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    font-style: italic;
+    color: #FF0000;
+}
+.RedNotificationNormal
+{
+    font-family: Verdana, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    font-style:normal;
+    color: #FF0000;
+}
+a.EventNotification 
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: bold;    
+    color: Red;
+    text-decoration: none;   
+    padding:0 0 0 0;
+    margin: 0 0 0 0; 
+}
+.Checkbox
+{
+}
+.contentCaption
+{
+     width: 83px;   
+     vertical-align:middle;
+}
+.contentValue
+{
+    width: 319px;
+    vertical-align:middle;
+    white-space:nowrap;
+}
+.contentCaptionOrig
+{
+     width: 240px;   
+     vertical-align:middle;
+     text-align:left;     
+     white-space:nowrap;
+     padding-left:5px;
+     
+}
+.contentValueOrig
+{
+    width: 350px;
+    vertical-align:middle;
+    text-align:left;
+    white-space:nowrap;
+}
+.TableLegend
+{
+    border: 1px solid #C0C0C0;
+    text-align: left;
+    vertical-align: middle;
+    height:100%
+}
+.TableLegend th, Table.TableLegend td.LegendBrk
+{
+    border-style: none none solid solid;
+    border-bottom: 1px;
+    border-bottom: #C0C0C0;
+    border-left: 1px;
+    border-left: #C0C0C0;
+    padding: 0 2px 0 2px;        
+}
+.TableLegend td.LegendBrk
+{
+    padding: 0 0 0 0;
+    margin: 0 0 0 0;
+    font-size: 1px;   
+}
+.TableLegend td
+{
+    border-style: none none none solid;
+    border-left: 1px;
+    border-left: #C0C0C0;    
+    padding: 0 2px 0 2px;    
+}
+.SessionWarning
+{
+    position:absolute; 
+    top:30%;       
+    left: 35%;
+    padding: 0 0 0 0; 
+    text-align:center; 
+    display: none; 
+    margin: auto auto auto auto; 
+    z-index:9999; 
+}
+.PotentialColor
+{
+    background-color:#F0F0F0;
+}
+
+
+
+table.cssTblDashboard
+{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #333333;        
+}
+table.cssTblDashboard th
+{
+    border: 2px solid gray;
+    padding: 2px 2px 2px 5px;
+    text-align: left;
+    white-space: nowrap;
+    font-weight: bold;
+    font-size: 13px;    
+    
+}
+table.cssTblDashboard td.leftAligned
+{
+    border-style: none none solid solid;
+    border-width: 2px;
+    border-color: gray;
+    padding: 2px 2px 2px 2px;
+    text-align: left;
+    white-space: nowrap;
+}
+table.cssTblDashboard td.midAligned
+{
+    border-style: none none solid none;
+    border-width: 2px;
+    border-color: gray;
+    padding: 2px 2px 2px 5px;
+    text-align: left;
+    white-space: nowrap;
+}
+table.cssTblDashboard td.rightAligned
+{
+    border-style: none solid solid none;
+    border-width: 2px;
+    border-color: gray;
+    padding: 2px 2px 2px 5px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+table.cssTblDashboardSub
+{    
+}
+table.cssTblDashboardSub td.cssLine
+{
+    border-style: solid none none none;
+    color: #0B55C4;
+    font-size: larger;
+    border-top-width: 1px;
+    border-top-color: #808080;    
+}
+table.cssTblDashboardSub td.cssNoLine
+{
+   padding-top: 5px;
+}
+
+.DashboardVendorName
+{
+    color:  #0000FF;   
+    font-size:12px;  
+    padding-top: 5px;   
+}
+.DashboardVendorName a
+{
+    color: #0000FF;
+    font-size: 12px;
+    padding-top: 5px;
+    text-decoration: none;
+}
+.DashboardVendorName a:hover
+{
+    text-decoration: underline;
+}
+
+.DashboardVendorName a:visited
+{
+    color:  #0000FF;   
+    font-size:12px;  
+    padding-top: 5px;   
+}
+.DashboardRowCaption
+{
+    padding: 5px 2px 5px 15px;
+    text-align:left;  
+    width: 100px;  
+}
+.DashboardRowValue
+{
+    padding: 5px 2px 5px 2px;
+    text-align: left;
+    width: 20px;
+    font-weight: bold;
+}
+ .RemarkDiv
+{
+    line-height: normal;
+    border: 1px solid #C0C0C0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+   
+}
+.linkCursor
+{
+	cursor: pointer;	
+}

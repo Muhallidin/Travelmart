@@ -1,0 +1,2087 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A7DEE05B-D224-4CC0-9533-543B38E8E3AC}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TRAVELMART</RootNamespace>
+    <AssemblyName>TRAVELMART</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AjaxControlToolkit, Version=3.0.30930.28736, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL" />
+    <Reference Include="itextsharp, Version=5.0.6.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" />
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Administration\AddRole.aspx.cs">
+      <DependentUpon>AddRole.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\AddRole.aspx.designer.cs">
+      <DependentUpon>AddRole.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\AuditTrailLogs.aspx.cs">
+      <DependentUpon>AuditTrailLogs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\AuditTrailLogs.aspx.designer.cs">
+      <DependentUpon>AuditTrailLogs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\AuditTrailLogs_old.aspx.cs">
+      <DependentUpon>AuditTrailLogs_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\AuditTrailLogs_old.aspx.designer.cs">
+      <DependentUpon>AuditTrailLogs_old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\Errors.aspx.cs">
+      <DependentUpon>Errors.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Errors.aspx.designer.cs">
+      <DependentUpon>Errors.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\Errors_old.aspx.cs">
+      <DependentUpon>Errors_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Errors_old.aspx.designer.cs">
+      <DependentUpon>Errors_old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\Exceptions.aspx.cs">
+      <DependentUpon>Exceptions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\Exceptions.aspx.designer.cs">
+      <DependentUpon>Exceptions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\RoleView_old.aspx.cs">
+      <DependentUpon>RoleView_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\RoleView_old.aspx.designer.cs">
+      <DependentUpon>RoleView_old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\UserAccounts.aspx.cs">
+      <DependentUpon>UserAccounts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\UserAccounts.aspx.designer.cs">
+      <DependentUpon>UserAccounts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\UserAirport.aspx.cs">
+      <DependentUpon>UserAirport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\UserAirport.aspx.designer.cs">
+      <DependentUpon>UserAirport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\UserMenu_old.aspx.cs">
+      <DependentUpon>UserMenu_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\UserMenu_old.aspx.designer.cs">
+      <DependentUpon>UserMenu_old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\UserRegionAdd.aspx.cs">
+      <DependentUpon>UserRegionAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\UserRegionAdd.aspx.designer.cs">
+      <DependentUpon>UserRegionAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\UserRegions.aspx.cs">
+      <DependentUpon>UserRegions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\UserRegions.aspx.designer.cs">
+      <DependentUpon>UserRegions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\CreateUserAccount.aspx.cs">
+      <DependentUpon>CreateUserAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\CreateUserAccount.aspx.designer.cs">
+      <DependentUpon>CreateUserAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\RoleView.aspx.cs">
+      <DependentUpon>RoleView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\RoleView.aspx.designer.cs">
+      <DependentUpon>RoleView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\UserAccounts_old.aspx.cs">
+      <DependentUpon>UserAccounts_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\UserAccounts_old.aspx.designer.cs">
+      <DependentUpon>UserAccounts_old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\UserRegions_old.aspx.cs">
+      <DependentUpon>UserRegions_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\UserRegions_old.aspx.designer.cs">
+      <DependentUpon>UserRegions_old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\UserSeaport.aspx.cs">
+      <DependentUpon>UserSeaport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\UserSeaport.aspx.designer.cs">
+      <DependentUpon>UserSeaport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\UserVessel.aspx.cs">
+      <DependentUpon>UserVessel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\UserVessel.aspx.designer.cs">
+      <DependentUpon>UserVessel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Air\AirView.aspx.cs">
+      <DependentUpon>AirView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Air\AirView.aspx.designer.cs">
+      <DependentUpon>AirView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CalendarPopUp.aspx.cs">
+      <DependentUpon>CalendarPopUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CalendarPopUp.aspx.designer.cs">
+      <DependentUpon>CalendarPopUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\Attachment.aspx.cs">
+      <DependentUpon>Attachment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\Attachment.aspx.designer.cs">
+      <DependentUpon>Attachment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\ContractAdd.aspx.cs">
+      <DependentUpon>ContractAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\ContractAdd.aspx.designer.cs">
+      <DependentUpon>ContractAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\HotelContractAdd_old.aspx.cs">
+      <DependentUpon>HotelContractAdd_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\HotelContractAdd_old.aspx.designer.cs">
+      <DependentUpon>HotelContractAdd_old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\HotelContractSummaryList.aspx.cs">
+      <DependentUpon>HotelContractSummaryList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\HotelContractSummaryList.aspx.designer.cs">
+      <DependentUpon>HotelContractSummaryList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\HotelNoActiveContractList.aspx.cs">
+      <DependentUpon>HotelNoActiveContractList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\HotelNoActiveContractList.aspx.designer.cs">
+      <DependentUpon>HotelNoActiveContractList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractAdd.aspx.cs">
+      <DependentUpon>PortAgentContractAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractAdd.aspx.designer.cs">
+      <DependentUpon>PortAgentContractAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractApproval.aspx.cs">
+      <DependentUpon>PortAgentContractApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractApproval.aspx.designer.cs">
+      <DependentUpon>PortAgentContractApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractHotel.aspx.cs">
+      <DependentUpon>PortAgentContractHotel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractHotel.aspx.designer.cs">
+      <DependentUpon>PortAgentContractHotel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractHotelAdd.aspx.cs">
+      <DependentUpon>PortAgentContractHotelAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractHotelAdd.aspx.designer.cs">
+      <DependentUpon>PortAgentContractHotelAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractHotelView.aspx.cs">
+      <DependentUpon>PortAgentContractHotelView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractHotelView.aspx.designer.cs">
+      <DependentUpon>PortAgentContractHotelView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractListView.aspx.cs">
+      <DependentUpon>PortAgentContractListView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractListView.aspx.designer.cs">
+      <DependentUpon>PortAgentContractListView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractMedicalView.aspx.cs">
+      <DependentUpon>PortAgentContractMedicalView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractMedicalView.aspx.designer.cs">
+      <DependentUpon>PortAgentContractMedicalView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractOthers.aspx.cs">
+      <DependentUpon>PortAgentContractOthers.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractOthers.aspx.designer.cs">
+      <DependentUpon>PortAgentContractOthers.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractOthersView.aspx.cs">
+      <DependentUpon>PortAgentContractOthersView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractOthersView.aspx.designer.cs">
+      <DependentUpon>PortAgentContractOthersView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractVehicleAdd.aspx.cs">
+      <DependentUpon>PortAgentContractVehicleAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractVehicleAdd.aspx.designer.cs">
+      <DependentUpon>PortAgentContractVehicleAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractVehicleView.aspx.cs">
+      <DependentUpon>PortAgentContractVehicleView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentContractVehicleView.aspx.designer.cs">
+      <DependentUpon>PortAgentContractVehicleView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\portAgentContractView.aspx.cs">
+      <DependentUpon>portAgentContractView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\portAgentContractView.aspx.designer.cs">
+      <DependentUpon>portAgentContractView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentNoActiveContract.aspx.cs">
+      <DependentUpon>PortAgentNoActiveContract.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\PortAgentNoActiveContract.aspx.designer.cs">
+      <DependentUpon>PortAgentNoActiveContract.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\PortContractAdd.aspx.cs">
+      <DependentUpon>PortContractAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\PortContractAdd.aspx.designer.cs">
+      <DependentUpon>PortContractAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\PortContractListView.aspx.cs">
+      <DependentUpon>PortContractListView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\PortContractListView.aspx.designer.cs">
+      <DependentUpon>PortContractListView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\HotelContractAdd.aspx.cs">
+      <DependentUpon>HotelContractAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\HotelContractAdd.aspx.designer.cs">
+      <DependentUpon>HotelContractAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\HotelContractListView.aspx.cs">
+      <DependentUpon>HotelContractListView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\HotelContractListView.aspx.designer.cs">
+      <DependentUpon>HotelContractListView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\HotelContractMaintenance.aspx.cs">
+      <DependentUpon>HotelContractMaintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\HotelContractMaintenance.aspx.designer.cs">
+      <DependentUpon>HotelContractMaintenance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\HotelContractView.aspx.cs">
+      <DependentUpon>HotelContractView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\HotelContractView.aspx.designer.cs">
+      <DependentUpon>HotelContractView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\PortContractMedical.aspx.cs">
+      <DependentUpon>PortContractMedical.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\PortContractMedical.aspx.designer.cs">
+      <DependentUpon>PortContractMedical.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\VehicleContractAdd.aspx.cs">
+      <DependentUpon>VehicleContractAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\VehicleContractAdd.aspx.designer.cs">
+      <DependentUpon>VehicleContractAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\VehicleContractView.aspx.cs">
+      <DependentUpon>VehicleContractView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\VehicleContractView.aspx.designer.cs">
+      <DependentUpon>VehicleContractView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\VehicleContractListView.aspx.cs">
+      <DependentUpon>VehicleContractListView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\VehicleContractListView.aspx.designer.cs">
+      <DependentUpon>VehicleContractListView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ContractManagement\VehicleNoActiveContractList.aspx.cs">
+      <DependentUpon>VehicleNoActiveContractList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ContractManagement\VehicleNoActiveContractList.aspx.designer.cs">
+      <DependentUpon>VehicleNoActiveContractList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CalendarPopUpForecast.aspx.cs">
+      <DependentUpon>CalendarPopUpForecast.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CalendarPopUpForecast.aspx.designer.cs">
+      <DependentUpon>CalendarPopUpForecast.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CrewAssistPopUp.aspx.cs">
+      <DependentUpon>CrewAssistPopUp.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CrewAssistPopUp.aspx.designer.cs">
+      <DependentUpon>CrewAssistPopUp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CrewAssist\CrewAssist.aspx.cs">
+      <DependentUpon>CrewAssist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CrewAssist\CrewAssist.aspx.designer.cs">
+      <DependentUpon>CrewAssist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelRequest.aspx.cs">
+      <DependentUpon>HotelRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HotelRequest.aspx.designer.cs">
+      <DependentUpon>HotelRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelRequestView.aspx.cs">
+      <DependentUpon>HotelRequestView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HotelRequestView.aspx.designer.cs">
+      <DependentUpon>HotelRequestView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\AddConfirmation.aspx.cs">
+      <DependentUpon>AddConfirmation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\AddConfirmation.aspx.designer.cs">
+      <DependentUpon>AddConfirmation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelConfirmManifestForecast.aspx.cs">
+      <DependentUpon>HotelConfirmManifestForecast.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelConfirmManifestForecast.aspx.designer.cs">
+      <DependentUpon>HotelConfirmManifestForecast.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelConfirmManifest.aspx.cs">
+      <DependentUpon>HotelConfirmManifest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelConfirmManifest.aspx.designer.cs">
+      <DependentUpon>HotelConfirmManifest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelLockedManifest.aspx.cs">
+      <DependentUpon>HotelLockedManifest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelLockedManifest.aspx.designer.cs">
+      <DependentUpon>HotelLockedManifest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelNonTurnPorts.aspx.cs">
+      <DependentUpon>HotelNonTurnPorts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelNonTurnPorts.aspx.designer.cs">
+      <DependentUpon>HotelNonTurnPorts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelOverflowBooking3.aspx.cs">
+      <DependentUpon>HotelOverflowBooking3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelOverflowBooking3.aspx.designer.cs">
+      <DependentUpon>HotelOverflowBooking3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masterfile\RestrictedNationalityMaster.aspx.cs">
+      <DependentUpon>RestrictedNationalityMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masterfile\RestrictedNationalityMaster.aspx.designer.cs">
+      <DependentUpon>RestrictedNationalityMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PopupTest.Master.cs">
+      <DependentUpon>PopupTest.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopupTest.Master.designer.cs">
+      <DependentUpon>PopupTest.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="RestrictedNationality.aspx.cs">
+      <DependentUpon>RestrictedNationality.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RestrictedNationality.aspx.designer.cs">
+      <DependentUpon>RestrictedNationality.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CrewAdmin\CrewAdmin.aspx.cs">
+      <DependentUpon>CrewAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CrewAdmin\CrewAdmin.aspx.designer.cs">
+      <DependentUpon>CrewAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocumentViewer.aspx.cs">
+      <DependentUpon>DocumentViewer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentViewer.aspx.designer.cs">
+      <DependentUpon>DocumentViewer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelDashboard3.aspx.cs">
+      <DependentUpon>HotelDashboard3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HotelDashboard3.aspx.designer.cs">
+      <DependentUpon>HotelDashboard3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelDashboardRoomType3.aspx.cs">
+      <DependentUpon>HotelDashboardRoomType3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HotelDashboardRoomType3.aspx.designer.cs">
+      <DependentUpon>HotelDashboardRoomType3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelDashboardRoomType4.aspx.cs">
+      <DependentUpon>HotelDashboardRoomType4.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HotelDashboardRoomType4.aspx.designer.cs">
+      <DependentUpon>HotelDashboardRoomType4.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelRoomEmergencyEdit.aspx.cs">
+      <DependentUpon>HotelRoomEmergencyEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HotelRoomEmergencyEdit.aspx.designer.cs">
+      <DependentUpon>HotelRoomEmergencyEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelDashboardRoomType2.aspx.cs">
+      <DependentUpon>HotelDashboardRoomType2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HotelDashboardRoomType2.aspx.designer.cs">
+      <DependentUpon>HotelDashboardRoomType2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelDashboard2.aspx.cs">
+      <DependentUpon>HotelDashboard2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HotelDashboard2.aspx.designer.cs">
+      <DependentUpon>HotelDashboard2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelRoomEmergencyEdit2.aspx.cs">
+      <DependentUpon>HotelRoomEmergencyEdit2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HotelRoomEmergencyEdit2.aspx.designer.cs">
+      <DependentUpon>HotelRoomEmergencyEdit2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelRoomOverrideEdit2.aspx.cs">
+      <DependentUpon>HotelRoomOverrideEdit2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HotelRoomOverrideEdit2.aspx.designer.cs">
+      <DependentUpon>HotelRoomOverrideEdit2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelForecast.aspx.cs">
+      <DependentUpon>HotelForecast.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelForecast.aspx.designer.cs">
+      <DependentUpon>HotelForecast.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelEditor2.aspx.cs">
+      <DependentUpon>HotelEditor2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelEditor2.aspx.designer.cs">
+      <DependentUpon>HotelEditor2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelEmailManifest.aspx.cs">
+      <DependentUpon>HotelEmailManifest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelEmailManifest.aspx.designer.cs">
+      <DependentUpon>HotelEmailManifest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelExceptionBookings.aspx.cs">
+      <DependentUpon>HotelExceptionBookings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelExceptionBookings.aspx.designer.cs">
+      <DependentUpon>HotelExceptionBookings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelExceptionBookingsRemoved.aspx.cs">
+      <DependentUpon>HotelExceptionBookingsRemoved.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelExceptionBookingsRemoved.aspx.designer.cs">
+      <DependentUpon>HotelExceptionBookingsRemoved.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelManifest2.aspx.cs">
+      <DependentUpon>HotelManifest2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelManifest2.aspx.designer.cs">
+      <DependentUpon>HotelManifest2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelManifest3.aspx.cs">
+      <DependentUpon>HotelManifest3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelManifest3.aspx.designer.cs">
+      <DependentUpon>HotelManifest3.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelNoContract.aspx.cs">
+      <DependentUpon>HotelNoContract.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelNoContract.aspx.designer.cs">
+      <DependentUpon>HotelNoContract.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelOverflowBooking2.aspx.cs">
+      <DependentUpon>HotelOverflowBooking2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelOverflowBooking2.aspx.designer.cs">
+      <DependentUpon>HotelOverflowBooking2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelTentativeManifest.aspx.cs">
+      <DependentUpon>HotelTentativeManifest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelTentativeManifest.aspx.designer.cs">
+      <DependentUpon>HotelTentativeManifest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelVendor.aspx.cs">
+      <DependentUpon>HotelVendor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelVendor.aspx.designer.cs">
+      <DependentUpon>HotelVendor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelViewNoBookings.aspx.cs">
+      <DependentUpon>HotelViewNoBookings.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelViewNoBookings.aspx.designer.cs">
+      <DependentUpon>HotelViewNoBookings.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelViewNoTransaction.aspx.cs">
+      <DependentUpon>HotelViewNoTransaction.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelViewNoTransaction.aspx.designer.cs">
+      <DependentUpon>HotelViewNoTransaction.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\EventsView_old.aspx.cs">
+      <DependentUpon>EventsView_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\EventsView_old.aspx.designer.cs">
+      <DependentUpon>EventsView_old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\HotelAirportAdd.aspx.cs">
+      <DependentUpon>HotelAirportAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\HotelAirportAdd.aspx.designer.cs">
+      <DependentUpon>HotelAirportAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\HotelAirportView.aspx.cs">
+      <DependentUpon>HotelAirportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\HotelAirportView.aspx.designer.cs">
+      <DependentUpon>HotelAirportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\HotelAirportView_old.aspx.cs">
+      <DependentUpon>HotelAirportView_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\HotelAirportView_old.aspx.designer.cs">
+      <DependentUpon>HotelAirportView_old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\HotelMaintenanceBranchView.aspx.cs">
+      <DependentUpon>HotelMaintenanceBranchView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\HotelMaintenanceBranchView.aspx.designer.cs">
+      <DependentUpon>HotelMaintenanceBranchView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\HotelMaintenanceView.aspx.cs">
+      <DependentUpon>HotelMaintenanceView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\HotelMaintenanceView.aspx.designer.cs">
+      <DependentUpon>HotelMaintenanceView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\StripesRoomType.aspx.cs">
+      <DependentUpon>StripesRoomType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\StripesRoomType.aspx.designer.cs">
+      <DependentUpon>StripesRoomType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManifestSearchFilter.aspx.cs">
+      <DependentUpon>ManifestSearchFilter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManifestSearchFilter.aspx.designer.cs">
+      <DependentUpon>ManifestSearchFilter.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManifestSearchView.aspx.cs">
+      <DependentUpon>ManifestSearchView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManifestSearchView.aspx.designer.cs">
+      <DependentUpon>ManifestSearchView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ManifestSearchView2.aspx.cs">
+      <DependentUpon>ManifestSearchView2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ManifestSearchView2.aspx.designer.cs">
+      <DependentUpon>ManifestSearchView2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manifest_old.aspx.cs">
+      <DependentUpon>Manifest_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manifest_old.aspx.designer.cs">
+      <DependentUpon>Manifest_old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masterfile\CityView_old.aspx.cs">
+      <DependentUpon>CityView_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masterfile\CityView_old.aspx.designer.cs">
+      <DependentUpon>CityView_old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masterfile\CountryView_old.aspx.cs">
+      <DependentUpon>CountryView_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masterfile\CountryView_old.aspx.designer.cs">
+      <DependentUpon>CountryView_old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masterfile\RegionAdd2.aspx.cs">
+      <DependentUpon>RegionAdd2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masterfile\RegionAdd2.aspx.designer.cs">
+      <DependentUpon>RegionAdd2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masterfile\RegionView_old.aspx.cs">
+      <DependentUpon>RegionView_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masterfile\RegionView_old.aspx.designer.cs">
+      <DependentUpon>RegionView_old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Navigation.aspx.cs">
+      <DependentUpon>Navigation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Navigation.aspx.designer.cs">
+      <DependentUpon>Navigation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NoTravelRequest.aspx.cs">
+      <DependentUpon>NoTravelRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NoTravelRequest.aspx.designer.cs">
+      <DependentUpon>NoTravelRequest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NoTravelRequest2.aspx.designer.cs">
+      <DependentUpon>NoTravelRequest2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RecoverPassword.aspx.cs">
+      <DependentUpon>RecoverPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RecoverPassword.aspx.designer.cs">
+      <DependentUpon>RecoverPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RequestView.aspx.cs">
+      <DependentUpon>RequestView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RequestView.aspx.designer.cs">
+      <DependentUpon>RequestView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RequestView_old.aspx.cs">
+      <DependentUpon>RequestView_old.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RequestView_old.aspx.designer.cs">
+      <DependentUpon>RequestView_old.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\UnderMaintenance.aspx.cs">
+      <DependentUpon>UnderMaintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Settings\UnderMaintenance.aspx.designer.cs">
+      <DependentUpon>UnderMaintenance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemAnalyst\ExceptionPNR.aspx.cs">
+      <DependentUpon>ExceptionPNR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemAnalyst\ExceptionPNR.aspx.designer.cs">
+      <DependentUpon>ExceptionPNR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemAnalyst\PortNotExist.aspx.cs">
+      <DependentUpon>PortNotExist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemAnalyst\PortNotExist.aspx.designer.cs">
+      <DependentUpon>PortNotExist.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TravelmartDashboardCalendar.ascx.cs">
+      <DependentUpon>TravelmartDashboardCalendar.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TravelmartDashboardCalendar.ascx.designer.cs">
+      <DependentUpon>TravelmartDashboardCalendar.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelDashboardRoomType.aspx.cs">
+      <DependentUpon>HotelDashboardRoomType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HotelDashboardRoomType.aspx.designer.cs">
+      <DependentUpon>HotelDashboardRoomType.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.aspx.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.cs">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardHotel.aspx.cs">
+      <DependentUpon>DashboardHotel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DashboardHotel.aspx.designer.cs">
+      <DependentUpon>DashboardHotel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardPortAgent.aspx.cs">
+      <DependentUpon>DashboardPortAgent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DashboardPortAgent.aspx.designer.cs">
+      <DependentUpon>DashboardPortAgent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardPortAgentVehicle.aspx.cs">
+      <DependentUpon>DashboardPortAgentVehicle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DashboardPortAgentVehicle.aspx.designer.cs">
+      <DependentUpon>DashboardPortAgentVehicle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DashboardVehicle.aspx.cs">
+      <DependentUpon>DashboardVehicle.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DashboardVehicle.aspx.designer.cs">
+      <DependentUpon>DashboardVehicle.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\ReimbursementAdd.aspx.cs">
+      <DependentUpon>ReimbursementAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Finance\ReimbursementAdd.aspx.designer.cs">
+      <DependentUpon>ReimbursementAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Finance\ReimbursementView.aspx.cs">
+      <DependentUpon>ReimbursementView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Finance\ReimbursementView.aspx.designer.cs">
+      <DependentUpon>ReimbursementView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelDashboard.aspx.cs">
+      <DependentUpon>HotelDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HotelDashboard.aspx.designer.cs">
+      <DependentUpon>HotelDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelDashboardDetails.aspx.cs">
+      <DependentUpon>HotelDashboardDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HotelDashboardDetails.aspx.designer.cs">
+      <DependentUpon>HotelDashboardDetails.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelEmailView.aspx.cs">
+      <DependentUpon>HotelEmailView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelEmailView.aspx.designer.cs">
+      <DependentUpon>HotelEmailView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelRoomOverride.aspx.cs">
+      <DependentUpon>HotelRoomOverride.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelRoomOverride.aspx.designer.cs">
+      <DependentUpon>HotelRoomOverride.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelViewPending.aspx.cs">
+      <DependentUpon>HotelViewPending.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelViewPending.aspx.designer.cs">
+      <DependentUpon>HotelViewPending.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\EventsAdd.aspx.cs">
+      <DependentUpon>EventsAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\EventsAdd.aspx.designer.cs">
+      <DependentUpon>EventsAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\EventsList.aspx.cs">
+      <DependentUpon>EventsList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\EventsList.aspx.designer.cs">
+      <DependentUpon>EventsList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\HotelContractApproval.aspx.cs">
+      <DependentUpon>HotelContractApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\HotelContractApproval.aspx.designer.cs">
+      <DependentUpon>HotelContractApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\SailMasterAdd.aspx.cs">
+      <DependentUpon>SailMasterAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\SailMasterAdd.aspx.designer.cs">
+      <DependentUpon>SailMasterAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\SailMasterView.aspx.cs">
+      <DependentUpon>SailMasterView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\SailMasterView.aspx.designer.cs">
+      <DependentUpon>SailMasterView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\VehicleContractApproval.aspx.cs">
+      <DependentUpon>VehicleContractApproval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\VehicleContractApproval.aspx.designer.cs">
+      <DependentUpon>VehicleContractApproval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\VendorServiceMaintenance.aspx.cs">
+      <DependentUpon>VendorServiceMaintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\VendorServiceMaintenance.aspx.designer.cs">
+      <DependentUpon>VendorServiceMaintenance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\VendorServiceMaintenanceAdd.aspx.cs">
+      <DependentUpon>VendorServiceMaintenanceAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\VendorServiceMaintenanceAdd.aspx.designer.cs">
+      <DependentUpon>VendorServiceMaintenanceAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PortAgentHotelDashboard.aspx.cs">
+      <DependentUpon>PortAgentHotelDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PortAgentHotelDashboard.aspx.designer.cs">
+      <DependentUpon>PortAgentHotelDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PortAgentVehicleDashboard.aspx.cs">
+      <DependentUpon>PortAgentVehicleDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PortAgentVehicleDashboard.aspx.designer.cs">
+      <DependentUpon>PortAgentVehicleDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report.aspx.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report.aspx.designer.cs">
+      <DependentUpon>Report.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportView.aspx.cs">
+      <DependentUpon>ReportView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportView.aspx.designer.cs">
+      <DependentUpon>ReportView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SuperUser.aspx.cs">
+      <DependentUpon>SuperUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperUser.aspx.designer.cs">
+      <DependentUpon>SuperUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateUser.aspx.cs">
+      <DependentUpon>CreateUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CreateUser.aspx.designer.cs">
+      <DependentUpon>CreateUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralListView.aspx.cs">
+      <DependentUpon>GeneralListView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GeneralListView.aspx.designer.cs">
+      <DependentUpon>GeneralListView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\AddSeafarer.aspx.cs">
+      <DependentUpon>AddSeafarer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\AddSeafarer.aspx.designer.cs">
+      <DependentUpon>AddSeafarer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelEditor.aspx.designer.cs">
+      <DependentUpon>HotelEditor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelView.aspx.cs">
+      <DependentUpon>HotelView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelView.aspx.designer.cs">
+      <DependentUpon>HotelView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelViewList.aspx.cs">
+      <DependentUpon>HotelViewList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Hotel\HotelViewList.aspx.designer.cs">
+      <DependentUpon>HotelViewList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoginProcess.aspx.cs">
+      <DependentUpon>LoginProcess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginProcess.aspx.designer.cs">
+      <DependentUpon>LoginProcess.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LoginReset.aspx.cs">
+      <DependentUpon>LoginReset.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LoginReset.aspx.designer.cs">
+      <DependentUpon>LoginReset.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\PortAgentPortMaintenance.aspx.cs">
+      <DependentUpon>PortAgentPortMaintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\PortAgentPortMaintenance.aspx.designer.cs">
+      <DependentUpon>PortAgentPortMaintenance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\PortAgentSeaportAdd.aspx.cs">
+      <DependentUpon>PortAgentSeaportAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\PortAgentSeaportAdd.aspx.designer.cs">
+      <DependentUpon>PortAgentSeaportAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\VehicleTypeBranch.aspx.cs">
+      <DependentUpon>VehicleTypeBranch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\VehicleTypeBranch.aspx.designer.cs">
+      <DependentUpon>VehicleTypeBranch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masterfile\CityView.aspx.cs">
+      <DependentUpon>CityView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masterfile\CityView.aspx.designer.cs">
+      <DependentUpon>CityView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masterfile\CityAdd.aspx.cs">
+      <DependentUpon>CityAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masterfile\CityAdd.aspx.designer.cs">
+      <DependentUpon>CityAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masterfile\RegionAdd.aspx.cs">
+      <DependentUpon>RegionAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masterfile\RegionAdd.aspx.designer.cs">
+      <DependentUpon>RegionAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masterfile\CountryAdd.aspx.cs">
+      <DependentUpon>CountryAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masterfile\CountryAdd.aspx.designer.cs">
+      <DependentUpon>CountryAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masterfile\CountryView.aspx.cs">
+      <DependentUpon>CountryView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masterfile\CountryView.aspx.designer.cs">
+      <DependentUpon>CountryView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\HotelMaintenanceBranch.aspx.cs">
+      <DependentUpon>HotelMaintenanceBranch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\HotelMaintenanceBranch.aspx.designer.cs">
+      <DependentUpon>HotelMaintenanceBranch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\PortAgentMaintenance.aspx.cs">
+      <DependentUpon>PortAgentMaintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\PortAgentMaintenance.aspx.designer.cs">
+      <DependentUpon>PortAgentMaintenance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\PortAgentMaintenanceView.aspx.cs">
+      <DependentUpon>PortAgentMaintenanceView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\PortAgentMaintenanceView.aspx.designer.cs">
+      <DependentUpon>PortAgentMaintenanceView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\PortCompanyMaintenance.aspx.cs">
+      <DependentUpon>PortCompanyMaintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\PortCompanyMaintenance.aspx.designer.cs">
+      <DependentUpon>PortCompanyMaintenance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\PortCompanyMaintenanceView.aspx.cs">
+      <DependentUpon>PortCompanyMaintenanceView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\PortCompanyMaintenanceView.aspx.designer.cs">
+      <DependentUpon>PortCompanyMaintenanceView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\PortMaintenanceView.aspx.cs">
+      <DependentUpon>PortMaintenanceView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\PortMaintenanceView.aspx.designer.cs">
+      <DependentUpon>PortMaintenanceView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\VehicleMaintenanceBranch.aspx.cs">
+      <DependentUpon>VehicleMaintenanceBranch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\VehicleMaintenanceBranch.aspx.designer.cs">
+      <DependentUpon>VehicleMaintenanceBranch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\VehicleMaintenanceBranchView.aspx.cs">
+      <DependentUpon>VehicleMaintenanceBranchView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\VehicleMaintenanceBranchView.aspx.designer.cs">
+      <DependentUpon>VehicleMaintenanceBranchView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\VehicleMaintenanceView.aspx.cs">
+      <DependentUpon>VehicleMaintenanceView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\VehicleMaintenanceView.aspx.designer.cs">
+      <DependentUpon>VehicleMaintenanceView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\HotelMaintenance.aspx.cs">
+      <DependentUpon>HotelMaintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\HotelMaintenance.aspx.designer.cs">
+      <DependentUpon>HotelMaintenance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\PortAgent.aspx.cs">
+      <DependentUpon>PortAgent.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\PortAgent.aspx.designer.cs">
+      <DependentUpon>PortAgent.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\VehicleMaintenance.aspx.cs">
+      <DependentUpon>VehicleMaintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\VehicleMaintenance.aspx.designer.cs">
+      <DependentUpon>VehicleMaintenance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Message.aspx.cs">
+      <DependentUpon>Message.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Message.aspx.designer.cs">
+      <DependentUpon>Message.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleRights.aspx.cs">
+      <DependentUpon>ModuleRights.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModuleRights.aspx.designer.cs">
+      <DependentUpon>ModuleRights.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PageMethods.aspx.cs">
+      <DependentUpon>PageMethods.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PageMethods.aspx.designer.cs">
+      <DependentUpon>PageMethods.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Popup.Master.cs">
+      <DependentUpon>Popup.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Popup.Master.designer.cs">
+      <DependentUpon>Popup.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SuperUserView.aspx.cs">
+      <DependentUpon>SuperUserView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SuperUserView.aspx.designer.cs">
+      <DependentUpon>SuperUserView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TravelMart.Master.cs">
+      <DependentUpon>TravelMart.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TravelMart.Master.designer.cs">
+      <DependentUpon>TravelMart.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TravelmartDashboardCalendar2.ascx.cs">
+      <DependentUpon>TravelmartDashboardCalendar2.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TravelmartDashboardCalendar2.ascx.designer.cs">
+      <DependentUpon>TravelmartDashboardCalendar2.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="TravelmartHotel.Master.cs">
+      <DependentUpon>TravelmartHotel.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TravelmartHotel.Master.designer.cs">
+      <DependentUpon>TravelmartHotel.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TravelMartMaintenanceMaster.Master.cs">
+      <DependentUpon>TravelMartMaintenanceMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TravelMartMaintenanceMaster.Master.designer.cs">
+      <DependentUpon>TravelMartMaintenanceMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TravelmartMaster.Master.cs">
+      <DependentUpon>TravelmartMaster.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TravelmartMaster.Master.designer.cs">
+      <DependentUpon>TravelmartMaster.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TravelMartMaster2.Master.cs">
+      <DependentUpon>TravelMartMaster2.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TravelMartMaster2.Master.designer.cs">
+      <DependentUpon>TravelMartMaster2.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TravelMartMaster3.Master.cs">
+      <DependentUpon>TravelMartMaster3.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TravelMartMaster3.Master.designer.cs">
+      <DependentUpon>TravelMartMaster3.Master</DependentUpon>
+    </Compile>
+    <Compile Include="TravelmartMenu.ascx.cs">
+      <DependentUpon>TravelmartMenu.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TravelmartMenu.ascx.designer.cs">
+      <DependentUpon>TravelmartMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="TravelmartMenuLinks.ascx.cs">
+      <DependentUpon>TravelmartMenuLinks.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TravelmartMenuLinks.ascx.designer.cs">
+      <DependentUpon>TravelmartMenuLinks.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Upload.aspx.cs">
+      <DependentUpon>Upload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Upload.aspx.designer.cs">
+      <DependentUpon>Upload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vehicle\AddSeafarer.aspx.cs">
+      <DependentUpon>AddSeafarer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vehicle\AddSeafarer.aspx.designer.cs">
+      <DependentUpon>AddSeafarer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vehicle\VehicleManifest.aspx.cs">
+      <DependentUpon>VehicleManifest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vehicle\VehicleManifest.aspx.designer.cs">
+      <DependentUpon>VehicleManifest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vehicle\VehicleViewPending.aspx.cs">
+      <DependentUpon>VehicleViewPending.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vehicle\VehicleViewPending.aspx.designer.cs">
+      <DependentUpon>VehicleViewPending.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vehicle\VehicleEditor.aspx.cs">
+      <DependentUpon>VehicleEditor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vehicle\VehicleEditor.aspx.designer.cs">
+      <DependentUpon>VehicleEditor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel\HotelEditor.aspx.cs">
+      <DependentUpon>HotelEditor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PortAgent\PortEditor.aspx.cs">
+      <DependentUpon>PortEditor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PortAgent\PortEditor.aspx.designer.cs">
+      <DependentUpon>PortEditor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PortAgent\PortView.aspx.cs">
+      <DependentUpon>PortView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PortAgent\PortView.aspx.designer.cs">
+      <DependentUpon>PortView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vehicle\VehicleView.aspx.cs">
+      <DependentUpon>VehicleView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vehicle\VehicleView.aspx.designer.cs">
+      <DependentUpon>VehicleView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Seafarer.aspx.cs">
+      <DependentUpon>Seafarer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Seafarer.aspx.designer.cs">
+      <DependentUpon>Seafarer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Air\AirEditor.aspx.cs">
+      <DependentUpon>AirEditor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Air\AirEditor.aspx.designer.cs">
+      <DependentUpon>AirEditor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\MaintenanceView.aspx.cs">
+      <DependentUpon>MaintenanceView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\MaintenanceView.aspx.designer.cs">
+      <DependentUpon>MaintenanceView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\PortMaintenance.aspx.cs">
+      <DependentUpon>PortMaintenance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\PortMaintenance.aspx.designer.cs">
+      <DependentUpon>PortMaintenance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manifest.aspx.cs">
+      <DependentUpon>Manifest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manifest.aspx.designer.cs">
+      <DependentUpon>Manifest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\UserMenu.aspx.cs">
+      <DependentUpon>UserMenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\UserMenu.aspx.designer.cs">
+      <DependentUpon>UserMenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\UserMenuAdd.aspx.cs">
+      <DependentUpon>UserMenuAdd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\UserMenuAdd.aspx.designer.cs">
+      <DependentUpon>UserMenuAdd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Administration\UserSubmenu.aspx.cs">
+      <DependentUpon>UserSubmenu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Administration\UserSubmenu.aspx.designer.cs">
+      <DependentUpon>UserSubmenu.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Masterfile\RegionView.aspx.cs">
+      <DependentUpon>RegionView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Masterfile\RegionView.aspx.designer.cs">
+      <DependentUpon>RegionView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Vehicle\VehicleViewList.aspx.cs">
+      <DependentUpon>VehicleViewList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Vehicle\VehicleViewList.aspx.designer.cs">
+      <DependentUpon>VehicleViewList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RequestEditor.aspx.cs">
+      <DependentUpon>RequestEditor.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RequestEditor.aspx.designer.cs">
+      <DependentUpon>RequestEditor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\SailMasterVesselView.aspx.cs">
+      <DependentUpon>SailMasterVesselView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\SailMasterVesselView.aspx.designer.cs">
+      <DependentUpon>SailMasterVesselView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Maintenance\EventsView.aspx.cs">
+      <DependentUpon>EventsView.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Maintenance\EventsView.aspx.designer.cs">
+      <DependentUpon>EventsView.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HotelRoomOverrideEdit.aspx.cs">
+      <DependentUpon>HotelRoomOverrideEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HotelRoomOverrideEdit.aspx.designer.cs">
+      <DependentUpon>HotelRoomOverrideEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NoTravelRequest2.aspx.cs">
+      <DependentUpon>NoTravelRequest2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArrivalDepartureSameDate.aspx.cs">
+      <DependentUpon>ArrivalDepartureSameDate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArrivalDepartureSameDate.aspx.designer.cs">
+      <DependentUpon>ArrivalDepartureSameDate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Remarks.aspx.cs">
+      <DependentUpon>Remarks.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Remarks.aspx.designer.cs">
+      <DependentUpon>Remarks.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MeetAndGreet\MeetAndGreet.aspx.cs">
+      <DependentUpon>MeetAndGreet.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MeetAndGreet\MeetAndGreet.aspx.designer.cs">
+      <DependentUpon>MeetAndGreet.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SystemAnalyst\ExceptionActive.aspx.cs">
+      <DependentUpon>ExceptionActive.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SystemAnalyst\ExceptionActive.aspx.designer.cs">
+      <DependentUpon>ExceptionActive.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Themes\Default\Stylesheet.css" />
+    <Content Include="CreateUser.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="Images\Calendar_scheduleHS.png" />
+    <Content Include="Images\exclamation.png" />
+    <Content Include="Images\gradient.jpg" />
+    <Content Include="Login.aspx" />
+    <Content Include="LoginProcess.aspx" />
+    <Content Include="LoginReset.aspx" />
+    <Content Include="Maintenance\PortAgent.aspx" />
+    <Content Include="TravelMart.Master" />
+    <Content Include="Vehicle\VehicleEditor.aspx" />
+    <Content Include="Hotel\HotelEditor.aspx" />
+    <Content Include="PortAgent\PortEditor.aspx" />
+    <Content Include="PortAgent\PortView.aspx" />
+    <Content Include="Vehicle\VehicleView.aspx" />
+    <Content Include="Seafarer.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TRAVELMART.BLL\TRAVELMART.BLL.csproj">
+      <Project>{754B27DE-2156-4891-915B-A52C9059B929}</Project>
+      <Name>TRAVELMART.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TRAVELMART.Common\TRAVELMART.Common.csproj">
+      <Project>{796B6E50-2B25-42B3-80F5-6C977654A49C}</Project>
+      <Name>TRAVELMART.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Administration\AddRole.aspx" />
+    <Content Include="Administration\UserRegionAdd.aspx" />
+    <Content Include="Administration\UserRegions.aspx" />
+    <Content Include="Administration\CreateUserAccount.aspx" />
+    <Content Include="Administration\RoleView.aspx" />
+    <Content Include="Administration\UserAccounts_old.aspx" />
+    <Content Include="Air\AirView.aspx" />
+    <Content Include="bin\AjaxControlToolkit.dll" />
+    <Content Include="bin\MDIVWCTL.DLL" />
+    <Content Include="bin\Microsoft.Practices.EnterpriseLibrary.Common.dll" />
+    <Content Include="bin\Microsoft.Practices.EnterpriseLibrary.Data.dll" />
+    <Content Include="bin\Microsoft.Practices.ObjectBuilder2.dll" />
+    <Content Include="bin\Microsoft.Practices.Unity.dll" />
+    <Content Include="bin\TRAVELMART.BLL.dll" />
+    <Content Include="bin\TRAVELMART.BLL.pdb" />
+    <Content Include="bin\TRAVELMART.Common.dll" />
+    <Content Include="bin\TRAVELMART.Common.pdb" />
+    <Content Include="bin\TRAVELMART.DAL.dll" />
+    <Content Include="bin\TRAVELMART.DAL.pdb" />
+    <Content Include="ContractManagement\ContractAdd.aspx" />
+    <Content Include="ContractManagement\HotelContractSummaryList.aspx" />
+    <Content Include="ContractManagement\PortContractAdd.aspx" />
+    <Content Include="ContractManagement\PortContractListView.aspx" />
+    <Content Include="ContractManagement\HotelContractAdd.aspx" />
+    <Content Include="ContractManagement\HotelContractListView.aspx" />
+    <Content Include="ContractManagement\HotelContractMaintenance.aspx" />
+    <Content Include="ContractManagement\HotelContractView.aspx" />
+    <Content Include="ContractManagement\VehicleContractAdd.aspx" />
+    <Content Include="ContractManagement\VehicleContractView.aspx" />
+    <Content Include="ContractManagement\VehicleContractListView.aspx" />
+    <Content Include="CSS\TaskStyleSheet.css" />
+    <Content Include="FBox\fancybox\blank.gif" />
+    <Content Include="FBox\fancybox\fancybox-x.png" />
+    <Content Include="FBox\fancybox\fancybox-y.png" />
+    <Content Include="FBox\fancybox\fancybox.png" />
+    <Content Include="FBox\fancybox\fancy_close.png" />
+    <Content Include="FBox\fancybox\fancy_loading.png" />
+    <Content Include="FBox\fancybox\fancy_nav_left.png" />
+    <Content Include="FBox\fancybox\fancy_nav_right.png" />
+    <Content Include="FBox\fancybox\fancy_shadow_e.png" />
+    <Content Include="FBox\fancybox\fancy_shadow_n.png" />
+    <Content Include="FBox\fancybox\fancy_shadow_ne.png" />
+    <Content Include="FBox\fancybox\fancy_shadow_nw.png" />
+    <Content Include="FBox\fancybox\fancy_shadow_s.png" />
+    <Content Include="FBox\fancybox\fancy_shadow_se.png" />
+    <Content Include="FBox\fancybox\fancy_shadow_sw.png" />
+    <Content Include="FBox\fancybox\fancy_shadow_w.png" />
+    <Content Include="FBox\fancybox\fancy_title_left.png" />
+    <Content Include="FBox\fancybox\fancy_title_main.png" />
+    <Content Include="FBox\fancybox\fancy_title_over.png" />
+    <Content Include="FBox\fancybox\fancy_title_right.png" />
+    <Content Include="FBox\fancybox\jquery.easing-1.3.pack.js" />
+    <Content Include="FBox\fancybox\jquery.fancybox-1.3.4.css" />
+    <Content Include="FBox\fancybox\jquery.fancybox-1.3.4.js" />
+    <Content Include="FBox\fancybox\jquery.fancybox-1.3.4.pack.js" />
+    <Content Include="FBox\fancybox\jquery.mousewheel-3.0.4.pack.js" />
+    <Content Include="FBox\jquery-1.4.3.min.js" />
+    <Content Include="FBox\jquery-1.6.1.min.js" />
+    <Content Include="FBox\style.css" />
+    <Content Include="GeneralListView.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Hotel\AddSeafarer.aspx" />
+    <Content Include="Hotel\HotelView.aspx" />
+    <Content Include="Images\negative.gif" />
+    <Content Include="Images\negative.png" />
+    <Content Include="Images\neutral.gif" />
+    <Content Include="Images\neutral.png" />
+    <Content Include="Images\next.jpg" />
+    <Content Include="Images\positive.gif" />
+    <Content Include="Images\positive.png" />
+    <Content Include="Images\prev.JPG" />
+    <Content Include="Images\statusOff.gif" />
+    <Content Include="Images\statusOn.gif" />
+    <Content Include="Maintenance\HotelMaintenanceBranch.aspx" />
+    <Content Include="Maintenance\PortAgentMaintenance.aspx" />
+    <Content Include="Maintenance\PortAgentMaintenanceView.aspx" />
+    <Content Include="Maintenance\PortCompanyMaintenance.aspx" />
+    <Content Include="Maintenance\PortCompanyMaintenanceView.aspx" />
+    <Content Include="Maintenance\PortMaintenanceView.aspx" />
+    <Content Include="Maintenance\VehicleMaintenanceBranch.aspx" />
+    <Content Include="Maintenance\VehicleMaintenanceBranchView.aspx" />
+    <Content Include="Maintenance\VehicleMaintenanceView.aspx" />
+    <Content Include="Maintenance\HotelMaintenance.aspx" />
+    <Content Include="Maintenance\VehicleMaintenance.aspx" />
+    <Content Include="Menu\menu.js" />
+    <Content Include="Menu\Menustyle.css" />
+    <Content Include="Message.aspx" />
+    <Content Include="ModuleRights.aspx" />
+    <Content Include="Popup.Master" />
+    <Content Include="SuperUserView.aspx" />
+    <Content Include="Air\AirEditor.aspx" />
+    <Content Include="TravelmartMenu.ascx" />
+    <Content Include="Vehicle\AddSeafarer.aspx" />
+    <Content Include="Maintenance\MaintenanceView.aspx" />
+    <Content Include="Maintenance\PortMaintenance.aspx" />
+    <Content Include="Manifest.aspx" />
+    <Content Include="Administration\UserMenu.aspx" />
+    <Content Include="Administration\UserMenuAdd.aspx" />
+    <Content Include="Administration\UserSubmenu.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Administration\AuditTrailLogs.aspx" />
+    <Content Include="Administration\AuditTrailLogs_old.aspx" />
+    <Content Include="Administration\Errors.aspx" />
+    <Content Include="Administration\Errors_old.aspx" />
+    <Content Include="Administration\Exceptions.aspx" />
+    <Content Include="Administration\RoleView_old.aspx" />
+    <Content Include="Administration\UserAccounts.aspx" />
+    <Content Include="Administration\UserAirport.aspx" />
+    <Content Include="Administration\UserMenu_old.aspx" />
+    <Content Include="Administration\UserRegions_old.aspx" />
+    <Content Include="Administration\UserSeaport.aspx" />
+    <Content Include="Administration\UserVessel.aspx" />
+    <Content Include="App_Browsers\BrowserFile1.browser" />
+    <Content Include="App_Themes\Default\LinkMenu.css" />
+    <Content Include="bin\itextsharp.dll" />
+    <Content Include="bin\Microsoft.Office.Interop.Excel.dll" />
+    <Content Include="CalendarPopUp.aspx" />
+    <Content Include="ContractManagement\Attachment.aspx" />
+    <Content Include="ContractManagement\HotelContractAdd_old.aspx" />
+    <Content Include="ContractManagement\HotelNoActiveContractList.aspx" />
+    <Content Include="ContractManagement\PortAgentContractAdd.aspx" />
+    <Content Include="ContractManagement\PortAgentContractApproval.aspx" />
+    <Content Include="ContractManagement\PortAgentContractHotel.aspx" />
+    <Content Include="ContractManagement\PortAgentContractHotelAdd.aspx" />
+    <Content Include="ContractManagement\PortAgentContractHotelView.aspx" />
+    <Content Include="ContractManagement\PortAgentContractListView.aspx" />
+    <Content Include="ContractManagement\PortAgentContractMedicalView.aspx" />
+    <Content Include="ContractManagement\PortAgentContractOthers.aspx" />
+    <Content Include="ContractManagement\PortAgentContractOthersView.aspx" />
+    <Content Include="ContractManagement\PortAgentContractVehicleAdd.aspx" />
+    <Content Include="ContractManagement\PortAgentContractVehicleView.aspx" />
+    <Content Include="ContractManagement\portAgentContractView.aspx" />
+    <Content Include="ContractManagement\PortAgentNoActiveContract.aspx" />
+    <Content Include="ContractManagement\PortContractMedical.aspx" />
+    <Content Include="ContractManagement\VehicleNoActiveContractList.aspx" />
+    <Content Include="CalendarPopUpForecast.aspx" />
+    <Content Include="CrewAssistPopUp.aspx" />
+    <Content Include="CrewAssist\CrewAssist.aspx" />
+    <Content Include="Help\HotelVendorManual.html" />
+    <Content Include="HotelRequest.aspx" />
+    <Content Include="HotelRequestView.aspx" />
+    <Content Include="Hotel\AddConfirmation.aspx" />
+    <Content Include="Hotel\HotelConfirmManifestForecast.aspx" />
+    <Content Include="Hotel\HotelConfirmManifest.aspx" />
+    <Content Include="Hotel\HotelLockedManifest.aspx" />
+    <Content Include="Hotel\HotelNonTurnPorts.aspx" />
+    <Content Include="Hotel\HotelOverflowBooking3.aspx" />
+    <Content Include="Images\SHRSS.gif" />
+    <Content Include="Masterfile\RestrictedNationalityMaster.aspx" />
+    <Content Include="RestrictedNationality.aspx" />
+    <Content Include="CrewAdmin\CrewAdmin.aspx" />
+    <Content Include="DocumentViewer.aspx" />
+    <Content Include="Help\ChangePassword.html" />
+    <Content Include="Help\css\base.css" />
+    <Content Include="Help\css\hnd.css" />
+    <Content Include="Help\css\ielte8.css" />
+    <Content Include="Help\css\reset.css" />
+    <Content Include="Help\css\silver-theme\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Help\css\silver-theme\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Help\css\silver-theme\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Help\css\silver-theme\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Help\css\silver-theme\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Help\css\silver-theme\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Help\css\silver-theme\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Help\css\silver-theme\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Help\css\silver-theme\images\ui-bg_inset-soft_95_fef1ec_1x100.png" />
+    <Content Include="Help\css\silver-theme\images\ui-icons_222222_256x240.png" />
+    <Content Include="Help\css\silver-theme\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Help\css\silver-theme\images\ui-icons_454545_256x240.png" />
+    <Content Include="Help\css\silver-theme\images\ui-icons_888888_256x240.png" />
+    <Content Include="Help\css\silver-theme\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Help\css\silver-theme\jquery-ui-1.8.12.custom.css" />
+    <Content Include="Help\css\toc.css" />
+    <Content Include="Help\DateNavigationandExport.html" />
+    <Content Include="Help\Exception.html" />
+    <Content Include="Help\ExceptionQueue.html" />
+    <Content Include="Help\Home.html" />
+    <Content Include="Help\Homepage.html" />
+    <Content Include="Help\HotelBranch.html" />
+    <Content Include="Help\HotelBrand.html" />
+    <Content Include="Help\HotelContract.html" />
+    <Content Include="Help\HotelDashboard.html" />
+    <Content Include="Help\HotelNoActiveContract.html" />
+    <Content Include="Help\HotelView.html" />
+    <Content Include="Help\img\arrow_left.png" />
+    <Content Include="Help\img\arrow_right.png" />
+    <Content Include="Help\img\arrow_up.png" />
+    <Content Include="Help\img\book-closed.png" />
+    <Content Include="Help\img\book.png" />
+    <Content Include="Help\img\footer-bg.png" />
+    <Content Include="Help\img\header-bg.png" />
+    <Content Include="Help\img\topic.png" />
+    <Content Include="Help\img\treeview-default-line.gif" />
+    <Content Include="Help\img\treeview-default.gif" />
+    <Content Include="Help\js\hnd.js" />
+    <Content Include="Help\js\hndjsse.js" />
+    <Content Include="Help\js\jquery-ui-1.8.12.custom.min.js" />
+    <Content Include="Help\js\jquery.cookie.js" />
+    <Content Include="Help\js\jquery.min.js" />
+    <Content Include="Help\js\jquery.treeview.min.js" />
+    <Content Include="Help\js\searchdata.js" />
+    <Content Include="Help\lib\1-1.jpg" />
+    <Content Include="Help\lib\1.jpg" />
+    <Content Include="Help\lib\10.jpg" />
+    <Content Include="Help\lib\11.jpg" />
+    <Content Include="Help\lib\110.jpg" />
+    <Content Include="Help\lib\112.jpg" />
+    <Content Include="Help\lib\113.jpg" />
+    <Content Include="Help\lib\115.jpg" />
+    <Content Include="Help\lib\116.jpg" />
+    <Content Include="Help\lib\118.jpg" />
+    <Content Include="Help\lib\119.jpg" />
+    <Content Include="Help\lib\12.jpg" />
+    <Content Include="Help\lib\120.jpg" />
+    <Content Include="Help\lib\121.jpg" />
+    <Content Include="Help\lib\122.jpg" />
+    <Content Include="Help\lib\123.jpg" />
+    <Content Include="Help\lib\125.jpg" />
+    <Content Include="Help\lib\13.jpg" />
+    <Content Include="Help\lib\14.jpg" />
+    <Content Include="Help\lib\15.jpg" />
+    <Content Include="Help\lib\16.jpg" />
+    <Content Include="Help\lib\17.jpg" />
+    <Content Include="Help\lib\19.jpg" />
+    <Content Include="Help\lib\210.jpg" />
+    <Content Include="Help\lib\212.jpg" />
+    <Content Include="Help\lib\214.jpg" />
+    <Content Include="Help\lib\216.jpg" />
+    <Content Include="Help\lib\217.jpg" />
+    <Content Include="Help\lib\218.jpg" />
+    <Content Include="Help\lib\220.jpg" />
+    <Content Include="Help\lib\221.jpg" />
+    <Content Include="Help\lib\222.jpg" />
+    <Content Include="Help\lib\223.jpg" />
+    <Content Include="Help\lib\23.jpg" />
+    <Content Include="Help\lib\24.jpg" />
+    <Content Include="Help\lib\25.jpg" />
+    <Content Include="Help\lib\27.jpg" />
+    <Content Include="Help\lib\28.jpg" />
+    <Content Include="Help\lib\29.jpg" />
+    <Content Include="Help\lib\3.jpg" />
+    <Content Include="Help\lib\310.jpg" />
+    <Content Include="Help\lib\311.jpg" />
+    <Content Include="Help\lib\313.jpg" />
+    <Content Include="Help\lib\314.jpg" />
+    <Content Include="Help\lib\315.jpg" />
+    <Content Include="Help\lib\316.jpg" />
+    <Content Include="Help\lib\317.jpg" />
+    <Content Include="Help\lib\318.jpg" />
+    <Content Include="Help\lib\34.jpg" />
+    <Content Include="Help\lib\35.jpg" />
+    <Content Include="Help\lib\37.jpg" />
+    <Content Include="Help\lib\38.jpg" />
+    <Content Include="Help\lib\410.jpg" />
+    <Content Include="Help\lib\413.jpg" />
+    <Content Include="Help\lib\414.jpg" />
+    <Content Include="Help\lib\416.jpg" />
+    <Content Include="Help\lib\417.jpg" />
+    <Content Include="Help\lib\418.jpg" />
+    <Content Include="Help\lib\46.jpg" />
+    <Content Include="Help\lib\47.jpg" />
+    <Content Include="Help\lib\48.jpg" />
+    <Content Include="Help\lib\49.jpg" />
+    <Content Include="Help\lib\5.jpg" />
+    <Content Include="Help\lib\512.jpg" />
+    <Content Include="Help\lib\513.jpg" />
+    <Content Include="Help\lib\57.jpg" />
+    <Content Include="Help\lib\58.jpg" />
+    <Content Include="Help\lib\59.jpg" />
+    <Content Include="Help\lib\6.jpg" />
+    <Content Include="Help\lib\67.jpg" />
+    <Content Include="Help\lib\68.jpg" />
+    <Content Include="Help\lib\7.jpg" />
+    <Content Include="Help\lib\78.jpg" />
+    <Content Include="Help\lib\8.jpg" />
+    <Content Include="Help\lib\9.jpg" />
+    <Content Include="Help\lib\homepage.jpg" />
+    <Content Include="Help\lib\last.jpg" />
+    <Content Include="Help\lib\Login_Page1.jpg" />
+    <Content Include="Help\lib\Log_Page 1.jpg" />
+    <Content Include="Help\lib\NewItem.jpg" />
+    <Content Include="Help\lib\see me now.jpg" />
+    <Content Include="Help\lib\see me.jpg" />
+    <Content Include="Help\lib\see me1.jpg" />
+    <Content Include="Help\lib\see me2.jpg" />
+    <Content Include="Help\lib\see me3.jpg" />
+    <Content Include="Help\lib\seeme.jpg" />
+    <Content Include="Help\lib\seemeseeme.jpg" />
+    <Content Include="Help\lib\seemeseeme1.jpg" />
+    <Content Include="Help\LockedManifest.html" />
+    <Content Include="Help\Loginwindow.html" />
+    <Content Include="Help\NavigationandExport.html" />
+    <Content Include="Help\NoTravelRequest.html" />
+    <Content Include="Help\Overflow.html" />
+    <Content Include="Help\Pendings.html" />
+    <Content Include="Help\RegionFilter.html" />
+    <Content Include="Help\SameDayArrivalDeparture.html" />
+    <Content Include="Help\Search.html" />
+    <Content Include="Help\Settings.html" />
+    <Content Include="Help\TentativeManifest.html" />
+    <Content Include="Help\toc.html" />
+    <Content Include="Help\TravelMart Manual.html" />
+    <Content Include="Help\TravelMartWebsite.html" />
+    <Content Include="Help\UserRegion.html" />
+    <Content Include="Help\UserRole.html" />
+    <Content Include="Help\Vendor.html" />
+    <Content Include="HotelDashboard3.aspx" />
+    <Content Include="HotelDashboardRoomType3.aspx" />
+    <Content Include="HotelDashboardRoomType4.aspx" />
+    <Content Include="HotelRoomEmergencyEdit.aspx" />
+    <Content Include="HotelDashboardRoomType2.aspx" />
+    <Content Include="HotelDashboard2.aspx" />
+    <Content Include="HotelRoomEmergencyEdit2.aspx" />
+    <Content Include="HotelRoomOverrideEdit2.aspx" />
+    <Content Include="Hotel\HotelForecast.aspx" />
+    <Content Include="Hotel\HotelEditor2.aspx" />
+    <Content Include="Hotel\HotelEmailManifest.aspx" />
+    <Content Include="Hotel\HotelExceptionBookings.aspx" />
+    <Content Include="Hotel\HotelExceptionBookingsRemoved.aspx" />
+    <Content Include="Hotel\HotelManifest2.aspx" />
+    <Content Include="Hotel\HotelManifest3.aspx" />
+    <Content Include="Hotel\HotelNoContract.aspx" />
+    <Content Include="Hotel\HotelOverflowBooking2.aspx" />
+    <Content Include="Hotel\HotelTentativeManifest.aspx" />
+    <Content Include="Hotel\HotelVendor.aspx" />
+    <Content Include="Hotel\HotelViewNoBookings.aspx" />
+    <Content Include="Hotel\HotelViewNoTransaction.aspx" />
+    <Content Include="Images\ArrowLeft.png" />
+    <Content Include="Images\ArrowRight.png" />
+    <Content Include="Images\bluearrowLeft.gif" />
+    <Content Include="Images\bluearrowRight.gif" />
+    <Content Include="Images\Blue\background.jpg" />
+    <Content Include="Images\Blue\banner.jpg" />
+    <Content Include="Images\btnDown.JPG" />
+    <Content Include="Images\btnUp.JPG" />
+    <Content Include="Images\bullet.png" />
+    <Content Include="Images\calendar1.gif" />
+    <Content Include="Images\calendar1.png" />
+    <Content Include="Images\calendar2.png" />
+    <Content Include="Images\contract.gif" />
+    <Content Include="Images\contract.jpg" />
+    <Content Include="Images\contract2.gif" />
+    <Content Include="Images\contract2.jpg" />
+    <Content Include="Images\hotel.jpg" />
+    <Content Include="Images\Hotel.png" />
+    <Content Include="Images\next.gif" />
+    <Content Include="Images\next3.gif" />
+    <Content Include="Images\pencil.gif" />
+    <Content Include="Images\pencil2.gif" />
+    <Content Include="Images\prev.gif" />
+    <Content Include="Images\prev3.gif" />
+    <Content Include="Images\Processing.gif" />
+    <Content Include="Images\Vessel.png" />
+    <Content Include="Maintenance\EventsView_old.aspx" />
+    <Content Include="Maintenance\HotelAirportView_old.aspx" />
+    <Content Include="Manifest_old.aspx" />
+    <Content Include="Masterfile\CityView_old.aspx" />
+    <Content Include="Masterfile\CountryView_old.aspx" />
+    <Content Include="Masterfile\RegionAdd2.aspx" />
+    <Content Include="Masterfile\RegionView_old.aspx" />
+    <Content Include="RequestView_old.aspx" />
+    <Content Include="Settings\UnderMaintenance.aspx" />
+    <Content Include="Sounds\Beep.wav" />
+    <Content Include="Maintenance\HotelAirportAdd.aspx" />
+    <Content Include="Maintenance\HotelAirportView.aspx" />
+    <Content Include="Maintenance\HotelMaintenanceBranchView.aspx" />
+    <Content Include="Maintenance\HotelMaintenanceView.aspx" />
+    <Content Include="Maintenance\StripesRoomType.aspx" />
+    <Content Include="ManifestSearchFilter.aspx" />
+    <Content Include="ManifestSearchView.aspx" />
+    <Content Include="ManifestSearchView2.aspx" />
+    <Content Include="Navigation.aspx" />
+    <Content Include="NoTravelRequest.aspx" />
+    <Content Include="RecoverPassword.aspx" />
+    <Content Include="RequestView.aspx" />
+    <Content Include="SystemAnalyst\ExceptionPNR.aspx" />
+    <Content Include="SystemAnalyst\PortNotExist.aspx" />
+    <Content Include="Tab\jquery-1.7.1.min.js" />
+    <Content Include="Tab\jquery.easytabs.js" />
+    <Content Include="Tab\jquery.easytabs.min.js" />
+    <Content Include="Tab\jquery.hashchange.min.js" />
+    <Content Include="TravelmartDashboardCalendar.ascx" />
+    <Content Include="HotelDashboardRoomType.aspx" />
+    <Content Include="Dashboard.aspx" />
+    <Content Include="DashboardHotel.aspx" />
+    <Content Include="DashboardPortAgent.aspx" />
+    <Content Include="DashboardPortAgentVehicle.aspx" />
+    <Content Include="DashboardVehicle.aspx" />
+    <Content Include="Finance\ReimbursementAdd.aspx" />
+    <Content Include="Finance\ReimbursementView.aspx" />
+    <Content Include="HotelDashboard.aspx" />
+    <Content Include="HotelDashboardDetails.aspx" />
+    <Content Include="Hotel\HotelEmailView.aspx" />
+    <Content Include="Hotel\HotelRoomOverride.aspx" />
+    <Content Include="Hotel\HotelViewPending.aspx" />
+    <Content Include="Images\box_down.png" />
+    <Content Include="Images\box_minus.png" />
+    <Content Include="Images\box_plus.png" />
+    <Content Include="Images\box_up.png" />
+    <Content Include="Images\minus.jpg" />
+    <Content Include="Images\plus.jpg" />
+    <Content Include="Maintenance\EventsAdd.aspx" />
+    <Content Include="Maintenance\EventsList.aspx" />
+    <Content Include="Maintenance\HotelContractApproval.aspx" />
+    <Content Include="Maintenance\SailMasterAdd.aspx" />
+    <Content Include="Maintenance\SailMasterView.aspx" />
+    <Content Include="Maintenance\VehicleContractApproval.aspx" />
+    <Content Include="Maintenance\VendorServiceMaintenance.aspx" />
+    <Content Include="Maintenance\VendorServiceMaintenanceAdd.aspx" />
+    <Content Include="PortAgentHotelDashboard.aspx" />
+    <Content Include="PortAgentVehicleDashboard.aspx" />
+    <Content Include="Report.aspx" />
+    <Content Include="ReportView.aspx" />
+    <Content Include="Script\popup.js" />
+    <Content Include="SuperUser.aspx" />
+    <Content Include="Hotel\HotelViewList.aspx" />
+    <Content Include="Images\BannerLeft.jpg" />
+    <Content Include="Images\BannerLogo.jpg" />
+    <Content Include="Images\BannerMiddle.jpg" />
+    <Content Include="Images\BannerMiddle2.jpg" />
+    <Content Include="Images\BannerRight.jpg" />
+    <Content Include="Maintenance\PortAgentPortMaintenance.aspx" />
+    <Content Include="Maintenance\PortAgentSeaportAdd.aspx" />
+    <Content Include="Maintenance\VehicleTypeBranch.aspx" />
+    <Content Include="Masterfile\CityView.aspx" />
+    <Content Include="Masterfile\CityAdd.aspx" />
+    <Content Include="Masterfile\RegionAdd.aspx" />
+    <Content Include="Masterfile\CountryAdd.aspx" />
+    <Content Include="Masterfile\CountryView.aspx" />
+    <Content Include="Menu\jquery-1.3.1.min.js" />
+    <None Include="FBox\fancybox\Thumbs.db" />
+    <None Include="Help\ShipboardUserManual.pdf" />
+    <None Include="Help\TravelMart Manual_CrewAdmin.pdf" />
+    <None Include="Help\TravelMart Manual_Vendor.pdf" />
+    <Content Include="Vehicle\VehicleManifest.aspx" />
+    <Content Include="Web.config" />
+    <Content Include="PopupTest.Master" />
+    <Content Include="TravelMartMaintenanceMaster.Master" />
+    <Content Include="TravelMartMaster3.Master" />
+    <Content Include="TravelMartMaster2.Master" />
+    <Content Include="TravelmartDashboardCalendar2.ascx" />
+    <Content Include="TravelmartHotel.Master" />
+    <Content Include="Menu\jquery-1.3.2.min.js" />
+    <Content Include="PageMethods.aspx" />
+    <Content Include="TravelmartMaster.Master" />
+    <Content Include="Masterfile\RegionView.aspx" />
+    <Content Include="TravelmartMenuLinks.ascx" />
+    <Content Include="UnderMaintenance.html" />
+    <Content Include="Upload.aspx" />
+    <Content Include="Vehicle\VehicleViewPending.aspx" />
+    <Content Include="Vehicle\VehicleViewList.aspx" />
+    <Content Include="RequestEditor.aspx" />
+    <Content Include="Maintenance\SailMasterVesselView.aspx" />
+    <Content Include="Maintenance\EventsView.aspx" />
+    <Content Include="HotelRoomOverrideEdit.aspx" />
+    <Content Include="NoTravelRequest2.aspx" />
+    <Content Include="ArrivalDepartureSameDate.aspx" />
+    <Content Include="Remarks.aspx" />
+    <Content Include="MeetAndGreet\MeetAndGreet.aspx" />
+    <Content Include="SystemAnalyst\ExceptionActive.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>5</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Extract\ArrDepSameOnOffDt\" />
+    <Folder Include="Extract\Calendar\" />
+    <Folder Include="Extract\CrewAdmin\" />
+    <Folder Include="Extract\ExceptionList\" />
+    <Folder Include="Extract\HotelManifest\" />
+    <Folder Include="Extract\Manifest\" />
+    <Folder Include="Extract\MeetGreetAndPortAgent\" />
+    <Folder Include="Extract\NoTravelRequest\" />
+    <Folder Include="Extract\OverflowList\" />
+    <Folder Include="Extract\PortManifest\" />
+    <Folder Include="Extract\TentativeManifest\" />
+    <Folder Include="Extract\VehicleManifest\" />
+    <Folder Include="obj\Debug\TempPE\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49416</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

@@ -1,0 +1,344 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/TravelMartMaintenanceMaster.Master"
+    AutoEventWireup="true" CodeBehind="UserAccounts.aspx.cs" Inherits="TRAVELMART.Administration.UserAccounts" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style type="text/css">
+        Padding1
+        {
+            padding-left:16px;    
+        }
+        Padding2
+        {
+            padding-left:2px;
+            }
+    </style>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="HeaderContent" runat="server">
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            ShowPopup();
+        });
+
+        function pageLoad(sender, args) {
+            var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
+            if (isAsyncPostback) {
+                ShowPopup();
+            }
+        }
+
+        function ShowPopup() {
+            $("a#<%=uoHyperLinkUserAdd.ClientID %>").fancybox(
+        {
+            'width': '75%',
+            'height': '112%',
+            'autoScale': false,
+            'transitionIn': 'fadeIn',
+            'transitionOut': 'fadeOut',
+            'type': 'iframe',
+            'onClosed': function() {
+                var a = $("#<%=uoHiddenFieldPopupUser.ClientID %>").val();
+                if (a == '1')
+                    $("#aspnetForm").submit();
+            }
+        });
+
+            $(".UserLink").fancybox(
+        {
+            'width': '75%',
+            'height': '112%',
+            'autoScale': false,
+            'transitionIn': 'fadeIn',
+            'transitionOut': 'fadeOut',
+            'type': 'iframe',
+            'onClosed': function() {
+                var a = $("#<%=uoHiddenFieldPopupUser.ClientID %>").val();
+                if (a == '1')
+                    $("#aspnetForm").submit();
+            }
+        });
+            $("#<%=uoTextBoxSearchParam.ClientID %>").keypress(function(ev) {
+                if (ev.which == "13") {
+                    $("#<%=uoHiddenFieldIsRefreshUserList.ClientID %>").val("1");
+                    $("#aspnetForm").submit();
+                }
+
+            });
+        }                    
+    </script>
+
+    <div class="PageTitle">
+        <table width="100%">
+            <tr class="PageTitle">
+                <td class="LeftClass">
+                    User List
+                </td>
+                <td align="right" style="padding-right: 3px;">
+                    <a id="uoHyperLinkUserAdd" runat="server">
+                        <asp:Button ID="uoBtnAddAdd" runat="server" Text="Add" Font-Size="X-Small" />
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <table width="100%" align="center">
+        <tr align="center">
+            <td>
+                <span>User Role:</span>
+                <asp:DropDownList ID="uoDropDownUserType" runat="server" Width="250px" AutoPostBack="True"
+                    AppendDataBoundItems="True" DataTextField="RoleToAccess" DataValueField="RoleToAccess"
+                    OnSelectedIndexChanged="uoDropDownUserType_SelectedIndexChanged">
+                    <asp:ListItem Text="" Value="" />
+                </asp:DropDownList>
+            </td>
+            <td>
+                Name :
+                <asp:TextBox ID="uoTextBoxSearchParam" runat="server" Font-Size="7.5pt" Width="180px" />
+                <asp:Button ID="uoButtonSearch" runat="server" Text="Search" Font-Size="X-Small"
+                    OnClick="uoButtonSearch_Click" />
+            </td>
+        </tr>
+    </table>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="NaviPlaceHolder" runat="server">
+
+    <script type="text/javascript" language="javascript">
+        function confirmDelete(sUser) {
+            if (confirm("Delete record of " + sUser + "?") == true)
+                return true;
+            else
+                return false;
+        }
+
+        function confirmUnlock(sUser) {
+            if (confirm("Unlock " + sUser + "?") == true)
+                return true;
+            else
+                return false;
+        }
+
+        function confirmReset(sUser) {
+            if (confirm("Reset Password of " + sUser + "?") == true)
+                return true;
+            else
+                return false;
+        }
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SetTRResolution();
+            ShowPopup();
+        });
+
+        function pageLoad(sender, args) {
+            var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
+            if (isAsyncPostback) {
+                SetTRResolution();
+                ShowPopup();
+            }
+        }
+
+        function SetTRResolution() {
+            var ht = $(window).height();
+            var wd = $(window).width()*0.945;
+            if (screen.height <= 600) {
+                ht = ht * 0.20;
+            }
+            else if (screen.height <= 720) {
+                ht = ht * 0.39;
+            }
+            else {
+                ht = ht * 0.55;
+            }
+
+            $("#Bv").height(ht);
+            
+        }
+
+
+        function divScrollL() {
+            var Right = document.getElementById('Av');
+            var Left = document.getElementById('Bv');
+            Right.scrollLeft = Left.scrollLeft;
+
+        }  
+    </script>
+    <div align="center">
+        
+    <asp:UpdatePanel runat="server" ID="UpdatePanel1">
+        <ContentTemplate>
+            <div id="Av" style="overflow: auto; overflow-x: hidden; overflow-y: hidden;">
+                <div style="padding-left:16px;">
+                <asp:ListView runat="server" ID="ListView1" onitemcommand="ListView2_ItemCommand">
+                    <LayoutTemplate>
+                    </LayoutTemplate>
+                    <ItemTemplate>
+                    </ItemTemplate>
+                    <EmptyDataTemplate>
+                        <%--<table border="0" cellpadding="0" cellspacing="0" class="listViewTableClass" style="border: solid 1px #ECDFC4;width:100%"  >--%>
+                        <table border="0" cellpadding="0" cellspacing="0" class="listViewTableClass" width="100%" >
+                            <tr >
+                                <th>
+                                    <%--<asp:Label runat="server" ID="uoLblUNameHdr" Text="Username" Width="300px"></asp:Label>--%>
+                                     <asp:LinkButton runat="server" ID="uoLinkButtonUname" CommandName="Uname" Text="Username" Width="200px">
+                                    </asp:LinkButton>
+                                </th>
+                                <th>
+                                    <%--<asp:Label runat="server" ID="uoLblNameHdr" Text="Name" Width="370px"></asp:Label>--%>
+                                     <asp:LinkButton runat="server" ID="LinkButton2" CommandName="Name" Text="Name" Width="330px">
+                                    </asp:LinkButton>
+                                </th>
+                                <th style="width: 300px;">
+                                    <%--<asp:Label runat="server" ID="uoLblRoleHdr" Text="Role" Width="250px"></asp:Label>--%>
+                                     <asp:LinkButton runat="server" ID="LinkButton4" CommandName="Role" Text="Role" Width="100px">
+                                    </asp:LinkButton>
+                                </th>
+                                 <th >
+                                    <asp:LinkButton runat="server" ID="LinkButton5" CommandName="Company" Text="Company" Width="250px">
+                                    </asp:LinkButton>
+                                </th>
+                                <th runat="server" style="width: 50px; border: solid 1px #333333;" id="EditTH" >
+                                <asp:Label runat="server" ID="uoLblEditHdr" Text="" Width="50px"></asp:Label>
+                                </th>
+                                
+                                <%--<th runat="server" style="background-color:#ECDFC4; border: solid 1px #ECDFC4;" id="Th1">
+                                <asp:Label runat="server" ID="uoLblScrollHdr" Text="" Width="10px"></asp:Label>
+                                </th>--%>
+                            </tr>
+                        </table>
+                    </EmptyDataTemplate>
+                </asp:ListView>
+                </div>
+                <div style="padding-left:16px;">
+                <asp:ListView runat="server" ID="ListView2" onitemcommand="ListView2_ItemCommand">
+                    <LayoutTemplate>
+                    </LayoutTemplate>
+                    <ItemTemplate>
+                    </ItemTemplate>
+                    <EmptyDataTemplate>
+                        <table border="0" cellpadding="0" cellspacing="0" class="listViewTableClass" width="100%" >
+                            <tr >
+                                <th >
+                                    <%--<asp:Label runat="server" ID="uoLblUNameHdr" Text="Username" Width="300px"></asp:Label>--%>
+                                    <asp:LinkButton runat="server" ID="uoLinkButtonUname" CommandName="Uname" Text="Username" Width="200px">
+                                    </asp:LinkButton>
+                                </th>
+                                <th >
+                                    <%--<asp:Label runat="server" ID="uoLblNameHdr" Text="Name" Width="370px"></asp:Label>--%>
+                                    <asp:LinkButton runat="server" ID="LinkButton2" CommandName="Name" Text="Name" Width="330px">
+                                    </asp:LinkButton>
+                                </th>
+                                <th >
+                                   <%--<asp:Label runat="server" ID="uoLblRoleHdr" Text="Role" Width="250px"></asp:Label>--%>
+                                    <asp:LinkButton runat="server" ID="LinkButton4" CommandName="Role" Text="Role" Width="100px">
+                                    </asp:LinkButton>
+                                </th>
+                                 <th >
+                                    <asp:LinkButton runat="server" ID="LinkButton5" CommandName="Company" Text="Company" Width="250px">
+                                    </asp:LinkButton>
+                                </th>
+                                 <th >
+                                    <asp:LinkButton runat="server" ID="LinkButton6" CommandName="Email" Text="Email" Width="140px">
+                                    </asp:LinkButton>
+                                </th>
+                                <th runat="server"  id="EditTH" style="border-style:none">
+                                    <asp:Label runat="server" ID="uoLblEditHdr" Text="" Width="50px"></asp:Label>
+                                </th>
+                                <th runat="server" id="UnlockTH" style="border-style:none">
+                                    <asp:Label runat="server" ID="uoLblUnlockHdr" Text="" Width="50px"></asp:Label>
+                                </th>
+                                <th runat="server"  id="ResetTH" style="border-style:none">
+                                    <asp:Label runat="server" ID="uoLblResetHdr" Text="" Width="50px"></asp:Label>
+                                </th>
+                                <th runat="server"  id="DeleteTH" style="border-style:none">
+                                    <asp:Label runat="server" ID="uoLblDeleteHdr" Text="" Width="50px"></asp:Label>
+                                </th>
+                                <th runat="server"  id="Th1" >
+                                    <asp:Label runat="server" ID="uoLblScrollHdr" Text="" Width="10px"></asp:Label>
+                                </th>
+                            </tr>
+                        </table>
+                    </EmptyDataTemplate>
+                </asp:ListView>
+                </div>
+            </div>
+            <div id="Bv" style="overflow: auto; overflow-x: auto; overflow-y: auto;"
+                onscroll="divScrollL();">
+                <div style="padding-left:16px;">
+                <asp:ListView runat="server" ID="uoUserList" OnItemCommand="uoUserList_ItemCommand"
+                    OnItemDeleting="uoUserList_ItemDeleting">
+                    <LayoutTemplate>
+                        <table border="0" cellpadding="0" cellspacing="0" class="listViewTableClass" width="100%" >
+                            <asp:PlaceHolder runat="server" ID="itemPlaceholder"></asp:PlaceHolder>
+                        </table>
+                    </LayoutTemplate>
+                    <ItemTemplate>
+                        <tr>
+                            <td class="leftAligned" style="white-space: normal;">
+                                <asp:Label runat="server" ID="uoLblUName" Text='<%# Eval("uname")%>' Width="204px"></asp:Label>
+                            </td>
+                            <td class="leftAligned" style="white-space: normal;">
+                                <asp:Label runat="server" ID="Label1" Text='<%# Eval("name")%>' Width="332px"></asp:Label>
+                            </td>
+                            <td class="leftAligned" style="white-space: normal;">
+                                <asp:Label runat="server" ID="Label2" Text='<%# Eval("role")%>' Width="103px"></asp:Label>
+                            </td>
+                            <td class="leftAligned" style="white-space: normal;">
+                                <asp:Label runat="server" ID="Label3" Text='<%# Eval("company")%>' Width="253px"></asp:Label>
+                            </td>
+                             <td class="leftAligned" style="white-space: normal;">
+                                <asp:Label runat="server" ID="Label4" Text='<%# Eval("Email")%>' Width="144px"></asp:Label>
+                            </td>
+                            <td class='<%# (HideElemet()==""?"leftAligned":HideElemet()) %>' style="width:50px;">
+                                <a runat="server" class="UserLink" id="uoEditUser"
+                                        href='<%# "~/Administration/CreateUserAccount.aspx?uId=" + Eval("uid") %>'>
+                                    Edit</a>
+                            </td>
+                            <td class='<%# (HideDeleteElement()==""?"leftAligned":HideDeleteElement()) %>' >
+                                <asp:LinkButton ID="LinkButton1" runat="server" Width="50px"
+                                    OnClientClick='<%# "return confirmUnlock(\""+ Eval("uname") +"\");" %>'
+                                    CommandArgument='<%#Eval("uname") %>' CommandName="Unlock">Unlock</asp:LinkButton>
+                            </td>
+                            <td class='<%# (HideDeleteElement()==""?"leftAligned":HideDeleteElement()) %>'>
+                                <asp:LinkButton ID="LinkButton3" runat="server" Width="50px" OnClientClick='<%# "return confirmReset(\""+ Eval("uname") +"\");" %>'
+                                    CommandArgument='<%#Eval("uname") %>' CommandName="Reset">Reset</asp:LinkButton>
+                            </td>
+                            <td class='<%# (HideDeleteElement()==""?"leftAligned":HideDeleteElement()) %>'>
+                                <asp:LinkButton ID="uoLinkButtonDelete" runat="server" Width="50px" OnClientClick='<%# "return confirmDelete(\""+ Eval("uname") +"\");" %>'
+                                    CommandArgument='<%# Eval("uid") + "::" + Eval("uname") %>' CommandName="Delete">Delete</asp:LinkButton>
+                            </td>
+                        </tr>
+                    </ItemTemplate>
+                    <EmptyDataTemplate>
+                        <table border="0" cellpadding="0" cellspacing="0" class="listViewTable" width="100%">
+                            <tr>
+                                <td colspan="4" class="leftAligned">
+                                    No Record
+                                </td>
+                            </tr>
+                        </table>
+                    </EmptyDataTemplate>
+                </asp:ListView>
+                <div class="LeftClass">
+                <asp:DataPager ID="uoUserListPager" runat="server" PagedControlID="uoUserList" PageSize="20" 
+                    OnPreRender="uoUserListPager_PreRender">
+                    <Fields>
+                        <asp:NumericPagerField ButtonType="link" NumericButtonCssClass="PagerClass" />
+                    </Fields>
+                </asp:DataPager>
+                </div>
+                
+            </div>
+            <asp:HiddenField runat="server" ID="uoHiddenFieldPopupUser" Value="0" />
+
+            <asp:HiddenField ID="uoHiddenFieldRole" runat="server" Value="" />
+            <asp:HiddenField ID="uoHiddenFieldUser" runat="server" Value="" />
+            <asp:HiddenField ID="uoHiddenFieldOrderBy" runat="server" Value="Uname" />
+            <asp:HiddenField ID="uoHiddenFieldIsRefreshUserList" runat="server" Value="0" />
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    </div>
+    </div>
+    
+</asp:Content>

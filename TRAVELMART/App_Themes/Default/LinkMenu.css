@@ -1,0 +1,40 @@
+﻿
+  #vertmenu {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    background: #999; /* for non-css3 browsers */
+    
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr='#cccccc', endColorstr='#82ABB8'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#82ABB8)); /* for webkit browsers */
+	background: -moz-linear-gradient(top,  #ccc,  #82ABB8); /* for firefox 3.6+ */ 	
+    }  
+
+    #vertmenu ul {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    }
+    #vertmenu ul li {
+    margin: 0px;
+    padding: 0px;
+    }
+    #vertmenu ul li a
+{
+    font-size: 80%;
+    display: block;
+    border-bottom: 1px dashed #C39C4E;
+    padding: 5px 0px 2px 4px;
+    text-decoration: none;
+    color: #CC0000;
+    width: 98%;
+    border-bottom-color: #999999;
+}
+
+    #vertmenu ul li a:hover, #vertmenu ul li a:focus {
+    color: #333333;
+    background-color: #eeeeee;
+    }

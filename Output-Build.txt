@@ -1,0 +1,12 @@
+------ Build started: Project: TRAVELMART.Report, Configuration: DebugLocal ------
+Skipping 'DataSource1.rds'. Item is up to date.
+Skipping 'DataSet1.rsd'. Item is up to date.
+Skipping 'FlightItinerary.rdl'. Item is up to date.
+Skipping 'FlightItineraryAll.rdl'. Item is up to date.
+Skipping 'FlightItineraryHotelVehicle.rdl'. Item is up to date.
+Skipping 'Immigration.rdl'. Item is up to date.
+Skipping 'Manifest.rdl'. Item is up to date.
+Skipping 'Report2.rdl'. Item is up to date.
+Build complete -- 0 errors, 0 warnings
+========== Build: 1 succeeded, 0 failed, 4 up-to-date, 0 skipped ==========
+========== Deploy: 0 succeeded, 1 failed, 0 skipped ==========

@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40" xmlns="urn:schemas-microsoft-com:office:spreadsheet">
+  <o:DocumentProperties>
+    <Author>Travelmart</Author>
+    <LastAuthor>Muhallidin</LastAuthor>
+    <Created>2014-11-24 16:43:14ZZ</Created>
+    <Company>RCCL</Company>
+    <Version>1</Version>
+  </o:DocumentProperties>
+  <x:ExcelWorkbook>
+    <WindowHeight>13170</WindowHeight>
+    <WindowWidth>17580</WindowWidth>
+    <WindowTopX>120</WindowTopX>
+    <WindowTopY>60</WindowTopY>
+    <ProtectStructure>False</ProtectStructure>
+    <ProtectWindows>False</ProtectWindows>
+  </x:ExcelWorkbook>
+  <Styles>
+    <Style ss:ID="Default" ss:Name="Normal">
+      <Alignment ss:Vertical="Bottom" />
+      <Borders />
+      <Font />
+      <Interior />
+      <NumberFormat />
+      <Protection />
+    </Style>
+    <Style ss:ID="s62">
+      <Font ss:Bold="1" />
+    </Style>
+    <Style ss:ID="s64">
+      <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" />
+    </Style>
+    <Style ss:ID="s65">
+      <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" />
+    </Style>
+  </Styles>
+  <Worksheet ss:Name="Confirmed Manifest">
+    <Table ss:ExpandedColumnCount="36" ss:ExpandedRowCount="236" x:FullColumns="1" x:FullRows="1" ss:DefaultColumnWidth="60">
+      <Row ss:StyleID="s62">
+        <Cell>
+          <Data ss:Type="String">Remarks</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">EmployeeID</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">LastName</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FirstName</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RecLoc</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">OnOffDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">VehicleVendorname</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PlateNo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PickupDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PickupTime</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">VehicleTypeName</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Status</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RouteFrom</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RouteTo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FromCity</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ToCity</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HotelVendorName</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RankName</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CostCenter</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Nationality</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Ship</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">SeqNo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FlightNo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Carrier</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Departure</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Arrival</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">DeptDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ArrDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PassportNo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PassportExp</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PassportIssued</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Birthday</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ConfirmedDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ConfirmBy</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">908362</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">NH-908362</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">25-Nov-2014</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">WTS (SIN)</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">25-Nov-2014</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ON</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Hotel</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Ship</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">SIN</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">SIN</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">GRAND MERCURE ROXY SINGAPORE HOTEL </Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CONT-TEMPORARY CONTRACTOR</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Z20</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+      </Row>
+    </Table>
+  </Worksheet>
+</Workbook>

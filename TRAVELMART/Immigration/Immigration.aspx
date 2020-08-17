@@ -1,0 +1,894 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/TravelMartMaster2.Master" AutoEventWireup="true"
+    CodeBehind="Immigration.aspx.cs" Inherits="TRAVELMART.CrewAgent.Immigration" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="HeaderContent" runat="server">
+    <div class="ViewTitlePadding">
+        <table width="100%" cellpadding="0" cellspacing="0" class="PageTitle">
+            <tr>
+                <td>
+                    Immigration Manifest
+                </td>
+                <td align="right">
+                    <%--  <asp:Button ID="uoButtonRequest" runat="server" CssClass="SmallButton" OnClientClick="javascript: return OpenRequestEditor();"
+                        Text="Add Hotel/Vehicle Request" Width="140px" />--%>
+                    <%--<asp:Label runat="server" ID="uoLblCrewAdminTitle" >Testing Brand</asp:Label>--%>
+                    <%-- <asp:Label ID="uoLabelVessel" runat="server" Text="" CssClass="Title"></asp:Label>--%>
+                    <asp:Label ID="uoLabel" runat="server" Text="Seaport:" CssClass="Title"></asp:Label>
+                </td>
+                <td align="right" style="width: 100px">
+                    <asp:DropDownList ID="uoDropDownListSeaport" runat="server" Width="300px" AutoPostBack="true"
+                        OnSelectedIndexChanged="uoDropDownListSeaport_SelectedIndexChanged">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+        </table>
+    </div>
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="NaviPlaceHolder" runat="server">
+
+    <script type="text/javascript" language="javascript">
+        function SetValues(trId, mrId) {
+            $("#<%= uoHiddenFieldtRid.ClientID %>").val(trId);
+            $("#<%= uoHIddenFieldmRid.ClientID %>").val(mrId);
+        }
+        function Tag() {
+            var e1Id = $("#<%=uoTextBoxBarcode.ClientID %>");
+            var user = $("#<%= uoHiddenFieldUserId.ClientID %>");
+            var role = $("#<%= uoHiddenFieldUserRole.ClientID %>");
+            var tRID = $("#<%= uoHiddenFieldtRid.ClientID %>");
+            var mRID = $("#<%= uoHIddenFieldmRid.ClientID %>");
+
+            if (isNaN(e1Id.val()) == true) {
+                alert("Invalid Barcode.");
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "/PageMethods.aspx/TagAsScanned",
+                    data: "{'e1Id': '" + e1Id.val() + "', 'tReqId': '" + tRID.val() + "', 'mReqId': '" + mRID.val() +
+                    "', 'UserId': '" + user.val() + "', 'URole': '" + role.val() + "', 'retValue': '0'}",
+                    dataType: "json",
+                    success: function(data) {
+                        if (data.d == 1) {
+                            alert("Invalid Barcode.");
+                        }
+                        else {
+                            alert("Seafarer Successfully Tagged.");
+                            window.parent.$("#ctl00_ContentPlaceHolder1_uoHiddenFieldPopup").val("1");
+                            window.parent.history.go(0);
+                            parent.$.fancybox.close();
+                        }
+                    }
+                        ,
+                    error: function(objXMLHttpRequest, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+            }
+        }
+                
+    </script>
+
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function() {
+            SetTRResolution();
+            filterSettings();
+            ShowPopup();
+            
+        });
+
+        function pageLoad(sender, args) {
+            var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
+            if (isAsyncPostback) {
+                SetTRResolution();
+                filterSettings();
+                ShowPopup();
+                ShowSearchPopup();
+               
+            }
+        }
+
+        function SetTRResolution() {
+            var ht = $(window).height() * 1.0;
+            var ht2 = $(window).height() * 1.1;
+            var wd = $(window).width() * 0.90;
+
+            if (screen.height <= 600) {
+                ht = ht * 0.20;
+                ht2 = ht2 * 0.20;
+            }
+            else if (screen.height <= 720) {
+                ht = ht * 0.39;
+                ht2 = ht2 * 0.39;
+            }
+            else {
+                ht = ht * 0.47;
+                ht2 = ht2 * 0.61;
+            }
+            $("#Av").width(wd);
+            $("#Bv").height(ht);
+            $("#Bv").width(wd);
+            $("#PG").height(ht2);
+            $("#PG").width(wd);
+
+        }
+        function filterSettings() {
+                                 
+
+            if ($("#<%=uoCheckBoxAdvanceSearch.ClientID %>").attr('checked')) {
+                $("#<%=uoTableAdvanceSearch.ClientID %>").show();
+            }
+            else {
+                $("#<%=uoTableAdvanceSearch.ClientID %>").hide();
+            }
+
+            $("#<%=uoCheckBoxAdvanceSearch.ClientID %>").click(function() {
+                if ($(this).attr('checked')) {
+                    $("#<%=uoTableAdvanceSearch.ClientID %>").fadeIn();
+                }
+                else {
+                    $("#<%=uoTableAdvanceSearch.ClientID %>").fadeOut();
+                }
+            });
+
+            $("#<%=uoDropDownListFilterBy.ClientID %>").change(function(ev) {
+                if ($(this).val() != "1") {
+                    $("#<%=uoTextBoxFilter.ClientID %>").val("");
+                }
+            });
+
+
+        }
+        function validate(key) {
+            if ($("#<%=uoDropDownListFilterBy.ClientID %>").val() != "1") {
+
+                //getting key code of pressed key
+                var keycode = (key.which) ? key.which : key.keyCode;
+                if ((keycode < 48 || keycode > 57) && (keycode < 45 || keycode > 46)) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+            return true;
+        }
+        function divScrollL() {
+            var Right = document.getElementById('Av');
+            var Left = document.getElementById('Bv');
+            Right.scrollLeft = Left.scrollLeft;
+
+        }
+      
+    </script>
+
+    <div id="PG" style="width: auto; height: auto; overflow: auto;">
+        <%-- <div id="Div1" style="overflow: auto; overflow-x: hidden; width: 100%; overflow-y: hidden;">--%>
+        <div align="left">
+            <table class="LeftClass" align="left" width="95%" style="margin-left: 12px;">
+                <tr>
+                    <td style="width: 250px; text-align: left; white-space: nowrap">
+                        <table>
+                            <%--<tr>
+                                <td colspan="6">
+                                    <asp:HyperLink ID="uoHyperLinkReport" runat="server" NavigateUrl="../ReportViewer.aspx">View Report</asp:HyperLink>
+                                </td>
+                                
+                            </tr>--%>
+                            <tr>
+                                <td>
+                                    <asp:CheckBox ID="uoCheckBoxAdvanceSearch" Text="View Advance Search" runat="server" Width="200px"/>
+                                </td>
+                                <td>
+                                    <asp:RadioButtonList ID="uoRadioButtonListStatus" runat="server" 
+                                        AutoPostBack="True" 
+                                        onselectedindexchanged="uoRadioButtonListStatus_SelectedIndexChanged" 
+                                        RepeatDirection="Horizontal" Width="168px">
+                                        <asp:ListItem Value="0" Selected="True">ALL</asp:ListItem>
+                                        <asp:ListItem Value="ON">ON</asp:ListItem>
+                                        <asp:ListItem Value="OFF">OFF</asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="uoDropDownListAirLeg" runat="server" CssClass="SmallText" 
+                                        Width="150px" AutoPostBack="true" 
+                                        onselectedindexchanged="uoDropDownListAirLeg_SelectedIndexChanged">
+                                        <asp:ListItem Value="0">Show ALL Air Legs</asp:ListItem>
+                                        <asp:ListItem Value="1">Show Air 1st Leg</asp:ListItem>
+                                        <asp:ListItem Value="2">Show Air Last Leg</asp:ListItem>                                        
+                                    </asp:DropDownList>&nbsp;&nbsp;
+                                </td>
+                                <td>
+                                    <asp:Button ID="uoButtonExport" runat="server" Text="Export Manifest" CssClass="SmallButton"                                    
+                                    OnClick="uoButtonExport_Click" Width="100px" /> 
+                                </td>
+                                <td style="white-space:nowrap">
+                                    <%--<asp:Button ID="uoButtonSave" runat="server" Text="Save" CssClass="SmallButton"
+                                        OnClick="uoButtonSave_Click" Width="100px" />--%>                                      
+                                    <asp:HyperLink ID="uoHyperLinkItinerary" runat="server"  NavigateUrl="#" Text="View Report"></asp:HyperLink>                                     
+                                    </td>
+                                <td>                                   
+                                </td>
+                            </tr>
+                           <%-- <tr>
+                                <td></td>
+                                <td style="text-align:right">Route From-To:</td>
+                                <td>
+                                     <asp:DropDownList ID="uoDropDownListRouteFrom" runat="server" CssClass="SmallText" 
+                                        Width="150px"  AppendDataBoundItems="true">
+                                        <asp:ListItem Value="0">--Select Route From--</asp:ListItem>                                        
+                                    </asp:DropDownList>&nbsp;&nbsp;
+                                </td>
+                                <td>
+                                     <asp:DropDownList ID="uoDropDownListRouteTo" runat="server" CssClass="SmallText" 
+                                        Width="150px" AppendDataBoundItems="true">
+                                        <asp:ListItem Value="0">--Select Route To--</asp:ListItem>                                        
+                                    </asp:DropDownList>&nbsp;&nbsp;
+                                </td>
+                                <td>
+                                     <asp:Button ID="uoButtonSubmit" runat="server" Text="Show" CssClass="SmallButton"
+                                    OnClick="uoButtonSubmit_Click" Width="100px" /> 
+                                </td>
+                                <td></td>
+                            </tr>--%>
+                        </table>                                                                                                
+                    </td>                                        
+                   
+                    <td style="text-align: right; width: 150px">
+                        <table class="RightClass" width="90%">
+                            <tr>
+                                <td style="padding-right: 10px;">
+                                    ON:&nbsp;
+                                    <asp:Label ID="uoLabelOnCount" runat="server" Text="OnCount" Font-Bold="true"></asp:Label>
+                                </td>
+                                <td>
+                                    OFF:&nbsp;
+                                    <asp:Label ID="uoLabelOffCount" runat="server" Text="OffCount" Font-Bold="true"></asp:Label>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>                
+            </table>
+        </div>
+        <div align="left">
+            <table width="90%" class="LeftClass" id="uoTableAdvanceSearch" runat="server" style="margin-left: 15px;">
+                <%--<tr id="uoTRVessel" runat="server" visible="false">
+            <td class="contentCaption">
+                Ship:
+            </td>
+            <td class="contentValue" >
+                <asp:DropDownList ID="uoDropDownListVessel" runat="server" Width="300px" AppendDataBoundItems="True">
+                    <asp:ListItem>--SELECT SHIP--</asp:ListItem>
+                </asp:DropDownList>
+            </td>
+            <td>
+            </td>
+        </tr>--%>
+                <tr>
+                    <td class="contentCaption">
+                        Filter By:
+                    </td>
+                    <td class="contentValue">
+                        <asp:DropDownList ID="uoDropDownListFilterBy" runat="server" Width="300px">
+                            <asp:ListItem Value="1">SEAFARER NAME</asp:ListItem>
+                            <asp:ListItem Value="2" Selected="True">EMPLOYEE ID</asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                    <td>
+                        <asp:TextBox ID="uoTextBoxFilter" runat="server" CssClass="TextBoxInput" Width="300px"
+                            onkeypress="return validate(event);"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="contentCaption">
+                        Nationality:
+                    </td>
+                    <td class="contentValue">
+                        <asp:DropDownList ID="uoDropDownListNationality" runat="server" Width="300px" AppendDataBoundItems="True">
+                            <asp:ListItem>--SELECT NATIONALITY--</asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="contentCaption">
+                        Gender:
+                    </td>
+                    <td class="contentValue">
+                        <asp:DropDownList ID="uoDropDownListGender" runat="server" Width="300px" AppendDataBoundItems="True">
+                            <asp:ListItem>--SELECT GENDER--</asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="contentCaption">
+                        Rank:
+                    </td>
+                    <td class="contentValue">
+                        <asp:DropDownList ID="uoDropDownListRank" runat="server" Width="300px" AppendDataBoundItems="True">
+                            <asp:ListItem>--SELECT RANK--</asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+               <%-- <tr runat="server" id="uoTRStatus">
+                    <td class="contentCaption">
+                        Status:
+                    </td>
+                    <td class="contentValue">
+                        <asp:DropDownList ID="uoDropDownListStatus" runat="server" Width="300px">
+                            <asp:ListItem Value="0">--SELECT STATUS--</asp:ListItem>
+                            <asp:ListItem>ON</asp:ListItem>
+                            <asp:ListItem>OFF</asp:ListItem>
+                        </asp:DropDownList>
+                    </td>
+                    <td>
+                    </td>
+                </tr>--%>
+                <tr>
+                    <td class="contentCaption">
+                        &nbsp;
+                    </td>
+                    <td class="contentValue">
+                        <asp:Button ID="uoButtonView" runat="server" CssClass="SmallButton" Height="21px"
+                            OnClick="uoButtonView_Click" Text="View" />
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="Av" style="overflow: auto; overflow-x: hidden; width: 100%; overflow-y: hidden;">
+            <asp:ListView runat="server" ID="uoListViewHeader" 
+                OnItemCommand="uoListViewHeader_ItemCommand" >
+                <LayoutTemplate>
+                    <table border="0" cellpadding="0" cellspacing="0" class="listViewTableClass">
+                        <asp:PlaceHolder runat="server" ID="itemPlaceholder"></asp:PlaceHolder>
+                    </table>
+                </LayoutTemplate>
+                <ItemTemplate>
+                </ItemTemplate>
+                <EmptyDataTemplate>
+                    <table border="0" cellpadding="0" cellspacing="0" class="listViewTable" runat="server" id = "ucTableHeader">
+                        <tr>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:Label ID="Label23" runat="server" Text="View Report" Width="70px"></asp:Label>
+                                <asp:CheckBox ID="uoCheckBoxSelect" runat="server" OnClick="TagSelectPrintAll(this);" />
+                            </th>                                                          
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton1" Text="E1 ID" Width="53px" runat="server" CommandName="SeafarerID" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton2" Text="Lastname" Width="120px" runat="server" CommandName="Lastname" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton32" Text="Firstname" Width="120px" runat="server" CommandName="Firstname" />
+                            </th>
+                            
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:Label runat="server" ID="Label10" Text="AirSeqNo" Width="53px"></asp:Label>
+                            </th>
+                            
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:Label runat="server" ID="uoLabelVehicle" Text="Vehicle Co." Width="143px"></asp:Label>
+                            </th>
+                            
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:Label runat="server" ID="uoLabelVConfirm" Text="Vehicle Status" Width="53px"></asp:Label>
+                            </th>
+                            
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton34" Text="Route From" Width="65px" runat="server" CommandName="RouteFrom" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton35" Text="Route To" Width="65px" runat="server" CommandName="RouteTo" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton36" Text="Pickup Date" Width="95px" runat="server" CommandName="Pickup" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton16" Text="Hotel" Width="196px" runat="server" CommandName="Hotel" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton17" Text="Check In" Width="83px" runat="server" CommandName="CheckIn" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton18" Text="Check Out" Width="83px" runat="server" CommandName="CheckOut" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton19" Text="Hotel Nites" Width="57px" runat="server"
+                                    CommandName="Duration" />
+                            </th>
+                         <%--   <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton37" Text="" Width="90px" runat="server" CommandName="Lastname" />
+                            </th>--%>
+                                                                                    
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton5" Text="Ship" Width="152px" runat="server" CommandName="Vessel" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton20" Text="Room Type" Width="55px" runat="server" CommandName="colSingleDouble" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton4" Text="Rank" Width="195px" runat="server" CommandName="Rank" />
+                            </th>                            
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton7" Text="Gender" Width="50px" runat="server" CommandName="colGender" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton6" Text="Cost Center" Width="129px" runat="server"
+                                    CommandName="colCostCenter" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton8" Text="Nationality" Width="70px" runat="server" CommandName="colNationality" />
+                            </th>                            
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton21" Text="Meal Allowance" Width="60px" runat="server"
+                                    CommandName="colMealAllowance" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton3" Text="Rec Loc" Width="55px" runat="server" CommandName="Recloc" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton12" Text="Dept Date" Width="94px" runat="server" CommandName="colDepartureDateTime" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton13" Text="Arvl Date" Width="94px" runat="server" CommandName="colArrivalDateTime" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton11" Text="From City" Width="53px" runat="server" CommandName="Departure" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton31" Text="To City" Width="53px" runat="server" CommandName="Arrival" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton29" Text="Dept Time" Width="50px" runat="server" CommandName="colDepartureDateTime" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton30" Text="Arvl Time" Width="50px" runat="server" CommandName="colDepartureDateTime" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton15" Text="Airline" Width="145px" runat="server" CommandName="Airline" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton14" Text="Flight No." Width="43px" runat="server" CommandName="colFlightNoVarchar" />
+                            </th>
+                            <th style="white-space: normal;">
+                                <asp:LinkButton ID="LinkButton9" Text="Status" Width="40px" runat="server" CommandName="Status" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton10" Text="Port" Width="73px" runat="server" CommandName="Port" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton22" Text="Passport No." Width="83px" runat="server"
+                                    CommandName="PassportNo" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton23" Text="Date Issued" Width="83px" runat="server"
+                                    CommandName="PassportIssued" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton24" Text="Passport Expiry" Width="83px" runat="server"
+                                    CommandName="PassportExp" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton33" Text="Birthdate" Width="70px" runat="server" CommandName="colBirthDay" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton25" Text="Meet & Greet" Width="65px" runat="server"
+                                    CommandName="IsMeetGreet" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton26" Text="Service Provider" Width="65px" runat="server" CommandName="IsPortAgent" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton27" Text="Hotel Vendor" Width="64px" runat="server"
+                                    CommandName="IsHotelVendor" />
+                            </th>
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:LinkButton ID="LinkButton28" Text="Remarks" Width="150px" runat="server" CommandName="Remarks" />
+                            </th>
+                            
+                            
+                            <%--<th style="text-align: center; white-space: normal;">
+                                <asp:Label runat="server" ID="Label17" Text="Confirmed by" Width="143px"></asp:Label>
+                            </th>
+                            
+                            <th style="text-align: center; white-space: normal;">
+                                <asp:Label runat="server" ID="Label18" Text="Confirmed Date" Width="95px"></asp:Label>
+                            </th>--%>
+                            
+                            
+                            
+                            <th>
+                                <asp:Label runat="server" ID="Label11" Text="" Width="10px">
+                                </asp:Label>
+                            </th>
+                        </tr>
+                    </table>
+                </EmptyDataTemplate>
+            </asp:ListView>
+        </div>
+        <div id="Bv" style="overflow: auto; width: 100%; overflow-x: auto; overflow-y: auto;"
+            onscroll="divScrollL();">
+                    <table width="100%">
+                        <tr>
+                            <td style="text-align: left">
+                                <asp:ListView runat="server" ID="uoListViewDetails">
+                                    <LayoutTemplate>
+                                        <table border="0" cellpadding="0" cellspacing="0" class="listViewTableClass" id="ucTableCrewAdmin">
+                                            <asp:PlaceHolder runat="server" ID="itemPlaceholder"></asp:PlaceHolder>
+                                        </table>
+                                    </LayoutTemplate>
+                                    <ItemTemplate>
+                                        <%# DashboardChangeRowColor()%>
+                                        <td class="centerAligned" style="white-space: normal;" >                                            
+                                            <asp:CheckBox Width="70px" ID="uoCheckBoxSelect" runat="server" 
+                                            Checked='<%# Eval("IsToPrintItinerary") %>'                                                                                         
+                                            OnClick='<%# "TagSelectPrint(this, "+ Eval("TravelRequestID") +", "+ Eval("IDBigInt") +");" %>' />  
+                                            
+                                            <asp:HiddenField ID="uoHiddenFieldTransID" runat="server" Value ='<%# Eval("TransVehicleID") %>'/>                                           
+                                            <asp:HiddenField ID="uoHiddenFieldListRecLocID" runat="server" Value ='<%# Eval("IDBigInt") %>' />                                            
+                                            <asp:HiddenField ID="uoHiddenFieldListTRID" runat="server" Value ='<%# Eval("TravelRequestID") %>' /> 
+                                        </td>                                        
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" Width="57px" ID="Label21" Text='<%# Eval("SeafarerID")%>'
+                                                Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label5" Text='<%# Eval("LastName") %>' Width="126px"
+                                                Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned">
+                                            <asp:HyperLink ID="uoHyperLinkName" NavigateUrl='<%# "../SuperUserView.aspx?ufn=" + Request.QueryString["ufn"] + "&sfId=" + Eval("SeafarerID") + "&recloc=&st=" + Eval("Status") + "&ID=0&trID="+ Eval("TravelRequestID") +"&manualReqID=0" + "&dt=" + Request.QueryString["dt"]%>'
+                                                runat="server" Width="126px" Visible='<%# Eval("IsVisible") %>'><%# Eval("Firstname")%></asp:HyperLink>
+                                        </td>
+                                        
+                                        <td class="centerAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label4" Width="53px" Text='<%# Eval("SequenceNo")%>' />
+                                        </td>
+                                        
+                                        <td style="text-align: center; white-space: normal;">
+                                            <asp:Label runat="server" ID="uoLabelVehicle" Text='<%# Eval("VehicleName")%>' Width="147px"></asp:Label>
+                                        </td>
+                                        
+                                        <td style="text-align: center; white-space: normal;">
+                                            <asp:Label runat="server" ID="uoLabelVConfirm" Text='<%# Eval("Confirm")%>' Width="56px"></asp:Label>
+                                        </td>
+                                                    
+                                        
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label8" Width="72px" Text='<%# Eval("RouteFrom")%>'  Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label9" Width="72px" Text='<%# Eval("RouteTo")%>'  Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label14" Width="101px" Text='<%# String.Format("{0:dd-MMM-yyyy HHmm}", Eval("PickupDatetime"))%>'  Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>                                        
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="uoLblReason" Width="200px" Text='<%# Eval("Hotel")%>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label25" Width="90px" Text='<%# String.Format("{0:dd-MMM-yyyy}", Eval("Checkin"))%>'
+                                                ></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label32" Width="90px" Text='<%# String.Format("{0:dd-MMM-yyyy}", Eval("Checkout"))%>'
+                                                ></asp:Label>
+                                        </td>
+                                        <td class="centerAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label33" Width="63px" Text='<%# Eval("Duration")%>'
+                                                Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        <%--<td class="centerAligned" style="white-space: normal;">
+                                            <asp:HyperLink runat="server" ID="uoHyperLinkPrint" Width="100px" 
+                                                NavigateUrl='<%#"../ReportViewer.aspx?report=FlightItinerary&sfID=" + Eval("SeafarerID") + "&recLoc=" %>' >
+                                                Flight Itinerary</asp:HyperLink>
+                                        </td>--%>                                                                                
+                                        
+                                        <td class="leftAligned">
+                                            <asp:Label runat="server" ID="Label38" Width="160px" Text='<%# Eval("Vessel")%>'
+                                                Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        <td class="centerAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label34" Width="62px" Text='<%# Eval("SingleDouble")%>'
+                                                Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" Width="200px" ID="Label20" Text='<%# Eval("Rank")%>' Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>                                       
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label35" Width="56px" Text='<%# Eval("Gender")%>' Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label36" Width="136px" Text='<%# Eval("CostCenter")%>'
+                                                Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label37" Width="76px" Text='<%# Eval("Nationality")%>'
+                                                Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>                                        
+                                        <td class="centerAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label39" Width="65px" Text='<%# Eval("MealAllowance")%>'
+                                                Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="ucLabelRecloc" Text='<%# Eval("RecLoc")%>' Width="60px"
+                                                 Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="uoLabelDepartureDate" Width="100px" Text='<%# String.Format("{0:dd-MMM-yyyy}", Eval("DepartureDateTime"))%>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="uoLabelArrivalDate" Width="100px" Text='<%# String.Format("{0:dd-MMM-yyyy}", Eval("ArrivalDateTime"))%>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label24" Width="59px" Text='<%# Eval("Departure") %>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label3" Width="59px" Text='<%# Eval("Arrival") %>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label1" Width="56px" Text='<%# String.Format("{0:Hmm}", Eval("DepartureDateTime"))%>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label2" Width="56px" Text='<%# String.Format("{0:HHmm}", Eval("ArrivalDateTime"))%>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label12" Width="150px" Text='<%# Eval("Airline")%>'></asp:Label>
+                                        </td>
+                                        <td class="centerAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="ucLabelFlightNo" Width="50px" Text='<%# Eval("FlightNo")%>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" Width="45px" ID="Label6" Text='<%# Eval("Status")%>' Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="uoLblVessel" Width="80px" Text='<%# Eval("Port")%>'
+                                                Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                            <%--<asp:Image ID="uoImageSailMaster" ImageUrl="~/Images/Vessel.png" runat="server" ToolTip="With Sail Master"
+                                                Visible='<%# bool.Parse(Eval("IsWithSail").ToString()) %>' />
+                                            <asp:Label runat="server" ID="uoSpace" Width="18px" Text='' Visible='<%# !bool.Parse(Eval("IsWithSail").ToString()) %>'></asp:Label>--%>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label15" Width="89px" Text='<%# Eval("PassportNo")%>'
+                                                Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label19" Width="89px" Text='<%# Eval("PassportIssued")%>'
+                                                Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label22" Width="90px" Text='<%# Eval("PassportExp")%>'
+                                                Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                         <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label7" Width="76px" Text='<%#String.Format("{0:dd-MMM-yyyy}", Eval("Birthday"))%>'
+                                                Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        <td class="centerAligned" style="white-space: normal;">
+                                            <asp:CheckBox ID="uoCheckBoxMeet" runat="server" Width="70px" onclick="return false"
+                                                Checked='<%# Convert.ToBoolean(Eval("IsMeetGreet")) %>' Visible='<%# Eval("IsVisible") %>' />
+                                        </td>
+                                        <td class="centerAligned" style="white-space: normal;">
+                                            <asp:CheckBox ID="uoCheckBoxPort" runat="server" Width="70px" onclick="return false"
+                                                Checked='<%# Convert.ToBoolean(Eval("IsPortAgent")) %>' Visible='<%# Eval("IsVisible") %>' />
+                                        </td>
+                                        <td class="centerAligned" style="white-space: normal;">
+                                            <asp:CheckBox ID="uoCheckBoxHotel" runat="server" Width="70px" onclick="return false"
+                                                Checked='<%# Convert.ToBoolean(Eval("IsHotelVendor")) %>' Visible='<%# Eval("IsVisible") %>' />
+                                        </td>
+                                        <td class="leftAligned" style="white-space: normal;">
+                                            <asp:Label runat="server" ID="Label28" Width="158px" Text='<%# Eval("Remarks") %>'
+                                                Visible='<%# Eval("IsVisible") %>'></asp:Label>
+                                        </td>
+                                        
+                                        <%--<td style="text-align: center; white-space: normal;">
+                                            <asp:Label runat="server" ID="Label17" Text='<%# Eval("ConfirmBy") %>' Width="145px"></asp:Label>
+                                        </td>
+                                        
+                                        <td style="text-align: center; white-space: normal;">
+                                            <asp:Label runat="server" ID="Label18" Text='<%# Eval("ConfirmDate") %>' Width="100px"></asp:Label>
+                                        </td>--%>
+                                        
+                                        
+                                        </tr>
+                                    </ItemTemplate>
+                                    <EmptyDataTemplate>
+                                        <table style="text-align: left">
+                                            <tr>
+                                                <td colspan="22" style="text-align: left;">
+                                                    No Record
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </EmptyDataTemplate>
+                                </asp:ListView>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div align="left" style="text-align: left" >
+                                    <asp:DataPager ID="uoListViewManifestPager" runat="server" PagedControlID="uoListViewDetails"
+                                        PageSize="20">
+                                        <Fields>
+                                            <asp:NumericPagerField ButtonType="link" NumericButtonCssClass="PagerClass" />                                            
+                                        </Fields>
+                                    </asp:DataPager>
+                                    <asp:ObjectDataSource ID="uoObjectDataSourceImmigration" runat="server" MaximumRowsParameterName="MaxRow"
+                                        SelectCountMethod="GetImmigrationCount" SelectMethod="GetImmigrationList" StartRowIndexParameterName="StartRow"
+                                        TypeName="TRAVELMART.BLL.ImmigrationBLL" OldValuesParameterFormatString="oldcount_{0}"
+                                        EnablePaging="True" OnSelecting="uoObjectDataSourceImmigration_Selecting">
+                                        <SelectParameters>
+                                            <asp:Parameter Name="LoadType" Type="Int16" />
+                                            <asp:Parameter Name="FromDate" Type="DateTime" />
+                                            <asp:Parameter Name="ToDate" Type="DateTime" />
+                                            <asp:Parameter Name="UserID" Type="String" />
+                                            <asp:Parameter Name="Role" Type="String" />
+                                            <asp:Parameter Name="OrderBy" Type="String" />
+                                            <asp:Parameter Name="SeaportID" Type="Int32" />
+                                            <asp:Parameter Name="FilterByName" Type="String" />
+                                            <asp:Parameter Name="SeafarerID" Type="String" />
+                                            <asp:Parameter Name="NationalityID" Type="String" />
+                                            <asp:Parameter Name="Gender" Type="String" />
+                                            <asp:Parameter Name="RankID" Type="String" />
+                                            <asp:Parameter Name="Status" Type="String" />
+                                            <asp:Parameter Name="iAirLeg" Type="Int16" />
+                                            <asp:Parameter Name="iRouteFrom" Type="Int16" />
+                                            <asp:Parameter Name="iRouteTo" Type="Int16" />
+                                        </SelectParameters>
+                                    </asp:ObjectDataSource>
+                                    <asp:HiddenField runat="server" ID="uoHiddenFieldOrderBy" Value="Name" />
+                                    <asp:HiddenField runat="server" ID="uoHiddenFieldLoadType" Value="0" />
+                                    <asp:HiddenField runat="server" ID="uoHiddenFieldNoBooking" Value="0" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                           
+            <asp:HiddenField ID="uoHiddenFieldE1TravelRequest" runat="server" Value="0" />
+            <asp:HiddenField ID="uoHiddenFieldManifest" runat="server" Value="0" />
+            <asp:HiddenField ID="uoHiddenFieldByVessel" runat="server" Value="1" />
+            <asp:HiddenField ID="uoHiddenFieldByName" runat="server" Value="2" />
+            <asp:HiddenField ID="uoHiddenFieldByRecLoc" runat="server" Value="0" />
+            <asp:HiddenField ID="uoHiddenFieldByE1ID" runat="server" Value="0" />
+            <asp:HiddenField ID="uoHiddenFieldByDateOnOff" runat="server" Value="0" />
+            <asp:HiddenField ID="uoHiddenFieldByDateArrDep" runat="server" Value="0" />
+            <asp:HiddenField ID="uoHiddenFieldByStatus" runat="server" Value="0" />
+            <asp:HiddenField ID="uoHiddenFieldByBrand" runat="server" Value="0" />
+            <asp:HiddenField ID="uoHiddenFieldByPort" runat="server" Value="0" />
+            <asp:HiddenField ID="uoHiddenFieldByRank" runat="server" Value="0" />
+            <asp:HiddenField ID="uoHiddenFieldByAirStatus" runat="server" Value="0" />
+            <asp:HiddenField ID="uoHiddenFieldByHotelStatus" runat="server" Value="0" />
+            <asp:HiddenField ID="uoHiddenFieldByVehicleStatus" runat="server" Value="0" />
+            <asp:HiddenField ID="uoHiddenFieldRole" runat="server" Value="" />
+            <asp:HiddenField ID="uoHiddenFieldUser" runat="server" Value="" />
+            <asp:HiddenField runat="server" ID="uoHiddenFieldPopUp" Value="0" />
+            <asp:HiddenField runat="server" ID="uoHiddenFieldDateRange" Value="0" />
+            <asp:HiddenField runat="server" ID="uoHiddenFieldDate" Value="0" />
+            <div style="display: none">
+                <%--Scan Barcode--%>
+                <div id="uoDivScan" style="width: 300px">
+                    <div class="PageTitle">
+                        Barcode Scan
+                    </div>
+                    <table>
+                        <tr>
+                            <td style="width: 100px">
+                                Barcode:
+                            </td>
+                            <td>
+                                <asp:TextBox ID="uoTextBoxBarcode" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                            </td>
+                            <td>
+                                <asp:Button ID="uoButtonSaveBarcode" runat="server" Text="Scan" />
+                                <%--  OnClientClick="return Tag();"--%>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <asp:HiddenField runat="server" ID="uoHiddenFieldUserId" />
+                                <asp:HiddenField runat="server" ID="uoHiddenFieldUserRole" />
+                                <asp:HiddenField runat="server" ID="uoHiddenFieldtRid" />
+                                <asp:HiddenField runat="server" ID="uoHIddenFieldmRid" />
+                                <asp:HiddenField runat="server" ID="uoHiddenFieldTransportation" Value = "0" />
+                                <asp:HiddenField runat="server" ID="uoHiddenFieldSelectPrintItinerary" Value = "0" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type ="text/javascript" language ="javascript">    
+        function TagNeedVehicleAll(IsNeedTransport) {
+                        
+            var sUserName = $("#<%= uoHiddenFieldUserId.ClientID %>").val();
+            
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "/PageMethods.aspx/TagCrewAsNeedVehicleAll",
+                data: "{'UserID': '" + sUserName + "', 'IsNeedTransport': " + IsNeedTransport.checked + "}",
+                dataType: "json",
+                success: function(data) {
+                    $("#<%=uoHiddenFieldTransportation.ClientID %>").val('1');
+                    $("#aspnetForm").submit();
+                },
+                error: function(objXMLHttpRequest, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
+        function TagNeedVehicle(IsNeedTransport, iTravelRequestID, iIDBigint) {
+
+            var sUserName = $("#<%= uoHiddenFieldUserId.ClientID %>").val();
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "/PageMethods.aspx/TagCrewAsNeedVehicleSingle",
+                data: "{'UserID': '" + sUserName + "', 'IsNeedTransport': " + IsNeedTransport.checked +
+                    ", 'iTravelReqID': " + iTravelRequestID + ", 'iIDBigint': " + iIDBigint + "}",
+                dataType: "json",
+                success: function(data) {
+                }
+                        ,
+                error: function(objXMLHttpRequest, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
+        function TagSelectPrintAll(IsSelected) {
+
+            var sUserName = $("#<%= uoHiddenFieldUserId.ClientID %>").val();
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "/PageMethods.aspx/TagCrewAsSelectedToPrintItinerary",
+                data: "{'UserID': '" + sUserName + "', 'IsSelected': " + IsSelected.checked + "}",
+                dataType: "json",
+                success: function(data) {
+                    $("#<%=uoHiddenFieldSelectPrintItinerary.ClientID %>").val('1');
+                    $("#aspnetForm").submit();
+                },
+                error: function(objXMLHttpRequest, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
+        function TagSelectPrint(IsSelected, iTravelRequestID, iIDBigint) {
+
+            var sUserName = $("#<%= uoHiddenFieldUserId.ClientID %>").val();
+
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                url: "/PageMethods.aspx/TagCrewAsSelectedToPrintItinerarySingle",
+                data: "{'UserID': '" + sUserName + "', 'IsSelected': " + IsSelected.checked +
+                    ", 'iTravelReqID': " + iTravelRequestID + ", 'iIDBigint': " + iIDBigint + "}",
+                dataType: "json",
+                success: function(data) {
+                }
+                        ,
+                error: function(objXMLHttpRequest, textStatus, errorThrown) {
+                    alert(errorThrown);
+                }
+            });
+        }
+    </script>
+</asp:Content>

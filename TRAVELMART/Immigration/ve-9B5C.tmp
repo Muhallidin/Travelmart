@@ -1,0 +1,962 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TravelMartMaster2.Master" 
+ AutoEventWireup="true" CodeBehind="CrewVerification.aspx.cs" Inherits="TRAVELMART.Immigration.CrewVerification" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>   
+
+<asp:Content ID="Content2" ContentPlaceHolderID="HeaderContent" runat="server">
+    <table width="100%" cellpadding="0" cellspacing="0" class="PageTitle">
+        <tr>
+            <td class="PageTitle">
+               Crew Verification
+            </td>                
+        </tr>
+    </table>
+</asp:Content>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="NaviPlaceHolder" runat="server">
+
+    <style type="text/css" >
+        #navigation {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            overflow: hidden;
+            border-bottom: 0.4em solid #0288D8;
+            min-width:703px;
+        }
+        
+        #navigation li {
+            float: left;
+            height: 2em;
+            margin: 0 0.009em;
+            background-color:Blue;
+        }
+      
+        #navigation a:link, #navigation a:visited {
+            float: left;
+            height: 1.8em;
+            width: 50%;
+            padding: 0.2em 0.5em;
+            
+            background-color:Green;
+             
+            text-align:center;
+            font-weight: bold;
+            text-decoration: none;
+            border-width: 0.1em 0.1em 0 0.1em;
+            border-style: solid;
+            border-color: #0288D8;
+            border-radius: 3px;
+            -moz-border-radius: 6px;
+            -webkit-border-radius: 6px;
+            line-height: 1.6em;
+            position: relative;
+            top: 0.3em;
+        }
+        
+        .nav 
+        {
+            float: left;
+            height: 1.8em;
+            width:100%;
+            text-align:center;
+            font-weight: bold;
+            text-decoration: none;
+            border-width:0.1em;
+            border-style: solid;
+            border-color: #0288D8;
+            border-radius: 1.5px;
+            -moz-border-radius: 3.25px;
+            -webkit-border-radius: 3.25px;
+            line-height: 1.6em;
+         }
+        
+        .ClassPanelCrewSchedule { max-height: 70px; height:70px; overflow: auto; }
+        .ClassPanelAir { max-height: 90px; height:90px; overflow: auto; }
+        .ClassPanelHotel { max-height: 90px; height:90px; overflow: auto; }
+        .ClassPanelTransportation { max-height: 107px;  overflow: auto; }
+        
+        .centerdiv {
+                    position:fixed;
+                    top: 50%;
+                    left: 50%;
+                    width:30em;
+                    height:12em;
+                    margin-top: -9em;   /*set to a negative number 1/2 of your height*/
+                    margin-left: -15em; /*set to a negative number 1/2 of your width*/
+                    border: 1px solid #ccc;
+                    background-color: #f3f3f3;
+                    
+        }
+        
+        .imagePos {
+                    position:absolute;
+                    right: -12px;
+                    top: -8px;
+                }   
+      
+        .RemarkDiv
+        {
+            position:absolute;
+            /*top: 354px;
+            left: 400.5px;*/
+            border-color:#C0C0C0;
+            border-style:solid;
+            border-width:thin;
+            width:31em;
+            height:24em;
+            margin-top: -9em; /*set to a negative number 1/2 of your height*/
+            margin-left: -15em; /*set to a negative number 1/2 of your width*/
+        }
+        
+       .PortTransDiv
+        {
+            position:absolute;
+            /*top: 354px;
+            left: 400.5px;*/
+            border-style:solid;
+            border-width:thin;
+            border-color:#C0C0C0;
+            width:32em;
+            height:18.5em;
+            margin-top: -9em; /*set to a negative number 1/2 of your height*/
+            margin-left: -15em; /*set to a negative number 1/2 of your width*/
+        }
+      .PortAgentHotelDiv {
+            position:absolute;
+            /*top: 354px;
+            left: 400.5px;*/
+            border-style:solid;
+            border-width:thin;
+            border-color:#C0C0C0;
+            width:36em;
+            height:17em;
+            margin-top: -9em; /*set to a negative number 1/2 of your height*/
+            margin-left: -15em; /*set to a negative number 1/2 of your width*/
+        }
+  
+        .DivCrewAssistComment
+        {
+            position:absolute;
+            top: 354px;
+            left: 400.5px;
+            border-style:solid;
+            border-width:thin;
+            border-color:#C0C0C0;
+            /*<%--width:36em; height:17em;--%>*/
+            margin-top: -9em; /*set to a negative number 1/2 of your height*/
+            margin-left: -15em; /*set to a negative number 1/2 of your width*/
+        }
+        
+        .HotelRemarkDiv
+        {
+            position:absolute;
+            border-color:#C0C0C0;
+            border-style:solid;
+            border-width:thin;
+            width:31em;
+            height:12.8em;
+            margin-top: -9em; /*set to a negative number 1/2 of your height*/
+            margin-left: -15em; /*set to a negative number 1/2 of your width*/
+        }
+  
+    </style>
+<asp:UpdatePanel runat="server" UpdateMode="Conditional" ID="uoPanelMaster" >
+   <ContentTemplate>
+         <table style="width:100%;   padding:0 5% 0 2%;  " >
+            <tr>
+                <td style="width:40%; padding-right:20px;  " >  
+                    <table style="width:100%">
+                        <tr style="width:50%;" >
+                            <td rowspan="5" style="width:20%;"  >
+                                <asp:Image ID="uoImageCM" runat="server" ImageUrl="~/Images/hotel.jpg" style="width:110px;"/>
+                                
+                            </td>
+                        </tr>
+                         <tr>
+                            <td style="padding-left:8%; white-space:nowrap; " >Unique ID</td>
+                            <td >
+                                <asp:TextBox ID="txtUniqeID" runat="server"  Width="100%"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:8%; white-space:nowrap; " >Last Name</td>
+                            <td >
+                                <asp:TextBox ID="txtLastName" runat="server" Width="100%" ></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left:8%;white-space:nowrap;" >Fist Name</td>
+                            <td >
+                                <asp:TextBox ID="txtFirstName" runat="server"  Width="100%"></asp:TextBox>
+                            </td>
+                        </tr>
+                       
+                        <tr>
+                            <td style="padding-left:8%; white-space:nowrap; " >LOE Control No.</td>
+                            <td >
+                                <asp:TextBox ID="txtLOEControlNo" runat="server"  Width="100%"></asp:TextBox>
+                            </td>
+                        </tr>
+                         <tr>
+                            <td>
+                                 <asp:RadioButton ID="chkNew" runat="server" Text="New"/>
+                            </td>
+                            <td colspan="2" align="right" style="padding:3px 0 5px 0;" >
+                                <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="SmallButton" OnClick="btnSearch_click" />
+                                <%--<asp:Button ID="btn" runat="server" Text="Save as PDF"  Font-Size="X-Small"   OnClientClick="OpenPDF()" />--%>
+                                <input type="button" value="Save as PDF" style="font-size:x-small"   onclick="OpenPDF()" name="btnSubmit">
+                                <a href="#" id="OpenPDF"  > </a >
+                            </td>
+                        </tr>
+                    </table>
+                    <table style="width:100%;"> 
+                        <tr>
+                            <td>Nationality</td>
+                            <td>
+                                <asp:TextBox ID="txtNationality" runat="server"  ReadOnly="true" CssClass="ReadOnly"></asp:TextBox>
+                            </td>
+                            <td>Passport No</td>
+                            <td>
+                                <asp:TextBox ID="txtPassportNo" runat="server"  Width="100%"  ReadOnly="true" CssClass="ReadOnly"></asp:TextBox>
+                            </td>
+                        
+                        </tr>
+                        <tr>
+                            <td>Telephone</td>
+                            <td>
+                                <asp:TextBox ID="txtTelephone" runat="server"  ReadOnly="true" CssClass="ReadOnly"></asp:TextBox>
+                            </td>
+                            <td>Expiration</td>
+                            <td>
+                                <asp:TextBox ID="txtExpiration" runat="server"  Width="100%" ReadOnly="true" CssClass="ReadOnly"></asp:TextBox>
+                            </td>
+                        
+                        </tr>
+                        <tr>
+                            <td>Email Address</td>
+                            <td>
+                                <asp:TextBox ID="txtEmailAdd" runat="server"  ReadOnly="true" CssClass="ReadOnly"></asp:TextBox>
+                            </td>
+                            <td>Date Of Birth</td>
+                            <td>
+                                <asp:TextBox ID="txtDateOffBirth" runat="server" Width="100%"  ReadOnly="true" CssClass="ReadOnly"></asp:TextBox>
+                            </td>
+                        
+                        </tr>
+                    </table>
+                </td>
+                
+                <td  style="width:40%">
+                    <div>
+                     <fieldset   >
+                          <legend><b>Upcomming Assginment:</b></legend>
+                          <table style="width:100%;" >
+                            <tr>
+                                <td>Brand</td>
+                                <td>
+                                    <asp:TextBox ID="txtBrand" runat="server"  ReadOnly="true" CssClass="ReadOnly"></asp:TextBox>
+                                </td>
+                                <td>Join Date</td>
+                                <td>
+                                    <asp:TextBox ID="txtJoindate" runat="server" Width="100%" ReadOnly="true" CssClass="ReadOnly" ></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Join Ship</td>
+                                <td>
+                                    <asp:TextBox ID="txtJoinShip" runat="server"  ReadOnly="true" CssClass="ReadOnly"></asp:TextBox>
+                                </td>
+                                <td>Join Port</td>
+                                <td>
+                                    <asp:TextBox ID="txtJoinPort" runat="server" Width="100%"  ReadOnly="true" CssClass="ReadOnly"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Position</td>
+                                <td>
+                                    <asp:TextBox ID="txtPosition" runat="server"  ReadOnly="true" CssClass="ReadOnly"></asp:TextBox>
+                                </td>
+                                <td>Join City</td>
+                                <td>
+                                    <asp:TextBox ID="txtJoinCity" runat="server" Width="100%"  ReadOnly="true" CssClass="ReadOnly"></asp:TextBox>
+                                </td>
+                            </tr>
+                          </table>
+                     </fieldset>
+                    
+                    </div>
+                    
+                    <table style="width:98%" >
+                        <tr>
+                            <td style="width:90.5%" >
+                                <asp:Label ID="tblUCDate" runat="server" Text="06/25/2014 [16:24]"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Button ID="btnApproved" runat="server" Text="Approved"  CssClass="SmallButton" OnClientClick="return Validatereason(this)"  OnClick="btnApproved_click" />
+                            </td>
+                            <td>
+                                <asp:Button ID="btnDecline" runat="server" Text="Declined"  CssClass="SmallButton"  OnClick="btnApproved_click" />
+                            </td>
+                        </tr>
+                     </table>
+                    <div>
+                            <fieldset >
+                            <legend> <b>Reason</b>
+                                <%-- <asp:DropDownList ID="cboReason" runat="server"> 
+                                        <asp:ListItem Text="Reason" Value="0"/>
+                                 </asp:DropDownList>--%>
+                            </legend>
+                                   
+                            <table style="width:100%" >
+                                <tr>
+                                    <td  style="white-space:nowrap ">
+                                        <asp:RadioButton ID="rdbFraudulentDoc"   runat="server" Text="Fraudulent Document" class='radio-button'/>
+                                    </td>
+                                    <td rowspan="3"  style="vertical-align:text-top; width:100%; ">
+                                        <asp:RadioButton ID="rdbOther" runat="server" class='radio-button' Text="OTHER" />
+                                        <br />
+                                        <asp:TextBox ID="txtOtherComment" runat="server" Width="100%" TextMode="MultiLine" Rows="3">
+                                        </asp:TextBox>
+                                    </td>
+                            </tr>
+                            
+                            <tr>
+                                <td style="white-space:nowrap " >
+                                    <asp:RadioButton ID="rdbPriorIIssue" runat="server" class='radio-button' Text="Prior Immigration Issue"  />
+                                </td>
+                            </tr>
+                            
+                                <tr>
+                                <td  style="white-space:nowrap ">
+                                    <asp:RadioButton ID="rdbPriorConDep" runat="server" class='radio-button' Text="Prior Connection/Deportation" />
+                                </td>
+                            </tr>
+                            </table>      
+                        </fieldset>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                   <%-- <table width="96%" >
+                        <tr>
+                            <td style=" width:25%;" >
+                                <a href="#TabFlight" id="A1" class="nav">Flight</a>
+                            </td>
+                           <td style=" width:25%;" >
+                                <a href="#TabHotel" id="navHotel" class="nav">Hotel</a>
+                            </td>
+                                
+                            <td  style= "width:25%;">
+                                <a href="#Transportation" id="navTransportation" class="nav"  >Transportation</a>
+                            </td>
+                        </tr>
+                    
+                    </table>--%>
+                    <div>
+                      <%--  <span  style="font-size:14px; padding-top:10px; ">
+                            <b>Air Detail</b>
+                        </span>  
+                        <br/> --%>
+                        <asp:Panel ID="uoPanelAir" runat="server" ScrollBars="Auto" CssClass="ClassPanelAir" Width="540px" >
+                            <asp:ListView runat="server" ID="uoListviewAir">
+                                    <LayoutTemplate>
+                                     <table border="0" id="uoListviewAirTable" cellpadding="0" cellspacing="0" class="listViewTable">
+                                            <tr>
+                                                
+                                                <th style="text-align: center; white-space: normal;">
+                                                    Seq #
+                                                </th >
+                                                <th style="text-align: center; white-space: normal;">
+                                                    Airline
+                                                </th >
+                                                <th style="text-align: center; white-space: normal;">
+                                                    Dept Date
+                                                </th>
+                                                <th style="text-align: center; white-space: normal;">
+                                                    Dept Time
+                                                </th>
+                                                <th style="text-align: center; white-space: normal;">
+                                                    Arr Date
+                                                </th>
+                                                <th style="text-align: center; white-space: normal;">
+                                                    Arr Time
+                                                </th>
+                                                <th style="text-align: center; white-space: normal; width:40px">
+                                                    Dept Code
+                                                </th>    
+                                                <th style="text-align: center; white-space: normal; width:40px">
+                                                     Arr Code
+                                                </th>   
+                                              <%--  <th style="text-align: center; white-space: normal;">
+                                                     Status
+                                                </th> --%>  
+                                            </tr>        
+                                            <asp:PlaceHolder runat="server" ID="itemPlaceHolder"></asp:PlaceHolder>              
+                                        </table>
+                                    </LayoutTemplate>
+                                    <ItemTemplate>
+                                        <tr>
+                                           
+                                           <td class="leftAligned" style="white-space: normal;" >
+                                                <asp:Label runat="server" ID="lblSeqNo" Text='<%# Eval("SeqNo") %>'/>
+                                            </td>
+                                            <td class="leftAligned" style="white-space: normal;" >
+                                                <asp:Label runat="server" ID="lblAirline" Text='<%# Eval("AirLine")%>' />
+                                            </td>
+                                            <td class="leftAligned">
+                                                <asp:Label runat="server" ID="lblDepartureDateTime"  Text='<%# String.Format("{0:dd-MMM-yyyy}", Eval("DepartureDateTime"))%>'/>
+                                            </td>
+                                            <td class="leftAligned" style="white-space: normal;" >
+                                                <asp:Label runat="server" ID="lblDeptTime"   Text='<%# String.Format("{0:HH:mm tt}", Eval("DepartureDateTime"))%>'/>
+                                            </td>
+                                            <td class="leftAligned">
+                                                <asp:Label runat="server" ID="lblArrivalDateTimeDate"  Text='<%# String.Format("{0:dd-MMM-yyyy}", Eval("ArrivalDateTime"))%>'/>
+                                            </td>
+                                            <td class="leftAligned" style="white-space: normal;" >
+                                                <asp:Label runat="server" ID="lblArrTime"   Text='<%# String.Format("{0:HH:mm tt}", Eval("ArrivalDateTime"))%>'/>
+                                            </td>
+                                         
+                                           <td class="leftAligned">
+                                                <asp:Label runat="server" ID="lblDepartureAirportLocationCode" Text='<%# Eval("DepartureAirportLocationCode") %>'/></td>
+                                           
+                                           <td class="leftAligned">
+                                                <asp:Label runat="server" ID="lblArrivalAirportLocationCode"  Text='<%# Bind("ArrivalAirportLocationCode")  %>'/>
+                                            </td>
+                                          
+                                            <%--
+                                            <td style="white-space: normal; visibility:hidden;" >
+                                               <asp:HiddenField runat="server" ID="hfIDBigInt" Value='<%# Eval("IdBigint") %>' />
+                                               <asp:HiddenField runat="server" ID="hfAirRequestID" Value='<%# Bind("HotelRequestID") %>' />
+                                               
+                                               <asp:HiddenField runat="server" ID="uoHiddenFieldAirTranspoReqID" Value='<%# Bind("ReqVehicleID") %>' />
+                                               <asp:HiddenField runat="server" ID="uoHiddenFieldAirMAGReqID" Value='<%# Bind("ReqMeetAndGreetID") %>' />
+                                               
+                                               <asp:HiddenField runat="server" ID="uoHiddenFieldAirPortAgentID" Value='<%# Bind("ReqPortAgentID") %>' />
+                                               <asp:HiddenField runat="server" ID="uoHiddenFieldAirFligthNo" Value='<%# Bind("FligthNo") %>' />
+                                               
+                                               
+                                               <asp:HiddenField runat="server" ID="uoHiddenFieldAHotelTranOtherID" Value='' />
+                                               <asp:HiddenField runat="server" ID="uoHiddenFieldStatus" Value='<%# Eval("Status")  %>' />
+                                               <asp:HiddenField runat="server" ID="uoHiddenFieldStatusMessage" Value='<%# Eval("StatusMessage")  %>' />
+                                               
+                                            </td>--%>
+                                          </tr>
+                                    </ItemTemplate>
+                                     <EmptyDataTemplate>
+                                        <table  class="listViewTable">
+                                            <tr>
+                                                
+                                                <th style="text-align: center; white-space: normal;">
+                                                    Seq #
+                                                </th >
+                                                <th style="text-align: center; white-space: normal;">
+                                                    Airline
+                                                </th >
+                                                <th style="text-align: center; white-space: normal;">
+                                                    Dept Date
+                                                </th>
+                                                <th style="text-align: center; white-space: normal;">
+                                                    Dept Time
+                                                </th>
+                                                <th style="text-align: center; white-space: normal;">
+                                                    Arr Date
+                                                </th>
+                                                <th style="text-align: center; white-space: normal;">
+                                                    Arr Time
+                                                </th>
+                                                <th style="text-align: center; white-space: normal; width:40px">
+                                                    Dept Code
+                                                </th>    
+                                                <th style="text-align: center; white-space: normal; width:40px">
+                                                     Arr Code
+                                                </th> 
+                                               <%-- <th style="text-align: center; white-space: normal;">
+                                                     Status
+                                                </th>  --%> 
+                                            </tr>  
+                                            <tr>
+                                                <td colspan="9" class="leftAligned">
+                                                    No Record
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </EmptyDataTemplate>
+                            </asp:ListView>
+                        </asp:Panel> 
+                    
+                    </div> 
+                    <div id="divHotelBooking">
+                       <%-- <table style=" width:100%;">
+                            <tr>
+                                <td style="white-space:nowrap; width:100%;  ">
+                                    <span  style="font-size:14px; padding-top:10px; ">
+                                         <b>Hotel Booking</b>
+                                    </span>
+                                </td>
+                                
+                            </tr>
+                        </table>--%>
+                        
+                        <asp:panel ID="uoPanelHotelBook" runat="server" ScrollBars="Auto" CssClass="ClassPanelHotel"  Width="540px">
+                            <asp:ListView runat="server" ID="uoListViewHotelBook">
+                                <LayoutTemplate>
+                                    <table border="0" id="uoListviewHotelBookTable" cellpadding="0" cellspacing="0" class="listViewTable">
+                                        <tr >
+                                        <%--<th style="text-align: center; white-space: normal;  width:30px;">
+                                        </th >--%>
+                                        <th style="text-align: center; white-space: normal; width:130px;">
+                                            Hotel
+                                        </th >
+                                        <th style="text-align: center; white-space: normal;">
+                                            Check-in Date
+                                        </th>
+                                        <th style="text-align: center; white-space: normal;">
+                                            Check-Out Date
+                                        </th>
+                                        <th style="text-align: center; white-space: normal;">
+                                            Room Type
+                                        </th>
+                                        <th style="text-align: center; white-space: normal;">
+                                            Day
+                                        </th>
+                                        <%--<th style="text-align: center; white-space: normal;">
+                                            Rate
+                                        </th>  
+                                        <th style="text-align: center; white-space: normal;">
+                                            Status
+                                        </th> 
+                                        <th style="text-align: center; white-space: normal; width:40px;">
+                                            Medical
+                                        </th>    
+                                        <th style="width:-1px;margin:-0px;"/>--%> 
+                                            
+                                    </tr>        
+                                        <asp:PlaceHolder runat="server" ID="itemPlaceHolder"></asp:PlaceHolder>              
+                                    </table>
+                                </LayoutTemplate>
+                                <ItemTemplate>
+                                <%# GetRequestColor() %>
+                                  
+                                     <td class="leftAligned" style="white-space: normal; display:none; width:130px;" >
+                                        <asp:Label runat="server" ID="Label3" style="display:none;" />
+                                    </td>
+                                     <td class="leftAligned" style="white-space: normal; width:130px;" >
+                                        <asp:Label runat="server" ID="lblHotelBook" Text='<%# Eval("BranchName")%>' />
+                                    </td>
+                                    <td class="leftAligned" style="white-space: nowrap;" >
+                                        <asp:Label runat="server" ID="lblCheckInDate"  Text='<%# String.Format("{0:dd-MMM-yyyy}", Eval("TimeSpanStartDate "))%>'/>
+                                    </td>
+                                    <td class="leftAligned" style="white-space: nowrap;" >
+                                        <asp:Label runat="server" ID="lblCheckOutDate"   Text='<%# String.Format("{0:dd-MMM-yyyy}", Eval("TimeSpanEndDate "))%>'/>
+                                    </td>
+                                    <td class="leftAligned">
+                                        <asp:Label runat="server" ID="lblRoomTypeID"  Text='<%# Eval("RoomType ")%>'/>
+                                    </td>
+                                    
+                                    <td class="leftAligned" style="white-space: normal;" >
+                                         <asp:Label runat="server" ID="lblHotelNite"   Text='<%# Eval("TimeSpanDurationInt ")%>'/>
+                                    </td>
+                                    
+                                    <%--
+                                    <td class="leftAligned" style="white-space: normal; width:30px;" >
+                                        <asp:Label runat="server" ID="lblLabelHotelRate" ToolTip='<%# Eval("ConfirmRateMoney") %>'  Text='<%# String.Format("{0:#,##0.00}", Eval("ConfirmRateMoney"))%>' />
+                                    </td>
+                                     <td class="leftAligned" style="white-space: normal; width:70px;" >
+                                        <asp:Label runat="server" ID="lblHStatus" ToolTip='<%# Eval("HotelStatus") %>'  Text='<%# Eval("HotelStatus") %>'/>
+                                    
+                                    </td>
+                                    <td  style="white-space: normal; width:40px; text-align:center;" >
+                                        <asp:CheckBox  runat="server" ID="Label9" Enabled="false"   Checked='<%# Eval("IsMedical") %>'/>
+                                    
+                                    </td>--%>
+                                    
+                                    
+                                  </tr>
+                                </ItemTemplate>
+                                <EmptyDataTemplate>
+                                <table  class="listViewTable">
+                                   <tr>
+                                       
+                                        <th style="text-align: center; white-space: normal; width:130px;">
+                                            Hotel
+                                        </th >
+                                        <th style="text-align: center; white-space: normal;">
+                                            Check-in Date
+                                        </th>
+                                        <th style="text-align: center; white-space: normal;">
+                                            Check-Out Date
+                                        </th>
+                                        <th style="text-align: center; white-space: normal;">
+                                            Room Type
+                                        </th>
+                                        <th style="text-align: center; white-space: normal;">
+                                            No Of Day
+                                        </th>
+                                       <%-- <th style="text-align: center; white-space: normal;">
+                                            Status
+                                        </th>    
+                                        <th style="text-align: center; white-space: normal;  width:40px;">
+                                            Medical
+                                        </th>   --%>
+                                    </tr>  
+                                    <tr>
+                                        <td colspan="5" class="leftAligned">
+                                            No Record
+                                        </td>
+                                    </tr>
+                                </table>
+                            </EmptyDataTemplate>
+                            </asp:ListView>
+                        </asp:panel>
+                    
+                    </div>
+                    <div>
+                      <%-- <table style=" width:100%;">
+                            <tr>
+                                <td style="white-space:nowrap; width:100%;  ">
+                                    <span  style="font-size:14px; padding-top:10px; ">
+                                        <b>Transportation Booking</b>
+                                    </span>
+                                </td>
+                                
+                            </tr>
+                        </table>--%>
+                        
+                        <asp:Panel ID="uoPanelTransportation" runat="server" CssClass="ClassPanelTransportation" Width="540px">
+                            <asp:ListView runat="server" ID="uoListViewTransportation" 
+                                >
+                                <LayoutTemplate>
+                                    <table border="0" id="uoListviewHotelBookTable" cellpadding="0" 
+                                           cellspacing="0" class="listViewTable" >
+                                        <tr>
+                                             <th style="text-align: center; width:160px;">
+                                                Transportation
+                                            </th>
+                                            <th style="text-align: center; width:120px;">
+                                                From
+                                            </th>
+                                            <th style="text-align: center; width:120px;">
+                                                To
+                                            </th>
+                                            <th style="text-align: center; width:70px;">
+                                                Pick-up Date
+                                            </th>
+                                            <th style="text-align: center; width:70px; ">
+                                                Pick-up Time
+                                            </th>
+                                           <%-- <th style="text-align: center; width:70px; ">
+                                                Rate
+                                            </th>--%>
+                                           
+                                            <%--<th style="text-align: center;white-space: nowrap; "/>--%>
+                                        </tr>
+                                        <asp:PlaceHolder runat="server" ID="itemPlaceHolder"></asp:PlaceHolder>
+                                    </table>
+                                </LayoutTemplate>
+                                
+                                <ItemTemplate>
+                                   <%# GetRequestColor() %>
+                                       <td class="leftAligned" style="white-space: normal; display:none; width:130px;" >
+                                            <asp:Label runat="server" ID="Label3" style="display:none;"  Text='<%# Eval("VehicleVendorName ")%>'/>
+                                        </td>
+                                        <td class="leftAligned" style="white-space:normal;  width:160px;">
+                                            <asp:Label runat="server" ID="lblListviewTransportation" 
+                                                       Text='<%# Eval("VehicleVendorName ")%>'/>
+                                                    
+                                        </td>
+                                        <td class="leftAligned" style="white-space:normal; width:145px">
+                                            <asp:Label runat="server" Width="145px" ID="lblFrom" Text='<%# Eval("RouteFrom")%>'  />
+                                        </td>
+                                        <td class="leftAligned" style="white-space:normal; width:145px">
+                                            <asp:Label runat="server" Width="145px" ID="lblTo" Text='<%# Eval("RouteTo")%>' />
+                                        </td>
+                                        <td class="leftAligned" >
+                                            <asp:Label runat="server" ID="lblPickupDate" Text='<%# String.Format("{0:dd-MMM-yyyy}", Eval("PickUpDate"))%>' />
+                                        </td>
+                                        <td class="leftAligned" >
+                                            <asp:Label runat="server" ID="lblPickupTime" Text='<%# String.Format("{0:hh:mm tt}", Eval("PickUpTime"))%>' />
+                                        </td>
+                                        
+                                         <%--  <td class="leftAligned" >
+                                            <asp:Label runat="server" ID="lblRate" Text='<%#  String.Format("{0:#,##0.00}", Eval("TranspoCost"))%>' />
+                                        </td>
+                                        
+                                        <td class="leftAligned" style="white-space:nowrap; width:80px;" >
+                                            <asp:Label runat="server" ID="lblStatus" style="text-align: center; width:80px;"
+                                                Text='<%# Eval("VehicleStatusVarchar")%>' />
+                                        </td> 
+                                   
+                                      <td style="white-space:nowrap; vertical-align:middle; padding-top:3px;   text-align:left; margin:-0px; width:-1px;" >
+                                            
+                                            <asp:LinkButton runat="server" ID="ouLinkButtonTrans"  style="font-size:small; font-weight:bold" class="Cancellation">
+                                                <asp:ImageButton ID="ImageButton2" runat="server" ToolTip="Click to Cancel" OnClientClick="return ConfirmTranscancel(this)"
+                                                    ImageUrl="~/Images/Cancel.png"  style="size:20px; width:20px; height:20px;"/>
+                                            </asp:LinkButton>      
+                                   
+                                                
+                                            <asp:ImageButton ID="uoImageButtonApproved" runat="server" 
+                                                OnClientClick="return ConfirmTranscancel(this)" CommandName="Update" 
+                                                ToolTip="Click to Approve" ImageUrl="~/Images/Approved.png" 
+                                                 style="size:20px; width:20px; height:20px;"
+                                                Visible='<%# Convert.ToBoolean(Eval("StatusID").ToString() == "2" ? 1 : 0) %>' />
+                                            
+                                        </td>
+                                        
+                                        <td style="white-space: normal; visibility: hidden;">
+                                            <asp:HiddenField runat="server" ID="uoHiddenFieldTranslID" Value='<%# Bind("ReqVehicleIDBigint") %>' />
+                                            
+                                            <asp:HiddenField runat="server" ID="uoHiddenFieldTransactionID" Value='<%# Bind("VehicleTransID") %>' />
+
+                                            <asp:HiddenField runat="server" ID="uoHiddenFieldTIDBigint" Value='<%# Bind("IdBigint") %>' />
+                                            <asp:HiddenField runat="server" ID="uoHiddenFieldTSeqNo" Value='<%# Bind("SeqNoInt") %>' />
+                                            <asp:HiddenField runat="server" ID="uoHiddenFieldTTravelRequestID" Value='<%# Bind("TravelReqIDInt") %>' />
+                                            <asp:HiddenField runat="server" ID="uoHiddenFieldIsPortAgent" Value='<%# Bind("IsPortAgent") %>' />
+                                        
+                                        </td>--%>
+                                    </tr>
+                                    
+                                </ItemTemplate>
+                                
+                                <EmptyDataTemplate>
+                                    <table class="listViewTable">
+                                        <tr>
+                                          
+                                            <th style="text-align: center; white-space: normal;">
+                                                Transportation
+                                            </th>
+                                            <th style="text-align: center; white-space: normal; ">
+                                                From
+                                            </th>
+                                            <th style="text-align: center; white-space: normal; ">
+                                                To
+                                            </th>
+                                            <th style="text-align: center; white-space: normal;">
+                                                Pick-up Date
+                                            </th>
+                                            <th style="text-align: center; white-space: normal;">
+                                                Pick-up Time
+                                            </th>
+                                            <th style="text-align: center; width:70px; ">
+                                                Rate
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" class="leftAligned">
+                                                No Record
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </EmptyDataTemplate>
+                            </asp:ListView>
+                        </asp:Panel>
+                    </div>
+                    
+                </td>
+            
+                <td align="left" valign="top" >
+                     <div id="div1">
+                        <table style=" width:100%;">
+                            <tr>
+                                <td style="white-space:nowrap; width:100%;  ">
+                                    <span  style="font-size:14px; padding-top:10px; ">
+                                         <b>Recent Employeement History</b>
+                                    </span>
+                                </td>
+                                
+                            </tr>
+                        </table>
+                        
+                        <asp:panel ID="Panel1" runat="server" ScrollBars="Auto" CssClass="ClassPanelHotel"  Width="550px">
+                            <asp:ListView runat="server" ID="uoListViewRecentEmployment">
+                                <LayoutTemplate>
+                                    <table border="0" id="uoListviewHotelBookTable" cellpadding="0" cellspacing="0" class="listViewTable">
+                                        <tr >
+                                            <th style="text-align: center; white-space: normal; width:150px;">
+                                                Ship Code
+                                            </th >
+                                            <th style="text-align: center; white-space: normal;">
+                                                SignOn Date
+                                            </th>
+                                            <th style="text-align: center; white-space: normal;">
+                                               SignOff Date
+                                            </th>
+                                            <th style="text-align: center; white-space: normal;">
+                                                Job Code
+                                            </th>
+                                            
+                                        </tr>        
+                                        <asp:PlaceHolder runat="server" ID="itemPlaceHolder"></asp:PlaceHolder>              
+                                    </table>
+                                </LayoutTemplate>
+                                <ItemTemplate>
+                                <%# GetRequestColor() %>
+                                   
+                                     <td class="leftAligned" style="white-space: normal; width:150px;" >
+                                        <asp:Label runat="server" ID="lblHotelBook" Text='<%# Eval("Ship")%>' />
+                                    </td>
+                                    <td class="leftAligned" style="white-space: nowrap;" >
+                                        <asp:Label runat="server" ID="lblCheckInDate"  Text='<%# String.Format("{0:dd-MMM-yyyy}", Eval("SignOnDate"))%>'/>
+                                    </td>
+                                    <td class="leftAligned" style="white-space: nowrap;" >
+                                        <asp:Label runat="server" ID="lblCheckOutDate"   Text='<%# String.Format("{0:dd-MMM-yyyy}", Eval("SignOffDate"))%>'/>
+                                    </td>
+                                    <td class="leftAligned">
+                                        <asp:Label runat="server" ID="lblRank"  Text='<%# Eval("Rank")%>'/>
+                                    </td>
+                                    <%--<td class="leftAligned" style="white-space: normal;" >
+                                         <asp:Label runat="server" ID="lblHotelNite"   Text='<%# Eval("NoNitesInt")%>'/>
+                                    </td>
+                                    <td class="leftAligned" style="white-space: normal; width:30px;" >
+                                        <asp:Label runat="server" ID="lblLabelHotelRate" ToolTip='<%# Eval("ConfirmRateMoney") %>'  Text='<%# String.Format("{0:#,##0.00}", Eval("ConfirmRateMoney"))%>' />
+                                    </td>
+                                     <td class="leftAligned" style="white-space: normal; width:70px;" >
+                                        <asp:Label runat="server" ID="lblHStatus" ToolTip='<%# Eval("HotelStatus") %>'  Text='<%# Eval("HotelStatus") %>'/>
+                                    
+                                    </td>
+                                    <td  style="white-space: normal; width:40px; text-align:center;" >
+                                        <asp:CheckBox  runat="server" ID="Label9" Enabled="false"   Checked='<%# Eval("IsMedical") %>'/>
+                                    
+                                    </td>--%>
+                                    
+                                    
+                                  </tr>
+                                </ItemTemplate>
+                                <EmptyDataTemplate>
+                                <table  class="listViewTable">
+                                     <tr >
+                                        <th style="text-align: center; white-space: normal; width:130px;">
+                                            Ship Code
+                                        </th >
+                                        <th style="text-align: center; white-space: normal;">
+                                            SignOn Date
+                                        </th>
+                                        <th style="text-align: center; white-space: normal;">
+                                           SignOff Date
+                                        </th>
+                                        <th style="text-align: center; white-space: normal;">
+                                            Job Code
+                                        </th>
+                                        
+                                    </tr>        
+                                    <tr>
+                                        <td colspan="4" class="leftAligned">
+                                            No Record
+                                        </td>
+                                    </tr>
+                                </table>
+                            </EmptyDataTemplate>
+                            </asp:ListView>
+                        </asp:panel>
+                    
+                    </div>
+                
+                </td>
+            
+            </tr>
+        </table>
+        
+        <asp:HiddenField ID="uoHDFISApproved" runat="server" Value="0"/>
+        <asp:HiddenField ID="uoHDFuserID" runat="server" Value=""/>
+        <asp:HiddenField ID="uoHDFTravelReqID" runat="server" Value=""/>
+        <asp:HiddenField ID="uoHDFRecordLocator" runat="server" Value=""/>
+        <asp:HiddenField ID="uoHDFItinerarySeqID" runat="server" Value=""/>
+        <asp:HiddenField ID="uoHDFCrewVericationID" runat="server" Value=""/>
+        
+         <asp:HiddenField ID="uoHDFVesselID" runat="server" Value=""/>
+        <asp:HiddenField ID="uoHDFRankID" runat="server" Value=""/>
+          
+        <asp:HiddenField ID="ReasonOptionValue" runat="server" Value=""/>
+     
+     
+   <script type="text/javascript" language="javascript">
+   
+            $(document).ready(function() {
+                HideDate();
+                registerRadiobutton();
+            });
+
+             function pageLoad(sender, args) {
+                 var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
+                 if (isAsyncPostback) {
+                     HideDate();
+                     registerRadiobutton();
+                 }
+             }
+
+             function HideDate() {
+                 document.getElementById("ctl00_uoTblDate").style.display = "none";
+             }
+
+             function registerRadiobutton() {
+
+                 $("input:radiobutton[type=radio]").click(function() {
+
+
+
+
+
+
+
+                     $('.radio-button > input:radiobutton[type*=radio]').attr('checked', false);
+                     if ($("#<%=ReasonOptionValue.ClientID %>").val() != $(this).val()) {
+                         $(this).attr('checked', true)
+                         $("#<%=ReasonOptionValue.ClientID %>").val($(this).val());
+                     }
+
+
+                     var e = $('.radio-button > input:radiobutton[type*=radio]');
+                     
+                     alert($('.radio-button > input:radiobutton[type*=radio]').options[2].checked);
+                     var check = element.options[2].value;
+                     alert(check);
+
+                 });
+
+             }
+             
+             function Validatereason(val) {
+
+                 alert($('.radio-button > input:radiobutton[type*=radio]').length)
+
+                 var e = $('.radio-button > input:radiobutton[type*=radio]');
+                 var check = element.options[e.selectedIndex].value
+                 
+                 
+                 
+                 
+//                $('.radio-button > input:radiobutton[type*=radio]').attr('checked', false);
+//                
+//                var fruit = new Array('Apples', 'Oranges', 'Bananas', 'Kiwis', 'Saskatoons', 'Grapes');
+//                var selection = document.quiz.colour;
+
+//                for (i=0; i< $('.radio-button > input:radiobutton[type*=radio]').length; i++)
+
+//                  if (selection[i].checked == true)
+//                  alert(fruit[i] + ' are ' + selection[i].value + '.')
+
+//                }
+                
+                
+                return false;
+             }
+
+
+             function OpenPDF() {
+             
+                 document.getElementById("OpenPDF").href = "../ReportViewer.aspx?report=Immigration&uID=" + $("#<%=txtUniqeID.ClientID %>").val(); //document.getElementById("").value;
+                 document.getElementById("OpenPDF").click();
+ 
+             
+             } 
+             
+    </script>
+   </ContentTemplate>
+   
+</asp:UpdatePanel>
+  
+     
+    
+</asp:Content>
+ 

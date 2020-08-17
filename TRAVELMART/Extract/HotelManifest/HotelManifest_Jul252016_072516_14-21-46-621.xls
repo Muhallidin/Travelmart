@@ -1,0 +1,647 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40" xmlns="urn:schemas-microsoft-com:office:spreadsheet">
+  <o:DocumentProperties>
+    <Author>Travelmart</Author>
+    <LastAuthor>WALI</LastAuthor>
+    <Created>2016-07-25 14:21:46ZZ</Created>
+    <Company>RCCL</Company>
+    <Version>1</Version>
+  </o:DocumentProperties>
+  <x:ExcelWorkbook>
+    <WindowHeight>13170</WindowHeight>
+    <WindowWidth>17580</WindowWidth>
+    <WindowTopX>120</WindowTopX>
+    <WindowTopY>60</WindowTopY>
+    <ProtectStructure>False</ProtectStructure>
+    <ProtectWindows>False</ProtectWindows>
+  </x:ExcelWorkbook>
+  <Styles>
+    <Style ss:ID="Default" ss:Name="Normal">
+      <Alignment ss:Vertical="Bottom" />
+      <Borders />
+      <Font />
+      <Interior />
+      <NumberFormat />
+      <Protection />
+    </Style>
+    <Style ss:ID="s62">
+      <Font ss:Bold="1" />
+    </Style>
+    <Style ss:ID="s64">
+      <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" />
+    </Style>
+    <Style ss:ID="s65">
+      <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" />
+    </Style>
+  </Styles>
+  <Worksheet ss:Name="RAMADA PLAZA MIAMI A">
+    <Table ss:ExpandedColumnCount="33" ss:ExpandedRowCount="20" x:FullColumns="1" x:FullRows="1" ss:DefaultColumnWidth="60">
+      <Row ss:StyleID="s62">
+        <Cell>
+          <Data ss:Type="String">Remarks</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HotelCity</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CheckIn</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CheckOut</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HotelNites</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ReasonCode</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">LastName</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FirstName</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">EmployeeId</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Gender</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">SingleDouble</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Couple</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Title</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Ship</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CostCenter</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Nationality</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HotelRequest</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RecordLocator</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">DeptCity</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ArvlCity</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">DeptDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ArvlDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">DeptTime</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ArvlTime</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Carrier</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FlightNo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Voucher</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PassportNo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">IssuedDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PassportExpiration</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Birthday</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HotelBranch</Data>
+        </Cell>
+      </Row>
+      <Row ss:StyleID="s65">
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MIAMI</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">25-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">26-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">1</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">VAC</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MAXIMILIEN</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">JIMMY</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">876505</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Male</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">0.5</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">GALLEY STEWARD</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">EN        </Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">470</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Haiti</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Y</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">IAYXIQ</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MIA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PAP</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">26-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">26-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">07:05:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">08:09:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">AA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">2593</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">15.0000</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CH3103102</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">23-Aug-2013</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">22-Aug-2018</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RAMADA PLAZA MIAMI AIRPORT NORTH</Data>
+        </Cell>
+      </Row>
+      <Row ss:StyleID="s65">
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MIAMI</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">25-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">26-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">1</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">VAC</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PIERRE</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FELIX</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">876237</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Male</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">0.5</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">GALLEY STEWARD</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">EN        </Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">470</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Haiti</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Y</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">OKTGAE</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MIA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PAP</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">26-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">26-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">07:05:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">08:09:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">AA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">2593</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">15.0000</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PP2828182</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">17-Sep-2012</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">16-Sep-2017</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RAMADA PLAZA MIAMI AIRPORT NORTH</Data>
+        </Cell>
+      </Row>
+      <Row ss:StyleID="s65">
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MIAMI</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">27-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">28-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">1</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">VAC</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ANDAG</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ROEL ANOSA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">794882</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Male</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">1.0</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">L&amp;D CONSULTANT</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">NE        </Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">489</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Philippines</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Y</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MEGNLO</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">DOH</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MIA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">27-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">27-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">08:10:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">16:20:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">QR</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">0777</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">15.0000</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">EC3423714</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">10-Feb-2015</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">09-Feb-2020</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RAMADA PLAZA MIAMI AIRPORT NORTH</Data>
+        </Cell>
+      </Row>
+      <Row ss:StyleID="s65">
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MIAMI</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">27-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">28-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">1</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">VAC</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">COLIC</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ZORAN</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">253805</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Male</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">1.0</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HOTEL MAINT. MGR-1ST ENG EQUIV</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">NE        </Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">485</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Croatia</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Y</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MPTMZF</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FCO</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MIA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">27-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">27-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">10:40:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">15:45:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">AZ</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">0630</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">15.0000</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">144611539</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">03-May-2012</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">03-May-2022</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RAMADA PLAZA MIAMI AIRPORT NORTH</Data>
+        </Cell>
+      </Row>
+      <Row ss:StyleID="s65">
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MIAMI</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">27-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">28-Jul-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">1</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">NEW</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ENRIQUEZ</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ANMEL SAM ZAMORA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">962473</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Male</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">0.5</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">3RD ASST.REFRIGERATOR ENGINEER</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">NE        </Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">402</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Philippines</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Y</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">NH-962473</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">15.0000</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">EB7998933</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">29-Apr-2013</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">28-Apr-2018</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RAMADA PLAZA MIAMI AIRPORT NORTH</Data>
+        </Cell>
+      </Row>
+    </Table>
+    <x:WorksheetOptions>
+      <PageSetup>
+        <Header x:Margin="0.4921259845" />
+        <Footer x:Margin="0.4921259845" />
+        <PageMargins x:Bottom="0.984251969" x:Left="0.78740157499999996" x:Right="0.78740157499999996" x:Top="0.984251969" />
+      </PageSetup>
+      <Selected />
+      <Panes>
+        <Pane>
+          <Number>1</Number>
+          <ActiveRow>1</ActiveRow>
+          <ActiveCol>1</ActiveCol>
+        </Pane>
+      </Panes>
+      <ProtectObjects>False</ProtectObjects>
+      <ProtectScenarios>False</ProtectScenarios>
+    </x:WorksheetOptions>
+  </Worksheet>
+</Workbook>

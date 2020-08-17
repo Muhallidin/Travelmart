@@ -1,0 +1,1343 @@
+﻿using System;
+using System.Data;
+using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
+using TRAVELMART.BLL;
+using TRAVELMART.Common;
+using System.IO;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Web;
+using System.Text;
+using System.Web.UI;
+using System.Linq;
+using System.Collections.Generic;
+
+namespace TRAVELMART.ContractManagement
+{
+    public partial class HotelContractAdd : System.Web.UI.Page
+    {
+        #region Declaration
+
+        private string _FileName;
+        private string _FileType;
+        private Int32 _FileSize = 0;
+        private Byte[] _FileData;
+        private DateTime _Now = DateTime.Now;
+        static List<ContractHotelAttachment> _contractHotelAttachments = new List<ContractHotelAttachment>(); // add for contract attachment -JEFF
+
+        #endregion
+        #region Events
+        /// <summary>
+        /// Date Created:   23/08/2011
+        /// Created By:     Ryan Bautista
+        /// (description)   Load all details      
+        /// </summary>
+        /// 
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            //Label SFStatus = (Label)Master.FindControl("uclabelStatus");
+            //SFStatus.Visible = false;
+            if (!IsPostBack)
+            {
+                HotelContractLogAuditTrail();
+                HotelLoad();
+                //HotelBranchLoad();
+                HotelBranchLoadByVendorID();
+                //ChangeToUpperCase(uoDropDownListVendor);
+                CountryListByVendorID();
+                //ChangeToUpperCase(uoDropDownCountry);
+                CityListByVendorID();
+                //ChangeToUpperCase(uoDropDownListCity);
+                //HotelRoomTypeLoad();
+                //ChangeToUpperCase(uoDropDownListRoomType);
+                CurrencyLoad();
+                //ChangeToUpperCase(uoDropDownListCurrency);
+                ViewState["Add"] = "False";
+                ////ViewState["AddBranch"] = "False";
+                _contractHotelAttachments = new List<ContractHotelAttachment>(); // reset the list to new list
+                uoGridViewHotelContractAttachment.DataSource = _contractHotelAttachments;
+                uoGridViewHotelContractAttachment.DataBind();
+                ContractLoadByBranch();
+            }
+        }
+
+        protected void uoBtnAdd_Click(object sender, EventArgs e)
+        {
+            if (uoBtnAdd.Text == "Add")
+            {
+                AddNewRowToGrid();
+
+                uoBtnAdd.Focus();
+
+            }
+            else
+
+            { 
+                UpdateRowToGrid();
+                uoBtnAdd.Text = "Add";
+            }
+           
+        }
+
+
+        void UpdateRowToGrid()
+        {
+            DataTable dtCurrentTable = null;
+            try
+            {
+
+
+
+                dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+                //DataRow drCurrentRow = dtCurrentTable.NewRow();
+
+                List<Int32> rowNumbers = dtCurrentTable.AsEnumerable().Select(r => GlobalCode.Field2Int(uoHiddenFieldRowNo.Value)).Distinct().ToList();
+                int row = GlobalCode.Field2Int(uoHiddenFieldRowNo.Value) - 1;
+
+
+                dtCurrentTable.Rows[row]["DateFrom"] = GlobalCode.Field2DateTime(uoTxtFrom.Text);
+                dtCurrentTable.Rows[row]["DateTo"] = GlobalCode.Field2DateTime(uoTxtTo.Text);
+                dtCurrentTable.Rows[row]["Sun"] = GlobalCode.Field2Int(uoTxtSun.Text);
+                dtCurrentTable.Rows[row]["Mon"] = GlobalCode.Field2Int(uoMon.Text);
+                dtCurrentTable.Rows[row]["Tue"] = GlobalCode.Field2Int(uoTue.Text);
+                dtCurrentTable.Rows[row]["Wed"] = GlobalCode.Field2Int(uoWed.Text);
+                dtCurrentTable.Rows[row]["Thu"] = GlobalCode.Field2Int(uoThu.Text);
+                dtCurrentTable.Rows[row]["Fri"] = GlobalCode.Field2Int(uoFri.Text);
+                dtCurrentTable.Rows[row]["Sat"] = GlobalCode.Field2Int(uoSat.Text);
+
+                dtCurrentTable.Rows[row]["Sun2"] = GlobalCode.Field2Int(uoTxtSun2.Text);
+                dtCurrentTable.Rows[row]["Mon2"] = GlobalCode.Field2Int(uoMon2.Text);
+                dtCurrentTable.Rows[row]["Tue2"] = GlobalCode.Field2Int(uoTue2.Text);
+                dtCurrentTable.Rows[row]["Wed2"] = GlobalCode.Field2Int(uoWed2.Text);
+                dtCurrentTable.Rows[row]["Thu2"] = GlobalCode.Field2Int(uoThu2.Text);
+                dtCurrentTable.Rows[row]["Fri2"] = GlobalCode.Field2Int(uoFri2.Text);
+                dtCurrentTable.Rows[row]["Sat2"] = GlobalCode.Field2Int(uoSat2.Text);
+                dtCurrentTable.Rows[row]["SingleRate"] = GlobalCode.Field2Decimal(uotextboxRoomRate.Text);
+                dtCurrentTable.Rows[row]["DoubleRate"] = GlobalCode.Field2Decimal(uotextboxRoomRate2.Text);
+                dtCurrentTable.Rows[row]["Tax"] = GlobalCode.Field2Decimal(uoRoomTax.Text);
+                dtCurrentTable.Rows[row]["TaxInclusive"] = GlobalCode.Field2Bool(uoChkRoomTaxInc.Checked);
+                dtCurrentTable.Rows[row]["Currency"] = uoDropDownlistCurrency.SelectedItem.Text;
+                dtCurrentTable.Rows[row]["CurrencyId"] = GlobalCode.Field2Int(uoDropDownlistCurrency.SelectedValue);
+
+                //dtCurrentTable.Rows.Add(drCurrentRow);
+                ViewState["CurrentTable"] = dtCurrentTable;
+
+                uoListView.DataSource = dtCurrentTable;
+                uoListView.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (dtCurrentTable != null)
+                {
+                    dtCurrentTable.Dispose();
+                }
+            }
+        
+        }
+
+        /// <summary>
+        /// Author: Charlene Remotigue
+        /// Date Created: 06/06/2012
+        /// Description: remove listview item
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void uoListView_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
+            DataTable dtCurrentTable = null;
+            try
+            {
+                string Deleted = GlobalCode.Field2String(ViewState["DeletedItems"]);
+                string DetailId = "";
+                string DetailId2 = "";
+                if (ViewState["CurrentTable"] != null)
+                {
+                    dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+
+                    //var selectedItem = (from a in dtCurrentTable.AsEnumerable()
+                    //                        where a["RowNumber"].Equals(e.CommandArgument)
+                    //                    select a
+                    //                        ).ToList();
+
+                    if (e.CommandArgument.ToString().Substring(0, 3) == "A- ")
+                    {
+
+                        DataRow[] row = dtCurrentTable.Select("RowNumber = " + e.CommandArgument.ToString().Remove(0, 3));
+                        DetailId = row[0]["DetailId"].ToString();
+                        DetailId2 = row[0]["DetailId2"].ToString();
+                        //DetailId = dtCurrentTable.Rows[Convert.ToInt32(e.CommandArgument)]["DetailId"].ToString();
+                        //DetailId2 = dtCurrentTable.Rows[Convert.ToInt32(e.CommandArgument)]["DetailId2"].ToString();
+
+
+                        if (DetailId != "0")
+                        {
+                            Deleted = Deleted + "," + DetailId;
+                        }
+                        if (DetailId2 != "0")
+                        {
+                            Deleted = Deleted + "," + DetailId2;
+                        }
+
+                        //dtCurrentTable.Rows.RemoveAt(Convert.ToInt32(e.CommandArgument) - 1);
+                        dtCurrentTable.Rows.Remove(row[0]);
+                        ViewState["CurrentTable"] = dtCurrentTable;
+
+                        uoListView.DataSource = dtCurrentTable;
+                        uoListView.DataBind();
+
+                        ViewState["DeletedItems"] = Deleted;
+
+                        uoBtnAdd.Text = "Add";
+
+                    }
+                    else
+                    {
+
+                        DataRow[] drCurrentRow = dtCurrentTable.Select("RowNumber = " + e.CommandArgument.ToString().Remove(0, 3));
+                      
+                        uoTxtFrom.Text = GlobalCode.Field2DateTime(drCurrentRow[0]["DateFrom"]).ToString();
+
+                        uoTxtTo.Text = GlobalCode.Field2DateTime(drCurrentRow[0]["DateTo"] ).ToString();
+                        uoTxtSun.Text= GlobalCode.Field2String(drCurrentRow[0]["Sun"]);
+                        uoMon.Text = GlobalCode.Field2String(drCurrentRow[0]["Mon"] );
+                        uoTue.Text = GlobalCode.Field2String(drCurrentRow[0]["Tue"]);
+                        uoWed.Text = GlobalCode.Field2String(drCurrentRow[0]["Wed"]);
+                        uoThu.Text = GlobalCode.Field2String(drCurrentRow[0]["Thu"]);
+                        uoFri.Text = GlobalCode.Field2String(drCurrentRow[0]["Fri"] );
+                        uoSat.Text = GlobalCode.Field2String(drCurrentRow[0]["Sat"] );
+
+                        uoTxtSun2.Text = GlobalCode.Field2String(drCurrentRow[0]["Sun2"]);
+                        uoMon2.Text = GlobalCode.Field2String(drCurrentRow[0]["Mon2"] );
+                        uoTue2.Text = GlobalCode.Field2String(drCurrentRow[0]["Tue2"] );
+                        uoWed2.Text = GlobalCode.Field2String(drCurrentRow[0]["Wed2"] );
+                        uoThu2.Text = GlobalCode.Field2String(drCurrentRow[0]["Thu2"] );
+                        uoFri2.Text = GlobalCode.Field2String(drCurrentRow[0]["Fri2"] );
+                        uoSat2.Text = GlobalCode.Field2String(drCurrentRow[0]["Sat2"] );
+                        uotextboxRoomRate.Text  = GlobalCode.Field2String(drCurrentRow[0]["SingleRate"]);
+                        uotextboxRoomRate2.Text = GlobalCode.Field2String(drCurrentRow[0]["DoubleRate"]);
+                        uoRoomTax.Text = GlobalCode.Field2String(drCurrentRow[0]["Tax"]);
+
+                        uoChkRoomTaxInc.Checked= GlobalCode.Field2Bool(drCurrentRow[0]["TaxInclusive"] );
+                        uoDropDownlistCurrency.SelectedIndex = GlobalCode.GetselectedIndex(uoDropDownlistCurrency, GlobalCode.Field2Int(drCurrentRow[0]["CurrencyId"]));
+                        uoHiddenFieldRowNo.Value = e.CommandArgument.ToString().Remove(0, 3);
+
+                        uoBtnAdd.Text = "Update";
+
+                        //drCurrentRow["Currency"] = uoDropDownlistCurrency.SelectedItem.Text;
+                        // = GlobalCode.Field2Int(uoDropDownlistCurrency.SelectedValue);
+
+                        //dtCurrentTable.Rows.Add(drCurrentRow);
+                        //ViewState["CurrentTable"] = dtCurrentTable;
+
+                        //uoListView.DataSource = dtCurrentTable;
+                        //uoListView.DataBind();
+
+                        //if (DetailId != "0")
+                        //{
+                        //    Deleted = Deleted + "," + DetailId;
+                        //}
+                        //if (DetailId2 != "0")
+                        //{
+                        //    Deleted = Deleted + "," + DetailId2;
+                        //}
+
+                        //dtCurrentTable.Rows.RemoveAt(Convert.ToInt32(e.CommandArgument) - 1);
+                        //dtCurrentTable.Rows.Remove(row[0]);
+                        //ViewState["CurrentTable"] = dtCurrentTable;
+
+                        //uoListView.DataSource = dtCurrentTable;
+                        //uoListView.DataBind();
+
+                        //ViewState["DeletedItems"] = Deleted;
+
+                    }
+                }
+                uoBtnAdd.Focus();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (dtCurrentTable != null)
+                {
+                    dtCurrentTable.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Date Created: 23/08/2011
+        /// Created By:   Ryan Bautista
+        /// (description) Save/Update Hotel contract  
+        /// -----------------------------------------
+        /// Modofied By: CHarlene Remotigue
+        /// Date Modified: 06/06/2012
+        /// Description: move saving to a different class
+        /// </summary>
+        protected void uobtnSave_Click(object sender, EventArgs e)
+        {
+            Int32 pID = 0;
+            string strLogDescription;
+            string strFunction;
+            object sqlTransaction;
+
+            pID = SaveContract(out sqlTransaction);
+
+            if (pID > 0)
+            {
+                //Save images
+                SaveHotelAttachments(pID, sqlTransaction);
+
+                SaveGridItems(pID);
+            }
+
+
+            //Insert log audit trail (Gabriel Oquialda - 17/11/2011)
+            strLogDescription = "Hotel contract added.";
+            strFunction = "uobtnSave_Click";
+
+            DateTime currentDate = CommonFunctions.GetCurrentDateTime();
+
+            BLL.AuditTrailBLL.InsertLogAuditTrail(pID, "", strLogDescription, strFunction, Path.GetFileName(Request.Path),
+                                                  CommonFunctions.GetDateTimeGMT(currentDate), DateTime.Now, MUser.GetUserName());
+
+            Response.Redirect("HotelContractListView.aspx?vmId=" + Request.QueryString["vmId"] + "&cID=" + Request.QueryString["cID"] + "&ufn=" + Request.QueryString["ufn"] + "&dt=" + Request.QueryString["dt"]);
+        }
+
+        /// <summary>
+        /// Date Created: 14/9/2011
+        /// Created By: Ryan Bautista
+        /// (description) select country and city after selecting a vendor branch
+        /// </summary>
+        protected void uoDropDownListVendor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CountryListByVendorID();
+            CityListByVendorID();
+            ChangeToUpperCase(uoDropDownCountry);
+        }
+
+        /// <summary>
+        /// Date Created: 14/9/2011
+        /// Created By: Ryan Bautista
+        /// (description) select city after select vendor branch 
+        /// </summary>
+        protected void uoDropDownCountry_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CityListByVendorID();
+            ChangeToUpperCase(uoDropDownListCity);
+        }
+
+        protected void uoCheckBoxLunchDinner_CheckedChanged(object sender, EventArgs e)
+        {
+            if (uoCheckBoxLunchDinner.Checked)
+            {
+                uoCheckBoxLunchDinner.Checked = true;
+                uoCheckBoxLunch.Checked = false;
+                uoCheckBoxDinner.Checked = false;
+            }
+        }
+
+        protected void uoCheckBoxLunch_CheckedChanged(object sender, EventArgs e)
+        {
+            if (uoCheckBoxLunch.Checked)
+            {
+                uoCheckBoxLunch.Checked = true;
+                uoCheckBoxLunchDinner.Checked = false;
+            }
+        }
+
+        protected void uoCheckBoxDinner_CheckedChanged(object sender, EventArgs e)
+        {
+            if (uoCheckBoxDinner.Checked)
+            {
+                uoCheckBoxDinner.Checked = true;
+                uoCheckBoxLunchDinner.Checked = false;
+            }
+        }
+
+        /// <summary>
+        /// Date Created: 14/9/2011
+        /// Created By: Ryan Bautista
+        /// (description) select vendor branch, country and city after selecting a vendor 
+        /// </summary>
+        protected void uoDropDownListVendorMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            HotelBranchLoadByVendorID();
+            CountryListByVendorID();
+            CityListByVendorID();
+            ChangeToUpperCase(uoDropDownCountry);
+        }
+
+
+        /// <summary>
+        /// Date Modified:      24/07/2012
+        /// Modified by:        Jefferson Bermundo
+        /// Description:        Create a file upload checker for uploading file greater than 10MB
+        /// -------------------------------------------------------------------------------------
+        /// Date Modified:      27/07/2012
+        /// Modified by:        Jefferson Bermundo
+        /// Description:        Create a handle for multiple Attachment
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void uoButtonUpload_Click(object sender, EventArgs e)
+        {
+            if (uoFileUploadContract.PostedFile == null || string.IsNullOrEmpty(uoFileUploadContract.PostedFile.FileName) || uoFileUploadContract.PostedFile.InputStream == null)
+            {
+                Label1.Text = "<br />Error - unable to upload file. Please try again.<br />";
+                uoFileUploadContract.Focus();
+            }
+            else
+            {
+                ContractHotelAttachment chaModel = new ContractHotelAttachment();
+                int fileSize = uoFileUploadContract.PostedFile.ContentLength;
+                if (fileSize > (10000 * 1024)) //10000 means 10MB
+                {
+                    Label1.Text = "Filesize is too large. Maximum file size permitted is 10MB";
+                    uoFileUploadContract.Focus();
+                    return;
+                }
+                //Label1.Visible = false;
+                byte[] imageBytes = new byte[uoFileUploadContract.PostedFile.InputStream.Length + 1];
+                uoFileUploadContract.PostedFile.InputStream.Read(imageBytes, 0, imageBytes.Length);
+                uoHiddenFieldFileName.Value = uoFileUploadContract.FileName;
+                uoHiddenFieldFileType.Value = uoFileUploadContract.PostedFile.ContentType;
+                
+                //uoFileUploadContract.Visible = false;
+                //ucLabelAttached.Visible = true;
+                
+                //ucLabelAttached.Text = uoHiddenFieldFileName.Value;
+                
+                ViewState["imageByte"] = imageBytes;
+                //uoLinkAttach.Visible = false;
+                //uoLinkButtonRemove.Visible = true;
+                uobtnSave.Focus();
+                
+                chaModel.FileName = uoFileUploadContract.FileName;
+                chaModel.FileType = uoFileUploadContract.PostedFile.ContentType;
+                chaModel.UploadedDate = DateTime.Now;
+                chaModel.uploadedFile = imageBytes;
+                _contractHotelAttachments.Add(chaModel);
+
+                uoGridViewHotelContractAttachment.DataSource = _contractHotelAttachments;
+                uoGridViewHotelContractAttachment.DataBind();
+
+                //_FileSize = imageBytes.Length;
+                //uoHiddenFieldFileData.Value = System.Text.Encoding.ASCII.GetString(imageBytes);
+
+                //ucLabelAttached.Text = "Attached: " + uoFileUploadContract.FileName + " (" + imageBytes.Length + " KB)";
+                //ucLabelAttached.Visible = true;
+                //uoLinkButtonRemove.Visible = true;
+
+                //ContractBLL.InsertAttachHotelContract(uoFileUploadContract.FileName, imageBytes, imageBytes.Length, uoFileUploadContract.PostedFile.ContentType);
+            }
+        }
+
+
+        protected void uoLinkButtonRemove_Click(object sender, EventArgs e)
+        {            
+            uoHiddenFieldFileName.Value = "";
+            uoHiddenFieldFileType.Value = "";
+            uoFileUploadContract.Visible = true;
+            //ucLabelAttached.Visible = false;
+            //ucLabelAttached.Text = uoHiddenFieldFileName.Value;
+            ViewState["imageByte"] = null;
+            uoLinkAttach.Visible = true;
+            //uoLinkButtonRemove.Visible = false;
+            uobtnSave.Focus();
+        }
+        #endregion
+
+        #region METHODS
+        /// <summary>
+        /// Author:Charlene Remotigue
+        /// Date Create: 06/06/2012
+        /// Description: initialize room count list view data table
+        /// </summary>
+        private void SetInitialTable()
+        {
+            DataTable dt = null;
+            try
+            {
+                dt = new DataTable();
+                dt.Columns.Add(new DataColumn("DetailId", typeof(int)));
+                dt.Columns.Add(new DataColumn("DetailId2", typeof(int)));
+                dt.Columns.Add(new DataColumn("RowNumber", typeof(int)));
+                dt.Columns.Add(new DataColumn("DateFrom", typeof(DateTime)));
+                dt.Columns.Add(new DataColumn("DateTo", typeof(DateTime)));
+                dt.Columns.Add(new DataColumn("Sun", typeof(int)));
+                dt.Columns.Add(new DataColumn("Mon", typeof(int)));
+                dt.Columns.Add(new DataColumn("Tue", typeof(int)));
+                dt.Columns.Add(new DataColumn("Wed", typeof(int)));
+                dt.Columns.Add(new DataColumn("Thu", typeof(int)));
+                dt.Columns.Add(new DataColumn("Fri", typeof(int)));
+                dt.Columns.Add(new DataColumn("Sat", typeof(int)));
+                dt.Columns.Add(new DataColumn("Sun2", typeof(int)));
+                dt.Columns.Add(new DataColumn("Mon2", typeof(int)));
+                dt.Columns.Add(new DataColumn("Tue2", typeof(int)));
+                dt.Columns.Add(new DataColumn("Wed2", typeof(int)));
+                dt.Columns.Add(new DataColumn("Thu2", typeof(int)));
+                dt.Columns.Add(new DataColumn("Fri2", typeof(int)));
+                dt.Columns.Add(new DataColumn("Sat2", typeof(int)));
+
+                dt.Columns.Add(new DataColumn("SingleRate", typeof(decimal)));
+                dt.Columns.Add(new DataColumn("DoubleRate", typeof(decimal)));
+                dt.Columns.Add(new DataColumn("Tax", typeof(decimal)));
+                dt.Columns.Add(new DataColumn("TaxInclusive", typeof(bool)));
+                dt.Columns.Add(new DataColumn("Currency", typeof(string)));
+                dt.Columns.Add(new DataColumn("CurrencyId", typeof(int)));
+
+                ViewState["CurrentTable"] = dt;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (dt != null)
+                {
+                    dt.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Author: Charlene Remotigue
+        /// Date Created: 06/06/2012
+        /// Description: adds new line to list view
+        /// </summary>
+        private void AddNewRowToGrid()
+        {
+            if (ViewState["CurrentTable"] == null)
+            {
+                SetInitialTable();
+            }
+            if (ViewState["CurrentTable"] != null)
+            {
+                AddNewRow();
+                
+            }
+        }
+
+        /// <summary>
+        /// Author: Charlene Remotigue
+        /// Date Created: 07/06/2012
+        /// Description: add the new row to data table
+        /// </summary>
+        private void AddNewRow()
+        {
+             DataTable dtCurrentTable = null;
+             try
+             {
+                 dtCurrentTable = (DataTable)ViewState["CurrentTable"];
+                 DataRow drCurrentRow = dtCurrentTable.NewRow();
+
+                 List<Int32> rowNumbers = dtCurrentTable.AsEnumerable().Select(r => GlobalCode.Field2Int(r["RowNumber"])).Distinct().ToList();
+                 int max = 0;
+                 if (rowNumbers.Count > 0)
+                 {
+                     max = rowNumbers.Max();
+                 }
+
+                 drCurrentRow["RowNumber"] = max + 1;//dtCurrentTable.Rows.Count + 1;
+                 drCurrentRow["DetailId"] = 0;
+                 drCurrentRow["DetailId2"] = 0;
+                 drCurrentRow["DateFrom"] = GlobalCode.Field2DateTime(uoTxtFrom.Text);
+                 drCurrentRow["DateTo"] = GlobalCode.Field2DateTime(uoTxtTo.Text);
+                 drCurrentRow["Sun"] = GlobalCode.Field2Int(uoTxtSun.Text);
+                 drCurrentRow["Mon"] = GlobalCode.Field2Int(uoMon.Text);
+                 drCurrentRow["Tue"] = GlobalCode.Field2Int(uoTue.Text);
+                 drCurrentRow["Wed"] = GlobalCode.Field2Int(uoWed.Text);
+                 drCurrentRow["Thu"] = GlobalCode.Field2Int(uoThu.Text);
+                 drCurrentRow["Fri"] = GlobalCode.Field2Int(uoFri.Text);
+                 drCurrentRow["Sat"] = GlobalCode.Field2Int(uoSat.Text);
+
+                 drCurrentRow["Sun2"] = GlobalCode.Field2Int(uoTxtSun2.Text);
+                 drCurrentRow["Mon2"] = GlobalCode.Field2Int(uoMon2.Text);
+                 drCurrentRow["Tue2"] = GlobalCode.Field2Int(uoTue2.Text);
+                 drCurrentRow["Wed2"] = GlobalCode.Field2Int(uoWed2.Text);
+                 drCurrentRow["Thu2"] = GlobalCode.Field2Int(uoThu2.Text);
+                 drCurrentRow["Fri2"] = GlobalCode.Field2Int(uoFri2.Text);
+                 drCurrentRow["Sat2"] = GlobalCode.Field2Int(uoSat2.Text);
+                 drCurrentRow["SingleRate"] = GlobalCode.Field2Decimal(uotextboxRoomRate.Text);
+                 drCurrentRow["DoubleRate"] = GlobalCode.Field2Decimal(uotextboxRoomRate2.Text);
+                 drCurrentRow["Tax"] = GlobalCode.Field2Decimal(uoRoomTax.Text);
+                 drCurrentRow["TaxInclusive"] = GlobalCode.Field2Bool(uoChkRoomTaxInc.Checked);
+                 drCurrentRow["Currency"] = uoDropDownlistCurrency.SelectedItem.Text;
+                 drCurrentRow["CurrencyId"] = GlobalCode.Field2Int(uoDropDownlistCurrency.SelectedValue);
+
+                 dtCurrentTable.Rows.Add(drCurrentRow);
+                 ViewState["CurrentTable"] = dtCurrentTable;
+
+                 uoListView.DataSource = dtCurrentTable;
+                 uoListView.DataBind();
+
+             }
+             catch (Exception ex)
+             {
+                 throw ex;
+             }
+             finally
+             {
+                 if (dtCurrentTable != null)
+                 {
+                     dtCurrentTable.Dispose();
+                 }
+             }
+        }
+
+        /// <summary>
+        /// Author: Charlene Remotigue
+        /// Date Created: 06/06/2012
+        /// Description: save contract header
+        /// </summary>
+        /// <returns></returns>
+        protected int SaveContract(out object sqlTransaction)   
+        {
+            Int32 pID = 0;
+
+            bool isValidTest = false;
+            Validate("Header");
+            isValidTest = IsValid;
+            Validate("branch");
+            isValidTest &= IsValid;
+            //Validate("Room");
+            //isValidTest &= IsValid;
+            if (!isValidTest)
+            {
+                sqlTransaction = new object();
+                return -1;
+            }
+
+            if (uoTextBoxMealRate.Text == "")
+            {
+                uoTextBoxMealRate.Text = "0";
+            }
+            if (uoTextBoxMealRateTax.Text == "")
+            {
+                uoTextBoxMealRateTax.Text = "0";
+            }
+            Byte[] imageBytes = null;
+            string Getdate="";
+            //if (uoFileUploadContract.HasFile)
+            //{
+            //    imageBytes = new byte[uoFileUploadContract.PostedFile.InputStream.Length + 1];
+            //    uoFileUploadContract.PostedFile.InputStream.Read(imageBytes, 0, imageBytes.Length);
+            //    uoHiddenFieldFileName.Value = uoFileUploadContract.FileName;
+            //    uoHiddenFieldFileType.Value = uoFileUploadContract.PostedFile.ContentType;
+            //    Getdate = Convert.ToString(_Now);
+            //}
+            //else
+            //{
+            //    Getdate = "";
+            //}
+
+            //if (ucLabelAttached.Text != "")
+            //{
+            //    imageBytes = (Byte[])ViewState["imageByte"];
+            //    Getdate = Convert.ToString(_Now);
+            //}
+            //else 
+            //{
+            //    uoHiddenFieldFileName.Value = "";
+            //    uoHiddenFieldFileType.Value = "";
+            //    Getdate = "";
+            //}
+
+            pID = AddSaveHotelContract(
+                //dt.Rows[i]["Hotel Branch"].ToString(),
+                uoDropDownListVendor.SelectedItem.Text,
+                uotextboxContractTitle.Text,
+                uotextboxRemarks.Text,
+                uotextboxStartDate.Text,
+                uotextboxEndDate.Text,
+                uotextboxRCCLRep.Text,
+                uotextboxVendorRep.Text,
+                uoTextBoxRCCLDateAccepted.Text,
+                uoTextBoxVendorDateAccepted.Text,
+
+                //dt.Rows[i]["Country"].ToString(),
+                uoDropDownCountry.SelectedItem.Text,
+                //dt.Rows[i]["City"].ToString(),
+                uoDropDownListCity.SelectedItem.Text,
+
+                MUser.GetUserName(),
+                uoTextBoxMealRate.Text,
+                uoTextBoxMealRateTax.Text,
+                uoCheckBoxMealRateTaxInclusive.Checked,
+                uoCheckBoxBreakfast.Checked,
+                uoCheckBoxLunch.Checked,
+                uoCheckBoxDinner.Checked,
+                uoCheckBoxLunchDinner.Checked,
+                uoCheckBoxShuttle.Checked,
+
+                //_FileName,
+                uoHiddenFieldFileName.Value,
+                uoHiddenFieldFileType.Value,
+                //System.Text.Encoding.ASCII.GetBytes(uoHiddenFieldFileData.Value),
+                imageBytes,
+                Getdate,
+                uoHiddenFieldContractID.Value,
+                out sqlTransaction,
+                uotextboxVendorRepContactNo.Text.ToString(),
+                uotextboxRCCLRepContactNo.Text.ToString(),
+                uotextboxVendorRepEmailAdd.Text.ToString(),
+                uotextboxRCCLRepEmailAdd.Text.ToString()
+                );  
+
+
+            return pID;
+        }
+
+        /// <summary>
+        /// Modified By: Charlene Remotigue
+        /// Date Modified: 06/06/2012
+        /// Description: save contract details (by bulk)
+        /// </summary>
+        /// <param name="pID"></param>
+        private void SaveGridItems(Int32 pID)
+        {
+            DataTable dt = null;
+            try
+            {
+                Int32 ContractDetailID = 0;
+                string DeletedItems = GlobalCode.Field2String(ViewState["DeletedItems"]);
+                if ((DataTable)ViewState["CurrentTable"] != null)
+                {
+                    dt = new DataTable();
+                    dt = (DataTable)ViewState["CurrentTable"];
+                    string RoomRate = uotextboxRoomRate.Text;
+                    string RoomRate2 = uotextboxRoomRate2.Text;
+                    int Currency = GlobalCode.Field2Int(uoDropDownlistCurrency.SelectedValue);
+                    bool TaxInclusive = uoChkRoomTaxInc.Checked;
+                    string Tax = uoRoomTax.Text;
+
+                    if (dt.Rows.Count > 0)
+                    {
+                        ContractDetailID = ContractBLL.AddSaveHotelDetailContract(pID, "", MUser.GetUserName(), dt,
+                            DeletedItems);
+                    }
+                }
+
+
+                //if (ContractDetailID != 0)
+                //{
+                //    string strLogDescription;
+                //    string strFunction;
+
+                //    //Insert log audit trail (Gabriel Oquialda - 19/03/2012)
+                //    strLogDescription = "Hotel contract detail added.";
+                //    strFunction = "SaveGridItems";
+
+                //    DateTime currentDate = CommonFunctions.GetCurrentDateTime();
+
+                //    BLL.AuditTrailBLL.InsertLogAuditTrail(ContractDetailID, "", strLogDescription, strFunction, Path.GetFileName(Request.Path),
+                //                                          CommonFunctions.GetDateTimeGMT(currentDate), DateTime.Now, GlobalCode.Field2String(Session["UserName"]));
+                //}
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (dt != null)
+                {
+                    dt.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Date Created: 25/07/2011
+        /// Created By: Ryan Bautista
+        /// (description) Select all currency  
+        /// </summary>
+        private void CurrencyLoad()
+        {
+            DataTable dt = null;
+            try
+            {
+                dt = ContractBLL.CurrencyLoad();
+                if (dt.Rows.Count > 0)
+                {
+                    uoDropDownlistCurrency.DataSource = dt;
+                    uoDropDownlistCurrency.DataTextField = "colCurrencyNameVarchar"; // "colCurrencyCodeVarchar";
+                    uoDropDownlistCurrency.DataValueField = "colCurrencyIDInt";
+                    uoDropDownlistCurrency.DataBind();
+                }
+                else
+                {
+                    uoDropDownlistCurrency.DataBind();
+                }
+                uoDropDownlistCurrency.Items.Insert(0, new ListItem("--Select Currency--", "0"));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (dt != null)
+                {
+                    dt.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Date Created: 25/07/2011
+        /// Created By: Ryan Bautista
+        /// (description) Select country list by vendor ID   
+        /// </summary>
+        private void CountryListByVendorID()
+        {
+            DataTable dt = null;
+            try
+            {
+                int VendorID = 0;
+                if (uoDropDownListVendor.SelectedValue != "0")
+                {
+                    VendorID = Convert.ToInt32(uoDropDownListVendor.SelectedValue);
+                }
+
+                dt = HotelBLL.CountryByVendorBranchID(VendorID);
+                if (dt.Rows.Count > 0)
+                {
+                    uoDropDownCountry.DataSource = dt;
+                    uoDropDownCountry.DataTextField = "colCountryNameVarchar";
+                    uoDropDownCountry.DataValueField = "colCountryIDInt";
+                    uoDropDownCountry.DataBind();
+                    uoDropDownCountry.SelectedValue = dt.Rows[0]["colCountryIDInt"].ToString();
+                    uoDropDownCountry.Enabled = false;
+                }
+                else
+                {
+                    uoDropDownCountry.DataBind();
+                    uoDropDownCountry.Items.Insert(0, new ListItem("--Select Country--", "0"));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (dt != null)
+                {
+                    dt.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Date Created: 25/07/2011
+        /// Created By: Ryan Bautista
+        /// (description) Select city list by vendor ID   
+        /// </summary>
+
+        private void CityListByVendorID()
+        {
+            DataTable dt = null;
+            try
+            {
+                int CountryID = 0;
+                if (uoDropDownCountry.SelectedValue != "0")
+                {
+                    CountryID = Convert.ToInt32(uoDropDownCountry.SelectedValue);
+                }
+                int VendorID = 0;
+                if (uoDropDownListVendor.SelectedValue != "0")
+                {
+                    VendorID = Convert.ToInt32(uoDropDownListVendor.SelectedValue);
+                }
+
+                dt = HotelBLL.CityByVendorBranchIDCountryID(VendorID, CountryID);
+                if (dt.Rows.Count > 0)
+                {
+                    uoDropDownListCity.DataSource = dt;
+                    uoDropDownListCity.DataTextField = "colCityNameVarchar";
+                    uoDropDownListCity.DataValueField = "colCityIDInt";
+                    uoDropDownListCity.DataBind();
+                    uoDropDownListCity.SelectedValue = dt.Rows[0]["colCityIDInt"].ToString();
+                    uoDropDownListCity.Enabled = false;
+                }
+                else
+                {
+                    uoDropDownListCity.DataBind();
+                    uoDropDownListCity.Items.Insert(0, new ListItem("--Select City--", "0"));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (dt != null)
+                {
+                    dt.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Date Created: 19/08/2011
+        /// Created By: Ryan Bautista
+        /// (description) Add / save hotel contract          
+        /// </summary>
+        /// 
+        private Int32 AddSaveHotelContract(string VendorID, string vContract, string Remarks, string dtStart, string dtEnd, string RCCLRep,
+                                            string vRep, string dtRCCLAccepted, string dtVendorAccepted, string CountryID, string CityID, string Username,
+                                            string MealRate, string MealRateTax, bool TaxInclusive, bool Breakfast, bool Lunch, bool Dinner,
+                                            bool LunchDinner, bool Shuttle, string Filename, string FileType, byte[] FileData, string DateUploaded,
+                                            string ContractID, out object sqlTransaction,
+                                            string VendorRepContactNo, string RCCLRepContactNo,
+                                            string endorRepEmailAdd, string RCCLRepEmailAdd)
+        {
+
+            return BLL.ContractBLL.AddSaveHotelContract(VendorID, vContract, Remarks, dtStart, dtEnd, RCCLRep, vRep, dtRCCLAccepted, dtVendorAccepted,
+                                                    CountryID, CityID, Username, MealRate, MealRateTax, TaxInclusive, Breakfast, Lunch, Dinner, LunchDinner,
+                                                    Shuttle, Filename, FileType, FileData, DateUploaded, ContractID, out sqlTransaction,
+                                                    VendorRepContactNo, RCCLRepContactNo,
+                                                    endorRepEmailAdd, RCCLRepEmailAdd);
+        }
+
+        /// <summary>
+        /// Date Created: 25/07/2011
+        /// Created By: Ryan Bautista
+        /// (description) Format data to uppercase        
+        /// </summary>
+        private void ChangeToUpperCase(DropDownList ddl)
+        {
+            foreach (ListItem item in ddl.Items)
+            {
+                item.Text = item.Text.ToUpper();
+            }
+        }
+
+        ///// <summary>
+        ///// Date Created: 23/08/2011
+        ///// Created By: Ryan Bautista
+        ///// (description) Select all hotel details by region 
+        ///// </summary>
+        private void HotelLoad()
+        {
+            DataTable dt = null;
+            try
+            {
+                dt = HotelBLL.HotelVendorGetDetailsByRegion(MUser.GetUserName());
+                if (dt.Rows.Count > 0)
+                {
+                    uoDropDownListVendorMain.DataSource = dt;
+                    uoDropDownListVendorMain.DataTextField = "colVendorNameVarchar";
+                    uoDropDownListVendorMain.DataValueField = "colVendorIdInt";
+                    uoDropDownListVendorMain.DataBind();
+                    if (Request.QueryString["hvID"] != null)
+                    {
+                        uoDropDownListVendorMain.SelectedValue = Request.QueryString["hvID"];
+                        uoDropDownListVendorMain.Enabled = false;
+                    }
+                }
+                else
+                {
+                    uoDropDownListVendorMain.DataBind();
+                }
+                uoDropDownListVendorMain.Items.Insert(0, new ListItem("--Select Hotel--", "0"));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (dt != null)
+                {
+                    dt.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Date Created: 23/08/2011
+        /// Created By: Ryan Bautista
+        /// (description) Select all hotel branch details  
+        /// </summary>
+        private void HotelBranchLoad()
+        {
+            DataTable dt = null;
+            try
+            {
+                dt = HotelBLL.HotelBranchList();
+                if (dt.Rows.Count > 0)
+                {
+                    uoDropDownListVendor.DataSource = dt;
+                    uoDropDownListVendor.DataTextField = "colVendorBranchNameVarchar";
+                    uoDropDownListVendor.DataValueField = "colBranchIDInt";
+                    uoDropDownListVendor.DataBind();
+
+                }
+                else
+                {
+                    uoDropDownListVendor.DataBind();
+                }
+                uoDropDownListVendor.Items.Insert(0, new ListItem("--Select Hotel Branch--", "0"));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (dt != null)
+                {
+                    dt.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Date Created:   23/08/2011
+        /// Created By:     Ryan Bautista
+        /// (description)   Select all hotel branch details  
+        /// ----------------------------------------------
+        /// Date Modified:  26/04/2012
+        /// Modified By:    Josephine Gad
+        /// (description)   Add branch name as default value of uotextboxContractTitle
+        /// </summary>
+        private void HotelBranchLoadByVendorID()
+        {
+            DataTable dt = null;
+            try
+            {
+                int VendorID = 0;
+                if (uoDropDownListVendorMain.SelectedValue != "0")
+                {
+                    VendorID = Convert.ToInt32(uoDropDownListVendorMain.SelectedValue);
+                }
+                //dt = HotelBLL.HotelBranchList();
+                dt = HotelBLL.HotelBranchListByVendorID(VendorID, MUser.GetUserName());
+                if (dt.Rows.Count > 0)
+                {
+                    uoDropDownListVendor.DataSource = dt;
+                    uoDropDownListVendor.DataTextField = "colVendorBranchNameVarchar";
+                    uoDropDownListVendor.DataValueField = "colBranchIDInt";
+                    uoDropDownListVendor.DataBind();
+                    if (Request.QueryString["vmId"] != null)
+                    {
+                        uoDropDownListVendor.SelectedValue = Request.QueryString["vmId"];
+                        uoDropDownListVendor.Enabled = false;
+                    }
+                    else
+                    {
+                        uoDropDownListVendor.SelectedValue = dt.Rows[0]["colBranchIDInt"].ToString();
+                    }
+                    if (uotextboxContractTitle.Text == "")
+                    {
+                        uotextboxContractTitle.Text = uoDropDownListVendor.SelectedItem.Text;
+                    }
+                }
+                else
+                {
+                    uoDropDownListVendor.DataBind();
+                    uoDropDownListVendor.Items.Insert(0, new ListItem("--Select Hotel Branch--", "0"));
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (dt != null)
+                {
+                    dt.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Date Created: 23/08/2011
+        /// Created By: Ryan Bautista
+        /// (description) Select contract by branch
+        /// -----------------------------------------
+        /// Modified By: Charlene Remotigue
+        /// Date Modified: 07/06/2012
+        /// Description: add getting of contract details on separate datatable
+        /// -----------------------------------------
+        /// Modified By:    Josephine Gad
+        /// Date Modified:  13/06/2012
+        /// Description:    add validation if colContractAttachmentVarbinary is NULL
+        /// </summary>
+        private void ContractLoadByBranch()
+        {
+            DataTable dt = null;
+            DataTable dt2 = null;
+            try
+            {
+                //dt = HotelBLL.HotelVendorGetDetailsByRegion(MUser.GetUserName());
+                if (Request.QueryString["vmId"] != "" && Request.QueryString["cID"] != null)
+                {
+                    dt = BLL.ContractBLL.GetVendorHotelContract(Request.QueryString["cID"], Request.QueryString["vmId"], out dt2);
+                    if (dt.Rows.Count > 0)
+                    {
+                        //uoTextBoxVendorCode.Text = dt.Rows[0]["colVendorCodeVarchar"].ToString();
+                        //uoTextBoxVendorName.Text = dt.Rows[0]["colVendorBranchNameVarchar"].ToString();
+                        uoHiddenFieldContractID.Value = dt.Rows[0]["colContractIdInt"].ToString();
+                        uotextboxContractTitle.Text = dt.Rows[0]["colContractNameVarchar"].ToString();
+                        uotextboxRemarks.Text = dt.Rows[0]["colRemarksVarchar"].ToString();
+                        uotextboxRCCLRep.Text = dt.Rows[0]["colRCCLPersonnel"].ToString();
+                        uotextboxVendorRep.Text = dt.Rows[0]["colVendorPersonnel"].ToString();
+                        uoCheckBoxShuttle.Checked = Convert.ToBoolean(dt.Rows[0]["colWithShuttleBit"].ToString());
+                        uoCheckBoxBreakfast.Checked = Convert.ToBoolean(dt.Rows[0]["colBreakfastBit"].ToString());
+                        uoCheckBoxLunch.Checked = Convert.ToBoolean(dt.Rows[0]["colLunchBit"].ToString());
+                        uoCheckBoxDinner.Checked = Convert.ToBoolean(dt.Rows[0]["colDinnertBit"].ToString());
+                        uoCheckBoxLunchDinner.Checked = Convert.ToBoolean(dt.Rows[0]["colLunchOrDinnerBit"].ToString());
+
+                        string dtStart = (dt.Rows[0]["colContractDateStartedDate"].ToString().Length > 0)
+                            ? dt.Rows[0]["colContractDateStartedDate"].ToString()
+                            : "";
+                        string dtEnd = (dt.Rows[0]["colContractDateEndDate"].ToString().Length > 0)
+                           ? dt.Rows[0]["colContractDateEndDate"].ToString()
+                           : "";
+                        uotextboxStartDate.Text = Convert.ToDateTime(dtStart).ToShortDateString();
+                        uotextboxEndDate.Text = Convert.ToDateTime(dtEnd).ToShortDateString();
+
+                        string dtRCCLAccepted = (dt.Rows[0]["colRCCLAcceptedDate"].ToString().Length > 0)
+                            ? Convert.ToDateTime(dt.Rows[0]["colRCCLAcceptedDate"].ToString()).ToShortDateString()
+                            : "";
+                        string dtVendorAccepted = (dt.Rows[0]["colVendorAcceptedDate"].ToString().Length > 0)
+                           ? Convert.ToDateTime(dt.Rows[0]["colVendorAcceptedDate"].ToString()).ToShortDateString()
+                           : "";
+
+                        uoTextBoxRCCLDateAccepted.Text = dtRCCLAccepted;
+                        uoTextBoxVendorDateAccepted.Text = dtVendorAccepted;
+
+                        uoTextBoxMealRate.Text = GlobalCode.Field2Double(dt.Rows[0]["colMealRateMoney"]).ToString("0,000.00");//dt.Rows[0]["colMealRateMoney"].ToString();
+                        uoTextBoxMealRateTax.Text = GlobalCode.Field2Double(dt.Rows[0]["colMealRateTaxDecimal"]).ToString("000.00");//dt.Rows[0]["colMealRateTaxDecimal"].ToString();
+                        uoCheckBoxMealRateTaxInclusive.Checked = Convert.ToBoolean(dt.Rows[0]["colMealRateTaxInclusiveBit"].ToString());
+
+                        uotextboxVendorRepEmailAdd.Text = dt.Rows[0]["colVendorRepEmailAddVarchar"].ToString();
+                        uotextboxRCCLRepEmailAdd.Text = dt.Rows[0]["colRCCLRepEmailAddVarchar"].ToString();
+                        uotextboxVendorRepContactNo.Text = dt.Rows[0]["colVendorRepContactNoVarchar"].ToString();
+                        uotextboxRCCLRepContactNo.Text = dt.Rows[0]["colRCCLRepContactNoVarchar"].ToString();
+
+                        
+                        
+                        //ucLabelAttached.Text = dt.Rows[0]["FileName"].ToString();
+                        //uoHiddenFieldFileName.Value = ucLabelAttached.Text;
+                        //uoHiddenFieldFileType.Value = dt.Rows[0]["FileType"].ToString();
+                        //if (ucLabelAttached.Text == "")
+                        //{
+                        //    uoFileUploadContract.Visible = true;
+                        //    //ucLabelAttached.Visible = false;
+                        //    uoLinkButtonRemove.Visible = false;
+                        //    uoLinkAttach.Visible = true;
+                        //}
+                        //else
+                        //{
+                        //    uoFileUploadContract.Visible = false;
+                        //    //ucLabelAttached.Visible = true;
+                        //    uoLinkButtonRemove.Visible = true;
+                        //    uoLinkAttach.Visible = false;
+                        //}
+                        if (GlobalCode.Field2String(dt.Rows[0]["colContractAttachmentVarbinary"]) != "")
+                        {
+                            ViewState["imageByte"] = (byte[])dt.Rows[0]["colContractAttachmentVarbinary"];
+                        }
+                        else
+                        {
+                            ViewState["imageByte"] = null;
+                        }
+                        ViewState["Add"] = true;
+
+                    }
+                }
+                if (Request.QueryString["cID"] != null)
+                {
+                    ViewState["CurrentTable"] = dt2;
+                    _contractHotelAttachments = GetHotelAttachments(Convert.ToInt32(Request.QueryString["cID"].ToString()));
+                    uoGridViewHotelContractAttachment.DataSource = _contractHotelAttachments;
+                    uoGridViewHotelContractAttachment.DataBind();
+                    uoListView.DataSource = dt2;
+                    uoListView.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (dt != null)
+                {
+                    dt.Dispose();
+                }
+                if (dt2 != null)
+                {
+                    dt2.Dispose();
+                }
+            }
+        }
+
+        /// Date Created:   17/02/2012
+        /// Created By:     Gabriel Oquialda
+        /// (description)   Audit trail logs
+        protected void HotelContractLogAuditTrail()
+        {
+            string strLogDescription = "";
+            string strFunction = "";
+
+            if (Request.QueryString["vmId"] != "" && Request.QueryString["cID"] != null)
+            {
+                strLogDescription = "Ammend linkbutton for hotel contract editor clicked.";
+            }
+            else
+            {
+                strLogDescription = "Add button for hotel contract editor clicked.";
+            }
+
+            strFunction = "HotelContractLogAuditTrail";
+
+            DateTime dateNow = CommonFunctions.GetCurrentDateTime();
+
+            AuditTrailBLL.InsertLogAuditTrail(0, "", strLogDescription, strFunction, Path.GetFileName(Request.UrlReferrer.AbsolutePath),
+                                                  CommonFunctions.GetDateTimeGMT(dateNow), DateTime.Now, MUser.GetUserName());
+        }
+
+
+       
+        #endregion
+
+        protected void ucLabelAttached_Click(object sender, EventArgs e)
+        {
+            Response.ClearContent();
+            Response.ClearHeaders();
+            LinkButton obj = (LinkButton)sender;
+            int attachmentId = Convert.ToInt32(obj.CommandArgument);
+            byte[] bytes = (byte[])_contractHotelAttachments.AsEnumerable().Where(
+                    data => data.AttachmentId == attachmentId).Select(data => data.uploadedFile).FirstOrDefault();
+            
+            
+            string fPath = System.IO.Path.GetTempPath();
+            string fName = fPath + System.IO.Path.GetTempFileName();
+            //Byte[] bytes = (Byte[])ViewState["imageByte"];
+            //if (File.Exists(fName))
+            //{
+            //    File.Delete(fName);
+            //}
+            //File.WriteAllBytes(fName, bytes);
+
+            //string strScript = "CloseModal('" + fName + "');";
+            //ScriptManager.RegisterStartupScript(ucLabelAttached, this.GetType(), "CloseModal", strScript, true);
+            Response.Buffer = true;
+
+            Response.Charset = "";
+
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+
+            Response.ContentType = _contractHotelAttachments.AsEnumerable().Where(
+                    data => data.AttachmentId == attachmentId).Select(data => data.FileType).FirstOrDefault().Trim(); ;
+
+            Response.AddHeader("content-length", bytes.Length.ToString());
+            Response.AddHeader("content-disposition", "attachment; filename=" + obj.Text);
+
+            Response.BinaryWrite(bytes);
+
+            Response.Flush();
+
+            Response.End();
+        }
+
+        /// <summary>
+        /// Created By:     Jefferson Bermundo
+        /// Date Created:   07/31/2012
+        /// Description:    Saving for Multiple Attachments
+        /// <para>pId : Contract Id</para>
+        /// </summary>
+        protected void SaveHotelAttachments(int pId, object sqlTransaction)
+        {
+            int i = 0;
+            foreach (var iList in _contractHotelAttachments)
+            {
+                i++;
+                ContractBLL.AddSaveHotelContractAttachments(pId, iList.FileName, iList.FileType, iList.uploadedFile,
+                    iList.UploadedDate, sqlTransaction, i == _contractHotelAttachments.Count ? true: false);
+            }
+            if (i == 0)
+            {
+                ContractBLL.AddSaveHotelContractAttachments(0, "", "", null, DateTime.Now, sqlTransaction, true);
+            }
+        }
+
+
+        protected List<ContractHotelAttachment> GetHotelAttachments(int contractId)
+        {
+           return ContractBLL.GetHotelContractAttachment(contractId);
+        }
+
+        /// <summary>
+        /// Created By:     Jefferson Bermundo 
+        /// Created Date:   24/07/2012
+        /// Description:    Set ViewState to session temporary.
+        ///                 Enable to handle more than 4MB files
+        ///                 during upload.
+        /// </summary>
+        protected override PageStatePersister PageStatePersister
+        {
+            get
+            {
+                //return base.PageStatePersister;
+                return new SessionPageStatePersister(this);
+            }
+        }
+
+        protected void uoGridViewHotelContractAttachment_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "Delete")
+            {
+                int i = Convert.ToInt32(e.CommandArgument);
+            }
+        }
+
+        protected void uoGridViewHotelContractAttachment_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int categoryID = e.RowIndex;
+            _contractHotelAttachments.RemoveAt(categoryID);
+            uoGridViewHotelContractAttachment.DataSource = _contractHotelAttachments;
+            uoGridViewHotelContractAttachment.DataBind();
+        }
+
+        protected void uoGridViewHotelContractAttachment_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                // loop all data rows
+                foreach (DataControlFieldCell cell in e.Row.Cells)
+                {
+                    // check all cells in one row
+                    foreach (Control control in cell.Controls)
+                    {
+                        LinkButton button = control as LinkButton;
+                        if (button != null && button.CommandName == "Delete")
+                            button.OnClientClick = "return confirmDelete();";
+                    }
+                }
+            }
+        }
+
+
+    }
+}

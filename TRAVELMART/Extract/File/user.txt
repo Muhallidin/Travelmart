@@ -1,0 +1,2 @@
+﻿ID=sa;
+Password=@$tigt3chs0p;

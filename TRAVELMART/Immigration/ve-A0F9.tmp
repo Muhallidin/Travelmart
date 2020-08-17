@@ -1,0 +1,209 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TravelMartMaster2.Master" 
+ AutoEventWireup="true" CodeBehind="CrewVerification.aspx.cs" Inherits="TRAVELMART.Immigration.CrewVerification" %>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="HeaderContent" runat="server">
+    <table width="100%" cellpadding="0" cellspacing="0" class="PageTitle">
+        <tr>
+            <td class="PageTitle">
+               Crew Verification
+            </td>                
+        </tr>
+    </table>
+</asp:Content>
+
+<asp:Content ID="Content3" ContentPlaceHolderID="NaviPlaceHolder" runat="server">
+
+    <table style="width:90%; " >
+    
+        <tr>
+            <td style="width:50%; padding-right:20px;  " >  
+                <table style="width:100%">
+                    <tr style="width:50%; background-color:Gray; " >
+                        <td rowspan="5" style="width:20%; background-color:Blue;"  >
+                            <asp:Image ID="uoImageCM" runat="server" />
+                             </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left:8%; white-space:nowrap; " >Last Name</td>
+                        <td >
+                            <asp:TextBox ID="txtLastName" runat="server" Width="100%" ></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left:8%;white-space:nowrap;  " >Fist Name</td>
+                        <td >
+                            <asp:TextBox ID="txtFirstName" runat="server"  Width="100%"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left:8%; white-space:nowrap; " >Unique ID</td>
+                        <td >
+                            <asp:TextBox ID="txtUniqeID" runat="server"  Width="100%"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding-left:8%; white-space:nowrap; " >LOE Control No.</td>
+                        <td >
+                            <asp:TextBox ID="txtLOEControlNo" runat="server"  Width="100%"></asp:TextBox>
+                        </td>
+                    </tr>
+                     <tr>
+                        
+                        <td colspan="3" align="right" style="padding:3px 0 5px 0;" >
+                            <asp:CheckBox ID="chkNew" runat="server" Text="New"/>
+                            <asp:Button ID="btnSearch" runat="server" Text="Search" />
+                            <asp:Button ID="btn" runat="server" Text="Save as PDF" />
+                        </td>
+                    </tr>
+                </table>
+                <table style="width:100%"> 
+                    <tr>
+                        <td>Nationality</td>
+                        <td>
+                            <asp:TextBox ID="txtNationality" runat="server"></asp:TextBox>
+                        </td>
+                        <td>Passport No</td>
+                        <td>
+                            <asp:TextBox ID="txtPassportNo" runat="server"></asp:TextBox>
+                        </td>
+                    
+                    </tr>
+                    <tr>
+                        <td>Telephone</td>
+                        <td>
+                            <asp:TextBox ID="txtTelephone" runat="server"></asp:TextBox>
+                        </td>
+                        <td>Expiration</td>
+                        <td>
+                            <asp:TextBox ID="txtExpiration" runat="server"></asp:TextBox>
+                        </td>
+                    
+                    </tr>
+                    <tr>
+                        <td>Email Address</td>
+                        <td>
+                            <asp:TextBox ID="txtEmailAdd" runat="server"></asp:TextBox>
+                        </td>
+                        <td>Date Of Birth</td>
+                        <td>
+                            <asp:TextBox ID="txtDateOffBirth" runat="server"></asp:TextBox>
+                        </td>
+                    
+                    </tr>
+                </table>
+            </td>
+            <td  style="width:50%">
+                <div>
+                 <fieldset>
+                      <legend>Upcomming Assginment:</legend>
+                      <table style="width:100%; background-color:Gray;    " >
+                        <tr>
+                            <td>Brand</td>
+                            <td>
+                                <asp:TextBox ID="txtBrand" runat="server"></asp:TextBox>
+                            </td>
+                            <td>Join Date</td>
+                            <td>
+                                <asp:TextBox ID="txtJoindate" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Join Ship</td>
+                            <td>
+                                <asp:TextBox ID="txtJoinShip" runat="server"></asp:TextBox>
+                            </td>
+                            <td>Join Port</td>
+                            <td>
+                                <asp:TextBox ID="txtJoinPort" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Position</td>
+                            <td>
+                                <asp:TextBox ID="txtPosition" runat="server"></asp:TextBox>
+                            </td>
+                            <td>Join City</td>
+                            <td>
+                                <asp:TextBox ID="txtJoinCity" runat="server"></asp:TextBox>
+                            </td>
+                        </tr>
+                      </table>
+                 </fieldset>
+                
+                </div>
+                <%--<br />--%>
+                <table style="width:95%" >
+                    <tr>
+                        <td style="width:92%" >
+                            <asp:Label ID="tblUCDate" runat="server" Text="06/25/2014 [16:24]"></asp:Label>
+                        </td>
+                        <td>
+                            <asp:Button ID="btnApproved" runat="server" Text="Approved" />
+                        </td>
+                        <td>
+                            <asp:Button ID="btnDecline" runat="server" Text="Declined" />
+                        </td>
+                    </tr>
+                 </table>
+                <%-- <br />--%>
+                 <table style="width:100%" >
+                    <tr>
+                        <td colspan ="2">
+                            <asp:DropDownList ID="ddlReason" runat="server">
+                            </asp:DropDownList>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td  style="white-space:nowrap ">
+                            <asp:RadioButton ID="rdbFraudulentDoc" runat="server" Text="Fraudulent Document"/>
+                        </td>
+                        <td rowspan="3"  style="vertical-align:text-top; width:100%; ">
+                            <asp:RadioButton ID="rdbOther" runat="server" Text="OTHER" />
+                            <br />
+                            <asp:TextBox ID="txtOtherComment" runat="server" Width="90%" TextMode="MultiLine" Rows="3"></asp:TextBox>
+                        </td>
+                    </tr>
+                    
+                   <tr>
+                        <td style="white-space:nowrap " >
+                            <asp:RadioButton ID="rdbPriorIIssue" runat="server" Text="Prior Immigration Issue"/>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td  style="white-space:nowrap ">
+                            <asp:RadioButton ID="rdbPriorConDep" runat="server" Text="Prior Connection/Deportation"/>
+                        </td>
+                    </tr>
+                 
+                 </table>
+                 
+            </td>
+        </tr>
+       
+    </table>
+
+
+
+
+    <script type="text/javascript" language="javascript">
+            $(document).ready(function() {
+                HideDate();
+            });
+
+             function pageLoad(sender, args) {
+                 var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
+                 if (isAsyncPostback) {
+
+                     HideDate();
+                 }
+             }
+
+             function HideDate() {
+                 document.getElementById("ctl00_uoTblDate").style.display = "none";
+             }
+             
+              
+    </script>
+</asp:Content>
+ 

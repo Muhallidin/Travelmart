@@ -1,0 +1,594 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40" xmlns="urn:schemas-microsoft-com:office:spreadsheet">
+  <o:DocumentProperties>
+    <Author>Travelmart</Author>
+    <LastAuthor>WALI</LastAuthor>
+    <Created>2016-12-07 15:10:33ZZ</Created>
+    <Company>RCCL</Company>
+    <Version>1</Version>
+  </o:DocumentProperties>
+  <x:ExcelWorkbook>
+    <WindowHeight>13170</WindowHeight>
+    <WindowWidth>17580</WindowWidth>
+    <WindowTopX>120</WindowTopX>
+    <WindowTopY>60</WindowTopY>
+    <ProtectStructure>False</ProtectStructure>
+    <ProtectWindows>False</ProtectWindows>
+  </x:ExcelWorkbook>
+  <Styles>
+    <Style ss:ID="Default" ss:Name="Normal">
+      <Alignment ss:Vertical="Bottom" />
+      <Borders />
+      <Font />
+      <Interior />
+      <NumberFormat />
+      <Protection />
+    </Style>
+    <Style ss:ID="s62">
+      <Font ss:Bold="1" />
+    </Style>
+    <Style ss:ID="s64">
+      <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" />
+    </Style>
+    <Style ss:ID="s65">
+      <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" />
+    </Style>
+  </Styles>
+  <Worksheet ss:Name="Wallem Shipping (HKG) ">
+    <Table ss:ExpandedColumnCount="35" ss:ExpandedRowCount="19" x:FullColumns="1" x:FullRows="1" ss:DefaultColumnWidth="60">
+      <Row ss:StyleID="s62">
+        <Cell>
+          <Data ss:Type="String">RequestStatus</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">EmployeeID</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">LastName</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FirstName</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ConfirmationNo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PickupDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PickupTime</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">VehicleType</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PlateNo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Driver</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">VesselName</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RankName</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CostCenter</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Nationality</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RecordLocator</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">DeptCity</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ArvlCity</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">DeptDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ArvlDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">DeptTime</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ArvlTime</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Carrier</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FlightNo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PassportNo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PassportIssued</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PassportExp</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ContractedRate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ConfirmedRate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Comment</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ConfirmedBy</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CommentedBy</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RouteFrom</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RouteTo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">From</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">To</Data>
+        </Cell>
+      </Row>
+      <Row ss:StyleID="s65">
+        <Cell>
+          <Data ss:Type="String">Approved</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">912218</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MAIN</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">LAUREN</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">19-Nov-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">05:20:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">BUS</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">OV-OVATION OF THE SEAS</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RTEP-TWO70 ENSEMBLE PERFORMER</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">483-PASSENGER ENTERTAINMENT</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">GBR-United Kingdom</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RDCXTE</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HKG</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FRA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">18-Nov-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">19-Nov-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">23:40:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">05:20:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">LH</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">0797</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">514150967</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">04-Mar-2014</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">04-Jun-2024</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">110.00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">110.00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Testing Approve Port agent vehicle</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Muhallidin G Wali</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">wali.hotel</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Ship</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Airport</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HONG KONG</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Hong Kong International Airport</Data>
+        </Cell>
+      </Row>
+      <Row ss:StyleID="s65">
+        <Cell>
+          <Data ss:Type="String">Approved</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">944784</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">GREENE</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">NICOLE</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">18-Nov-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">21:00:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">OV-OVATION OF THE SEAS</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RTEP-TWO70 ENSEMBLE PERFORMER</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">483-PASSENGER ENTERTAINMENT</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">USA-United States of America</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">TWOQZQ</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HKG</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">EWR</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">18-Nov-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">18-Nov-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">18:20:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">21:00:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CX</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">0890</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">513368533</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">18-Mar-2014</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">17-Mar-2024</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">100.00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">100.00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">test</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">wali</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">wali.hotel</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Ship</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Airport</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HONG KONG</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Hong Kong International Airport</Data>
+        </Cell>
+      </Row>
+      <Row ss:StyleID="s65">
+        <Cell>
+          <Data ss:Type="String">Approved</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">944962</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">BRADY</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HANNAH</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">18-Nov-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">22:25:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">OV-OVATION OF THE SEAS</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FTS-FEATURED SINGER</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">483-PASSENGER ENTERTAINMENT</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">USA-United States of America</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">KGEMPK</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HKG</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">JFK</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">18-Nov-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">18-Nov-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">19:45:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">22:25:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CX</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">0846</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">530750364</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">19-Jan-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">18-Jan-2026</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">100.00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">100.00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Test NTP</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Muhallidin G Wali</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">wali.hotel</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Ship</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Airport</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HONG KONG</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Hong Kong International Airport</Data>
+        </Cell>
+      </Row>
+      <Row ss:StyleID="s65">
+        <Cell>
+          <Data ss:Type="String">Approved</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">945567</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">COURCY</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MATHIEU</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">18-Nov-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">15:15:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">OV-OVATION OF THE SEAS</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RTEP-TWO70 ENSEMBLE PERFORMER</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">483-PASSENGER ENTERTAINMENT</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CAN-Canada</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">VYRNXX</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HKG</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">YVR</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">18-Nov-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">18-Nov-2016</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">19:50:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">15:15:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">AC</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">0008</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">QL577407</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">10-May-2013</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">10-May-2018</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">100.00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">100.00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Test NTP</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Muhallidin G Wali</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">wali.hotel</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Ship</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Airport</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HONG KONG</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Hong Kong International Airport</Data>
+        </Cell>
+      </Row>
+    </Table>
+    <x:WorksheetOptions>
+      <PageSetup>
+        <Header x:Margin="0.4921259845" />
+        <Footer x:Margin="0.4921259845" />
+        <PageMargins x:Bottom="0.984251969" x:Left="0.78740157499999996" x:Right="0.78740157499999996" x:Top="0.984251969" />
+      </PageSetup>
+      <Selected />
+      <Panes>
+        <Pane>
+          <Number>1</Number>
+          <ActiveRow>1</ActiveRow>
+          <ActiveCol>1</ActiveCol>
+        </Pane>
+      </Panes>
+      <ProtectObjects>False</ProtectObjects>
+      <ProtectScenarios>False</ProtectScenarios>
+    </x:WorksheetOptions>
+  </Worksheet>
+</Workbook>

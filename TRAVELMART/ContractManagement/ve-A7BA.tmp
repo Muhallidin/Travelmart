@@ -1,0 +1,1213 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/TravelMartMaintenanceMaster.Master"
+    AutoEventWireup="true" CodeBehind="HotelContractAdd.aspx.cs" Inherits="TRAVELMART.ContractManagement.HotelContractAdd" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<script type="text/javascript" src="../FBox/jquery-1.6.1.min.js"></script> 
+<script type="text/javascript" src="../FBox/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+<script type="text/javascript" src="../FBox/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+<script src="../Script/popup.js" type="text/javascript"></script>
+    <style type="text/css">
+          .style9
+        {
+            width: 164px;
+        }
+        .style10
+        {
+            width: 19px;
+        }
+        .style11
+        {
+            width: 142px;
+            height: 26px;
+        }
+        .style12
+        {
+            width: 164px;
+            height: 26px;
+        }
+        .style13
+        {
+            width: 19px;
+            height: 26px;
+        }
+        .style14
+        {
+            height: 26px;
+        }
+        .style15
+        {
+            width: 148px;
+        }
+        .style17
+        {
+            width: 29px;
+        }
+        .style18
+        {
+            width: 119px;
+        }
+        .style20
+        {
+            width: 181px;
+        }
+        .style23
+        {
+            width: 220px;
+        }
+        .style24
+        {
+            width: 212px;
+        }
+        .style25
+        {
+            width: 148px;
+            height: 24px;
+        }
+        .style26
+        {
+            width: 119px;
+            height: 24px;
+        }
+        .style27
+        {
+            width: 29px;
+            height: 24px;
+        }
+        .style28
+        {
+            height: 24px;
+        }
+        .style29
+        {
+            width: 214px;
+        }
+    </style>
+</asp:Content>
+<asp:Content runat="server" ID="Content3" ContentPlaceHolderID="HeaderContent">
+
+    &nbsp;&nbsp;&nbsp;
+
+    <script type="text/javascript" language="javascript">
+        function CloseModal(strURL) {
+            window.location = strURL;
+        }
+        function confirmRemove() {
+            if (confirm("Remove attachment?") == true)
+                return true;
+            else
+                return false;
+        }
+
+        function confirmDelete() {
+            if (confirm("Remove record?") == true)
+                return true;
+            else
+                return false;
+        }
+
+        function confirmEdit() {
+            if (confirm("Edit record?") == true) {
+                return true;
+            }
+            else { 
+                return false;
+            }
+                
+        }
+
+
+        function ReplaceCaption() {
+
+            $("#<%=uoBtnAdd.ClientID %>").value = "Save";
+        }
+
+        function RoomDetailChange(obj) {
+//            $("#<%=uoBtnAdd.ClientID %>").disabled = false;
+            document.getElementById("<%=uoBtnAdd.ClientID %>").disabled = false;
+        }
+        
+    </script>
+
+    <script type="text/ecmascript" language="javascript">
+        function pageLoad(sender, args) {
+            var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
+            if (isAsyncPostback) {
+                SetResolution();
+            }
+        }
+
+        $(document).ready(function() {
+            SetResolution();
+        });
+
+        function SetResolution() {
+            var ht = $(window).height(); //550;
+            var wd = $(window).width() * 0.90;
+
+            if (screen.height <= 600) {
+                ht = ht * 0.45;
+            }
+            else if (screen.height <= 720) {
+                ht = ht * 0.52;
+            }
+            else {
+                ht = ht * 0.67;
+            }
+
+            $("#Bv").height(ht);
+            $("#Bv").width(wd);
+        }     
+    </script>
+
+    <div class="PageTitle">
+        Hotel Contract
+    </div>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="NaviPlaceHolder" runat="server">
+    <div id="Bv" style="overflow: auto; width: 100%; overflow-x: auto; overflow-y: auto;"
+        align="left">
+        <hr />
+        <table style="text-align: left">
+            <tr>
+                <td colspan="4">
+                    <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="Header" />
+                </td>
+            </tr>
+            <tr>
+                <td class="style29">
+                    Contract Title :
+                </td>
+                <td colspan="3">
+                    <asp:TextBox ID="uotextboxContractTitle" runat="server" Width="535px" />
+                    &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="uotextboxContractTitle"
+                        ErrorMessage="Contract title required." ValidationGroup="Header">*</asp:RequiredFieldValidator></td>
+            </tr>
+            <tr>
+                <td class="style29">
+                    Remarks :
+                </td>
+                <td colspan="3">
+                    <asp:TextBox ID="uotextboxRemarks" runat="server" Width="535px" TextMode="MultiLine"
+                        CssClass="TextBoxInput" />
+                </td>
+            </tr>
+            <tr>
+                <td class="style29">
+                    Contract Start Date :
+                </td>
+                <td class="style20">
+                    <asp:TextBox ID="uotextboxStartDate" runat="server" Width="125px" />
+                    <cc1:TextBoxWatermarkExtender ID="uotextboxStartDate_TextBoxWatermarkExtender" runat="server"
+                        Enabled="True" TargetControlID="uotextboxStartDate" WatermarkCssClass="fieldWatermark"
+                        WatermarkText="MM/dd/yyyy">
+                    </cc1:TextBoxWatermarkExtender>
+                    <cc1:MaskedEditExtender ID="uotextboxStartDate_MaskedEditExtender" runat="server"
+                        CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat=""
+                        CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder=""
+                        CultureTimePlaceholder="" Enabled="True" TargetControlID="uotextboxStartDate"
+                        Mask="99/99/9999" UserDateFormat="MonthDayYear" MaskType="Date">
+                    </cc1:MaskedEditExtender>
+                    <cc1:CalendarExtender ID="uotextboxStartDate_CalendarExtender" runat="server" Enabled="True"
+                        PopupButtonID="Image1" TargetControlID="uotextboxStartDate" Format="MM/dd/yyyy">
+                    </cc1:CalendarExtender>
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                        Height="16px" />
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="uotextboxStartDate"
+                        ErrorMessage="Contract start date required." ValidationGroup="Header">*</asp:RequiredFieldValidator>
+                </td>
+                <td class="style23">
+                    Contract End Date :
+                </td>
+                <td>
+                    <asp:TextBox ID="uotextboxEndDate" runat="server" Width="125px" />
+                    <cc1:TextBoxWatermarkExtender ID="uotextboxEndDate_TextBoxWatermarkExtender1" runat="server"
+                        Enabled="True" TargetControlID="uotextboxEndDate" WatermarkCssClass="fieldWatermark"
+                        WatermarkText="MM/dd/yyyy">
+                    </cc1:TextBoxWatermarkExtender>
+                    <cc1:MaskedEditExtender ID="uotextboxEndDate_MaskedEditExtender" runat="server" CultureAMPMPlaceholder=""
+                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                        Enabled="True" TargetControlID="uotextboxEndDate" MaskType="Date" UserDateFormat="MonthDayYear"
+                        Mask="99/99/9999">
+                    </cc1:MaskedEditExtender>
+                    <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/Calendar_scheduleHS.png" />
+                    <cc1:CalendarExtender ID="uotextboxEndDate_CalendarExtender" runat="server" Enabled="True"
+                        PopupButtonID="Image2" TargetControlID="uotextboxEndDate" Format="MM/dd/yyyy">
+                    </cc1:CalendarExtender>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="uotextboxEndDate"
+                        ErrorMessage="Contract end date required." ValidationGroup="Header">*</asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td class="style29">
+                    Vendor Contract Date Accepted :
+                </td>
+                <td class="style20">
+                    <asp:TextBox ID="uoTextBoxVendorDateAccepted" runat="server" Width="125px"></asp:TextBox>
+                    <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender2" runat="server" Enabled="True"
+                        TargetControlID="uoTextBoxVendorDateAccepted" WatermarkCssClass="fieldWatermark"
+                        WatermarkText="MM/dd/yyyy">
+                    </cc1:TextBoxWatermarkExtender>
+                    <cc1:MaskedEditExtender ID="uoTextBoxvendorDateAccepted0_MaskedEditExtender" runat="server"
+                        CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat=""
+                        CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder=""
+                        CultureTimePlaceholder="" Enabled="True" MaskType="Date" UserDateFormat="MonthDayYear"
+                        Mask="99/99/9999" TargetControlID="uoTextBoxVendorDateAccepted">
+                    </cc1:MaskedEditExtender>
+                    <cc1:CalendarExtender ID="uoTextBoxvendorDateAccepted0_CalendarExtender" runat="server"
+                        Enabled="True" TargetControlID="uoTextBoxVendorDateAccepted" PopupButtonID="Image6"
+                        Format="MM/dd/yyyy">
+                    </cc1:CalendarExtender>
+                    <asp:Image ID="Image6" runat="server" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                        Height="16px" />
+                </td>
+                <td class="style23">
+                    RCCL Contract Date Accepted :
+                </td>
+                <td>
+                    <asp:TextBox ID="uoTextBoxRCCLDateAccepted" runat="server" Width="125px"></asp:TextBox>
+                    <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender1" runat="server" Enabled="True"
+                        TargetControlID="uoTextBoxRCCLDateAccepted" WatermarkCssClass="fieldWatermark"
+                        WatermarkText="MM/dd/yyyy">
+                    </cc1:TextBoxWatermarkExtender>
+                    <cc1:MaskedEditExtender ID="uoTextBoxRCCLDateAccepted_MaskedEditExtender" runat="server"
+                        CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat=""
+                        CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder=""
+                        CultureTimePlaceholder="" Enabled="True" MaskType="Date" UserDateFormat="MonthDayYear"
+                        Mask="99/99/9999" TargetControlID="uoTextBoxRCCLDateAccepted">
+                    </cc1:MaskedEditExtender>
+                    <cc1:CalendarExtender ID="uoTextBoxRCCLDateAccepted_CalendarExtender" runat="server"
+                        Enabled="True" TargetControlID="uoTextBoxRCCLDateAccepted" PopupButtonID="Image5"
+                        Format="MM/dd/yyyy">
+                    </cc1:CalendarExtender>
+                    <asp:Image ID="Image5" runat="server" ImageUrl="~/Images/Calendar_scheduleHS.png"
+                        Height="16px" />
+                </td>
+            </tr>
+            <tr>
+                <td class="style29">
+                    Vendor Personnel :
+                </td>
+                <td class="style20">
+                    <asp:TextBox ID="uotextboxVendorRep" runat="server" Width="125px" />
+                </td>
+                <td class="style23">
+                    RCCL Personnel :
+                </td>
+                <td>
+                    <asp:TextBox ID="uotextboxRCCLRep" runat="server" Width="125px" />
+                </td>
+            </tr>
+            <tr>
+                <td class="style29">
+                    Vendor Personnel Email Add:
+                </td>
+                <td class="style20">
+                    <asp:TextBox ID="uotextboxVendorRepEmailAdd" runat="server" Width="125px" />
+                </td>
+                <td class="style23">
+                    RCCL Personnel Email Add:
+                </td>
+                <td>
+                    <asp:TextBox ID="uotextboxRCCLRepEmailAdd" runat="server" Width="125px" />
+                </td>
+            </tr>
+            <tr>
+                <td class="style29">
+                    Vendor Personnel Contact #:
+                </td>
+                <td class="style20">
+                    <asp:TextBox ID="uotextboxVendorRepContactNo" runat="server" Width="125px" />
+                </td>
+                <td class="style23">
+                    RCCL Personnel Contact #:
+                </td>
+                <td>
+                    <asp:TextBox ID="uotextboxRCCLRepContactNo" runat="server" Width="125px" />
+                </td>
+            </tr>
+            <tr>
+                <td class="style29">
+                    Hotel Time zone
+                </td>
+                <td class="style20" colspan="3" >
+                    <asp:DropDownList ID="cboHotelTimeZone" runat="server" />
+                </td>
+                
+            
+            </tr>
+            <tr>
+                <td class="style29">
+                    <asp:HiddenField ID="uoHiddenFieldContractID" runat="server" />
+                </td>
+                <td>
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+        <div class="PageTitle">
+            <asp:Panel ID="Panel2" runat="server">
+                Hotel Branch
+            </asp:Panel>
+        </div>
+        <table style="text-align: left">
+            <tr>
+                <td colspan="2">
+                    <asp:ValidationSummary ID="ValidationSummary3" runat="server" ValidationGroup="branch" />
+                </td>
+            </tr>
+            <tr>
+                <td class="style29">
+                    Hotel Brand Name:
+                </td>
+                <td>
+                    <asp:UpdatePanel ID="UpdatePanel9" runat="server">
+                        <ContentTemplate>
+                            <asp:DropDownList ID="uoDropDownListVendorMain" runat="server" Width="500px" AutoPostBack="True"
+                                OnSelectedIndexChanged="uoDropDownListVendorMain_SelectedIndexChanged">
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ControlToValidate="uoDropDownListVendorMain"
+                                ErrorMessage="Hotel name required." InitialValue="0" ValidationGroup="branch">*</asp:RequiredFieldValidator>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </td>
+            </tr>
+            <tr>
+                <td class="style29">
+                    Hotel Branch Name :
+                </td>
+                <td>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <asp:DropDownList ID="uoDropDownListVendor" runat="server" Width="500px" AutoPostBack="True"
+                                OnSelectedIndexChanged="uoDropDownListVendor_SelectedIndexChanged">
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ControlToValidate="uoDropDownListVendor"
+                                ErrorMessage="Hotel branch name required." InitialValue="0" ValidationGroup="branch">*</asp:RequiredFieldValidator>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </td>
+            </tr>
+            <tr>
+                <td class="style29">
+                    Country :
+                </td>
+                <td>
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+                            <asp:DropDownList ID="uoDropDownCountry" runat="server" Width="500px" AutoPostBack="True"
+                                OnSelectedIndexChanged="uoDropDownCountry_SelectedIndexChanged">
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="uoDropDownCountry"
+                                ErrorMessage="Country required." InitialValue="0" ValidationGroup="branch">*</asp:RequiredFieldValidator>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </td>
+            </tr>
+            <tr>
+                <td class="style29">
+                    <%--class="style15"--%>
+                    City :
+                </td>
+                <td>
+                    <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                        <ContentTemplate>
+                            <asp:DropDownList ID="uoDropDownListCity" runat="server" Width="500px">
+                            </asp:DropDownList>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="uoDropDownListCity"
+                                ErrorMessage="City required." InitialValue="0" ValidationGroup="branch">*</asp:RequiredFieldValidator>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </td>
+            </tr>
+        </table>
+        <div class="PageTitle">
+            <asp:Panel ID="uoPanelShuttleHeader" runat="server">
+                Shuttle
+                <asp:Label ID="uoLabelShuttle" runat="server" Text="" Font-Size="Small" />
+            </asp:Panel>
+        </div>
+        <asp:Panel ID="uoPanelShuttle" runat="server" CssClass="CollapsiblePanel">
+            <table>
+                <tr align="left">
+                    <td align="left" class="style29">
+                        With shuttle :
+                    </td>
+                    <%--class="style19"--%>
+                    <td align="left">
+                        <asp:CheckBox ID="uoCheckBoxShuttle" runat="server" />
+                    </td>
+                </tr>
+            </table>
+            <cc1:CollapsiblePanelExtender ID="CollapsiblePanelExtender1" runat="server" TargetControlID="uoPanelShuttle"
+                ExpandControlID="uoPanelShuttleHeader" CollapseControlID="uoPanelShuttleHeader"
+                TextLabelID="uoLabelShuttle" CollapsedText="(Show List)" ExpandedText="(Hide List)"
+                Collapsed="false" SuppressPostBack="true">
+            </cc1:CollapsiblePanelExtender>
+        </asp:Panel>
+        <div class="PageTitle">
+            <asp:Panel ID="Panel1" runat="server">                
+                <table width="100%">
+                    <tr>
+                        <td style="width:50%">
+                            Meals
+                                <asp:Label ID="uoLabelMeal" runat="server" Text="" Font-Size="Small" />
+                        </td>
+                        <td style="width:50%">
+                            Cancellation Terms
+                        </td>
+                    </tr>
+                </table>
+            </asp:Panel>
+        </div>
+        <asp:Panel ID="uopanelMeal" runat="server" CssClass="CollapsiblePanel">          
+            <table width="100%">
+                <tr>
+                    <td align="left" class="style29">                        
+                        Meal Rate :
+                    </td>
+                    <td align="left" class="style20">
+                        <asp:TextBox ID="uoTextBoxMealRate" runat="server"></asp:TextBox>
+                        <cc1:MaskedEditExtender ID="uoTextBoxMealRate_MaskedEditExtender" runat="server"
+                            CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat=""
+                            CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder=""
+                            CultureTimePlaceholder="" Enabled="True" Mask="9,999.99" MaskType="Number" TargetControlID="uoTextBoxMealRate">
+                        </cc1:MaskedEditExtender>
+                    </td>
+                    <td align="left" class="style23">
+                        No. of Hours:
+                    </td>
+                    <td align="left" >
+                        <asp:TextBox ID="uoTextBoxCancellationHours" runat="server" onkeypress="return validate(event);"></asp:TextBox>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" class="style29">                       
+                        Meal Rate Tax(%) :
+                    </td>
+                    <td align="left" class="style20">
+                        <asp:TextBox ID="uoTextBoxMealRateTax" runat="server" Width="100px"  onkeypress="return validate(event);" ></asp:TextBox>
+                        <cc1:MaskedEditExtender ID="uoTextBoxMealRateTax_MaskedEditExtender" runat="server"
+                            CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat=""
+                            CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder=""
+                            CultureTimePlaceholder="" Enabled="True" Mask="999.99" MaskType="Number" TargetControlID="uoTextBoxMealRateTax">
+                        </cc1:MaskedEditExtender>
+                    </td>
+                    <td align="left" class="style23">
+                        Cut-off Time :  
+                        &nbsp;<asp:Label ID="uoLabelCutOffTime"  CssClass="RedNotification" runat="server" 
+                                Text="UTC/GMT +8 hours"> </asp:Label> 
+                    </td>
+                    <td align="left" >
+                             <asp:TextBox runat="server" ID="uoTextBoxCutoffTime" Width="100px"></asp:TextBox>
+                             <cc1:textboxwatermarkextender ID="uoTextBoxCutoffTime_TextBoxWatermarkExtender"
+                            runat="server" Enabled="True" TargetControlID="uoTextBoxCutoffTime" 
+                                WatermarkCssClass="fieldWatermark" WatermarkText="HH:mm">
+                            </cc1:textboxwatermarkextender>
+                            <cc1:maskededitextender ID="uoMaskedEditExtenderCutoffTime" runat="server" CultureAMPMPlaceholder=""
+                                CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                Enabled="True" Mask="99:99" MaskType="Time" TargetControlID="uoTextBoxCutoffTime"
+                                UserDateFormat="None" UserTimeFormat="TwentyFourHour">
+                            </cc1:maskededitextender>
+                            &nbsp;
+                             <asp:Label ID="Label4"  CssClass="RedNotification" runat="server" 
+                                Text="24 hr format (e.g. 22:30)"> </asp:Label>                            
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" class="style29">
+                        <%--class="style15"--%>
+                        Meal Rate Tax Inclusive :
+                    </td>
+                    <td align="left" class="style20">
+                        <asp:CheckBox ID="uoCheckBoxMealRateTaxInclusive" runat="server" />
+                    </td>
+                    <td align="left" class="style23">
+                        &nbsp;
+                    </td>
+                    <td align="left">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" class="style29">
+                        &nbsp;
+                    </td>
+                    <td align="left" class="style20">
+                        <asp:CheckBox ID="uoCheckBoxBreakfast" runat="server" Text="Breakfast" />
+                    </td>
+                    <td align="left" class="style23">
+                        &nbsp;
+                    </td>
+                    <td align="left">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" class="style29">
+                        &nbsp;
+                    </td>
+                    <td align="left" class="style20">
+                        <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                            <ContentTemplate>
+                                <asp:CheckBox ID="uoCheckBoxLunch" runat="server" Text="Lunch" AutoPostBack="True"
+                                    OnCheckedChanged="uoCheckBoxLunch_CheckedChanged" />
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </td>
+                    <td align="left" >
+                        &nbsp;
+                    </td>
+                    <td align="left">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" class="style29">
+                    </td>
+                    <td align="left" class="style20">
+                        <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                            <ContentTemplate>
+                                <asp:CheckBox ID="uoCheckBoxDinner" runat="server" Text="Dinner" AutoPostBack="True"
+                                    OnCheckedChanged="uoCheckBoxDinner_CheckedChanged" />
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </td>
+                    <td align="left" class="style23">
+                    </td>
+                    <td align="left">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" class="style29">
+                        &nbsp;
+                    </td>
+                    <td align="left" class="style20">
+                        <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                            <ContentTemplate>
+                                <asp:CheckBox ID="uoCheckBoxLunchDinner" runat="server" Text="Lunch or Dinner" AutoPostBack="True"
+                                    OnCheckedChanged="uoCheckBoxLunchDinner_CheckedChanged" />
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </td>
+                    <td align="left" >
+                        &nbsp;
+                    </td>
+                    <td align="left">
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" >
+                        &nbsp;
+                    </td>
+                    <td align="left">
+                        &nbsp;
+                    </td>
+                    <td align="left">
+                        &nbsp;
+                    </td>
+                    <td align="left">
+                        &nbsp;
+                    </td>
+                </tr>
+            </table>               
+            <cc1:CollapsiblePanelExtender ID="uocollapsibleMeal" runat="server" TargetControlID="uopanelMeal"
+                ExpandControlID="Panel1" CollapseControlID="Panel1" TextLabelID="uolabelMeal"
+                CollapsedText="(Show List)" ExpandedText="(Hide List)" Collapsed="false" SuppressPostBack="true">
+            </cc1:CollapsiblePanelExtender>
+        </asp:Panel>
+        <div class="PageTitle">
+            <asp:Panel ID="uopanelroomhead" runat="server">
+                Rooms
+                <asp:Label ID="uolabelRoom" runat="server" Text="" Font-Size="Small" />
+            </asp:Panel>
+        </div>
+        <asp:Panel ID="uopanelroom" runat="server" CssClass="CollapsiblePanel">
+            <table width="100%">
+                <tr>
+                    <td>
+                        <asp:UpdatePanel runat="server" ID="uoUpdatePanelCount" UpdateMode="Conditional">
+                            <ContentTemplate>
+                                <table align="center" width="100%">
+                                    <tr>
+                                        <td align="right">
+                                            Date From :
+                                        </td>
+                                        <td align="left">
+                                            <asp:TextBox runat="server" ID="uoTxtFrom" Text='<%# Eval("DateFrom") %>' TabIndex="1" 
+                                                onchange="RoomDetailChange(this);" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="uoTxtFrom"
+                                                ErrorMessage="Start Date required." ValidationGroup="Room">*</asp:RequiredFieldValidator>
+                                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender3" runat="server" Enabled="True"
+                                                TargetControlID="uoTxtFrom" WatermarkCssClass="fieldWatermark" WatermarkText="MM/dd/yyyy">
+                                            </cc1:TextBoxWatermarkExtender>
+                                            <cc1:MaskedEditExtender ID="uoTxtFrom_MaskedEditExtender" runat="server" CultureAMPMPlaceholder=""
+                                                CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                                CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                                Enabled="True" MaskType="Date" UserDateFormat="MonthDayYear" Mask="99/99/9999"
+                                                TargetControlID="uoTxtFrom">
+                                            </cc1:MaskedEditExtender>
+                                            <cc1:CalendarExtender ID="uoTxtFrom_CalendarExtender" runat="server" Enabled="True"
+                                                TargetControlID="uoTxtFrom" PopupButtonID="Image3" Format="MM/dd/yyyy">
+                                            </cc1:CalendarExtender>
+                                            <asp:Image ID="Image3" runat="server" Height="16px" ImageUrl="~/Images/Calendar_scheduleHS.png" />
+                                        </td>
+                                        <td>
+                                            &nbsp;
+                                        </td>
+                                        <td align="right">
+                                            Date To :
+                                        </td>
+                                        <td align="left">
+                                            <asp:TextBox runat="server" ID="uoTxtTo" Text='<%# Eval("DateTo") %>' TabIndex="2"
+                                                ValidationGroup="Room" onchange="RoomDetailChange(this);" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="uoTxtTo"
+                                                ErrorMessage="End Date required." ValidationGroup="Room">*</asp:RequiredFieldValidator>
+                                            <cc1:TextBoxWatermarkExtender ID="TextBoxWatermarkExtender4" runat="server" Enabled="True"
+                                                TargetControlID="uoTxtTo" WatermarkCssClass="fieldWatermark" WatermarkText="MM/dd/yyyy">
+                                            </cc1:TextBoxWatermarkExtender>
+                                            <cc1:MaskedEditExtender ID="MaskedEditExtender2" runat="server" CultureAMPMPlaceholder=""
+                                                CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                                CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                                Enabled="True" MaskType="Date" UserDateFormat="MonthDayYear" Mask="99/99/9999"
+                                                TargetControlID="uoTxtTo">
+                                            </cc1:MaskedEditExtender>
+                                            <cc1:CalendarExtender ID="CalendarExtender1" runat="server" Enabled="True" TargetControlID="uoTxtTo"
+                                                PopupButtonID="Image4" Format="MM/dd/yyyy">
+                                            </cc1:CalendarExtender>
+                                            <asp:Image ID="Image4" runat="server" Height="16px" ImageUrl="~/Images/Calendar_scheduleHS.png" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right">
+                                            Room Tax Rate (%) :
+                                        </td>
+                                        <td align="left">
+                                            <asp:TextBox ID="uoRoomTax" runat="server" Width="180px" TabIndex="3" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                            <cc1:MaskedEditExtender ID="MaskedEditExtender3" runat="server" CultureAMPMPlaceholder=""
+                                                CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                                CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                                Enabled="True" Mask="999.99" MaskType="Number" TargetControlID="uoRoomTax">
+                                            </cc1:MaskedEditExtender>
+                                        </td>
+                                        <td>
+                                            &nbsp;
+                                        </td>
+                                        <td>
+                                            &nbsp;
+                                        </td>
+                                        <td align="left">
+                                            <asp:CheckBox ID="uoChkRoomTaxInc" onchange="RoomDetailChange(this);" runat="server" Checked="True" Text="Is Inclusive"
+                                                TabIndex="4" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right">
+                                            Currency :
+                                        </td>
+                                        <td align="left">
+                                            <asp:DropDownList ID="uoDropDownlistCurrency" runat="server" ValidationGroup="Room"
+                                                Width="180px" TabIndex="5" onchange="RoomDetailChange(this);">
+                                            </asp:DropDownList>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="uoDropDownlistCurrency"
+                                                ErrorMessage="Currency is required." ValidationGroup="Room" InitialValue="0">*</asp:RequiredFieldValidator>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <table align="center">
+                                                <tr>
+                                                    <th>
+                                                        &nbsp;
+                                                    </th>
+                                                    <th>
+                                                        Room Rate
+                                                    </th>
+                                                    <th>
+                                                        Su
+                                                    </th>
+                                                    <th>
+                                                        M
+                                                    </th>
+                                                    <th>
+                                                        T
+                                                    </th>
+                                                    <th>
+                                                        W
+                                                    </th>
+                                                    <th>
+                                                        Th
+                                                    </th>
+                                                    <th>
+                                                        F
+                                                    </th>
+                                                    <th>
+                                                        S
+                                                    </th>
+                                                    <th>
+                                                        &nbsp;
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Single
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox ID="uotextboxRoomRate" runat="server" Width="180px" TabIndex="6" 
+                                                            Text="0.00" onchange="RoomDetailChange(this);" onkeypress="RoomDetailChange(this);"/>
+                                                        <cc1:MaskedEditExtender ID="MaskedEditExtender4" runat="server" CultureAMPMPlaceholder=""
+                                                            CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                                            CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                                            Enabled="True" Mask="999,999.99" MaskType="Number" TargetControlID="uotextboxRoomRate">
+                                                        </cc1:MaskedEditExtender>
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="uotextboxRoomRate"
+                                                            ErrorMessage="Single Room rate required." ValidationGroup="Room">*</asp:RequiredFieldValidator>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="uoTxtSun" Width="25px" TabIndex="7" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="uoMon" Width="25px" TabIndex="8" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="uoTue" Width="25px" TabIndex="9" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="uoWed" Width="25px" TabIndex="10" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="uoThu" Width="25px" TabIndex="11" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="uoFri" Width="25px" TabIndex="12" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="uoSat" Width="25px" TabIndex="13" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        &nbsp;
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Double
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox ID="uotextboxRoomRate2" runat="server" Width="180px" TabIndex="14" Text="0.00" onchange="RoomDetailChange(this);"/>
+                                                        <cc1:MaskedEditExtender ID="uotextboxRoomRate2_MaskedEditExtender" runat="server"
+                                                            CultureAMPMPlaceholder="" CultureCurrencySymbolPlaceholder="" CultureDateFormat=""
+                                                            CultureDatePlaceholder="" CultureDecimalPlaceholder="" CultureThousandsPlaceholder=""
+                                                            CultureTimePlaceholder="" Enabled="True" Mask="999,999.99" MaskType="Number"
+                                                            TargetControlID="uotextboxRoomRate2">
+                                                        </cc1:MaskedEditExtender>
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="uotextboxRoomRate2"
+                                                            ErrorMessage="Double Room rate required." ValidationGroup="Room">*</asp:RequiredFieldValidator>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="uoTxtSun2" Width="25px" TabIndex="15" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="uoMon2" Width="25px" TabIndex="16" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="uoTue2" Width="25px" TabIndex="17" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="uoWed2" Width="25px" TabIndex="18" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="uoThu2" Width="25px" TabIndex="19" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="uoFri2" Width="25px" TabIndex="20" onkeypress="RoomDetailChange(this);"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox runat="server" ID="uoSat2" Width="25px" TabIndex="21"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                        <asp:Button runat="server" ID="uoBtnAdd" Text="Add" OnClick="uoBtnAdd_Click"
+                                                                ValidationGroup="Room" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5">
+                                            <asp:UpdatePanel runat="server" ID="uoPanelRoomCount">
+                                                <ContentTemplate>
+                                                    <asp:ListView runat="server" ID="uoListView" OnItemCommand="uoListView_ItemCommand">
+                                                        <LayoutTemplate>
+                                                            <table class="listViewTable">
+                                                                <tr>
+                                                                    <th>
+                                                                        Date From
+                                                                    </th>
+                                                                    <th>
+                                                                        Date To
+                                                                    </th>
+                                                                    <th>
+                                                                        Room Type
+                                                                    </th>
+                                                                    <th>
+                                                                        Room Rate
+                                                                    </th>
+                                                                    <th>
+                                                                        Tax Rate (%)
+                                                                    </th>
+                                                                    <th>
+                                                                        Tax is Inclusive
+                                                                    </th>
+                                                                    <th>
+                                                                        Currency
+                                                                    </th>
+                                                                    <th>
+                                                                        Su
+                                                                    </th>
+                                                                    <th>
+                                                                        M
+                                                                    </th>
+                                                                    <th>
+                                                                        T
+                                                                    </th>
+                                                                    <th>
+                                                                        W
+                                                                    </th>
+                                                                    <th>
+                                                                        Th
+                                                                    </th>
+                                                                    <th>
+                                                                        F
+                                                                    </th>
+                                                                    <th>
+                                                                        S
+                                                                    </th>
+                                                                    <th colspan="2">
+                                                                    </th>
+                                                                </tr>
+                                                                <asp:PlaceHolder runat="server" ID="itemPlaceHolder"></asp:PlaceHolder>
+                                                            </table>
+                                                        </LayoutTemplate>
+                                                        <ItemTemplate>
+                                                            <tr>
+                                                                <td>
+                                                                    <%# String.Format("{0:dd/MM/yyyy}", Eval("DateFrom")) %>
+                                                                    <asp:HiddenField runat="server" ID="uoHiddenFieldDetailId" Value='<%# Eval("DetailId")%>' />
+                                                                    <asp:HiddenField runat="server" ID="uoHiddenFieldDetailId2" Value='<%# Eval("DetailId2")%>' />
+                                                                    <asp:HiddenField runat="server" ID="uoHiddenFieldRowNumber" Value='<%# Eval("RowNumber")%>' />
+                                                                </td>
+                                                                <td>
+                                                                    <%# String.Format("{0:dd/MM/yyyy}", Eval("DateTo")) %>
+                                                                </td>
+                                                                <td>
+                                                                    <table>
+                                                                        <tr>
+                                                                            <td>
+                                                                                Single
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                Double
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <table>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# String.Format("{0:0.00}", Eval("SingleRate"))%>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# String.Format("{0:0.00}", Eval("DoubleRate"))%>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <%# String.Format("{0:0.00}", Eval("Tax") ) %>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:CheckBox runat="server" ID="uoChkTax" Checked='<%# Convert.ToBoolean(Eval("TaxInclusive")) %>' />
+                                                                </td>
+                                                                <td>
+                                                                    <asp:HiddenField runat="server" ID="uoHiddenFieldCurrencyId" Value='<%# Eval("CurrencyId") %>' />
+                                                                    <%# Eval("Currency") %>
+                                                                </td>
+                                                                <td>
+                                                                    <table>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# Eval("Sun") %>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# Eval("Sun2") %>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <table>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# Eval("Mon") %>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# Eval("Mon2") %>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <table>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# Eval("Tue") %>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# Eval("Tue2") %>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <table>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# Eval("Wed") %>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# Eval("Wed2") %>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <table>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# Eval("Thu") %>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# Eval("Thu2") %>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <table>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# Eval("Fri") %>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# Eval("Fri2") %>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <table>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# Eval("Sat") %>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <%# Eval("Sat2") %>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:LinkButton runat="server" ID="uoLinkRemove" CommandArgument='<%# "A- " + Eval("RowNumber")  %>'
+                                                                        Text="Remove" OnClientClick="return confirmDelete();"></asp:LinkButton>
+                                                                </td>
+                                                                 <td>
+                                                                    <asp:LinkButton runat="server" ID="uoLinkButtonEdit" CommandArgument='<%# "E- " +  Eval("RowNumber")  %>'
+                                                                        Text="Edit" OnClientClick="return confirmEdit();"></asp:LinkButton>
+                                                                </td>
+                                                            </tr>
+                                                        </ItemTemplate>
+                                                    </asp:ListView>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="uoBtnAdd" EventName="Click" />
+                            </Triggers>
+                        </asp:UpdatePanel>
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+        <cc1:CollapsiblePanelExtender ID="uocollapsibleRoom" runat="server" TargetControlID="uopanelRoom"
+            ExpandControlID="uopanelroomhead" CollapseControlID="uopanelroomhead" TextLabelID="uolabelRoom"
+            CollapsedText="(Show List)" ExpandedText="(Hide List)" Collapsed="false" SuppressPostBack="true">
+        </cc1:CollapsiblePanelExtender>
+        <div class="PageTitle">
+            <asp:Panel ID="Panel3" runat="server">
+                Upload Contract</asp:Panel>
+        </div>
+        <asp:Panel ID="Panel4" runat="server">
+            <table width="100%">
+                <tr>
+                    <td align="left">
+                        <asp:ValidationSummary ID="ValidationSummaryUpload" runat="server" ValidationGroup="Upload" />
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" class="style29" style="vertical-align: top;">
+                        <%--class="style24"--%>
+                        Contract Attachment (pdf/doc/docx) :
+                    </td>
+                    <td align="left">
+                        <asp:UpdatePanel ID="UpdatePanel11" runat="server" UpdateMode="Always">
+                            <ContentTemplate>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <asp:FileUpload ID="uoFileUploadContract" runat="server" Width="500px" />
+                                            <asp:Label ID="Label1" runat="server" ForeColor="Red"></asp:Label><br />
+                                            <asp:RegularExpressionValidator ID="uoRegularExpressionValidatorUpload" runat="server"
+                                                ControlToValidate="uoFileUploadContract" ErrorMessage="Please select a .pdf or .doc or .docx file"
+                                                ValidationExpression="^([a-zA-Z].*|[1-9].*)\.(((p|P)(d|D)(f|F))|((d|D)(o|O)(c|C))|((d|D)(o|O)(c|C)(x|X)))$"
+                                                ValidationGroup="Upload">*</asp:RegularExpressionValidator>
+                                            <%--<asp:LinkButton ID="ucLabelAttached" runat="server" 
+                                                onclick="ucLabelAttached_Click"></asp:LinkButton>--%>
+                                            <asp:LinkButton runat="server" ID="uoLinkAttach" Text="Attach" OnClick="uoButtonUpload_Click">
+                                            </asp:LinkButton>
+                                            <asp:GridView ID="uoGridViewHotelContractAttachment" runat="server" BackColor="White"
+                                                BorderColor="#DEDFDE" BorderWidth="1px" CellPadding="4" AutoGenerateColumns="False"
+                                                ForeColor="Black" GridLines="Vertical" DataKeyNames="AttachmentId"
+                                                OnRowCommand="uoGridViewHotelContractAttachment_RowCommand"
+                                                OnRowDeleting="uoGridViewHotelContractAttachment_RowDeleting" BorderStyle="None"
+                                                Width="100%" onrowcreated="uoGridViewHotelContractAttachment_RowCreated">
+                                                <RowStyle BackColor="#F7F7DE" />
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="Filename">
+                                                        <ItemStyle Width="80%" />
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton runat="server" ID="uoLinkButtonFileName" Text='<%# Eval("FileName") %>'
+                                                                OnClick="ucLabelAttached_Click" CommandArgument='<%# Eval("AttachmentId") %>'></asp:LinkButton>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:CommandField ShowDeleteButton="True" DeleteText="Remove" />
+                                                </Columns>
+                                                <FooterStyle BackColor="#CCCC99" />
+                                                <PagerStyle BackColor="#F7F7DE" ForeColor="Black" HorizontalAlign="Right" />
+                                                <SelectedRowStyle BackColor="#CE5D5A" ForeColor="White" Font-Bold="True" />
+                                                <HeaderStyle CssClass="listViewTable" BackColor="#6B696B" Font-Bold="True" ForeColor="White" />
+                                                <AlternatingRowStyle BackColor="White" />
+                                            </asp:GridView>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <asp:HiddenField ID="uoHiddenFieldFileName" runat="server" />
+                                            <%--&nbsp;<asp:LinkButton ID="uoLinkButtonRemove" runat="server" OnClientClick="return confirmRemove();"
+                                                OnClick="uoLinkButtonRemove_Click">Remove</asp:LinkButton>--%>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:PostBackTrigger ControlID="uoLinkAttach" />
+                                <asp:PostBackTrigger ControlID="uoGridViewHotelContractAttachment" />
+                                <%--                                <asp:PostBackTrigger ControlID="uoLinkButtonRemove" />
+                                <asp:PostBackTrigger ControlID="ucLabelAttached" />--%>
+                            </Triggers>
+                        </asp:UpdatePanel>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="style24" align="left">
+                        <asp:HiddenField ID="uoHiddenFieldFileType" runat="server" />
+                    </td>
+                    <td align="left">
+                        &nbsp;
+                    </td>
+                </tr>
+            </table>
+        </asp:Panel>
+        <table width="100%">
+            <tr>
+                <td align="center">
+                    <hr />
+                    <asp:Button ID="uobtnSave" runat="server" OnClick="uobtnSave_Click" Text="Save" Width="70px" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+    <asp:HiddenField ID="uoHiddenFieldRowNo" runat="server" value="0" />
+    <span id="toavoiderror" class="HotelLink"></span>
+    
+      <script type="text/javascript" language="javascript">
+        function pageLoad(sender, args) {
+            var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
+            if (isAsyncPostback) {
+                pageSettings();
+            }
+        }
+
+        
+        function pageSettings() {
+            $("#<%=uoTextBoxCutoffTime.ClientID %>").change(function(ev) {
+                ValidateTime($(this).val());
+            });
+        }
+        function ValidateTime(pTime) {
+            try {
+                var timePat = /^(\d{1,2}):(\d{2})(:(\d{2}))?$/;
+
+                var matchArray = pTime.match(timePat);
+                if (matchArray == null) {
+                    alert("Time is not in a valid format.");
+                    return false;
+                }
+
+                var hour = matchArray[1];
+                var min = matchArray[2];
+
+                if (hour > 23) {
+                    $("#<%=uoTextBoxCutoffTime.ClientID %>").val('00:00');
+                    alert("Invalid Time.");
+                    return false;
+                }
+
+                if (min > 59) {
+                    $("#<%=uoTextBoxCutoffTime.ClientID %>").val('00:00');
+                    alert("Invalid Time.");
+                    return false;
+                }
+                return true;
+            }
+            catch (err) {
+                return false;
+            }
+        }
+    </script>    
+</asp:Content>

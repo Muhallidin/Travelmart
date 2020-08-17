@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RptDataSource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="DataSource1">
+  <ConnectionProperties>
+    <Extension>SQL</Extension>
+    <ConnectString>Data Source=10.80.0.33;Initial Catalog=TravelMart</ConnectString>
+  </ConnectionProperties>
+  <DataSourceID>456fe2f4-84b9-4066-a904-80933e7b3087</DataSourceID>
+</RptDataSource>

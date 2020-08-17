@@ -1,0 +1,3 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="TravelmartDashboardCalendar.ascx.cs" Inherits="TRAVELMART.TravelmartDashboardCalendar" %>
+<asp:Literal ID="ucLiteralCalendar" runat="server"></asp:Literal>
+

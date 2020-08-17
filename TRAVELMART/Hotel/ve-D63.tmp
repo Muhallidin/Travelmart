@@ -1,0 +1,289 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TravelMartMaster2.Master" AutoEventWireup="true" ValidateRequest="false"
+    CodeBehind="HotelExceptionBooking.aspx.cs" Inherits="TRAVELMART.Hotel.HotelExceptionBooking" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <style type="text/css">
+        .HotelGroup
+        {
+            font-size: larger;
+            font-weight: bold;
+            text-decoration: underline;
+            color: #82ABB8;
+        }
+        .Details
+        {
+            font-size: small;
+            text-align: right;
+            vertical-align: bottom;
+            display: inline;
+        }
+        .Padding
+        {
+            padding-left: 1px;
+        }
+        .Header
+        {
+            font-size: medium;
+            font-weight: bold;
+            text-decoration: underline;
+            text-align: center;
+        }
+        .Bullets
+        {
+            height: auto;
+            text-align: left;
+            list-style-type: circle;
+            font-size: small;
+            vertical-align: middle;
+            display: block;
+        }
+        .Panel
+        {
+            display: none;
+        }
+        .alignRight
+        {
+            text-align: right;
+            padding-right: 5px;
+        }
+        .MouseTool
+        {
+            cursor: pointer;
+        }
+        .listViewTable2
+        {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 11px;
+            color: #333333;
+            border-collapse: collapse;
+            border: 1px solid;
+            border-color: #CCCCCC;
+            text-align: center;
+            white-space: normal;
+        }               
+    </style>    
+       
+</asp:Content>
+<asp:Content ContentPlaceHolderID="HeaderContent" runat="server" ID="header">
+    <%--<div class="PageTitle">
+        Hotel Booking Exception List</div>--%>
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <tr class="PageTitle">
+                <td align="left">
+                   Hotel Booking Exception List
+                </td>                        
+                <td align="right">                
+                Region: &nbsp;&nbsp
+			     <asp:DropDownList ID="uoDropDownListRegion" runat="server" Width="200px" AutoPostBack="true" 
+			           >
+                 </asp:DropDownList>
+                 &nbsp;&nbsp;Port: &nbsp;&nbsp;
+                <asp:DropDownList ID="uoDropDownListPortPerRegion" runat="server" Width="200px" AutoPostBack="true"
+                    >
+                </asp:DropDownList>
+                </td>
+            </tr>
+        </table>
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="SidePlaceHolder" runat="server">
+     <table>
+        <tr>
+            <td>
+                <asp:UpdatePanel runat="server" ID="uoUpdateExport" UpdateMode="Conditional">
+                    <ContentTemplate>
+                        <asp:Button runat="server" ID="uoBtnExportList" CssClass="SmallButton" Text="Export Exception List"
+                             Visible="true" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </td>
+            <td>
+                <a href="HotelExceptionBookingsRemoved.aspx" id="aBtnViewRemoved">
+                    <asp:Button runat="server" ID="uoButtonViewRemoved" CssClass="SmallButton" 
+                     Text="View Removed Records"  Visible="true" />
+                </a>
+            </td>
+        </tr>
+    </table>
+    
+     <div id="DivLeft" style="overflow: auto; overflow-x: hidden; width: 100%; overflow-y: hidden;
+                 position: relative; background:red;">
+                   <asp:ListView runat="server" ID="ListViewExceptionHeader" >
+                        <LayoutTemplate/>
+                        <ItemTemplate/>
+                        <EmptyDataTemplate>
+                            <table border="0" cellpadding="0" cellspacing="0" class="listViewTable">
+                                <tr>
+                                    <th class="hideElement">
+                                        requestInfo
+                                    </th>
+                                    <th>
+                                        <asp:CheckBox runat="server" ID="CheckBox1" Width="20px" CssClass="Checkbox" onclick="SetSettings(this);" />
+                                    </th>
+                                    <th>
+                                        <asp:Label runat="server" ID="Label16" Text="Remove" Width="50px"> </asp:Label>
+                                    </th>
+                                    <th style="text-align: center;">
+                                        <asp:Label runat="server" ID="uoLablE1Hdr" Text="E1 TRId" Width="35px"> </asp:Label>
+                                    </th>
+                                    <th style="text-align: center;">
+                                         <asp:LinkButton ID="LinkButton17" runat="server" CommandName="SortByRecLoc" 
+                                        Text="Record Locator" Width="60px"></asp:LinkButton>
+                                    </th>
+                                    <th style="text-align: center;">
+                                         <asp:LinkButton ID="uoLinkButtonEmpID" runat="server" CommandName="SortByEmpID" 
+                                        Width="60px" Text="Employee Id"></asp:LinkButton>
+                                    </th>
+                                    <th style="text-align: center;">
+                                         <asp:LinkButton ID="uoLinkButtonName" runat="server" CommandName="SortByName" 
+                                        Width="200px" Text="Name"></asp:LinkButton>
+                                    </th>
+                                    <th style="text-align: center;">
+                                        <asp:LinkButton ID="uoLinkButtonStatus" runat="server" CommandName="SortByStatus" 
+                                        Width="50px" Text="Status"></asp:LinkButton>
+                                    </th>
+                                     <th class="MouseTool" style="text-align: center;">
+                                         <asp:LinkButton ID="LinkButton1" runat="server" CommandName="SortByExRemarks" 
+                                        Width="250px" Text="Exception Remarks"></asp:LinkButton>
+                                    </th>
+                                    <th style="text-align: center;">
+                                        <asp:LinkButton ID="uoLinkButtonOnOffDate" runat="server" CommandName="SortByOnOffDate" 
+                                        Width="70px" Text="On/Off Date"></asp:LinkButton>
+                                    </th>
+                                    <th style="text-align: center;">
+                                        <asp:LinkButton ID="LinkButton2" runat="server" CommandName="SortByGender" 
+                                        Width="50px" Text="Gender"></asp:LinkButton>
+                                    </th>
+                                    <th style="text-align: center;">
+                                         <asp:LinkButton ID="LinkButton3" runat="server" CommandName="SortByRank" 
+                                        Width="120px" Text="Rank"></asp:LinkButton>
+                                    </th>
+                                    <th style="text-align: center;">
+                                        <asp:LinkButton ID="LinkButton4" runat="server" CommandName="SortByStripe" 
+                                        Width="35px" Text="Stripe"></asp:LinkButton>
+                                    </th>
+                                    <th style="text-align: center;">
+                                         <asp:LinkButton ID="LinkButton5" runat="server" CommandName="SortByRoomType" 
+                                        Width="50px" Text="Room Type"></asp:LinkButton>
+                                    </th>
+                                    <th style="text-align: center;">
+                                        <asp:LinkButton ID="LinkButton6" runat="server" CommandName="SortByNationality" 
+                                        Width="120px" Text="Nationality"></asp:LinkButton>
+                                    </th>
+                                    <th class="MouseTool" style="text-align: center;">
+                                        <%--<asp:Label runat="server" ID="uoLablPort" Text="Port" ToolTip="Port Code based on Crew History"
+                                            Width="150px"> </asp:Label>--%>
+                                        <asp:LinkButton ID="LinkButton7" runat="server" CommandName="SortByPort" ToolTip="Port Code based on Crew History"
+                                        Width="150px" Text="Port"></asp:LinkButton>
+                                    </th>
+                                    <th style="text-align: center;">
+                                        <asp:LinkButton ID="LinkButton8" runat="server" CommandName="SortByShip" 
+                                        Width="150px" Text="Ship"></asp:LinkButton>
+                                    </th>
+                                    <th class="MouseTool" style="text-align: center;">
+                                        <%--<asp:Label runat="server" ID="Label1" Text="Arvl/Dept Date" ToolTip="Arrival/Departure date based on PNR."
+                                            Width="70px"> </asp:Label>--%>
+                                        <asp:LinkButton ID="LinkButton9" runat="server" CommandName="SortByArrDepDate" 
+                                        Width="70px" Text="Arvl/Dept Date"></asp:LinkButton>
+                                    </th>
+                                    <th class="MouseTool" style="text-align: center;">
+                                        <%--<asp:Label runat="server" ID="Label2" Text="Arvl/Dept Time" ToolTip="Arrival/Departure time based on PNR."
+                                            Width="50px"> </asp:Label>--%>
+                                            <asp:LinkButton ID="LinkButton10" runat="server" CommandName="SortByArrDepTime" 
+                                            Width="50px" Text="Arvl/Dept Time"></asp:LinkButton>
+                                    </th>
+                                    <th class="MouseTool" style="text-align: center;">
+                                        <%--<asp:Label runat="server" ID="Label3" Text="Carrier" ToolTip="Airline Carrier based on PNR."
+                                            Width="45px"> </asp:Label>--%>
+                                            <asp:LinkButton ID="LinkButton12" runat="server" CommandName="SortByCarrier" 
+                                            Width="45px" Text="Carrier"></asp:LinkButton>
+                                    </th>
+                                    <th class="MouseTool" style="text-align: center;">
+                                       <%-- <asp:Label runat="server" ID="Label4" Text="Flight No." ToolTip="Flight No. based on PNR."
+                                            Width="45px"> </asp:Label>--%>
+                                            <asp:LinkButton ID="LinkButton11" runat="server" CommandName="SortByFlightNo" 
+                                            Width="45px" Text="Flight No."></asp:LinkButton>
+                                    </th>
+                                    <th class="MouseTool" style="text-align: center;">
+                                        <%--<asp:Label runat="server" ID="Label5" Text="From City" ToolTip="Airport Code Equivalent of Origin."
+                                            Width="45px"> </asp:Label>--%>
+                                            <asp:LinkButton ID="LinkButton13" runat="server" CommandName="SortByFromCity" 
+                                            Width="45px" Text="From City"></asp:LinkButton>
+                                    </th>
+                                    <th class="MouseTool" style="text-align: center;">
+                                        <%--<asp:Label runat="server" ID="Label6" Text="To City" ToolTip="Airport Code Equivalent of Destination."
+                                            Width="45px"> </asp:Label>--%>
+                                             <asp:LinkButton ID="LinkButton14" runat="server" CommandName="SortByToCity" 
+                                            Width="45px" Text="To City"></asp:LinkButton>
+                                    </th>
+                                    <th class="MouseTool" style="text-align: center;">
+                                        <%--<asp:Label runat="server" ID="Label7" Text="Reason Code" ToolTip="Reason Code based on Crew History."
+                                            Width="60px"> </asp:Label>--%>
+                                            <asp:LinkButton ID="LinkButton15" runat="server" CommandName="SortByRasonCode" 
+                                            Width="60px" Text="Reason Code"></asp:LinkButton>
+                                    </th>
+                                   
+                                    <th class="MouseTool" style="text-align: center;">
+                                        <asp:LinkButton ID="LinkButton16" runat="server" CommandName="SortByRemarks" 
+                                        Width="150px" Text="Booking Remarks"></asp:LinkButton>
+                                    </th>
+                                    
+                                    <th>
+                                        <asp:Label runat="server" ID="Label11" Text="" Width="20px"> </asp:Label>
+                                    </th>
+                                </tr>
+                            </table>
+                        </EmptyDataTemplate>
+                    </asp:ListView>
+                
+        </div>
+        <script language="javascript" type="text/javascript">
+            function CloseModal(strURL) {
+                window.location = strURL;
+            }
+            Sys.Application.add_load(function() {
+                SetExceptionResolution();
+    //            ShowRemoveComment();
+            });
+
+            $("#masterDiv").style.display = "hidden";
+            
+            function SetExceptionResolution() {
+                var ht = $(window).height(); // * 0.54; //550;
+                var wd = $(window).width() * 0.62;
+                var ht2 = $(window).height(); // * 0.60; //550;
+                var ht3 = $(window).height(); // * 0.60;
+                var wd2 = $(window).width() - (wd + 45);
+                if (screen.height <= 600) {
+                    ht = ht * 0.30;
+                    ht2 = ht2 * 0.40;
+                    ht3 = ht3 * 0.40;
+                    wd2 = $(window).width() - wd;
+
+                }
+                else if (screen.height <= 720) {
+                    ht = ht * 0.45;
+                    ht2 = ht2 * 0.50;
+                    ht3 = ht3 * 0.50;
+                }
+                else {
+                    ht = ht * 0.50;
+                    ht2 = ht2 * 0.58;
+                }
+
+
+                $("#DivLeft").width(wd);
+                $("#HotelDiv").width(wd2);
+//                document.getElementById('masterDiv').hide();
+                document.getElementById("masterDiv").style.border="0px";
+                    
+            }
+        
+    
+    </script>
+           
+</asp:Content>
+<asp:Content ID="Content3" ContentPlaceHolderID="BodyPlaceHolder" runat="server" >
+    
+</asp:Content>

@@ -1,0 +1,1333 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="TravelMartMaster.Master.cs"
+    Inherits="TRAVELMART.TravelMartMaster" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<%@ Register src="TravelmartMenu.ascx" tagname="TravelmartMenu" tagprefix="uc1" %>
+<%@ Register src="TravelmartMenuLinks.ascx" tagname="TravelmartMenuLinks" tagprefix="uc2" %>
+<%@ Register src="TravelmartDashboardCalendar.ascx" tagname="TravelmartCalendar" tagprefix="uc3" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+    
+    <script type="text/javascript" src="/FBox/jquery-1.6.1.min.js"></script>    
+    <script type="text/javascript" src="/Menu/jquery-1.3.1.min.js"></script> 
+    
+    <script type="text/javascript" src="/FBox/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+    <script type="text/javascript" src="/FBox/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="FBox/fancybox/jquery.fancybox-1.3.4.css"
+        media="screen" />
+    <link href="App_Themes/Default/Stylesheet.css" rel="stylesheet" type="text/css" />
+    <link href="App_Themes/Default/LinkMenu.css" rel="stylesheet" type="text/css" />
+    <%--Menu Settings --%>
+    
+    <script src="/Menu/menu.js" type="text/javascript"></script>
+    <link href="Menu/Menustyle.css" rel="stylesheet" type="text/css" />
+
+    <script src="/Script/popup.js" type="text/javascript"></script>    
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .Master
+        {
+            text-align:left;   
+            border: 1px solid #C0C0C0;
+        }
+        .Master td.MasterCaption
+        {
+            width: 100px;
+            white-space:nowrap;
+        }
+        .Master td.MasterImage
+        {
+            width: 5px;            
+            margin:0, 0, 0, 0;
+            padding: 0, 0, 0, 0;        
+        } 
+        .Img
+        {
+            cursor:hand;            
+        }  
+        .Master td.MasterValue
+        {
+            width: 150px;
+        }        
+        .Separator
+        {
+            color: #FF0000;
+            font-weight: bold;
+            padding-left: 5px;
+        }  
+        .hideHover
+        {
+            display:none;    
+        }
+        .showHover
+        {
+            display:inline;   
+            position: absolute; z-index: 200; 
+            background-color:White;
+            left: 400px;
+            top: 400px;
+        }    
+        #progressBackgroundFilter {
+            position:fixed;
+            top:0px;
+            bottom:0px;
+            left:0px;
+            right:0px;
+            overflow:hidden;
+            padding:0;
+            margin:0;
+            background-color:#000;
+            filter:alpha(opacity=50);
+            opacity:0.5;
+            z-index:1000;
+        }
+        #processMessage {
+            position:fixed;
+            top:30%;
+            left:43%;
+            padding:10px;
+            width:14%;
+            z-index:1001;
+            background-color:#fff;
+            border:solid 1px #000;
+            text-align:center;
+        }    
+    </style>
+</head>
+<body bgcolor="#82ABB8" >
+    <form id="form1" runat="server">
+    
+    <script language ="javascript" type="text/javascript">
+        var ModalProgress = '<%= uoModalPopUp.ClientID %>';
+
+        Sys.WebForms.PageRequestManager.getInstance().add_beginRequest(beginReq);
+        Sys.WebForms.PageRequestManager.getInstance().add_endRequest(endReq);
+
+        // Function is called when the Asynchronous postback starts, used to SHOW the Modal Popup.
+        function beginReq(sender, args) {
+            $find(ModalProgress).show(); // shows the Popup.
+        }
+
+        // Function is called when the Asynchronous postback ends, used to HIDE the Modal Popup.
+        function endReq(sender, args) {
+            $find(ModalProgress).hide(); // shows the Popup.
+        }
+                    
+        $(document).ready(function() {
+            Settings();
+            ShowSearchPopup();
+
+        });
+
+        function OpenHelp() {
+            var URLString = "../Help/TravelMart Manual.html";
+
+            var screenWidth = screen.availwidth;
+            var screenHeight = screen.availheight;
+
+            screenWidth = 820;
+            screenHeight = 650;
+
+            window.open(URLString, 'Help', 'top=10, left=200, width=' + screenWidth + ', height=' + screenHeight + ', scrollbars=yes, menubar=no,toolbar=no,status=no,resizable=yes,addressbar=no');
+            return false;
+        }
+        
+        function ShowSearchPopup() {
+            $("#uoASearch").fancybox(
+                {
+                    'width': '35%',
+                    'height': '70%',
+                    'autoScale': false,
+                    'transitionIn': 'fadeIn',
+                    'transitionOut': 'fadeOut',
+                    'type': 'iframe',
+                    'onClosed': function() {
+                        var a = $("#<%=uoHiddenFieldSearch.ClientID %>").val();
+                        if (a == '1')
+                            window.location = $("#<%=uoHiddenFieldRedirectURL.ClientID %>").val();
+                    }
+                });
+        }
+
+        function pageLoad(sender, args) {
+            var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
+            if (isAsyncPostback) {
+                Settings();
+                $('a[rel!=ext]').click(function() { window.onbeforeunload = null; });
+                $("aspnetForm").submit(function() { window.onbeforeunload = null; });
+            }
+        }
+
+        function Settings() {
+            $('html').click(function() {
+                var UserSession = "<%= HttpContext.Current.User.Identity.Name %>";
+                if (UserSession == null) {
+                    alert("Your Session has expired");
+                    window.location = "Login.aspx";
+                }
+            });
+            
+            //Variables
+            var ddlRegion = $("#<%=uoDropDownListRegion.ClientID %>");
+            var ddlCountry = $("#<%=uoDropDownListCountry.ClientID %>");
+            var ddlCity = $("#<%=uoDropDownListCity.ClientID %>");
+            
+            var ddlPort = $("#<%=uoDropDownListPort.ClientID %>");
+            var ddlHotel = $("#<%=uoDropDownListHotel.ClientID %>");
+
+            var txtCountry = $("#<%=uoTextBoxCountryName.ClientID %>");
+            var txtCity = $("#<%=uoTextBoxCityName.ClientID %>");
+
+            var imgRegion = $("#<%=uoImageRegion.ClientID %>");
+            var imgCountry = $("#<%=uoImageCountry.ClientID %>");
+            var imgCity = $("#<%=uoImageCity.ClientID %>");
+            var imgPort = $("#<%=uoImagePort.ClientID %>");
+            var imgHotel = $("#<%=uoImageHotel.ClientID %>");
+            var imgLegend = $("#<%=uoImageLegend.ClientID %>");
+            var imgFilter = $("#<%=uoImageFilter.ClientID %>");
+
+            
+            var imgLeftMenu = $("#<%=uoImageLeftMenu.ClientID %>");
+            var imgDashboard2 = $("#<%=uoImageDashboard.ClientID %>");
+
+            var ViewRegion = $("#<%=uoHiddenFieldViewRegion.ClientID %>");
+            var ViewCountry = $("#<%=uoHiddenFieldViewCountry.ClientID %>");
+            var ViewCity = $("#<%=uoHiddenFieldViewCity.ClientID %>");
+            var ViewHotel = $("#<%=uoHiddenFieldViewHotel.ClientID %>");
+            var ViewPort = $("#<%=uoHiddenFieldViewPort.ClientID %>");
+            var ViewLegend = $("#<%=uoHiddenFieldViewLegend.ClientID %>");
+            var ViewFilter = $("#<%=uoHiddenFieldFilter.ClientID %>");
+            
+            var ViewLeftMenu = $("#<%=uoHiddenFieldLeftMenu.ClientID %>");
+            var ViewDashboard2 = $("#<%=uoHiddenFieldDashboard2.ClientID %>");
+            var ViewDateRange = $("#<%=uoHiddenFieldDateRange.ClientID %>");
+            
+            //Bind country, city, port hotel
+            ddlRegion.change(function(ev) {
+                GetCountry($(this).val(), txtCountry.val());
+                //ClearCity();
+                //GetPort("0");
+                //GetHotel("0");
+                GetPort(ddlRegion.val(), ddlCountry.val());
+                GetHotel(ddlRegion.val(), ddlPort.val(), ddlCountry.val());                
+            });
+
+            txtCountry.change(function(ev) {
+                GetCountry(ddlRegion.val(), $(this).val());
+                //ClearCity();
+                //GetPort("0");
+                //GetHotel("0");
+                GetPort(ddlRegion.val(), ddlCountry.val());
+                GetHotel(ddlRegion.val(), ddlPort.val(), ddlCountry.val());
+            });
+
+            //Bind City
+            ddlCountry.change(function(ev) {
+                //GetCity($(this).val(), txtCity.val());
+                GetPort(ddlRegion.val(), ddlCountry.val());
+                GetHotel(ddlRegion.val(), ddlPort.val(), ddlCountry.val());
+            });
+
+            txtCity.change(function(ev) {
+                GetCity(ddlCountry.val(), $(this).val());
+            });
+
+            //Bind Port and Hotel
+            ddlCity.change(function(ev) {
+                //GetPort($(this).val());
+                //GetHotel($(this).val());
+                GetPort("0");
+                GetHotel("0");
+            });
+
+            //Button Go click
+            $("#<%=uoButtonDateRange.ClientID %>").click(function(ev) {
+                $("#<%=uoHiddenFieldRegionID.ClientID %>").val(ddlRegion.val());
+                $("#<%=uoHiddenFieldCountryName.ClientID %>").val(txtCountry.val());
+                $("#<%=uoHiddenFieldCountryID.ClientID %>").val(ddlCountry.val());
+                $("#<%=uoHiddenFieldCityName.ClientID %>").val(txtCity.val());
+                $("#<%=uoHiddenFieldCityID.ClientID %>").val(ddlCity.val());
+                $("#<%=uoHiddenFieldPortID.ClientID %>").val(ddlPort.val());
+                $("#<%=uoHiddenFieldHotelID.ClientID %>").val(ddlHotel.val());
+            });
+
+            //Hide/Show Filter
+            imgRegion.click(function(ev) {
+                //var oldSrc = $(this).attr("src");
+                if (ViewRegion.val() == "0") {
+                    ddlRegion.fadeIn();
+                    $("#<%=spanRegion.ClientID %>").fadeIn();
+                    ViewRegion.val("1");
+                }
+                else {
+                    ddlRegion.fadeOut();
+                    $("#<%=spanRegion.ClientID %>").fadeOut();
+                    ViewRegion.val("0");
+                }
+                ChangeImageSrc($(this), ViewRegion.val());
+            });
+            imgCountry.click(function(ev) {
+                //var oldSrc = $(this).attr("src");
+                if (ViewCountry.val() == "0") {
+                    ddlCountry.fadeIn();
+                    txtCountry.fadeIn();
+                    $("#<%=spanCountryName.ClientID %>").fadeIn();
+                    $("#<%=spanCountry.ClientID %>").fadeIn();
+                    ViewCountry.val("1");
+                    GetCountry(ddlCountry.val(), txtCountry.val());
+                }
+                else {
+                    ddlCountry.fadeOut();
+                    txtCountry.fadeOut();
+                    $("#<%=spanCountryName.ClientID %>").fadeOut();
+                    $("#<%=spanCountry.ClientID %>").fadeOut();
+                    ViewCountry.val("0");
+                }
+                ChangeImageSrc($(this), ViewCountry.val());
+            });
+            imgCity.click(function(ev) {
+                //var oldSrc = $(this).attr("src");
+                if (ViewCity.val() == "0") {
+                    ddlCity.fadeIn();
+                    txtCity.fadeIn();
+                    $("#<%=spanCityName.ClientID %>").fadeIn();
+                    $("#<%=spanCity.ClientID %>").fadeIn();
+                    ViewCity.val("1");
+                    GetCity(ddlCity.val(), txtCity.val());
+                }
+                else {
+                    ddlCity.fadeOut();
+                    txtCity.fadeOut();
+                    $("#<%=spanCityName.ClientID %>").fadeOut();
+                    $("#<%=spanCity.ClientID %>").fadeOut();
+                    ViewCity.val("0");
+                    
+                }
+                ChangeImageSrc($(this), ViewCity.val());
+            });
+            imgHotel.click(function(ev) {
+               //var oldSrc = $(this).attr("src");
+                if (ViewHotel.val() == "0") {
+                    ddlHotel.fadeIn();
+                    $("#<%=spanHotel.ClientID %>").fadeIn();
+                    ViewHotel.val("1");
+                    GetHotel(ddlRegion.val(), ddlPort.val(), ddlCountry.val()); //ddlCity
+                }
+                else {
+                    ddlHotel.fadeOut();
+                    $("#<%=spanHotel.ClientID %>").fadeOut();
+                    ViewHotel.val("0");
+                }
+                ChangeImageSrc($(this), ViewHotel.val());
+            });
+            imgPort.click(function(ev) {
+                //var oldSrc = $(this).attr("src");
+                if (ViewPort.val() == "0") {
+                    ddlPort.fadeIn();
+                    $("#<%=spanPort.ClientID %>").fadeIn();
+                    ViewPort.val("1");
+                    GetPort(ddlRegion.val(), ddlCountry.val()); //ddlCity
+                }
+                else {
+                    ddlPort.fadeOut();
+                    $("#<%=spanPort.ClientID %>").fadeOut();
+                    ViewPort.val("0");
+                }
+                ChangeImageSrc($(this), ViewPort.val());
+            });
+
+            imgLegend.click(function(ev) {
+                if (ViewLegend.val() == "0") {
+                    ViewLegend.val("1");
+                }
+                else {
+                    ViewLegend.val("0");
+                }
+            });
+
+//            imgDashboard.click(function(ev) {
+//                if (ViewDashboard.val() == "0") {
+//                    ViewDashboard.val("1");
+//                }
+//                else {
+//                    ViewDashboard.val("0");
+//                }
+//            });
+
+            imgFilter.click(function(ev) {
+                if (ViewFilter.val() == "0") {
+                    ViewFilter.val("1");
+                }
+                else {
+                    ViewFilter.val("0");
+                }
+            });
+
+//            imgLinkMenu.click(function(ev) {
+//                if (ViewLinkMenu.val() == "0") {
+//                    ViewLinkMenu.val("1");
+//                }
+//                else {
+//                    ViewLinkMenu.val("0");
+//                }
+//            });
+
+//            imgLeftMenu.click(function(ev) {
+//                if (ViewLeftMenu.val() == "0") {
+//                    ViewLeftMenu.val("1");
+//                }
+//                else {
+//                    ViewLeftMenu.val("0");
+//                }
+//            });
+
+            imgDashboard2.click(function(ev) {
+                if (ViewDashboard2.val() == "0") {
+                    ViewDashboard2.val("1");
+                }
+                else {
+                    ViewDashboard2.val("0");
+                }
+            });
+
+//            $("#uoCalendarDashboard.ClientID").each(function(ev) {
+//                alert($(this).html);
+//            });
+    
+                                                
+//            //START
+            $(".hoverDate a").hover(function(ev) {
+                //alert($(this).attr("title"));
+                //var sHTML = $(this).html;
+
+                var sParent = $(this).parent()[0].id;
+
+
+
+                $(this).hover(function(e) {
+                    $("#divTestHover2").removeClass("hideHover");
+                    $("#divTestHover2").addClass("showHover");
+
+                    $("#<%=uoLabelDate.ClientID %>").text($(this).attr("title"));
+
+                    var sDate = $(this).attr("title");
+                    var sSign = sParent.split('~');
+
+                    if (sSign[2] != undefined) {
+                        $("#<%=uoLabelCalOn.ClientID %>").text(sSign[2].toString());
+                        $("#<%=uoLabelCalOff.ClientID %>").text(sSign[1].toString());
+                    }
+                    //data: "{'DateFrom': '" + sParent + "', 'DateTo': '" + sParent + "', 'pRole':'" + $("#<%=uoHiddenFieldRole.ClientID %>").val() + "'}",
+                    //                    $.ajax({
+                    //                        type: "POST",
+                    //                        contentType: "application/json; charset=utf-8",
+                    //                        url: "/PageMethods.aspx/GetHomeDashboard",
+                    //                        data: "{'ONOFFValue': '" + sParent + "'}",
+                    //                        dataType: "json",
+                    //                        success: function(data) {
+
+                    //                            $("#<%=uoLabelCalOn.ClientID %>").text(data.d[0].Onsigning);
+                    //                            $("#<%=uoLabelCalOff.ClientID %>").text(data.d[0].Offsigning);
+                    //                        }
+                    //                        ,
+                    //                        error: function(objXMLHttpRequest, textStatus, errorThrown) {
+                    //                            //alert(errorThrown);
+                    //                        }
+                    //                    });
+
+                },
+                function() {
+                    $("#divTestHover2").removeClass("showHover");
+                    $("#divTestHover2").addClass("hideHover");
+                });
+                //alert($(this).html());
+                //                $(this).each(function(e) {
+                //                    alert(e.html());
+                //                });
+            });
+//            //END
+            
+            //FUNCTIONS
+            function ChangeImageSrc(icon, view) 
+            {
+                var newSrc;
+                //var oldSrc = icon.attr("src");
+                //alert(view);
+                if (view == "1") {
+                    newSrc = icon.attr("src").replace("box_plus.png", "box_minus.png");
+                }
+                else {                    
+                    newSrc = icon.attr("src").replace("box_minus.png", "box_plus.png");
+                }
+                icon.attr("src", newSrc);              
+            }
+
+            function GetCountry(RegionID, CountryName) {
+                if (ViewCountry.val() == "1") {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "/PageMethods.aspx/GetCountry",
+                        data: "{'RegionID': '" + RegionID + "', 'CountryName': '" + CountryName + "'}",
+                        dataType: "json",
+                        success: function(data) {
+
+                            //remove all the options in dropdown
+                            $("#<%=uoDropDownListCountry.ClientID %>> option").remove();
+
+                            //add option in dropdown
+                            $("<option value='PROCESSING'>PROCESSING...</option>").appendTo(ddlCountry);
+                            $("<option value='0'>--SELECT COUNTRY--</option>").appendTo(ddlCountry);
+
+                            for (var i = 0; i < data.d.length; i++) {
+                                //add the data coming from the result
+                                $("<option value='" + data.d[i].CountryIDString + "'>" + data.d[i].CountryNameString + "</option>").appendTo(ddlCountry);
+                            }
+                            $("#<%=uoDropDownListCountry.ClientID %>> option[value='PROCESSING']").remove();
+                        }
+                        ,
+                        error: function(objXMLHttpRequest, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+                }
+            }
+            function GetCity(countryID, cityName) {
+                if (ViewCity.val() == "1") {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "/PageMethods.aspx/GetCity",
+                        data: "{'CountryID': '" + countryID + "', 'CityName': '" + cityName + "'}",
+                        dataType: "json",
+                        success: function(data) {
+
+                            //remove all the options in dropdown
+                            $("#<%=uoDropDownListCity.ClientID %>> option").remove();
+
+                            //add option in dropdown
+                            $("<option value='PROCESSING'>PROCESSING...</option>").appendTo(ddlCity);
+                            $("<option value='0'>--SELECT CITY--</option>").appendTo(ddlCity);
+
+                            for (var i = 0; i < data.d.length; i++) {
+                                //add the data coming from the result                            
+                                $("<option value='" + data.d[i].CityIDString + "'>" + data.d[i].CityNameString + "</option>").appendTo(ddlCity);
+                            }
+                            $("#<%=uoDropDownListCity.ClientID %>> option[value='PROCESSING']").remove();
+                        },
+                        error: function(objXMLHttpRequest, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+                }
+            }
+            function GetPort(regionID, countryID) {
+                if (ViewPort.val() == "1") {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "/PageMethods.aspx/GetPort",
+                        data: "{'RegionID': '" + regionID + "', 'CountryID': '" + countryID + "'}",
+                        dataType: "json",
+                        success: function(data) {
+
+                            //remove all the options in dropdown
+                            $("#<%=uoDropDownListPort.ClientID %>> option").remove();
+
+                            //add option in dropdown
+                            $("<option value='PROCESSING'>PROCESSING...</option>").appendTo(ddlPort);
+                            $("<option value='0'>--SELECT PORT--</option>").appendTo(ddlPort);
+
+                            for (var i = 0; i < data.d.length; i++) {
+                                //add the data coming from the result
+                                $("<option value='" + data.d[i].PortIDString + "'>" + data.d[i].PortNameString + "</option>").appendTo(ddlPort);
+                            }
+                            $("#<%=uoDropDownListPort.ClientID %>> option[value='PROCESSING']").remove();
+                        },
+                        error: function(objXMLHttpRequest, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+                }
+            }
+            function GetHotel(RegionID, PortID, countryID) {
+                if (ViewHotel.val() == "1") {
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "/PageMethods.aspx/GetHotel",
+                        data: "{'RegionID': '" + RegionID + "', 'PortID': '" + PortID + "', 'CountryID': '" + countryID + "'}",
+                        dataType: "json",
+                        success: function(data) {
+
+                            //remove all the options in dropdown
+                            $("#<%=uoDropDownListHotel.ClientID %>> option").remove();
+
+                            //add option in dropdown
+                            $("<option value='PROCESSING'>PROCESSING...</option>").appendTo(ddlHotel);
+                            $("<option value='0'>--SELECT HOTEL--</option>").appendTo(ddlHotel);
+
+                            for (var i = 0; i < data.d.length; i++) {
+                                //add the data coming from the result
+                                $("<option value='" + data.d[i].HotelIDString + "'>" + data.d[i].HotelNameString + "</option>").appendTo(ddlHotel);
+                            }
+                            $("#<%=uoDropDownListHotel.ClientID %>> option[value='PROCESSING']").remove();
+                        },
+                        error: function(objXMLHttpRequest, textStatus, errorThrown) {
+                            alert(errorThrown);
+                        }
+                    });
+                }
+            }
+            function ClearCity() {
+                if (ViewCity.val() == "1") {
+                    //remove all the options in dropdown
+                    $("#<%=uoDropDownListCity.ClientID %>> option").remove();
+                    $("<option value='0'>--SELECT CITY--</option>").appendTo(ddlCity);
+                }
+            }
+            function ClearCountry() {
+                if (ViewCountry.val() == "1") {
+                    //remove all the options in dropdown
+                    $("#<%=uoDropDownListCountry.ClientID %>> option").remove();
+                    $("<option value='0'>--SELECT COUNTRY--</option>").appendTo(ddlCountry);
+                }
+            }
+            function ClearPort() {
+                if (ViewPort.val() == "1") {
+                    //remove all the options in dropdown
+                    $("#<%=uoDropDownListPort.ClientID %>> option").remove();
+                    $("<option value='0'>--SELECT PORT--</option>").appendTo(ddlPort);
+                }
+            }
+            function ClearHotel() {
+                //remove all the options in dropdown
+                $("#<%=uoDropDownListHotel.ClientID %>> option").remove();
+                $("<option value='0'>--SELECT HOTEL--</option>").appendTo(ddlHotel);
+            }
+
+            //Click Show/Hide Left Menu
+            $("#<%=uoImageLeftMenu.ClientID %>").click(function(ev) {
+
+                if (ViewLeftMenu.val() == '0') {
+                    ViewLeftMenu.val('1');
+                }
+                else {
+                    ViewLeftMenu.val('0');
+                }
+
+                javascript: __doPostBack('ctl00$uoImageLeftMenu', '')
+            })
+        }
+
+
+
+        function Settings() {
+            $('html').click(function() {
+                var UserSession = "<%= HttpContext.Current.User.Identity.Name %>";
+                if (UserSession == null) {
+                    window.location = "/Login.aspx";
+                }               
+            });
+        }
+
+        var lefttime = parseInt(("<%= Session.Timeout %>").toString());
+        function BodyOnLoad() {
+            var divSessionTimeoutWarning = document.getElementById('<%=divSessionTimeoutWarning.ClientID%>');
+            divSessionTimeoutWarning.style.display = 'none';
+            setTimeout('SessionWarning()', 1000);
+        }
+
+        //Notify the user that his session is ABOUT to expire.
+        //Do so by making our warning div tag visible.
+        //Notify the user that his session HAS expired.
+
+        function ShowSessionExpiredNotification() {
+            clearTimeout(StopCounter);
+            alert("Sorry you session is expired");
+            var divSessionTimeoutWarning = document.getElementById('<%=divSessionTimeoutWarning.ClientID%>');
+            divSessionTimeoutWarning.style.display = 'none';
+            window.location = "/Login.aspx";
+        }
+
+        function ShowSessionExitNotification() {
+            clearTimeout(StopCounter);
+            var divSessionTimeoutWarning = document.getElementById('<%=divSessionTimeoutWarning.ClientID%>');
+            divSessionTimeoutWarning.style.display = 'none';
+            window.location = "/Login.aspx";
+        }
+
+        function ResetClientSideSessionTimers() {
+            var divSessionTimeoutWarning = document.getElementById('<%=divSessionTimeoutWarning.ClientID%>');
+            divSessionTimeoutWarning.style.display = 'none';
+            clearTimeout(StopAlert);
+            Counter = 60
+            lefttime = parseInt(("<%= Session.Timeout %>").toString());
+            setTimeout('SessionWarning()', 1000);
+        }
+
+        var Counter = 60;
+        var StopCounter;
+        var StopAlert;
+        function AlertCounter() {
+            var divSessionTimeoutWarning = document.getElementById('<%=divSessionTimeoutWarning.ClientID%>');
+            divSessionTimeoutWarning.style.display = 'inline';
+            document.getElementById('<%=TextCounter2.ClientID%>').value = Counter;
+            Counter--;
+            if (Counter <= 0) {
+                clearTimeout(StopAlert);
+                Counter = 60
+                StopCounter = setTimeout('ShowSessionExpiredNotification()', 1 / 1000);
+            }
+            else {
+                StopAlert = setTimeout('AlertCounter()', 1000);
+            }
+        }
+
+        var StopWarning;
+        function SessionWarning() {
+            lefttime--;
+            if (lefttime <= 1) {
+                StopAlert = setTimeout('AlertCounter()', 1 / 1000);
+            }
+            else {
+                StopWarning = setTimeout('SessionWarning()', 60000);
+            }
+        }
+           
+    </script>
+    
+    <div style="vertical-align: middle; height:100%; padding-bottom: 15px" runat="server">
+        <center>
+            <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+                
+            </asp:ScriptManager>
+            <br />
+            <div id="divSessionTimeoutWarning" runat="server" style="position: fixed; left: 400px; top: 250px; background-color: white; border-style: solid; display: none;">
+            <asp:UpdatePanel ID="UpdatePanelAlert" runat="server">
+                <ContentTemplate>
+                     <table>
+                        <tr>
+                            <td align="center">
+                                <asp:TextBox ID="TextCounter2"  Font-Size="Larger" Font-Bold="true" 
+                                 runat="server" Width="100px" />        
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                              <asp:Label ID="lblSessionWarning" runat="server" Text="Warning.  Your server session is about to expire due to inactivity."></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                              <asp:Button ID="btnContinueWorking" runat="server" Text="Continue Working" OnClientClick="ResetClientSideSessionTimers()" OnClick="btnContinueWorking_Click" />
+                              <asp:Button ID="btnExitWorking" runat="server" Text="Exit" OnClientClick="ShowSessionExitNotification()" OnClick="btnExitWorking_Click"/>  
+                            </td>
+                        </tr>
+                     </table>                      
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </div>
+            <%--<table width="1025px" bgcolor="#ECDFC4">--%>
+            <table width="1180px" bgcolor="#ECDFC4" runat="server" id="tblMenu">
+                <tr>
+                    <td  colspan="2">                    
+                    <table cellpadding="0" cellspacing = "0" width="100%" >
+                        <tr>
+                            <td class="BannerLeft"></td>
+                            <td class="BannerMiddle">&nbsp;</td>
+                            <td class="BannerRight"></td>
+                        </tr>
+                    </table>
+                        <%--<asp:Image ID="ucImageBanner" runat="server" Width="100%"
+                            ImageUrl="~/Images/BannerLogo.jpg" />--%>
+                    </td>
+                </tr>               
+                <tr>
+                    <td style=" padding-left: 5px;text-align:right " valign="top" rowspan="2">
+                    <asp:Panel runat="server" ID="uoPanelMenu">
+                        <asp:Image ID="uoImageLeftMenu" runat="server" ImageUrl="~/Images/bluearrowLeft.gif" />
+                        <cc1:CollapsiblePanelExtender ID="CollapsiblePanelExtender_uoPanelLeftMenu" 
+                                runat="server" Enabled="True" 
+                                TargetControlID="uoPanelLeftMenu"
+                                CollapsedSize="0"                                        
+                                ExpandControlID="uoImageLeftMenu"
+                                CollapseControlID="uoImageLeftMenu"
+                                AutoCollapse="False"
+                                AutoExpand="False"                                        
+                                ImageControlID="uoImageLeftMenu"
+                                ExpandedImage="~/images/bluearrowLeft.gif"
+                                CollapsedImage="~/images/bluearrowRight.gif"
+                                ExpandDirection="Horizontal" />
+                                
+                        <asp:Panel runat="server" ID="uoPanelLeftMenu" Width="300px">  
+                            <table width="300px">
+                                <tr id="uoRowFilter" runat="server">
+                                    <td>
+                                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                        <ContentTemplate> 
+                                                                            
+                                        <table class="LeftPanelTitle" width="100%" cellpadding="0" cellspacing="0" runat="server" ID="FilterTable">
+                                            <tr>
+                                                <td>Filter</td>
+                                                <td align="right">                                               
+                                                    <asp:Image ID="uoImageFilter" runat="server" ImageUrl="~/Images/box_up.png" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        
+                                        <asp:Panel ID="uoPanelFilter" runat="server">                                   
+                                        <cc1:CollapsiblePanelExtender ID="uoPanelFilter_CollapsiblePanelExtender" 
+                                            runat="server" Enabled="True" 
+                                            TargetControlID="uoPanelFilter"
+                                            CollapsedSize="0"                                        
+                                            ExpandControlID="uoImageFilter"
+                                            CollapseControlID="uoImageFilter"
+                                            AutoCollapse="False"
+                                            AutoExpand="False"                                        
+                                            ImageControlID="uoImageFilter"
+                                            ExpandedImage="~/images/box_up.png"
+                                            CollapsedImage="~/images/box_down.png"
+                                            ExpandDirection="Vertical" />
+                                        
+                                        <table class="Master" width="100%" >
+                                            <tr runat="server" id="uoRowFilterRegion">
+                                                <td class="MasterImage">
+                                                    <asp:Image ID="uoImageRegion" runat="server" ImageUrl="~/Images/box_minus.png" CssClass="Img" ToolTip="Region"/>
+                                                </td>                                            
+                                                <td class="MasterCaption"><span runat="server" id = "spanRegion"> Region: </span></td>
+                                                <td >
+                                                    <asp:DropDownList ID="uoDropDownListRegion" runat="server" CssClass="SmallText" 
+                                                       Width="147px" AppendDataBoundItems="True">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server" id="uoRowFilterCountryName">                                            
+                                                <td class="MasterImage">
+                                                    <asp:Image ID="uoImageCountry" runat="server" ImageUrl="~/Images/box_minus.png" CssClass="Img" ToolTip="Country"/>
+                                                </td>
+                                                <td class="MasterCaption"><span runat="server" id="spanCountryName">Country Name:</span> </td>
+                                                <td>
+                                                    <asp:TextBox ID="uoTextBoxCountryName" runat="server" CssClass="SmallText" 
+                                                        Width="141px"></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server" id="uoRowFilterCountry">                                            
+                                                <td class="MasterImage"></td>
+                                                <td><span runat="server" id="spanCountry">Country:</span></td>
+                                                <td>                                                
+                                                    <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                                        <ContentTemplate>             --%>                                       
+                                                        <asp:DropDownList ID="uoDropDownListCountry" runat="server" CssClass="SmallText" 
+                                                           Width="147px" AppendDataBoundItems="True" >
+                                                        </asp:DropDownList>                                                
+                                                        <%--</ContentTemplate>
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="uoDropDownListRegion" 
+                                                                EventName="SelectedIndexChanged" />
+                                                        </Triggers>
+                                                    </asp:UpdatePanel>--%>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server" id="uoRowFilterCityName">    
+                                                <td class="MasterImage">
+                                                    <asp:Image ID="uoImageCity" runat="server" ImageUrl="~/Images/box_minus.png" CssClass="Img" ToolTip="City" Visible=false/>
+                                                </td>                                        
+                                                <td class="MasterCaption">
+                                                    <span runat="server" id ="spanCityName" visible=false> City Name: </span>    
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="uoTextBoxCityName" runat="server" CssClass="SmallText" 
+                                                        Width="141px" Visible=false></asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server" id="uoRowFilterCity">                                            
+                                                <td class="MasterImage"></td>
+                                                <td > <span runat="server" id ="spanCity" visible=false> City: </span></td>
+                                                <td >  
+                                                    <%--<asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                                        <ContentTemplate>       --%>                                                                                                                                               
+                                                        <asp:DropDownList ID="uoDropDownListCity" runat="server" CssClass="SmallText" 
+                                                           Width="147px" AppendDataBoundItems="True" Visible=false >
+                                                            <asp:ListItem>--SELECT CITY--</asp:ListItem>
+                                                        </asp:DropDownList>
+                                                      <%--   </ContentTemplate>
+                                                       <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="uoDropDownListRegion" 
+                                                                EventName="SelectedIndexChanged" />
+                                                            <asp:AsyncPostBackTrigger ControlID="uoDropDownListCountry" 
+                                                                EventName="SelectedIndexChanged" />
+                                                        </Triggers>
+                                                    </asp:UpdatePanel>--%>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server" id="uoRowFilterPort">    
+                                                <td class="MasterImage">
+                                                    <asp:Image ID="uoImagePort" runat="server" ImageUrl="~/Images/box_minus.png" CssClass="Img" ToolTip="Port"/>
+                                                </td>                                        
+                                                <td> <span runat="server" id ="spanPort"> Port: </span></td>
+                                                <td>                                                
+                                                    <asp:DropDownList ID="uoDropDownListPort" runat="server" CssClass="SmallText" 
+                                                       Width="147px" AppendDataBoundItems="True">
+                                                        <asp:ListItem>--SELECT PORT--</asp:ListItem>
+                                                    </asp:DropDownList>                                                
+                                                </td>
+                                            </tr>
+                                            <tr runat="server" id="uoRowFilterHotel">
+                                                <td class="MasterImage">
+                                                    <asp:Image ID="uoImageHotel" runat="server" ImageUrl="~/Images/box_minus.png" CssClass="Img" ToolTip="Hotel"/>
+                                                </td>
+                                                <td><span runat="server" id ="spanHotel"> Hotel: </span></td>
+                                                <td>
+                                                    <asp:DropDownList ID="uoDropDownListHotel" runat="server" CssClass="SmallText" 
+                                                       Width="147px" AppendDataBoundItems="True">
+                                                        <asp:ListItem>--SELECT HOTEL--</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            </table>
+                                            </asp:Panel>
+                                            </ContentTemplate> 
+                                            </asp:UpdatePanel>
+                                            
+                                        <asp:Panel ID="uoPanelDateRange" runat="server">
+                                        
+                                            <table class="Master" width="100%">
+                                            <tr >
+                                                <td align="left" style="font-weight:bold" colspan="3"> 
+                                                        Date Range                                                                                                                                                 
+                                                                                                                                          
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="MasterImage"></td>
+                                                <td class="MasterCaption">Based on:</td>
+                                                <td >
+                                                    <asp:DropDownList ID="uoDropDownListBasedOn" runat="server" CssClass="SmallText" 
+                                                       Width="147px">
+                                                        <asp:ListItem Value="1">Date (On/Off)</asp:ListItem>
+                                                        <asp:ListItem Value="2">Date(Arrival/Departure)</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="MasterImage"></td>
+                                                <td class="MasterCaption">
+                                                    From:
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="uoTextBoxFrom" runat="server" CssClass="SmallText" 
+                                                        Width="141px"></asp:TextBox>
+                                                    <cc1:TextBoxWatermarkExtender ID="uoTextBoxFrom_TextBoxWatermarkExtender" runat="server"
+                                                        Enabled="True" TargetControlID="uoTextBoxFrom" WatermarkCssClass="fieldWatermarkSmall"
+                                                        WatermarkText="MM/dd/yyyy">
+                                                    </cc1:TextBoxWatermarkExtender>
+                                                    <cc1:CalendarExtender ID="uoTextBoxFrom_CalendarExtender" runat="server" Enabled="True"
+                                                        TargetControlID="uoTextBoxFrom" Format="MM/dd/yyyy">
+                                                    </cc1:CalendarExtender>
+                                                    <cc1:MaskedEditExtender ID="uoTextBoxFrom_MaskedEditExtender" runat="server" CultureAMPMPlaceholder=""
+                                                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                                        Enabled="True" Mask="99/99/9999" MaskType="Date" TargetControlID="uoTextBoxFrom"
+                                                        UserDateFormat="MonthDayYear">
+                                                    </cc1:MaskedEditExtender>
+                                                </td>
+                                            </tr>
+                                            <tr runat="server" id="uoRowDateTo">
+                                                <td class="MasterImage"></td>
+                                                <td >
+                                                    To:
+                                                    
+                                                </td>
+                                                
+                                                
+                                                
+                                                <td >
+                                                    <asp:TextBox ID="uoTextBoxTo" runat="server" CssClass="SmallText" Width="141px"></asp:TextBox>
+                                                    <cc1:TextBoxWatermarkExtender ID="uoTextBoxTo_TextBoxWatermarkExtender" runat="server"
+                                                        Enabled="True" TargetControlID="uoTextBoxTo" WatermarkCssClass="fieldWatermarkSmall"
+                                                        WatermarkText="MM/dd/yyyy">
+                                                    </cc1:TextBoxWatermarkExtender>
+                                                    <cc1:CalendarExtender ID="uoTextBoxTo_CalendarExtender" runat="server" Enabled="True"
+                                                        TargetControlID="uoTextBoxTo" Format="MM/dd/yyyy">
+                                                    </cc1:CalendarExtender>
+                                                    <cc1:MaskedEditExtender ID="uoTextBoxTo_MaskedEditExtender" runat="server" CultureAMPMPlaceholder=""
+                                                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                                        Enabled="True" Mask="99/99/9999" MaskType="Date" TargetControlID="uoTextBoxTo"
+                                                        UserDateFormat="MonthDayYear">
+                                                    </cc1:MaskedEditExtender>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td >
+                                                </td>
+                                                <td>
+                                                    <asp:Button ID="uoButtonDateRange" runat="server" Text="Go" 
+                                                        CssClass="SmallButton" onclick="uoButtonDateRange_Click"/>
+                                                </td>
+                                            </tr>                                   
+                                        </table>
+                                        </asp:Panel>
+                                    </td>
+                                </tr>                                                                                                                                    
+                                <tr>
+                                    <td align="left">                                                                       
+                                    </td>
+                                </tr>                           
+                               
+                                <tr>
+                                    <td>
+                                      <%-- <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                            <ContentTemplate>--%>
+                                            
+                                        <table class="LeftPanelTitle" width="100%" cellpadding="0" cellspacing="0" id="uoTableDashboard"  runat="server">
+                                            <tr>
+                                                <td>Calendar Dashboard</td>
+                                                <td align="right">                                               
+                                                    <asp:Image ID="uoImageDashboard" runat="server" ImageUrl="~/Images/box_up.png" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <cc1:CollapsiblePanelExtender ID="CollapsiblePanelExtender_Dashboard2" runat="Server"
+                                        TargetControlID="uoPanelDashboard"
+                                        CollapsedSize="0"                                        
+                                        ExpandControlID="uoImageDashboard"
+                                        CollapseControlID="uoImageDashboard"
+                                        AutoCollapse="False"
+                                        AutoExpand="False"                                        
+                                        ImageControlID="uoImageDashboard"
+                                        ExpandedImage="~/images/box_up.png"
+                                        CollapsedImage="~/images/box_down.png"
+                                        ExpandDirection="Vertical" />
+                                        <asp:Panel ID="uoPanelDashboard" runat="server" >
+                                            <uc3:TravelmartCalendar ID="TravelmartCalendar1" runat="server" />
+                                           </asp:Panel>
+                                      
+                                    </td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>                                   
+                                    </td>
+                                </tr>                                               
+                                <tr id="uoRowLegend" runat="server" >
+                                    <td align="left">                                                                   
+                                        <table class="LeftPanelTitle" width="100%" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <td>Legend</td>
+                                                <td align="right">                                               
+                                                    <asp:Image ID="uoImageLegend" runat="server" ImageUrl="~/Images/box_up.png" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <cc1:CollapsiblePanelExtender ID="CollapsiblePanelExtender_Legend" runat="Server"
+                                            TargetControlID="uoPanelLegend"
+                                            CollapsedSize="0"                                        
+                                            ExpandControlID="uoImageLegend"
+                                            CollapseControlID="uoImageLegend"
+                                            AutoCollapse="False"
+                                            AutoExpand="False"                                        
+                                            ImageControlID="uoImageLegend"
+                                            ExpandedImage="~/images/box_up.png"
+                                            CollapsedImage="~/images/box_down.png"
+                                            ExpandDirection="Vertical" />
+                                        <asp:Panel ID="uoPanelLegend" runat="server">
+                                        <table width="100%" class="TableLegend" cellpadding="0" cellspacing="0">
+                                            <tr>
+                                                <th>Icon</th>
+                                                <th>Air</th>
+                                                <th>Hotel</th>
+                                                <th>Vehicle</th>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/positive.gif" 
+                                                        Height="30px" /></td>
+                                                <td>                                            
+                                                    Check-in, Used</td>
+                                                <td>                                            
+                                                    Checked In, Checked Out</td>
+                                                <td>                                            
+                                                    In Transit, Arrived</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="LegendBrk">&nbsp;</td>                                           
+                                                <td class="LegendBrk">&nbsp;</td>                                           
+                                                <td class="LegendBrk">&nbsp;</td>                                           
+                                                <td class="LegendBrk">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Image ID="Image2" runat="server" ImageUrl="~/Images/negative.gif" /></td>
+                                                <td>                                            
+                                                    Open, Exchanged</td>
+                                                <td>                                            
+                                                    Unused, No Show, Cancelled</td>
+                                                <td>                                            
+                                                    Unused, No Show, Cancelled</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="LegendBrk">&nbsp;</td>                                           
+                                                <td class="LegendBrk">&nbsp;</td>                                           
+                                                <td class="LegendBrk">&nbsp;</td>                                           
+                                                <td class="LegendBrk">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:Image ID="Image3" runat="server" ImageUrl="~/Images/neutral.gif" /></td>
+                                                <td>                                            
+                                                    None</td>
+                                                <td>                                            
+                                                    None</td>
+                                                <td>                                            
+                                                    None</td>
+                                            </tr>
+                                             <tr>
+                                                <td class="LegendBrk">&nbsp;</td>                                           
+                                                <td class="LegendBrk">&nbsp;</td>                                           
+                                                <td class="LegendBrk">&nbsp;</td>                                           
+                                                <td class="LegendBrk">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" valign="middle">
+                                                    <asp:Label ID="uoLabelEvents" runat="server" Text="*" Font-Bold="true" Font-Size="Large" ForeColor="Red"></asp:Label>    
+                                                </td>
+                                                <td>
+                                                    &nbsp;</td>
+                                                <td>
+                                                    With Event</td>
+                                                <td>
+                                                    &nbsp;</td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>                               
+                                    </td>
+                                </tr>
+                            </table>
+                            </asp:Panel>
+                        
+                            <asp:HiddenField ID="uohiddenFlightStatusFilter" runat="server" />
+                            <asp:HiddenField ID="uoHiddenFieldDateFrom" runat="server" />
+                            <asp:HiddenField ID="uoHiddenFieldDateTo" runat="server" />
+                            
+                            <asp:HiddenField ID="uoHiddenFieldRegionID" runat="server" Value="0"/>
+                            <asp:HiddenField ID="uoHiddenFieldCountryName" runat="server" Value="" />
+                            <asp:HiddenField ID="uoHiddenFieldCountryID" runat="server" Value="0"/>
+                            <asp:HiddenField ID="uoHiddenFieldCityName" runat="server" Value=""/>
+                            <asp:HiddenField ID="uoHiddenFieldCityID" runat="server" Value="0"/>
+                            <asp:HiddenField ID="uoHiddenFieldPortID" runat="server" Value="0"/>
+                            <asp:HiddenField ID="uoHiddenFieldHotelID" runat="server" Value="0"/>
+                            
+                            <asp:HiddenField ID="uoHiddenFieldViewRegion" runat="server" Value="1"/>
+                            <asp:HiddenField ID="uoHiddenFieldViewCountry" runat="server" Value="1"/>
+                            <asp:HiddenField ID="uoHiddenFieldViewCity" runat="server" Value="1"/>
+                            <asp:HiddenField ID="uoHiddenFieldViewHotel" runat="server" Value="1"/>
+                            <asp:HiddenField ID="uoHiddenFieldViewPort" runat="server" Value="1"/>
+                            <asp:HiddenField ID="uoHiddenFieldViewLegend" runat="server" Value="0"/>
+                            <asp:HiddenField ID="uoHiddenFieldDashboard" runat="server" Value="1"/>
+                            <asp:HiddenField ID="uoHiddenFieldDashboard2" runat="server" Value="1"/>
+                            <asp:HiddenField ID="uoHiddenFieldRole" runat="server" Value=""/>
+                            <asp:HiddenField ID="uoHiddenFieldRoleBranchID" runat="server" Value="0"/>
+                            <asp:HiddenField ID="uoHiddenFieldFilter" runat="server" Value="1"/>                            
+                            <asp:HiddenField ID="uoHiddenFieldDateRange" runat="server" Value="1"/>                            
+                            <asp:HiddenField ID="uoHiddenFieldLeftMenu" runat="server" Value="0" />    
+                            <asp:HiddenField ID="uoHiddenFieldSearch" runat="server" Value="0" />                    
+                            <asp:HiddenField ID="uoHiddenFieldRedirectURL" runat="server" Value="0" />                    
+                    </asp:Panel>                                           
+                                       
+                    </td>
+                </tr>
+                <tr>
+                    <%--<td style="vertical-align: top; text-align: right; width: 850px" >--%>
+                    <td style="vertical-align: top; text-align: right; width: 100%" >
+                        <table width="100%"  >                                                   
+                            <tr>
+                                <td align="left" style="width:80%" valign="top">
+                                    <table width="100%" align="left">
+                                        <tr>
+                                            <td ><uc1:TravelmartMenu ID="TravelmartMenu1" runat="server" /></td>
+                                            <td >
+                                                <asp:Label ID="uoLabelBranchName" runat="server" Font-Bold="True" 
+                                                    Font-Size="Large" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td style="font-weight:bold;padding-right:5px; white-space:nowrap" align="right">
+                                    Welcome
+                                    <asp:Label ID="uclabelFName" runat="server" Text="" />
+                                </td>
+                            </tr>                     
+                            <%--<tr>
+                                <td  class="LeftClass" colspan="2">
+                                    <table cellpadding="0" cellspacing="0" width="100%" style="display:none">
+                                        <tr>
+                                            <td>
+                                                <asp:HyperLink CssClass="RedNotification"  
+                                                    ToolTip="Pending hotel/vehicle request for approval." 
+                                                    ID="uoHyperLinkPendingRequest" runat="server" Text="Pending Request" 
+                                                    Font-Underline="True"></asp:HyperLink>
+                                                <span class="Separator" runat="server" id="uoSpan1">|</span>
+                                                <asp:HyperLink CssClass="RedNotification"  
+                                                    ToolTip="Pending hotel contract approval" ID="uoHyperLinkPendingContract" 
+                                                    runat="server" Text="Pending Hotel Contract" Font-Underline="True"></asp:HyperLink>
+                                                <span class="Separator" runat="server" id="uoSpan2">|</span>
+                                                <asp:HyperLink CssClass="RedNotification"  
+                                                    ToolTip="Hotel with no active contract" ID="uoHyperLinkNoContract" 
+                                                    runat="server" Text="Hotel No Active Contract" Font-Underline="True"></asp:HyperLink>
+                                                <span class="Separator" runat="server" id="uoSpan3">|</span>
+                                                <asp:HyperLink CssClass="RedNotification"  
+                                                    ToolTip="Pending vehicle contract approval" ID="uoHyperLinkPendingVehicleContract" 
+                                                    runat="server" Text="Pending Vehicle Contract" Font-Underline="True"></asp:HyperLink>
+                                                <span class="Separator" runat="server" id="uoSpan4">|</span>
+                                                <asp:HyperLink CssClass="RedNotification"  
+                                                    ToolTip="Vehicle with no active contract" ID="uoHyperLinkNoVehicleContract" 
+                                                    runat="server" Text="Vehicle No Active Contract" Font-Underline="True"></asp:HyperLink>
+                                                <span class="Separator" runat="server" id="uoSpan5">|</span>
+                                                <asp:HyperLink CssClass="RedNotification"  
+                                                    ToolTip="Pending Service Provider Contract" ID="uoHyperLinkPendingPortAgentContract" 
+                                                    runat="server" Text="Pending Service Provider Contract" Font-Underline="True"></asp:HyperLink>
+                                                <span class="Separator" runat="server" id="uoSpan6">|</span>
+                                                <asp:HyperLink CssClass="RedNotification"  
+                                                    ToolTip="Service Provider with no active Contract" ID="uoHyperLinkNoPortAgentContract" 
+                                                    runat="server" Text="Service Provider No Active Contract" Font-Underline="True"></asp:HyperLink>
+                                            </td>
+                                        </tr>                                                                   
+                                    </table>                                                                                   
+                                </td>                                                            
+                            </tr>    --%>                           
+                            <tr>
+                                 <td class="LeftClass">
+                                    <asp:Label ID="uclabelStatus" runat="server" Font-Size="15px" Font-Bold="true" />
+                                </td>
+                               
+                                
+                                <td style="text-align:right; padding-right:5px" >
+                                    <a href="#" id="help" onclick='return OpenHelp()'>Help</a> &nbsp;
+                                    <a href="../LoginReset.aspx" id="loginReset">Change Password</a> &nbsp;
+                                    <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutText="Logout" 
+                                        onloggedout="LoginStatus1_LoggedOut"  />
+                                     
+                                </td>
+                            </tr>                       
+                            <tr>
+                                <td colspan="2">
+                                    <asp:UpdatePanel runat="server" ID="uoPanelBody" >
+                                        <ContentTemplate>                                  
+                                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" >
+                                            </asp:ContentPlaceHolder>
+                                        </ContentTemplate>
+                                          <Triggers>
+                                                <asp:AsyncPostBackTrigger ControlID="uoButtonDateRange" EventName="Click" />
+                                            </Triggers>
+                                        </asp:UpdatePanel>
+                                        <asp:UpdateProgress runat="server" ID="uoUpdateProgress"
+                                        DisplayAfter="0" AssociatedUpdatePanelID="uoPanelBody" >
+                                        <ProgressTemplate>
+                                            <asp:Panel runat="server" ID="uoPanelProgress">
+                                                <div id="progressBackgroundFilter"></div>
+                                                <div id="processMessage"> 
+                                                    <img alt="Loading" src="../Images/Processing.gif" /> &nbsp;
+                                                    Processing Request...
+                                                    
+                                                </div>
+                                            </asp:Panel>
+                                        </ProgressTemplate>    
+                                    </asp:UpdateProgress>         
+                                    <cc1:ModalPopupExtender runat="server" TargetControlID="uoPanelProgress"
+                                        PopupControlID="uoPanelProgress" ID="uoModalPopUp"></cc1:ModalPopupExtender>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                       <%-- <hr />
+                        Developed by PTC-FMBR 2011--%>
+                    </td>
+                </tr>
+            </table>  
+            <div id="hidden-table" style="display:none;">
+              <table border="1" width="400">
+                <tr>
+                  <th>Name</th>
+                  <th>Age</th>
+                </tr>
+                <tr>
+                  <td>Hans</td>
+                  <td>22</td>
+                </tr>
+                <tr>
+                  <td>Gretchen</td>
+                  <td>22</td>
+                </tr>
+              </table>
+            </div>
+             <div id="divTestHover2" class="hideHover" >
+               <div id="divTestHover" style="border-style: solid; border-width: thin; width:150px; height:90px; overflow:auto;">                                                                                
+               <div class="PageTitle">
+                   <asp:Label ID="uoLabelDate" runat="server" ></asp:Label>
+                </div>                
+                <table style="text-align:left" width="100%">                    
+                    <tr>
+                        <td style="text-align:left; width: 30px;">ON:</td> 
+                        <td><b><asp:Label ID="uoLabelCalOn" runat="server" ></asp:Label></b></td>                        
+                    </tr>
+                    <tr>
+                        <td style="text-align:left; width: 30px;" >OFF:</td> 
+                        <td><b><asp:Label ID="uoLabelCalOff" runat="server" ></asp:Label></b></td>                                                
+                    </tr>
+                </table>                                             
+               </div>
+            </div>                      
+        </center>
+    </div>
+    </form>
+</body>
+
+<script language="javascript" type="text/javascript">
+
+   
+    $(document).ready(function() {
+        isClose = true;
+        $("#ctl00_uoTextBoxFrom").change(function(ev) {
+            var fromString = $("#ctl00_uoTextBoxFrom").val();
+            var toString = $("#ctl00_uoTextBoxTo").val()
+
+            var fromDate = new Date(fromString);
+            var toDate = new Date(toString);
+
+            if (toDate < fromDate) {
+                $("#ctl00_uoTextBoxTo").val(fromString);
+            }
+        });
+
+        $("#ctl00_uoButtonDateRange").click(function() {
+            if ($("#ctl00_uoTextBoxFrom") != null) {
+                var fromString = $("#ctl00_uoTextBoxFrom").val();
+                var toString = $("#ctl00_uoTextBoxTo").val();
+
+                var fromDate = new Date(fromString);
+                var toDate = new Date(toString);
+                if (toDate < fromDate) {
+                    alert('Invalid date range!');
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        });
+
+    });
+</script>
+
+</html>

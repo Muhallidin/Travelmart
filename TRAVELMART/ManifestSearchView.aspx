@@ -1,0 +1,497 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/TravelmartMaster.Master" AutoEventWireup="true" CodeBehind="ManifestSearchView.aspx.cs" Inherits="TRAVELMART.ManifestSearchView" %>
+
+<%--<%@ OutputCache Duration="60" VaryByParam="mt" VaryByControl="uoCalendarDashboard"%>--%>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">      
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    
+    <script type ="text/javascript" language ="javascript">
+        function SetValues(trId, mrId) {
+            $("#<%= uoHiddenFieldtRid.ClientID %>").val(trId);
+            $("#<%= uoHIddenFieldmRid.ClientID %>").val(mrId);
+        }
+        function Tag() {
+            var e1Id = $("#<%=uoTextBoxBarcode.ClientID %>");
+            var user = $("#<%= uoHiddenFieldUserId.ClientID %>");
+            var role = $("#<%= uoHiddenFieldUserRole.ClientID %>");
+            var tRID = $("#<%= uoHiddenFieldtRid.ClientID %>");
+            var mRID = $("#<%= uoHIddenFieldmRid.ClientID %>");
+
+            if (isNaN(e1Id.val()) == true) {
+                alert("Invalid Barcode.");
+            }
+            else {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "/PageMethods.aspx/TagAsScanned",
+                    data: "{'e1Id': '" + e1Id.val() + "', 'tReqId': '" + tRID.val() + "', 'mReqId': '" + mRID.val() +
+                    "', 'UserId': '" + user.val() + "', 'URole': '" + role.val() + "', 'retValue': '0'}",
+                    dataType: "json",
+                    success: function(data) {
+                        if (data.d == 1) {
+                            alert("Invalid Barcode.");
+                        }
+                        else {
+                            alert("Seafarer Successfully Tagged.");
+                            window.parent.$("#ctl00_ContentPlaceHolder1_uoHiddenFieldPopup").val("1");
+                            window.parent.history.go(0);
+                            parent.$.fancybox.close();
+                        }
+                    }
+                        ,
+                    error: function(objXMLHttpRequest, textStatus, errorThrown) {
+                        alert(errorThrown);
+                    }
+                });
+            }
+        }
+
+        function OpenRequestEditor() {
+            var screenWidth = screen.availwidth;
+            var screenHeight = screen.availheight;
+
+            screenWidth = 1060;
+            screenHeight = 600;
+
+            window.open('RequestEditor.aspx?id=0', 'Hotel_Vehicle_Request', 'top=10, left=200, width=' + screenWidth + ', height=' + screenHeight + ', scrollbars=yes, menubar=no,toolbar=no,status=no,resizable=yes,addressbar=no');
+            return false;
+        }
+        function confirmEmail() {
+            if (confirm("Email record?") == true)
+                return true;
+            else
+                return false;
+        }
+   </script>
+
+<div class="ViewTitlePadding">
+    <table width="100%" cellpadding="0" cellspacing="0" >
+        <tr>
+            <td class="PageTitle">
+                Manifest Search View</td>
+        </tr>
+    </table>
+</div>
+
+<script type="text/javascript" language="javascript">
+    $(document).ready(function() {
+        filterSettings();
+    });
+
+    function pageLoad(sender, args) {
+        var isAsyncPostback = Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack();
+        if (isAsyncPostback) {
+            filterSettings();
+        }
+    }
+
+    function filterSettings() {
+
+        if ($("#<%=uoCheckBoxAdvanceSearch.ClientID %>").attr('checked')) {
+            $("#<%=uoTableAdvanceSearch.ClientID %>").show();
+        }
+        else {
+            $("#<%=uoTableAdvanceSearch.ClientID %>").hide();
+        }
+
+        $("#<%=uoCheckBoxAdvanceSearch.ClientID %>").click(function() {
+            if ($(this).attr('checked')) {
+                $("#<%=uoTableAdvanceSearch.ClientID %>").fadeIn();
+            }
+            else {
+                $("#<%=uoTableAdvanceSearch.ClientID %>").fadeOut();
+            }
+        });
+
+        $("#<%=uoDropDownListFilterBy.ClientID %>").change(function(ev) {
+            if ($(this).val() != "1") {
+                $("#<%=uoTextBoxFilter.ClientID %>").val("");
+            }
+        });
+
+        $(".EditLink").fancybox({
+            'transitionIn': 'none',
+            'transitionOut': 'none',
+            'onClosed': function() {
+                var a = $("#<%=uoHiddenFieldPopUp.ClientID %>").val();
+                if (a == '1')
+                    $("#aspnetForm").submit();
+            }
+        });
+        //        $("#<%=uoListViewManifest.ClientID %>").fancybox({           
+        //            'transitionIn': 'none',
+        //            'transitionOut': 'none'
+        //        });
+        //        $("#<%=uoListViewManifest.ClientID %> tr a[id*='uoLinkButtonHeaderScanned']").fancybox({
+        //            'transitionIn': 'none',
+        //            'transitionOut': 'none'
+        //        });
+    }
+
+    function validate(key) {
+        if ($("#<%=uoDropDownListFilterBy.ClientID %>").val() != "1") {
+
+            //getting key code of pressed key
+            var keycode = (key.which) ? key.which : key.keyCode;
+            if ((keycode < 48 || keycode > 57) && (keycode < 45 || keycode > 46)) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        return true;
+    }       
+</script>
+
+<%--<asp:UpdatePanel ID="uoUpdatePanelManifest" runat="server">
+    <ContentTemplate>
+        --%>
+<table width="100%" class="LeftClass" onload="opener.location.reload();">
+    <tr>
+        <td class="contentValue" >
+            <asp:CheckBox ID="uoCheckBoxAdvanceSearch" Text="View Advance Search" runat="server" Visible=false />
+        </td>        
+    </tr>       
+</table>
+
+<table width="100%" class="LeftClass" id="uoTableAdvanceSearch" runat="server">   
+   <tr id="uoTRVessel" runat="server">
+        <td class="contentCaption">Ship:</td>
+        <td class="contentValue" >
+            <asp:DropDownList ID="uoDropDownListVessel" runat="server" Width="300px" 
+                AppendDataBoundItems="True">
+                <asp:ListItem>--SELECT SHIP--</asp:ListItem>
+            </asp:DropDownList>
+        </td> 
+        <td></td>      
+    </tr>
+    <tr>
+        <td class="contentCaption">Filter By:</td>
+        <td class="contentValue" >
+            <asp:DropDownList ID="uoDropDownListFilterBy" runat="server" Width="300px">
+                <asp:ListItem Value="1">SEAFARER NAME</asp:ListItem>
+                <asp:ListItem Value="2" Selected="True">EMPLOYEE ID</asp:ListItem>
+            </asp:DropDownList>
+        </td>        
+        <td>
+            <asp:TextBox ID="uoTextBoxFilter" runat="server" CssClass="TextBoxInput"  Width="300px" onkeypress="return validate(event);"  ></asp:TextBox>
+        </td>
+    </tr> 
+    <tr>
+        <td class="contentCaption">Nationality:</td>
+        <td class="contentValue"> <asp:DropDownList ID="uoDropDownListNationality" runat="server" Width="300px" 
+                AppendDataBoundItems="True">
+            <asp:ListItem>--SELECT NATIONALITY--</asp:ListItem>
+        </asp:DropDownList></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="contentCaption">Gender:</td>
+        <td class="contentValue"> <asp:DropDownList ID="uoDropDownListGender" runat="server" Width="300px" 
+                AppendDataBoundItems="True">
+            <asp:ListItem>--SELECT GENDER--</asp:ListItem>
+        </asp:DropDownList></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="contentCaption">Rank:</td>
+        <td class="contentValue"> <asp:DropDownList ID="uoDropDownListRank" runat="server" Width="300px" 
+                AppendDataBoundItems="True">
+            <asp:ListItem>--SELECT RANK--</asp:ListItem>
+        </asp:DropDownList></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="contentCaption">Status:</td>
+        <td class="contentValue"> <asp:DropDownList ID="uoDropDownListStatus" runat="server" Width="300px">
+            <asp:ListItem Value="0">--SELECT STATUS--</asp:ListItem>
+            <asp:ListItem>ON</asp:ListItem>
+            <asp:ListItem>OFF</asp:ListItem>
+        </asp:DropDownList></td>
+        <td></td>
+    </tr>     
+    <tr>
+        <td class="contentCaption">
+            &nbsp;</td>
+        <td class="contentValue">
+            <asp:Button ID="uoButtonView" runat="server" CssClass="SmallButton" 
+                Height="21px" onclick="uoButtonView_Click" Text="View" />
+        </td>
+        <td>
+            <asp:LinkButton ID="uoLinkButtonReport" runat="server" visible=false  
+                onclick="uoLinkButtonReport_Click">Report Manifest</asp:LinkButton>
+        </td>
+    </tr>
+</table>
+
+<asp:UpdatePanel ID="UpdatePanel1" runat="server">
+<ContentTemplate>    
+<table width="100%" class="LeftClass">   
+    <tr>                
+        <td> 
+            &nbsp;</td>
+        <td align="right">
+            <table>
+                <tr>
+                    <%--<td>
+                        <asp:Button ID="uoButtonRequestSendEmail" runat="server" Text="Send Email"  OnClientClick="javascript: return confirmEmail();"
+                        CssClass="SmallButton" Width="100px" onclick="uoButtonRequestSendEmail_Click" 
+                            Visible="False"/>                                                
+                    </td>--%> 
+                    <td>
+                        <asp:Button ID="uoButtonRequest" runat="server" CssClass="SmallButton" 
+                        OnClientClick="javascript: return OpenRequestEditor();" 
+                        Text="Add Hotel/Vehicle Request" Width="140px" />    
+                    </td>
+                </tr>
+            </table>                         
+        </td>        
+    </tr>
+    <tr>
+        <td colspan="2" align="right">                                       
+            <asp:ListView runat="server" ID="uoListViewManifest" DataSourceID="uoObjectDataSourceManifestSearchView"
+                onitemcommand="uoListViewManifest_ItemCommand" onitemdatabound="uoListViewManifest_ItemDataBound">
+                    <LayoutTemplate>
+                        <table border="0" cellpadding="0" cellspacing="0" class="listViewTable" width="100%">
+                            <tr>
+                                <th class="hideElement">IDBigInt</th>                                
+                                <th class="hideElement">RequestID</th>
+                                
+                                <th>Is Manual</th>
+                                
+                                <th><asp:LinkButton ID="LinkButton1" runat="server" CommandName="SortByE1ID">E1 Travel Req No</asp:LinkButton></th>
+                                
+                                <th class="hideElement"><asp:LinkButton ID="uoLinkButtonHeaderRecLoc" runat="server" CommandName="SortByRLoc">Rec Loc</asp:LinkButton></th>
+                                
+                                <th><asp:LinkButton ID="uoLinkButtonHeaderE1ID" runat="server" CommandName="SortByE1">E1 ID</asp:LinkButton></th>
+                                <th><asp:LinkButton ID="uoLinkButtonHeaderName" runat="server" CommandName="SortByName">Name</asp:LinkButton></th>                                
+                                <th><asp:LinkButton ID="uoLinkButtonHeaderOnOff" runat="server" CommandName="SortByOnOff">On/Off Date</asp:LinkButton></th>
+                                <th><asp:LinkButton ID="uoLinkButtonHeaderCrew" runat="server" CommandName="SortByStatus">Crew Status</asp:LinkButton></th>
+                                <th><asp:LinkButton ID="uoLinkButtonHeaderReasonCode" runat="server" CommandName="SortByReason">Reason Code</asp:LinkButton></th>
+                                <th><asp:LinkButton ID="uoLinkButtonHeaderArrDep" runat="server" CommandName="SortByArrDep">Arrival/Departure Date</asp:LinkButton></th>
+                                <th><asp:LinkButton ID="uoLinkButtonHeaderPort" runat="server" CommandName="SortByPort">Port</asp:LinkButton></th>
+                                <th><asp:LinkButton ID="uoLinkButtonHeaderBrand" runat="server" CommandName="SortByBrand">Brand</asp:LinkButton></th>
+                                <th class="hideElement">Ship</th>
+                                <th><asp:LinkButton ID="uoLinkButtonHeaderRank" runat="server" CommandName="SortByRank">Rank</asp:LinkButton></th>                                
+                                <th><asp:LinkButton ID="uoLinkButtonHeaderAir" runat="server" CommandName="SortByAirStat">Air Status</asp:LinkButton></th>
+                                <th><asp:LinkButton ID="uoLinkButtonHeaderVehicle" runat="server" CommandName="SortByVehicleStat">Vehicle Status</asp:LinkButton></th>
+                                <th><asp:LinkButton ID="uoLinkButtonHeaderHotel" runat="server" CommandName="SortByHotelStat">Hotel Status</asp:LinkButton></th>                                
+                                <th>Remarks</th>
+                                <th><asp:LinkButton ID="uoLinkButtonHeaderScanned" runat="server" CommandName="SortByScan">Tag As Scanned</asp:LinkButton></th>                                
+                            </tr>
+                            <asp:PlaceHolder runat="server" ID="itemPlaceholder"></asp:PlaceHolder>
+                        </table>
+                    </LayoutTemplate>
+                    <ItemTemplate>     
+                        <%# ManifestSearchViewAddGroup() %>                     
+                        <%--<tr class='<%# Eval("E1TravelRequest").ToString()=="0"?"notComplete":"" %>'>--%>
+                        <tr>
+                            <td class="hideElement">
+                                <asp:HiddenField runat="server" id="uoHiddenFieldIdBigInt" value='<%# Eval("IDBigInt") %>'/>
+                                <asp:HiddenField runat="server" id="uoHiddenFieldRemarksURL" value='<%# Eval("RemarksURL") %>'/>
+                                <asp:HiddenField runat="server" id="uoHiddenFieldRemarksParameter" value='<%# Eval("RemarksParameter") %>'/>
+                            </td>
+                             <td class="hideElement">
+                                <asp:HiddenField runat="server" id="uoHiddenFieldIRequestID" value='<%# Eval("RequestID") %>'/>
+                            </td>
+                            <td >
+                                <%# Eval("IsManual")%>
+                            </td>
+                             <td class="leftAligned">
+                                 <%# (Eval("E1TravelRequest").ToString() == "0" ? "" : Eval("E1TravelRequest"))%>
+                            </td>
+                            <td class="hideElement">
+                                 <%# Eval("RecLoc")%>
+                            </td>
+                            
+                            <td class="leftAligned"><%# Eval("SfID")%></td>
+                            <td class="leftAligned">
+                                <asp:HyperLink ID="uoHyperLinkName" NavigateUrl='<%# "SuperUserView.aspx?ufn=" + Request.QueryString["ufn"] + "&sfId=" + Eval("SfID") + "&recloc=" + Eval("RecLoc") + "&st=" + Eval("Status") + "&ID=" + Eval("IDBigInt") + "&trID=" + Eval("TravelRequestID") + "&manualReqID=" + Eval("RequestID") + "&dt=" + Request.QueryString["dt"] + "&e1TR=" + Eval("E1TravelRequest")%>' runat="server"><%# Eval("Name")%></asp:HyperLink>
+                            </td>
+                           <%-- <td class="leftAligned"><%# String.Format("{0:dd-MMM-yyyy HHmm}", Eval("DateOnOff"))%>  </td>
+                            <td class="leftAligned"><%# String.Format("{0:dd-MMM-yyyy HHmm}", Eval("DateArrivalDeparture"))%>  </td>
+--%>                            
+                            <td class="leftAligned"><%# String.Format("{0:dd-MMM-yyyy}", Eval("DateOnOff"))%>  </td>
+                            <td><%# Eval("Status")%></td>  
+                            <td><%# Eval("ReasonCode")%></td>  
+                            <td class="leftAligned"><%# String.Format("{0:dd-MMM-yyyy}", Eval("DateArrivalDeparture"))%>  </td>
+ 
+                            
+                            <td class="leftAligned"><%# Eval("PortCode")%> - <%# Eval("Port")%></td>
+                            <td class="leftAligned"><%# Eval("Brand")%></td>                            
+                            <td class="hideElement"><%# Eval("Vessel")%></td>
+                            <td class="leftAligned"><%# Eval("RankCode")%> - <%# Eval("Rank")%></td>      
+                                          
+                            <%--<td><%# Eval("AirStatus")%></td>  
+                            <td><%# Eval("VehicleStatus")%></td>  
+                            <td><%# Eval("HotelStatus")%></td>  --%>
+                            
+                            <td>
+                                <asp:Image ID="uoImageAir" runat="server" ImageUrl='<%#GetStatusImage(Eval("AirStatus")) %>' ToolTip='<%# Eval("colAirStatusVarchar")%>' />
+                            </td>
+                            <td >
+                                <asp:Image ID="uoImageCar" runat="server" ImageUrl='<%#GetStatusImage(Eval("VehicleStatus")) %>' ToolTip='<%# Eval("colVehicleStatusVarchar")%>' />
+                            </td>
+                            <td >
+                                <asp:Image ID="uoImageHotel" runat="server" ImageUrl='<%#GetStatusImage(Eval("HotelStatus")) %>' ToolTip='<%# Eval("colHotelStatusVarchar")%>' />
+                            </td>   
+                            <td class="leftAligned"> 
+                                <asp:Label ID="uoLabelRemarks" runat="server" Text='<%# Eval("Remarks")%>'></asp:Label>                           
+                                <asp:HyperLink ID="uoHyperLinkRemarks" runat="server"><%# Eval("Remarks")%></asp:HyperLink>
+                            </td>      
+                            <td>
+                                <asp:Label ID="uoLabelScanned" runat="server" Text="LOE Scanned" Visible= '<%# ShowScanBtn(Eval("TravelRequestID"), Eval("RequestID")) %>'></asp:Label>
+                                <a class="EditLink"  onclick='<%# "SetValues(" +  Eval("TravelRequestID") + "," + Eval("RequestID") + ");"  %>' href="#uoDivScan" ID="uoLinkButtonScan" runat="server" Visible= '<%# !ShowScanBtn(Eval("TravelRequestID"), Eval("RequestID")) %>'>Tag</a>
+                            </td>
+                            
+                        </tr>
+                    </ItemTemplate>
+                    <EmptyDataTemplate>
+                        <table class="listViewTable">
+                            <tr>                   
+                                <th>Travel Request No</th>
+                                <th>Record Loc</th>
+                                <th>E1 ID</th>
+                                <th>Name</th>
+                                <th>On/Off Date</th>
+                                <th>Arrival/Departure Date</th>
+                                <th>Brand</th>
+                                <th>Port</th>
+                                <th>Ship</th>
+                                <th>Rank</th>                                
+                                <th>Air Status</th>
+                                <th>Vehicle Status</th>
+                                <th>Hotel Status</th>
+                                <th>Crew Status</th>
+                                <th>Remarks</th>
+                                <th>Tag As Scanned</th>
+                            </tr>
+                            <tr>
+                                <td colspan="16" class="leftAligned">No Record</td>                                
+                            </tr>
+                        </table>
+                    </EmptyDataTemplate>
+                </asp:ListView>          
+        </td>      
+      </tr>   
+      <tr>
+        <td>
+            <asp:DataPager ID="uoListViewManifestPager" runat="server" 
+                    PagedControlID="uoListViewManifest" OnPreRender="uoListViewManifest_PreRender" 
+                    PageSize="20">
+                    <Fields>
+                        <asp:NumericPagerField ButtonType="link" NumericButtonCssClass="PagerClass" />
+                    </Fields>
+            </asp:DataPager>
+            
+            <asp:ObjectDataSource ID="uoObjectDataSourceManifestSearchView" runat="server"                 
+                MaximumRowsParameterName="MaxRow" SelectCountMethod="LoadManifestSearchViewListCount" 
+                SelectMethod="LoadManifestSearchViewList" StartRowIndexParameterName="StartRow" 
+                TypeName="TRAVELMART.BLL.ManifestBLL" 
+                OldValuesParameterFormatString="oldcount_{0}" EnablePaging="True" 
+                        onselecting="uoObjectDataSourceManifestSearchView_Selecting">
+                
+                <SelectParameters>
+                    <asp:Parameter Name="LoadType" Type="String"/>
+                    <asp:Parameter Name="CurrentDate" Type="String"/>                    
+                    <asp:Parameter Name="UserID" Type="String" />                    
+                    <asp:Parameter Name="Role" Type="String" />
+                    <asp:Parameter Name="OrderBy" Type="String" />                    
+                                       
+                    <asp:Parameter Name="SeafarerID" Type="String" />
+                    <asp:Parameter Name="SeafarerLN" Type="String" />
+                    <asp:Parameter Name="SeafarerFN" Type="String" />
+                    <asp:Parameter Name="RecordLocator" Type="String" /> 
+                    
+                    <asp:Parameter Name="VesselCode" Type="String" />
+                    <asp:Parameter Name="VesselName" Type="String" /> 
+                                        
+                    <asp:Parameter Name="RegionID" Type="String" />
+                    <asp:Parameter Name="CountryID" Type="String" />
+                    <asp:Parameter Name="CityID" Type="String" />
+                    <asp:Parameter Name="PortID" Type="String" />
+                    <asp:Parameter Name="HotelID" Type="String" />
+                    
+                </SelectParameters>
+            </asp:ObjectDataSource>                    
+            
+            <asp:HiddenField runat="server" ID="uoHiddenFieldOrderBy" Value = "SortByStatus" />
+            <asp:HiddenField runat="server" ID="uoHiddenFieldLoadType" Value = "0" />
+        </td>
+      </tr>         
+</table>       
+</ContentTemplate>
+        <Triggers>
+            <asp:AsyncPostBackTrigger ControlID="uoButtonView" EventName="Click" />
+        </Triggers>
+    </asp:UpdatePanel>
+    <asp:HiddenField ID="uoHiddenFieldE1TravelRequest" runat="server" Value="0"/>                   
+    <asp:HiddenField ID="uoHiddenFieldManifest" runat="server" Value="0"/>    
+    <asp:HiddenField ID="uoHiddenFieldByVessel" runat="server" Value="1"/>
+    <asp:HiddenField ID="uoHiddenFieldByName" runat="server" Value="2"/>
+    <asp:HiddenField ID="uoHiddenFieldByRecLoc" runat="server" Value="0"/>
+    <asp:HiddenField ID="uoHiddenFieldByE1ID" runat="server" Value="0"/>
+    <asp:HiddenField ID="uoHiddenFieldByDateOnOff" runat="server" Value="0"/>
+    <asp:HiddenField ID="uoHiddenFieldByDateArrDep" runat="server" Value="0"/>
+    <asp:HiddenField ID="uoHiddenFieldByStatus" runat="server" Value="0"/>
+    <asp:HiddenField ID="uoHiddenFieldByBrand" runat="server" Value="0"/>
+    <asp:HiddenField ID="uoHiddenFieldByPort" runat="server" Value="0"/>
+    <asp:HiddenField ID="uoHiddenFieldByRank" runat="server" Value="0"/>
+    <asp:HiddenField ID="uoHiddenFieldByAirStatus" runat="server" Value="0"/>
+    <asp:HiddenField ID="uoHiddenFieldByHotelStatus" runat="server" Value="0"/>
+    <asp:HiddenField ID="uoHiddenFieldByVehicleStatus" runat="server" Value="0"/>
+    <asp:HiddenField ID="uoHiddenFieldRole" runat="server" Value=""/>
+    <asp:HiddenField ID="uoHiddenFieldUser" runat="server" Value=""/>
+    <asp:HiddenField runat="server" ID="uoHiddenFieldPopUp" Value="0" />
+    <asp:HiddenField runat="server" ID="uoHiddenFieldDateRange" Value = "0"/>    
+    <asp:HiddenField runat="server" ID="uoHiddenFieldDate" Value = "0"/>
+    
+    <asp:HiddenField ID="uoHiddenFieldSeafarerID" runat="server" Value=""/>
+    <asp:HiddenField ID="uoHiddenFieldSeafarerLN" runat="server" Value=""/>
+    <asp:HiddenField ID="uoHiddenFieldSeafarerFN" runat="server" Value=""/>
+    <asp:HiddenField ID="uoHiddenFieldRecLoc" runat="server" Value=""/>
+    
+    <asp:HiddenField ID="uoHiddenFieldVesselCode" runat="server" Value=""/>
+    <asp:HiddenField ID="uoHiddenFieldVesselName" runat="server" Value=""/>
+    <%--<asp:HiddenField runat="server" ID="uoHiddenFieldLoadType" Value = "<%# getDefualtLoadType() %>" />--%>
+    
+<%--</ContentTemplate>
+</asp:UpdatePanel>--%>
+
+<div style="display:none">
+<%--Scan Barcode--%>
+<div id = "uoDivScan" style="width: 300px">
+     <div class="PageTitle">
+         Barcode Scan
+    </div>
+    <table>        
+        <tr>
+            <td style="width: 100px">
+                Barcode:
+            </td>
+            <td>
+                <asp:TextBox ID="uoTextBoxBarcode" runat="server"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <asp:Button ID="uoButtonSaveBarcode" runat="server" OnClientClick="return Tag();"
+                    Text="Scan" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:HiddenField runat="server" ID="uoHiddenFieldUserId" />
+                <asp:HiddenField runat="server" ID="uoHiddenFieldUserRole" />
+                <asp:HiddenField runat="server" ID="uoHiddenFieldtRid" />
+                <asp:HiddenField runat="server" ID="uoHIddenFieldmRid" />                
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
+</asp:Content>

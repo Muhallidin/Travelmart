@@ -1,0 +1,516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40" xmlns="urn:schemas-microsoft-com:office:spreadsheet">
+  <o:DocumentProperties>
+    <Author>Travelmart</Author>
+    <LastAuthor>Muhallidin</LastAuthor>
+    <Created>2015-01-08 15:02:17ZZ</Created>
+    <Company>RCCL</Company>
+    <Version>1</Version>
+  </o:DocumentProperties>
+  <x:ExcelWorkbook>
+    <WindowHeight>13170</WindowHeight>
+    <WindowWidth>17580</WindowWidth>
+    <WindowTopX>120</WindowTopX>
+    <WindowTopY>60</WindowTopY>
+    <ProtectStructure>False</ProtectStructure>
+    <ProtectWindows>False</ProtectWindows>
+  </x:ExcelWorkbook>
+  <Styles>
+    <Style ss:ID="Default" ss:Name="Normal">
+      <Alignment ss:Vertical="Bottom" />
+      <Borders />
+      <Font />
+      <Interior />
+      <NumberFormat />
+      <Protection />
+    </Style>
+    <Style ss:ID="s62">
+      <Font ss:Bold="1" />
+    </Style>
+    <Style ss:ID="s64">
+      <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" />
+    </Style>
+  </Styles>
+  <Worksheet ss:Name="Tentative Manifest">
+    <Table ss:ExpandedColumnCount="30" ss:ExpandedRowCount="19" x:FullColumns="1" x:FullRows="1" ss:DefaultColumnWidth="60">
+      <Row ss:StyleID="s62">
+        <Cell>
+          <Data ss:Type="String">HotelCity</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CheckIn</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CheckOut</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HotelNites</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ReasonCode</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">LastName</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FirstName</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">EmployeeId</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Gender</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">SingleDouble</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Couple</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Title</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Ship</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CostCenter</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Nationality</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HotelRequest</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RecLoc</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">DeptCity</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ArvlCity</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">DeptDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ArvlDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">DeptTime</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ArvlTime</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Carrier</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FlightNo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Voucher</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PassportNo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PassportExpiration</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PasportDateIssued</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Birthdate</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Data ss:Type="String">MIAMI</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">1/7/2015 12:00:00 AM</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">1/8/2015 12:00:00 AM</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">1</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">VAC</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">KUMAR</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ARUN MOHAN</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">373614</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Male</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">0.5</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">0</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">SECURITY GUARD</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FR</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">410</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">India</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Y</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">XZJVJG</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MIA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FPO</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">24-Jan-2015</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">24-Jan-2015</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">16:10:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">16:58:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">AA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">3593</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">45.0000</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">F4371625</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">25-Jul-2015</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">26-Jul-2005</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">27-Dec-1982</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Data ss:Type="String">MIAMI</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">1/9/2015 12:00:00 AM</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">1/10/2015 12:00:00 AM</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">1</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">VAC</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">GRAHAM</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">TYLER EARL</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">843850</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Male</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">0.5</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">0</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ENTERTAINMENT OPERATOR - FLY</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RF</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">480</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Canada</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Y</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">JHTSWR</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">YYZ</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MIA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">09-Jan-2015</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">09-Jan-2015</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">07:55:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">11:21:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">AC</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">0914</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">0.0000</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">QB424627</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">08-Oct-2015</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">08-Oct-2010</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">31-Dec-1991</Data>
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Data ss:Type="String">MIAMI</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">1/9/2015 12:00:00 AM</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">1/10/2015 12:00:00 AM</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">1</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">NEW</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">OTILANO</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RODRIGO JR BLANCO</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">895295</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Male</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">0.5</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">0</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">3RD COOK SUSHI</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RF</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">470</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Philippines</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Y</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">NH-895295</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">0.0000</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">EB5008153</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">26-Mar-2017</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">27-Mar-2012</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+      </Row>
+      <Row>
+        <Cell>
+          <Data ss:Type="String">MIAMI</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">1/9/2015 12:00:00 AM</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">1/10/2015 12:00:00 AM</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">1</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">VAC</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">SCARLETT</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">SHERIKA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">353921</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Female</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">0.5</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">0</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">BAR SERVER</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RF</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">472</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Jamaica</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Y</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ILRZEH</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MBJ</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MIA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">09-Jan-2015</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">09-Jan-2015</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">14:04:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">15:45:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">AA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">1248</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">0.0000</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">A3124054</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">09-Feb-2020</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">10-Feb-2010</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">06-Sep-1981</Data>
+        </Cell>
+      </Row>
+    </Table>
+    <x:WorksheetOptions>
+      <PageSetup>
+        <Header x:Margin="0.4921259845" />
+        <Footer x:Margin="0.4921259845" />
+        <PageMargins x:Bottom="0.984251969" x:Left="0.78740157499999996" x:Right="0.78740157499999996" x:Top="0.984251969" />
+      </PageSetup>
+      <Selected />
+      <Panes>
+        <Pane>
+          <Number>1</Number>
+          <ActiveRow>1</ActiveRow>
+          <ActiveCol>1</ActiveCol>
+        </Pane>
+      </Panes>
+      <ProtectObjects>False</ProtectObjects>
+      <ProtectScenarios>False</ProtectScenarios>
+    </x:WorksheetOptions>
+  </Worksheet>
+</Workbook>

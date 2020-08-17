@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{754B27DE-2156-4891-915B-A52C9059B929}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TRAVELMART.BLL</RootNamespace>
+    <AssemblyName>TRAVELMART.BLL</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AirBLL.cs" />
+    <Compile Include="AnalystExceptionBLL.cs" />
+    <Compile Include="AuditTrailBLL.cs" />
+    <Compile Include="AutomaticBookingBLL.cs" />
+    <Compile Include="CalendarBLL.cs" />
+    <Compile Include="CityBLL.cs" />
+    <Compile Include="ContractBLL.cs" />
+    <Compile Include="CountryBLL.cs" />
+    <Compile Include="CrewAdminBLL.cs" />
+    <Compile Include="CrewAssistBLL.cs" />
+    <Compile Include="DashboardBLL.cs" />
+    <Compile Include="DashboardCouter.cs" />
+    <Compile Include="EmailBLL.cs" />
+    <Compile Include="ErrorBLL.cs" />
+    <Compile Include="ExceptionBLL.cs" />
+    <Compile Include="FinanceBLL.cs" />
+    <Compile Include="HotelBLL.cs" />
+    <Compile Include="HotelBookingsBLL.cs" />
+    <Compile Include="HotelDashboardBLL.cs" />
+    <Compile Include="HotelManifestBLL.cs" />
+    <Compile Include="LockedManifestBLL.cs" />
+    <Compile Include="MaintenanceViewBLL.cs" />
+    <Compile Include="ManifestBLL.cs" />
+    <Compile Include="MasterfileBLL.cs" />
+    <Compile Include="NoHotelContractBLL.cs" />
+    <Compile Include="NonTurnPorts.cs" />
+    <Compile Include="OverFlowBookingBLL.cs" />
+    <Compile Include="PortBLL.cs" />
+    <Compile Include="RegionBLL.cs" />
+    <Compile Include="RequestBLL.cs" />
+    <Compile Include="SeafarerBLL.cs" />
+    <Compile Include="SeafarerTravelBLL.cs" />
+    <Compile Include="SuperViewBLL.cs" />
+    <Compile Include="TravelRequestBLL.cs" />
+    <Compile Include="UserAccountBLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserRightsBLL.cs" />
+    <Compile Include="VehicleBLL.cs" />
+    <Compile Include="VehicleManifestBLL.cs" />
+    <Compile Include="VendorMaintenanceBLL.cs" />
+    <Compile Include="VesselBLL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TRAVELMART.Common\TRAVELMART.Common.csproj">
+      <Project>{796B6E50-2B25-42B3-80F5-6C977654A49C}</Project>
+      <Name>TRAVELMART.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TRAVELMART.DAL\TRAVELMART.DAL.csproj">
+      <Project>{B0DC2641-13FF-47F4-B6E8-8C86268F70BB}</Project>
+      <Name>TRAVELMART.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

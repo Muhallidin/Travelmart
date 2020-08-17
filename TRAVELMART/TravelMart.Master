@@ -1,0 +1,439 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="TravelMart.Master.cs"
+    Inherits="TRAVELMART.TravelMart" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
+<%@ Register src="TravelmartMenu.ascx" tagname="TravelmartMenu" tagprefix="uc1" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    
+    <script type="text/javascript" src="/FBox/jquery-1.6.1.min.js"></script>    
+    <script type="text/javascript" src="/Menu/jquery-1.3.1.min.js"></script> 
+    
+    <script type="text/javascript" src="/FBox/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+    <script type="text/javascript" src="/FBox/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="FBox/fancybox/jquery.fancybox-1.3.4.css"
+        media="screen" />
+    <link href="App_Themes/Default/Stylesheet.css" rel="stylesheet" type="text/css" />
+
+    <%--Menu Settings --%>
+    
+    <script src="/Menu/menu.js" type="text/javascript"></script>
+    <link href="Menu/Menustyle.css" rel="stylesheet" type="text/css" />
+        
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body bgcolor="#82ABB8">
+    <form id="form1" runat="server">
+    <div style="vertical-align: middle">
+        <center>
+            <asp:ScriptManager ID="ScriptManager1" runat="server" >
+                
+            </asp:ScriptManager>
+            <br />
+            <table width="1025px" bgcolor="#ECDFC4">
+                <tr>
+                    <td class="Banner" colspan="2">
+                    </td>
+                </tr>
+                <%--<tr>
+                <td class="menu" colspan="2">
+                    <ul class="basictab">
+                        <li>
+                            <asp:HyperLink ID="uoHyperLinkSeafarer" runat="server" NavigateUrl="Seafarer.aspx">Seafarer</asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="uoHyperLinkTravelPackage" runat="server" NavigateUrl="Travel.aspx">Travel Package</asp:HyperLink>
+                        </li>
+                        <li>
+                            <asp:HyperLink ID="uoHyperLinkMaintenance" runat="server">Maintenance</asp:HyperLink>
+                        </li>
+                    </ul>
+                </td>
+            </tr>--%>
+                <tr>
+                    <td style="width: 18%; padding-left: 5px" valign="top" rowspan="2">
+                        <table width="100%">
+                            <tr>
+                                <td align="left">
+                                    <div class="LeftPanelTitle">
+                                                                                Filter</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:ImageButton ID="uobuttonSignOn" runat="server" ImageUrl="Images/statusOn.gif"
+                                        OnClick="uobuttonSignOn_Click" />
+                                    <asp:LinkButton runat="server" ID ="uoLinkButtonOn" onclick="uoLinkButtonOn_Click"
+                                        >Onsigning</asp:LinkButton> 
+                                    <hr />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <asp:ImageButton ID="uobuttonSignOff" runat="server" ImageUrl="Images/statusOff.gif"
+                                        OnClick="uobuttonSignOff_Click" />
+                                     <asp:LinkButton runat="server" ID ="uoLinkButtonOff" onclick="uoLinkButtonOff_Click"
+                                        >Offsigning</asp:LinkButton> 
+                                    <hr />
+                                </td>
+                            </tr>                           
+                            <tr style="display:none">
+                                <td align="left">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uoLinkButtonArrivalDate" runat="server" Text="Arrival Date" 
+                                                    CssClass="BlueText" Visible="true" onclick="uoLinkButtonArrivalDate_Click" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uoLinkButtonDepartureDate" runat="server" 
+                                                    Text="Departure Date"  CssClass="BlueText" Visible="true" 
+                                                    onclick="uoLinkButtonDepartureDate_Click"   />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uoLinkButtonOnsigningDate" runat="server" 
+                                                    Text="Onsigning Date"  CssClass="BlueText" Visible="true" 
+                                                    onclick="uoLinkButtonOnsigningDate_Click"   />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uoLinkButtonOffsigningDate" runat="server" 
+                                                    Text="Offsigning Date"  CssClass="BlueText" Visible="true" 
+                                                    onclick="uoLinkButtonOffsigningDate_Click"   />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:HiddenField ID="uoHiddenFieldFilterBy" runat="server" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left">
+                                    <div class="LeftPanelTitle">
+                                        <table>
+                                            <tr>
+                                                <td style="white-space:nowrap">Date Range</td>
+                                                <td>
+                                                    <asp:DropDownList runat="server" ID="uoDropDownListDateType" 
+                                                    CssClass="SmallButton" AutoPostBack="True" 
+                                                    onselectedindexchanged="uoDropDownListDateType_SelectedIndexChanged"></asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                        </table>                                                                                
+                                    </div>                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left">
+                                    <table width="120px">
+                                        <tr>
+                                            <td style="width: 80%">
+                                                <asp:LinkButton ID="uolinkbutton0_3Days" runat="server" Text="0 - 3 Days" OnClick="uolinkbutton0_3Days_Click"
+                                                    CssClass="BlueText" Visible="true" />
+                                            </td>
+                                            <td>
+                                                <asp:LinkButton ID="uohl0_3Count" runat="server" Text="0" Font-Bold="true" OnClick="uolinkbutton0_3Days_Click" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uolinkbutton4_7Days" runat="server" Text="4 - 7 Days" OnClick="uolinkbutton4_7Days_Click"
+                                                    CssClass="BlueText" Visible="true" />
+                                            </td>
+                                            <td>
+                                                <asp:LinkButton ID="uohl4_7Count" runat="server" Text="0" Font-Bold="true" OnClick="uolinkbutton4_7Days_Click" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uolinkbutton8_15Days" runat="server" Text="8 - 15 Days" OnClick="uolinkbutton8_15Days_Click"
+                                                    CssClass="BlueText" Visible="true" />
+                                            </td>
+                                            <td>
+                                                <asp:LinkButton ID="uohl8_15Count" runat="server" Text="0" Font-Bold="true" OnClick="uolinkbutton8_15Days_Click" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uolinkbutton16_30Days" runat="server" Text="16 - 30 Days" OnClick="uolinkbutton16_30Days_Click"
+                                                    CssClass="BlueText" Visible="true" />
+                                            </td>
+                                            <td>
+                                                <asp:LinkButton ID="uohl16_30Count" runat="server" Text="0" Font-Bold="true" OnClick="uolinkbutton16_30Days_Click" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uolinkbutton31_100Days" runat="server" Text="31 - 100 Days" OnClick="uolinkbutton31_100Days_Click"
+                                                    CssClass="BlueText" Visible="true" />
+                                            </td>
+                                            <td>
+                                                <asp:LinkButton ID="uohl31_100Count" runat="server" Text="0" Font-Bold="true" OnClick="uolinkbutton31_100Days_Click" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uoLinkButtonDateRange" runat="server" Text="By Date" OnClick="uoLinkButtonDateRange_Click"
+                                                    CssClass="BlueText" />
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div runat="server" id="uoDivByDate" visible="false">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    From:
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="uoTextBoxFrom" runat="server" CssClass="SmallText" Width="65px"></asp:TextBox>
+                                                    <cc1:TextBoxWatermarkExtender ID="uoTextBoxFrom_TextBoxWatermarkExtender" runat="server"
+                                                        Enabled="True" TargetControlID="uoTextBoxFrom" WatermarkCssClass="fieldWatermarkSmall"
+                                                        WatermarkText="MM/dd/yyyy">
+                                                    </cc1:TextBoxWatermarkExtender>
+                                                    <cc1:CalendarExtender ID="uoTextBoxFrom_CalendarExtender" runat="server" Enabled="True"
+                                                        TargetControlID="uoTextBoxFrom" Format="MM/dd/yyyy">
+                                                    </cc1:CalendarExtender>
+                                                    <cc1:MaskedEditExtender ID="uoTextBoxFrom_MaskedEditExtender" runat="server" CultureAMPMPlaceholder=""
+                                                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                                        Enabled="True" Mask="99/99/9999" MaskType="Date" TargetControlID="uoTextBoxFrom"
+                                                        UserDateFormat="MonthDayYear">
+                                                    </cc1:MaskedEditExtender>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    To:
+                                                </td>
+                                                <td>
+                                                    <asp:TextBox ID="uoTextBoxTo" runat="server" CssClass="SmallText" Width="65px"></asp:TextBox>
+                                                    <cc1:TextBoxWatermarkExtender ID="uoTextBoxTo_TextBoxWatermarkExtender" runat="server"
+                                                        Enabled="True" TargetControlID="uoTextBoxTo" WatermarkCssClass="fieldWatermarkSmall"
+                                                        WatermarkText="MM/dd/yyyy">
+                                                    </cc1:TextBoxWatermarkExtender>
+                                                    <cc1:CalendarExtender ID="uoTextBoxTo_CalendarExtender" runat="server" Enabled="True"
+                                                        TargetControlID="uoTextBoxTo" Format="MM/dd/yyyy">
+                                                    </cc1:CalendarExtender>
+                                                    <cc1:MaskedEditExtender ID="uoTextBoxTo_MaskedEditExtender" runat="server" CultureAMPMPlaceholder=""
+                                                        CultureCurrencySymbolPlaceholder="" CultureDateFormat="" CultureDatePlaceholder=""
+                                                        CultureDecimalPlaceholder="" CultureThousandsPlaceholder="" CultureTimePlaceholder=""
+                                                        Enabled="True" Mask="99/99/9999" MaskType="Date" TargetControlID="uoTextBoxTo"
+                                                        UserDateFormat="MonthDayYear">
+                                                    </cc1:MaskedEditExtender>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                    <asp:Button ID="uoButtonDateRange" runat="server" Text="Go" CssClass="SmallButton"
+                                                        OnClick="uoButtonDateRange_Click" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <asp:HiddenField ID="uohiddenSFDate" runat="server" />
+                                    <asp:HiddenField ID="uohiddenSFStatus" runat="server" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left">
+                                    <div class="LeftPanelTitle">
+                                        Flight Status
+                                    </div>
+                                    <table width="120px">
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uohlFlownCount" runat="server" Text="Flown" OnClick="uoFlownFlight_Click"
+                                                    CssClass="BlueText" Visible="true" />
+                                            </td>
+                                            <td style="width: 20%">
+                                                <asp:LinkButton ID="uoFlownFlightCount" runat="server" Text="0" Font-Bold="true"
+                                                    OnClick="uoFlownFlight_Click" Visible="true" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uohlArrivedCount" runat="server" Text="Arrived" OnClick="uoArrivedFlight_Click"
+                                                    CssClass="BlueText" Visible="true" />
+                                            </td>
+                                            <td>
+                                                <asp:LinkButton ID="uoArrivedFlightCount" runat="server" Text="0" Font-Bold="true"
+                                                    OnClick="uoArrivedFlight_Click" Visible="true" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uohlDelayedCount" runat="server" Text="Delayed" OnClick="uoDelayedFlight_Click"
+                                                    CssClass="BlueText" Visible="true" />
+                                            </td>
+                                            <td>
+                                                <asp:LinkButton ID="uoDelayedFlightCount" runat="server" Text="0" Font-Bold="true"
+                                                    OnClick="uoDelayedFlight_Click" Visible="true" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uohlCancelledCount" runat="server" Text="Cancelled" OnClick="uoCancelledFlight_Click"
+                                                    CssClass="BlueText" Visible="true" />
+                                            </td>
+                                            <td>
+                                                <asp:LinkButton ID="uoCancelledFlightCount" runat="server" Text="0" Font-Bold="true"
+                                                    OnClick="uoCancelledFlight_Click" Visible="true" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left">
+                                    <div class="LeftPanelTitle">
+                                        Pendings
+                                    </div>
+                                    <table width="120px">
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uohlPendingAirCount" runat="server" Text="Air" OnClick="uoPendingAirTrans_Click"
+                                                    CssClass="BlueText" Visible="true" />
+                                            </td>
+                                            <td style="width: 20%">
+                                                <asp:LinkButton ID="uoPendingAirTrans" runat="server" Text="0" Font-Bold="true" OnClick="uoPendingAirTrans_Click"
+                                                    Visible="true" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uohlPendingHotelCount" runat="server" Text="Hotel" OnClick="uoPendingHotelTrans_Click"
+                                                    CssClass="BlueText" Visible="true" />
+                                            </td>
+                                            <td style="width: 20%">
+                                                <asp:LinkButton ID="uoPendingHotelTrans" runat="server" Text="0" Font-Bold="true"
+                                                    OnClick="uoPendingHotelTrans_Click" Visible="true" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <asp:LinkButton ID="uohlPendingVehicleCount" runat="server" Text="Vehicle" OnClick="uoPendingVehicleTrans_Click"
+                                                    CssClass="BlueText" Visible="true" />
+                                            </td>
+                                            <td>
+                                                <asp:LinkButton ID="uoPendingVehicleTrans" runat="server" Text="0" Font-Bold="true"
+                                                    OnClick="uoPendingVehicleTrans_Click" Visible="true" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <asp:HiddenField ID="uohiddenPendingFilter" runat="server" />
+                                </td>
+                            </tr>
+                            <asp:HiddenField ID="uohiddenFlightStatusFilter" runat="server" />
+                            <asp:HiddenField ID="uoHiddenFieldDateFrom" runat="server" />
+                            <asp:HiddenField ID="uoHiddenFieldDateTo" runat="server" />
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top; text-align: right; width: 80%">
+                        <table width="100%">                                                   
+                            <tr>
+                                <td align="left">                                                                  
+                                    <uc1:TravelmartMenu ID="TravelmartMenu1" runat="server" />
+                                </td>
+                                <td align="left" style="display:none">
+                                    <span runat="server" id="uoSpanHome">
+                                        <asp:HyperLink ID="ucHyperLinkHome" runat="server" Text=" Home" CssClass="BlueText"> </asp:HyperLink>
+                                    </span><span runat="server" id="uoSpanAir">|
+                                        <asp:HyperLink ID="ucHyperLinkAir" runat="server" Text=" Air" CssClass="BlueText"> </asp:HyperLink>
+                                    </span><span runat="server" id="uoSpanHotel">|
+                                        <asp:HyperLink ID="ucHyperLinkHotel" runat="server" CssClass="BlueText"> Hotel</asp:HyperLink>
+                                    </span><span runat="server" id="uoSpanVehicle">|
+                                        <asp:HyperLink ID="ucHyperLinkVehicle" runat="server" CssClass="BlueText"> Vehicle</asp:HyperLink>
+                                    </span><span runat="server" id="uoSpanPort">|
+                                        <asp:HyperLink ID="ucHyperLinkPort" runat="server" CssClass="BlueText"> Port</asp:HyperLink>
+                                    </span><span runat="server" id="uoSpanMaintenance">|
+                                        <asp:HyperLink ID="ucHyperLinkMaintenance" runat="server" CssClass="BlueText"> Maintenance</asp:HyperLink>
+                                    </span>
+                                    <span runat="server" id="uoSpanUser">|
+                                        <asp:HyperLink ID="ucHyperLinkUser" runat="server" CssClass="BlueText"> User Accounts</asp:HyperLink>
+                                    </span>| 
+                                    <span runat="server" id="uoSpanContract">|
+                                    <asp:HyperLink ID="ocHyperLinkContract" runat="server" CssClass="BlueText"> Contracts</asp:HyperLink>
+                                    </span>|
+                                    <a href="Login.aspx" runat="server" id="ucalinklog2" style="text-decoration: none">
+                                        Logout</a> <a href="CreateUserAccount.aspx" runat="server" id="ucalinkcreate" style="text-decoration: none" />
+                                </td>
+                                <td style="font-weight:bold;padding-right:5px;" align="right">
+                                    Welcome
+                                    <asp:Label ID="uclabelFName" runat="server" Text="" />
+                                </td>
+                            </tr>                     
+                            <tr>
+                                <td  class="LeftClass">
+                                    <br />
+                                    <asp:Label ID="uclabelStatus" runat="server" Width="100%" Font-Size="15px" Font-Bold="true" />
+                                </td>
+                                <td style="text-align:right; padding-right:5px" >
+                                    <a href="Login.aspx" runat="server" id="ucalinklog" class="MenuLink">Logout</a>    
+                                </td>
+                            </tr>                            
+                            <tr>
+                                <td colspan="2">
+                                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server" >
+                                    </asp:ContentPlaceHolder>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <hr />
+                        Developed by PTC-FMBR 2011
+                    </td>
+                </tr>
+            </table>
+        </center>
+    </div>
+    </form>
+</body>
+
+<script language="javascript" type="text/javascript">
+    $(document).ready(function() {
+        $("#ctl00_uoButtonDateRange").click(function() {
+            if ($("#ctl00_uoTextBoxFrom") != null) {
+                var fromString = $("#ctl00_uoTextBoxFrom").val();
+                var toString = $("#ctl00_uoTextBoxTo").val();
+
+                var fromDate = new Date(fromString);
+                var toDate = new Date(toString);
+                if (toDate < fromDate) {
+                    alert('Invalid date range!');
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        });
+
+    });
+</script>
+
+</html>

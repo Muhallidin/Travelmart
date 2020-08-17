@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" xmlns:html="http://www.w3.org/TR/REC-html40" xmlns="urn:schemas-microsoft-com:office:spreadsheet">
+  <o:DocumentProperties>
+    <Author>Travelmart</Author>
+    <LastAuthor>Muhallidin</LastAuthor>
+    <Created>2015-01-05 11:44:14ZZ</Created>
+    <Company>RCCL</Company>
+    <Version>1</Version>
+  </o:DocumentProperties>
+  <x:ExcelWorkbook>
+    <WindowHeight>13170</WindowHeight>
+    <WindowWidth>17580</WindowWidth>
+    <WindowTopX>120</WindowTopX>
+    <WindowTopY>60</WindowTopY>
+    <ProtectStructure>False</ProtectStructure>
+    <ProtectWindows>False</ProtectWindows>
+  </x:ExcelWorkbook>
+  <Styles>
+    <Style ss:ID="Default" ss:Name="Normal">
+      <Alignment ss:Vertical="Bottom" />
+      <Borders />
+      <Font />
+      <Interior />
+      <NumberFormat />
+      <Protection />
+    </Style>
+    <Style ss:ID="s62">
+      <Font ss:Bold="1" />
+    </Style>
+    <Style ss:ID="s64">
+      <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" />
+    </Style>
+    <Style ss:ID="s65">
+      <Alignment ss:Horizontal="Left" ss:Vertical="Bottom" />
+    </Style>
+  </Styles>
+  <Worksheet ss:Name="MED - HOTEL INDIGO M">
+    <Table ss:ExpandedColumnCount="33" ss:ExpandedRowCount="16" x:FullColumns="1" x:FullRows="1" ss:DefaultColumnWidth="60">
+      <Row ss:StyleID="s62">
+        <Cell>
+          <Data ss:Type="String">Remarks</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HotelCity</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CheckIn</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CheckOut</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HotelNites</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ReasonCode</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">LastName</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FirstName</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">EmployeeId</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Gender</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">SingleDouble</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Couple</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Title</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Ship</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">CostCenter</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Nationality</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HotelRequest</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RecordLocator</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">DeptCity</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ArvlCity</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">DeptDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ArvlDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">DeptTime</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">ArvlTime</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Carrier</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FlightNo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Voucher</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PassportNo</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">IssuedDate</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">PassportExpiration</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Birthday</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">HotelBranch</Data>
+        </Cell>
+      </Row>
+      <Row ss:StyleID="s65">
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MIAMI</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">06-Jan-2015</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">07-Jan-2015</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">1</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">NACE</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">RANDAL MANZANO</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">269059</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Male</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">0.5</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">BAR SERVER</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">472</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Philippines</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">Y</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">GBMECU</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MCO</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">FRA</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">20-Oct-2013</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">21-Oct-2013</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">20:40:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">11:55:00</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">LH</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">0465</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="Number">45.0000</Data>
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String" />
+        </Cell>
+        <Cell>
+          <Data ss:Type="String">MED - HOTEL INDIGO MIAMI DADELAND</Data>
+        </Cell>
+      </Row>
+    </Table>
+    <x:WorksheetOptions>
+      <PageSetup>
+        <Header x:Margin="0.4921259845" />
+        <Footer x:Margin="0.4921259845" />
+        <PageMargins x:Bottom="0.984251969" x:Left="0.78740157499999996" x:Right="0.78740157499999996" x:Top="0.984251969" />
+      </PageSetup>
+      <Selected />
+      <Panes>
+        <Pane>
+          <Number>1</Number>
+          <ActiveRow>1</ActiveRow>
+          <ActiveCol>1</ActiveCol>
+        </Pane>
+      </Panes>
+      <ProtectObjects>False</ProtectObjects>
+      <ProtectScenarios>False</ProtectScenarios>
+    </x:WorksheetOptions>
+  </Worksheet>
+</Workbook>

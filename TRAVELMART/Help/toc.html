@@ -1,0 +1,323 @@
+﻿<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+
+<head>
+	<title>TravelMart Manual- Table of Contents</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HelpNDoc">
+	<link type="text/css" rel="stylesheet" media="all" href="css/reset.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/silver-theme/jquery-ui-1.8.12.custom.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/base.css" />
+	<link type="text/css" rel="stylesheet" media="all" href="css/hnd.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="css/toc.css" />
+	<!--[if lte IE 8]>
+		<link type="text/css" rel="stylesheet" media="all" href="css/ielte8.css" />
+	<![endif]-->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/jquery.treeview.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.8.12.custom.min.js"></script>
+	<script type="text/javascript" src="js/hndjsse.js"></script>
+	<script type="text/javascript">
+	
+		var bSearchDataLoaded = false;
+	
+		$(document).ready(function()
+		{
+			var sAnchorName = top.location.href.substring(top.location.href.lastIndexOf("#") + 1, top.location.href.length);
+			var nSelectedTab = 0;
+			if (sAnchorName == '_index') nSelectedTab = 1
+			else if (sAnchorName == '_search') nSelectedTab = 2;			
+			$("#tabs").tabs({selected: nSelectedTab});
+			$("#toc").treeview({collapsed: true});
+			$("#keywords").treeview({collapsed: true});
+			// Load search data
+			$.getScript("js/searchdata.js",	function() {
+				bSearchDataLoaded = true;
+			});
+		});
+		
+		function SelectTocItem(sLinkHref)
+		{
+			$("#toc a").each(function()
+			{
+				if ($.inArray(sLinkHref + '.htm', this.href) > -1) $(this).css('font-weight', 'bold')
+				else $(this).css('font-weight', '');
+			});
+		}
+		
+		function HideKwPopup()
+		{
+			if($("#popupMenu")) $("#popupMenu").remove();
+		}
+		
+		function ShowKwPopup(oSender, aLinks)
+		{
+			HideKwPopup();
+			if (!aLinks || !aLinks.length || aLinks.length == 0) return false
+			else if (aLinks.length == 1) return true
+			else
+			{
+				var oParentDiv = document.createElement("DIV");
+				oParentDiv.id = "popupMenu";
+				var oLink = null;
+				for (var nCnt=0; nCnt<aLinks.length; nCnt++)
+				{
+					oLink = document.createElement("A");
+					oLink.innerHTML = aLinks[nCnt][0];
+					oLink.href = aLinks[nCnt][1];
+					oLink.target = "FrameMain";
+					oLink.onclick = HideKwPopup;
+					oParentDiv.appendChild(oLink);
+				}
+				document.body.appendChild(oParentDiv);
+				var pos = $(oSender).offset(); 
+				var height = $(oSender).height();
+				$(oParentDiv).css({
+					"left": (pos.left+20) + "px",
+					"top": (pos.top + height + 5) + "px"
+				});
+				$(oParentDiv).show();
+				return false;
+			}
+		}
+		
+		function PerformSearch()
+		{
+			sValue = $("#search_value").val();
+			$("#search_results").html('Searching...');
+			var oSearchEngine = new HndJsSe;
+			oSearchEngine.ParseInput(sValue);			
+			oSearchEngine.PerformSearch();
+			if (!oSearchEngine.aResults || !oSearchEngine.aResults.length)
+			{
+				$("#search_results").html('No results found.');
+			}
+			else
+			{
+				$("#search_results").html('');
+				var oUl = $("#search_results").append("<ul id='lr'></ul>").find("ul");
+				for (var nCnt = 0; nCnt < oSearchEngine.aResults.length; nCnt++)
+				{
+					oUl.append("<li><a href='" + aTl[oSearchEngine.aResults[nCnt]][0] + "?search=" + escape(sValue) + "' target='FrameMain'>" + unescape(aTl[oSearchEngine.aResults[nCnt]][1]) + "</a></li>");
+				}
+				$("#lr").treeview({collapsed: false});
+			}
+		}
+	</script>
+</head>
+
+<body>
+
+	<div id="tabs">
+		<ul>
+			<li><a href="#tab-toc">Contents</a></li>
+			<li><a href="#tab-keywords">Index</a></li>
+			<li><a href="#tab-search">Search</a></li>
+		</ul>
+		<div id="tab-toc">
+			<ul id="toc" class="filetree toctree">
+
+				<li>
+							<a
+							href="TravelMartWebsite.html"
+							class="folder"
+							target="FrameMain">
+								TravelMart Website</a>
+
+				<ul><li>
+							<a
+							href="Loginwindow.html"
+							class="file"
+							target="FrameMain">
+								Login window</a>
+
+				</li><li>
+							<a
+							href="Homepage.html"
+							class="folder"
+							target="FrameMain">
+								Homepage</a>
+
+				<ul><li>
+							<a
+							href="Home.html"
+							class="folder"
+							target="FrameMain">
+								Home</a>
+
+				<ul><li>
+							<a
+							href="RegionFilter.html"
+							class="file"
+							target="FrameMain">
+								Region Filter</a>
+
+				</li><li>
+							<a
+							href="DateNavigationandExport.html"
+							class="file"
+							target="FrameMain">
+								Date Navigation and Export</a>
+
+				</li><li>
+							<a
+							href="Overflow.html"
+							class="file"
+							target="FrameMain">
+								Overflow</a>
+
+				</li><li>
+							<a
+							href="Exception.html"
+							class="file"
+							target="FrameMain">
+								Exception</a>
+
+				</li><li>
+							<a
+							href="NoTravelRequest.html"
+							class="file"
+							target="FrameMain">
+								No Travel Request</a>
+
+				</li><li>
+							<a
+							href="SameDayArrivalDeparture.html"
+							class="file"
+							target="FrameMain">
+								Same Day Arrival/Departure</a>
+
+				</li><li>
+							<a
+							href="HotelDashboard.html"
+							class="file"
+							target="FrameMain">
+								Hotel Dashboard</a>
+
+				</li></ul></li><li>
+							<a
+							href="HotelView.html"
+							class="folder"
+							target="FrameMain">
+								Hotel View</a>
+
+				<ul><li>
+							<a
+							href="TentativeManifest.html"
+							class="file"
+							target="FrameMain">
+								Tentative Manifest</a>
+
+				</li><li>
+							<a
+							href="LockedManifest.html"
+							class="file"
+							target="FrameMain">
+								Locked Manifest</a>
+
+				</li></ul></li><li>
+							<a
+							href="Vendor.html"
+							class="folder"
+							target="FrameMain">
+								Vendor</a>
+
+				<ul><li>
+							<a
+							href="HotelBrand.html"
+							class="file"
+							target="FrameMain">
+								Hotel Brand</a>
+
+				</li><li>
+							<a
+							href="HotelBranch.html"
+							class="file"
+							target="FrameMain">
+								Hotel Branch</a>
+
+				</li></ul></li><li>
+							<a
+							href="Pendings.html"
+							class="folder"
+							target="FrameMain">
+								Pendings</a>
+
+				<ul><li>
+							<a
+							href="HotelContract.html"
+							class="file"
+							target="FrameMain">
+								Hotel Contract</a>
+
+				</li><li>
+							<a
+							href="HotelNoActiveContract.html"
+							class="file"
+							target="FrameMain">
+								Hotel No Active Contract</a>
+
+				</li><li>
+							<a
+							href="ExceptionQueue.html"
+							class="file"
+							target="FrameMain">
+								Exception Queue</a>
+
+				</li></ul></li><li>
+							<a
+							href="Settings.html"
+							class="folder"
+							target="FrameMain">
+								Settings</a>
+
+				<ul><li>
+							<a
+							href="UserRole.html"
+							class="file"
+							target="FrameMain">
+								User Role</a>
+
+				</li><li>
+							<a
+							href="UserRegion.html"
+							class="file"
+							target="FrameMain">
+								User Region</a>
+
+				</li></ul></li><li>
+							<a
+							href="Search.html"
+							class="file"
+							target="FrameMain">
+								Search</a>
+
+				</li><li>
+							<a
+							href="ChangePassword.html"
+							class="file"
+							target="FrameMain">
+								Change Password</a>
+
+				</li></ul></li></ul></li></ul>
+		</div>
+		<div id="tab-keywords">
+			<ul id="keywords" class="filetree indextree">
+
+				</ul>
+		</div>
+		<div id="tab-search">
+			<form onsubmit="PerformSearch(); return false;">
+				<label for="search_value">Search:</label>
+				<input id="search_value" name="search_value"></input>
+				<input type="submit" value="search"/>
+			</form>
+			<div id="search_results"></div>
+		</div>
+	</div>
+    
+</body>
+
+</html>
+
